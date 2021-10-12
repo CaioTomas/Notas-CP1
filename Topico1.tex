@@ -1,0 +1,571 @@
+\documentclass[../Notas.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+
+\begin{document}
+
+%\section{Tópico 1}
+
+\section{Espaço de probabilidade}
+
+\subsection{Definição e exemplos}
+A {\bf Teoria da Probabilidade} é um ramo da Matemática que estuda, através de modelos matemáticos, fenômenos (ou experimentos) aleatórios, isto é, experimentos que, quando repetidos sob condições semelhantes, produz resultados diferentes em geral.
+
+\begin{example}
+Lançar uma moeda e observar o resultado (cara ou coroa).
+\end{example}
+
+Vemos, então, que experimentos aleatórios diferem bastante de experimentos {\bf determinísticos}, isto é, experimentos que, quando repetidos sob condições semelhantes, produzem resultados idênticos.
+
+\begin{example}
+Água aquecida a 100$^\circ$C ao nível do mar entra em ebulição.
+\end{example}
+
+Algumas características de um experimento aleatório são:
+\begin{enumerate}[i.]
+    \item pode ser repetido indefinidamente sob condições inalteradas;
+    \item permite descrever todos os possíveis resultados do experimento;
+    \item quando executado um número grande de vezes, os resultados apresentam certa regularidade (e isso nos permite construir modelos matemáticos para o experimento).
+\end{enumerate}
+
+\begin{examples} Alguns exemplos são:
+\begin{enumerate}[1)]
+    \item Lançar um dado e observar seu resultado
+    \item Jogar uma moeda duas vezes e observar seus resultados
+    \item Tem-se duas caixas:
+    \begin{itemize}
+        \item a caixa I contém 5 bolas numeradas de 1 a 5;
+        \item a caixa II contém 6 bolas numeradas de 1 a 6.
+    \end{itemize}
+    Retirar uma bola de cada caixa e observar os números de cada bola consiste em um experimento aleatório
+    \item Jogar uma moeda até que apareça cara pela primeira vez
+    \item Escolher, ao acaso, um número real entre 0 e 1
+    \item Medir, em horas, o tempo de vida útil de uma lâmpada
+\end{enumerate}
+\end{examples}
+
+Nosso objetivo aqui é construir um modelo matemático, que recebe o nome de {\bf espaço de probabilidade}, para uma análise matemática destes experimentos aleatórios. Para tanto, seja $\mathcal{E}$ um experimento aleatório.
+
+\begin{definition}
+Seja $\mathcal{E}$ um experimento aleatório cujo conjunto de todos os resultados possíveis são conhecidos. Esse conjunto, denotado $\Omega$, é chamado {\bf espaço amostral} de $\mathcal{E}$. Um ponto $\omega\in\Omega$ é chamado {\bf ponto amostral}.
+\end{definition}
+
+\begin{remarks} Note que o espaço amostral é um conjunto amostral. Além disso,
+\begin{enumerate}[(i)]
+    \item $\Omega$ pode conter mais pontos que o necessário, mas não pode excluir nenhum resultado possível
+    \item $\Omega$ pode ser finito,
+    $$
+    \Omega = \left\{ x_1, x_2, \dots, x_N \right\},
+    $$
+    infinito enumerável,
+    $$
+    \Omega = \left\{ x_1, x_2, \dots \right\}
+    $$
+    ou, ainda, infinito não-enumerável,
+    $$
+    \Omega\subset\mathbb{R} \text{ não enumerável, e.g., um intervalo.}
+    $$
+\end{enumerate}
+\end{remarks}
+
+\begin{examples}
+Considere os 5 exemplos de experimentos aleatórios anteriores e denote por $\Omega_i$ o espaço amostral associado ao $i$-ésimo experimento anterior. Temos
+\begin{enumerate}[1)]
+    \item $\Omega_1 = \{1, 2, 3, 4, 5, 6\}$
+    \item $\Omega_2 = \{\text{cc}, \text{cĉ}, \text{ĉc}, \text{ĉĉ}\}$, sendo c cara e ĉ coroa
+    \item $\Omega_1 = \{ (1,1), (1,2), \dots, (1,6), (2,1), (2,2), \dots, (5,6) \} = \{ (i,j) : i\in \{ 1,2,\dots, 5\}, j\in \{ 1,2,\dots, 6 \} \}$
+    \item $\Omega_4 = \{ \text{c}, \text{ĉc}, \text{ĉĉc}, \text{ĉĉĉc}, \dots \} = \{ 1,2,3,4,5, \dots \}$, onde $\omega = j$ se, e só se, a primeira cara saiu no $j$-ésimo lançamento, ou seja, $\underbrace{\text{ĉĉ}\cdots\text{ĉ}}_{j-1}\text{c}.$
+    \item $\Omega_5 = [0,1] = \{ x\in\mathbb{R} : 0\leq x\leq 1 \}$
+    \item $\Omega_6 = [0, +\infty) = \{ t\in\mathbb{R} : t\geq 0 \}$
+\end{enumerate}
+\end{examples}
+
+\begin{definition}
+Um subconjunto $A\subseteq\Omega$ do espaço amostral de um experimento $\mathcal{E}$ é chamado {\bf evento}.
+\end{definition}
+
+Na prática, os eventos são os subconjuntos do espaço amostral para os quais desejamos saber o quão provável será a sua ocorrência quando o experimento for realizado. Dito de outro modo, são os subconjuntos de $\Omega$ para os quais desejamos atribuir probabilidades.
+
+\begin{examples}
+Considere os mesmos experimentos acima.
+\begin{enumerate}[1)]
+    \item Para $\mathcal{E}_1$, $A = \{ \text{sair um número ímpar} \} = \{ 1,3,5 \}$ e $B = \{ \text{sair 1 ou 6} \} = \{ 1,6 \}$ são eventos
+    \item Para $\mathcal{E}_3$, 
+    \begin{align*}
+    A = \{ \text{soma dos resultados é par} \} = \{ 1,3,5 \}
+    &= \{ (1,1), (1,3), (1,5), (2,2), (2,4), \dots, (5,5) \} \\
+    &= \{ (i,j) : i,j\in \{1,2,3,4,5,6\}, i\neq 6 \text{ e } i+j \text{ é par} \}
+    \end{align*}
+    é um evento
+    \item Para $\mathcal{E}_6$, $A = \{ \text{lâmpada queima após 10 horas de uso} \} = \{ t\in\mathbb{R} : t > 10 \} = (10, +\infty)$
+    é um evento
+\end{enumerate}
+\end{examples}
+
+\begin{remarks}
+Note que dois exemplos triviais (mas importantes!) de eventos são $\emptyset$ e $\Omega$. Além disso, perceba que o espaço amostral de um mesmo experimento pode ser representado de maneiras distintas.
+\end{remarks}
+
+\begin{definition}
+Uma coleção $\mathcal{A}$ de subconjuntos de $\Omega$ tal que
+\begin{enumerate}[(i)]
+    \item $\mathcal{A}\neq\emptyset$
+    \item $A\in\mathcal{A} \implies A^C = \Omega\setminus A \in\mathcal{A}$, isto é, se $A$ é um evento de $\Omega$, então $A^C$ também é
+    \item $A_1,A_2, \dots \in\mathcal{A} \implies \displaystyle{\bigcup_{i=1}^{\infty}}A_i \in\mathcal{A}$, isto é, a união enumerável de eventos de $\Omega$ é também um evento de $\Omega$
+\end{enumerate}
+é chamada {\bf $\mathbf{\sigma}$-álgebra} de eventos/subconjuntos de $\Omega$.
+\end{definition}
+
+\begin{proposition}
+Se $\mathcal{A}$ é uma $\sigma$-álgebra de subconjuntos de $\Omega$, então
+\begin{enumerate}[(a)]
+    \item $A,B \in\mathcal{A} \implies A\cup B\in\mathcal{A}$
+    \item $\emptyset, \Omega\in\mathcal{A}$
+    \item $A,B \in\mathcal{A} \implies A\cap B\in\mathcal{A}$
+    \item $A_1, A_2, \dots\in\mathcal{A} \implies \displaystyle{ \bigcap_{i=1}^{\infty}A_i } \in\mathcal{A}$
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Demonstramos cada item.
+\begin{enumerate}[(a)]
+    \item Tomando $A_1 = A, A_2 = B, A_i = \emptyset, i\geq 3$, segue da definição que $\displaystyle{\bigcup_{i=1}^{\infty}A_i} = A\cup B \in\mathcal{A}$.
+    \item Como $\mathcal{A}\neq\emptyset$, existe $A\in\mathcal{A}$. Logo, por definição de $\sigma$-álgebra, $A^C\in\mathcal{A}$. Ora, como $\Omega = A\cup A^C$, então $\Omega\in\mathcal{A}$ e, daí, $\Omega^C = \emptyset\in\mathcal{A}$.
+    \item Como $A, B\in\mathcal{A}$, então $A^C, B^C\in\mathcal{A}$. Daí, por (b), $A^C\cup B^C\in\mathcal{A}$ e, portanto, $(A^C\cup B^C)^C = A\cap B\in\mathcal{A}$.
+    \item Se $A_1, A_2, \dots \in\mathcal{A}$, então $A_1^C, A_2^C, \dots \in\mathcal{A}$. Logo, $\displaystyle{\bigcup_{i=1}^{\infty} A_i^C }\in\mathcal{A}$ e, portanto, $\displaystyle{\left(\bigcup_{i=1}^{\infty} A_i^C\right)^C  = \bigcap_{i=1}^{\infty}A_i }\in\mathcal{A}$
+\end{enumerate}
+\end{proof}
+
+\begin{remarks}
+Dado um conjunto $\Omega$ qualquer, temos
+\begin{enumerate}[(i)]
+    \item $\mathcal{A} = \{ \emptyset, \Omega \}$ é a menor $\sigma$-álgebra de $\Omega$, denominada {\bf $\sigma$-álgebra trivial}
+    \item $\mathcal{A} = \mathcal{P}(\Omega) = \{ A : A\subset\Omega \}$ é a maior $\sigma$-álgebra de $\Omega$, denominada {\bf $\sigma$-álgebra das partes}.
+\end{enumerate}
+Os termos ``maior'' e ``menor'' se referem à inclusão de conjuntos.
+\end{remarks}
+
+\begin{example}
+Considere $\mathcal{E}:$ jogar um dado honesto. Como vimos, nesse caso podemos tomar $\Omega = \{ 1,2,3,4,5,6 \}$. Daí, $\mathcal{A} = \{ \emptyset, \Omega, \{1,2,3\}, \{4,5,6\} \}$ é uma $\sigma$-álgebra de subconjuntos de $\Omega$. Note que $A = \{ \text{sair um número par} \} = \{2,4,6\}\notin\mathcal{A}$. Isso ilustra a necessidade de considerarmos as maiores (novamente, no sentido de inclusão de conjuntos) $\sigma$-álgebras possíveis.
+\end{example}
+
+Listamos as três $\sigma$-álgebras mais usuais.
+\begin{enumerate}[(a)]
+    \item Se $\Omega = \{ \omega_1, \omega_2, \dots, \omega_N \}$ (finito) ou $\Omega = \{ \omega_1, \omega_2, \dots, \}$ (infinito enumerável), tomamos $\mathcal{A} = \mathcal{P}(\Omega)$, ou seja, a $\sigma$-álgebra das partes de $\Omega$. Note que $|\mathcal{A}| = 2^N$ se $\Omega$ é finito.
+    \begin{example}
+    Se $\Omega = \{1,2,3\}$, então a $\sigma$-álgebra das partes de $\Omega$ é $\mathcal{A} = \{ \emptyset, \{1\}, \{2\}, \{3\}, \{1,2\}, \{1,3\}, \{2,3\}, \Omega \}$.
+    \end{example}
+    \item Se $\Omega\subseteq\mathbb{R}$ é não-enumerável, tomamos $\mathcal{A} = \mathcal{B}(\Omega)$: a {\bf $\sigma$-álgebra de Borel} de $\Omega$. Esse conjunto é a coleção de todos os subconjuntos de $\Omega$ ``gerados'' por intervalos, e é a menor $\sigma$-álgebra contendo todos os intervalos de $\Omega$. Intuitivamente, um conjunto é ``gerado'' por intervalos se ele pode ser obtido a partir de uma quantidade enumerável de intervalos aplicando-se as operações de união, interseção e complementar.
+    
+    Chamamos ainda $A\in\mathcal{B}(\Omega)$ de {\bf boreliano} de $\Omega$ e denotamos também a $\sigma$-álgebra de Borel na reta por $\mathcal{B}(\mathbb{R}) = \mathcal{B}$.
+    \begin{remark}
+    Subconjuntos de $\mathbb{R}$ que não são ``gerados'' por intervalos são ``raríssimos''. 
+    \end{remark}
+    \item Subindo uma dimensão, se $\Omega\subseteq\mathbb{R}^2$ é não-enumerável, tomamos $\mathcal{A} = \mathcal{B}^2(\Omega)$, também chamada $\sigma$-álgebra de Borel de $\Omega$. Analogamente ao caso anterior, esse conjunto é a coleção de todos os subconjuntos de $\Omega$ ``gerados'' por retângulos, e é a menor $\sigma$-álgebra contendo todos os retângulos de $\Omega$.
+    
+    Chamamos ainda $A\in\mathcal{B}^2(\Omega)$ de {\bf boreliano} de $\Omega$ e denotamos também a $\sigma$-álgebra de Borel no plano por $\mathcal{B}^2(\mathbb{R}) = \mathcal{B}^2$.
+    \begin{remark}
+    Definições e notações análogas valem para dimensão maior que 2. Por exemplo, $\mathcal{B}^n = \mathcal{B}^n(\mathbb{R})$ é a $\sigma$-álgebra de Borel no $\mathbb{R}^n$. 
+    \end{remark}
+\end{enumerate}
+
+Agora que já definimos o que é um espaço amostral e uma $\sigma$-álgebra, queremos definir um {\bf espaço de probabilidade}, i.e., um espaço no qual possamos, de fato, calcular as probailidades desejadas. Para tanto, seja $\mathcal{E}$ um experimento aleatório. Associamos, acima, um par $(\Omega, \mathcal{A})$ a $\mathcal{E}$, sendo $\Omega$ um espaço amostral e $\mathcal{A}$ uma $\sigma$-álgebra de eventos de $\Omega$.
+
+Queremos, dado $A\in\mathcal{A}$, associar um número que indique o quão provável é a ocorrência de $A$ a cada realização de $\mathcal{E}$: a {\bf probabilidade de A}.
+
+\begin{definition}
+Considere $\Omega$ um espaço amostral e $\mathcal{A}$ uma $\sigma$-álgebra de eventos de $\Omega$. Uma {\bf medida de probabilidade} sobre $(\Omega, \mathcal{A})$ é uma função $P:\mathcal{A}\to\mathbb{R}$ que satisfaz os seguintes axiomas:
+\begin{itemize}
+    \item[(A1)] $P(\Omega) = 1$
+    \item[(A2)] $\forall A\in\mathcal{A}, P(A)\geq 0$
+    \item[(A3)] se $A_1, A_2, \dots \in\mathcal{A}$ são tais que $A_i\cap A_j = \emptyset \, \forall i\neq j$, então
+    \begin{equation}
+    \tag{$\sigma$-aditividade}
+    P\left( \bigcup_{i=1}^{\infty} A_i \right) = \sum_{i=1}^{\infty} P(A_i) 
+    \end{equation}
+\end{itemize}
+Nesse caso, $P(A)$ é dita {\bf probabilidade de $A$}. 
+\end{definition}
+
+A partir da definição, temos a seguinte proposição.
+
+\begin{proposition}
+Se $P$ é uma medida de probabilidade sobre $(\Omega, \mathcal{A})$, então
+\begin{enumerate}[(i)]
+    \item $P(\emptyset) = 0$
+    \item se $A_1, \dots, A_n\in\mathcal{A}$ são tais que $A_i\cap A_j = \emptyset \, \forall i\neq j$, então
+    $$
+    P\left( \bigcup_{i=1}^{n} A_i \right) = \sum_{i=1}^{n} P(A_i),
+    $$
+    ou seja, $P$ é {\bf finitamente aditiva}.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}[(i)]
+    \item Tome $A_1 = \Omega, A_n = \emptyset \, \forall n\geq 2$. Da $\sigma$-aditividade de $P$ segue que
+    $$
+    1 = 1 + \sum_{n=2}^{\infty}P(A_n) \Longleftrightarrow P(\emptyset) = 0.
+    $$
+    \item Sejam $A_1, A_2, \dots, A_n, A_{n+1}, \dots \in\mathcal{A}$ tais que $A_i\cap A_j = \emptyset \, \forall i\neq j$ e tome $A_k = \emptyset \, \forall k\geq n+1$. Logo, 
+    $$
+    P\left( \bigcup_{i=1}^{n}A_i \right) = P\left( \bigcup_{i=1}^{\infty}A_i \right) = \sum_{i=1}^{\infty}P(A_i) = \sum_{i=1}^{n}P(A_i),
+    $$
+    pois $P(\emptyset) = 0$.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+Um {\bf espaço de probabilidade} é um trio $(\Omega, \mathcal{A}, P)$, com $\Omega$ espaço amostral, $\mathcal{A}$ uma $\sigma$-álgebra de eventos de $\Omega$ e $P$ medida de probabilidade sobre $(\Omega, \mathcal{A})$.
+\end{definition}
+
+\begin{example}
+Considere os 6 experimentos $\mathcal{E}_i$ dados anteriormente. Temos
+\begin{itemize}
+    \item[$\mathcal{E}_1$:] nesse caso, vimos que podíamos tomar $\Omega = \{1,2,3,4,5,6 \}$. Daí, tomando $\mathcal{A} = \mathcal{P}(\Omega)$, definimos
+    $$
+    P(\{ \omega \}) = \frac{1}{6}, \, \forall \omega\in\Omega.
+    $$
+    Então, $\forall A\in\mathcal{A}$, é intuitivo definir (só se $\Omega$ for finito!) que
+    $$
+    P(A) = \sum_{\omega \, : \, \omega\in A} P(\{ \omega \}) = \frac{|A|}{|\Omega|}.
+    $$
+    Mas será que essa $P$ é de fato uma medida de probabilidade? Dito de outro modo, se $0 < |\Omega| < \infty$, então $P:\mathcal{A} \to\mathbb{R}$ tal que, dado $A\in\mathcal{A}$, $P(A) = |\mathcal{A}|/|\Omega|$ é medida de probabilidade? A resposta é sim!
+    \begin{proof}
+    Note que $P(\Omega) = |\Omega|/|\Omega| = 1$ e que, $\forall A\in\mathcal{A}, P(A) = |A|/|\Omega| \geq 0$ pois $|A| \geq 0$. Por fim, se $A_1, A_2, \dots \in\mathcal{A}$ são tais que $A_i\cap A_j = \emptyset \, \forall i\neq j$, então
+    $$
+    P\left( \bigcup_{i=1}^{\infty} A_i \right) = \frac{\left| \displaystyle{\bigcup_{i=1}^{\infty}A_i} \right|}{|\Omega|} \stackrel{\text{união disjunta}}{=} \frac{1}{|\Omega|}\cdot\sum_{i=1}^{\infty} |A_i| = \cdot\sum_{i=1}^{\infty} \frac{|A_i|}{|\Omega|} = \sum_{i=1}^{\infty} P(A_i),
+    $$
+    logo $P$ é medida de probabilidade.
+    \end{proof}
+    \item[$\mathcal{E}_4$:] para esse experimento, tomamos $\Omega = \{ 1, 2, 3, \dots \}$. Sendo $\mathcal{A} = \mathcal{P}(\Omega)$, é intuitivo tomar $P:\mathcal{A}\to\mathbb{R}$ tal que
+    $$
+    P(\{j\}) = \frac{1}{2^j}, \, \forall j\in\Omega 
+    $$
+    e
+    $$
+    P(A) = \sum_{j\in A} P(\{j\}) = \sum_{j\in A}\frac{1}{2^j}.
+    $$
+    Vamos mostrar que essa $P$ é uma medida de probabilidade.
+    \begin{proof}
+    Note que 
+    $$
+    P(\Omega) = \sum_{j\in\Omega} P(\{j\}) = \sum_{j\in\Omega}\frac{1}{2^j} = \sum_{j=1}^{\infty}\frac{1}{2^j} = \frac{1/2}{1 - 1/2} = 1.
+    $$
+    Além disso, dado $A\in\mathcal{A}$ temos 
+    $$
+    P(A) = \sum_{j\in A}\frac{1}{2^j} \geq 0
+    $$
+    pois $1/2^j > 0, \, \forall j\in A$. Por fim, se $A_1, A_2, \dots \in\mathcal{A}$ são tais que $A_i\cap A_k = \emptyset \, \forall i\neq k$, então
+    $$
+    P\left( \bigcup_{i=1}^{\infty}A_i \right) = \sum_{j\in \cup A_i }\frac{1}{2^j} = \sum_{i=1}^{\infty} \sum_{j\in A_i}\frac{1}{2^j} = \sum_{i=1}^{\infty}P(A_i),
+    $$
+    logo $P$ é medida de probabilidade.
+    \end{proof}
+    \item[$\mathcal{E}_5$:] nesse último caso, tínhamos $\Omega = [0,1]$. Tomando $\mathcal{A} = \mathcal{B}(\Omega)$, é intuitivo definir (considerando um espaço de probabilidade uniforme e $\Omega$ de ``comprimento'' finito) $P:\mathcal{A}\to\mathbb{R}$ tal que
+    $$
+    P(A) = \frac{ \text{``comprimento'' de $A$} }{ \text{``comprimento de'' $\Omega$} } = \frac{ \int_{A}dx }{ \int_{\Omega}dx }.
+    $$
+    Vamos mostrar que para $\Omega\subset\mathbb{R}$ tal que $\displaystyle{ 0 < \int_{\Omega} dx < \infty }$, a função $P:\mathcal{A} \to \mathbb{R}$ definida acima é uma medida de probabilidade.
+    \begin{proof}
+    Da monotonicidade da integral, segue que $P(A)\geq A, \, \forall A\in\mathcal{A}$. Além disso, 
+    $$
+    P(\Omega) = \int_{\Omega}dx/\int_{\Omega}dx = 1.
+    $$
+    Por último, se $A_1, A_2, \dots \in\mathcal{A}$ são tais que $A_i\cap A_k = \emptyset \, \forall i\neq k$, então
+    $$
+    P\left( \bigcup_{i=1}^{\infty}A_i \right) = 
+    \int_{\cup A_i} dx / \int_{\Omega} dx \stackrel{\text{união disjunta}}{=} \sum_{i=1}^{\infty} \int_{A_i} dx / \int_{\Omega} dx = \sum_{i=1}^{\infty}P(A_i),
+    $$
+    logo $P$ é medida de probabilidade.
+    \end{proof}
+\end{itemize}
+\end{example}
+
+No contexto de espaços de probabilidade, há dois casos especiais que receberão nossa atenção: os espaços discretos e os espaços contínuos.
+
+\paragraph{Espaço de probabilidade discreto.}
+Seja $(\Omega, \mathcal{A}, P)$ um espaço de probabilidade tal que $\Omega = \{ \omega_1, \omega_2, \dots, \omega_N \}$ ou $\Omega = \{ \omega_1, \omega_2, \dots \}$ ($\Omega$ enumerável).
+
+\begin{remark}
+$\Omega$ também poderia ser um espaço amostral qualquer contendo um subconjunto enumerável $\{ \omega_1, \omega_2, \dots \}\subset\Omega$ tal que
+$$
+\sum_{i\geq 1}P(\{ \omega_i \}) = 1.
+$$
+\end{remark}
+
+Nesse caso, podemos tomar $\mathcal{A} = \mathcal{P}(\Omega)$ e definir, $\forall A\in\mathcal{A}$,
+$$
+P(A) = \sum_{i \, : \, \omega_i\in A}P(\{ \omega_i \}).
+$$
+Então, para calcular $P(A)$, basta conhecer $P(\{ \omega_i \}) = p_i, i = 1,2,\dots$. Note que $p_i\geq 0 \, \forall i=1,2,\dots$ e $\displaystyle{\sum_{i\geq 1}p_i = 1}$.
+
+No caso particular de $\Omega$ finito de cardinalidade $N$ e resultados {\bf equiprováveis}, i.e., $p_i = P(\{ \omega_i \}) = p \, \forall i = 1,2,\dots,$ pode-se mostrar (Lista 1 - Exercício 1) que $p = 1/N$ e, dado $A\in\mathcal{A}$, 
+$$
+P(A) = \sum_{i \, : \, P(\{ \omega_i \})} = \sum_{i \, : \, \omega_i\in A}p = p|A| = \frac{|A|}{N} = \frac{|A|}{|\Omega|}.
+$$
+Nesse caso, $(\Omega, \mathcal{A}, P)$ é chamado {\bf espaço de probabilidade uniforme discreto}. A principal dificuldade em espaços desse tipo é determinar as cardinalidades dos conjuntos envolvidos, e para isso serão necessárias ferramentas e métodos de contagem e análise combinatória, vistos mais adiante.
+
+\paragraph{Espaço de probabilidade contínuo.} Aqui lidaremos com dois casos principais.
+\begin{itemize}
+    \item[(I)] Seja $\Omega\subset\mathbb{R}$ não-enumerável tal que $\displaystyle{\int_{\Omega}dx > 0}$ e tome $\mathcal{A} = \mathcal{B}(\Omega)$. Em geral, a probabilidade de um evento $A\in\mathcal{A}$ é
+    $$
+    P(A) = \int_A f(x)dx,
+    $$
+    com $f:\mathbb{R}\to\mathbb{R}$ tal que $f(x)\geq 0 \, \forall x\in\mathbb{R}$ e $\displaystyle{ \int_{\Omega}f(x)dx  = 1}$.
+    
+    Um caso particular é o espaço uniforme: suponha $\displaystyle{ 0 < \int_{\Omega} dx < \infty }$. Para cada $A\in\mathcal{A}$, 
+    $$
+    P(A) = \frac{ \text{``comprimento'' de $A$} }{ \text{``comprimento de'' $\Omega$} } = \frac{ \int_{A}dx }{ \int_{\Omega}dx } = \int_A f(x) dx,
+    $$
+    sendo
+    $$
+    f(x) = \begin{cases}
+    \displaystyle{ \frac{1}{\int_{\Omega}dx }, x\in\Omega } \\
+    0, x\notin\Omega
+    \end{cases}.
+    $$
+    \begin{example}
+    Seja $\Omega = [a,b]\subset\mathbb{R}$. Então o ``comprimento'' de $\Omega$ é $\displaystyle{ \int_{a}^b dx } = b-a$ e, nesse caso,
+    $$
+    f(x) = \begin{cases}
+    \displaystyle{ \frac{1}{b-a}, x\in [a,b] } \\
+    0, x\notin [a,b]
+    \end{cases}.
+    $$
+    \end{example}
+    
+    \item[(II)] Seja $\Omega\subset\mathbb{R}^2$ não-enumerável tal que $\displaystyle{\iint_{\Omega}dxdy > 0}$ e tome $\mathcal{A} = \mathcal{B}^2(\Omega)$. Em geral, a probabilidade de um evento $A\in\mathcal{A}$ é
+    $$
+    P(A) = \iint_A f(x)dx,
+    $$
+    com $f:\mathbb{R}^2\to\mathbb{R}$ tal que $f(x,y)\geq 0 \, \forall (x,y)\in\mathbb{R}^2$ e $\displaystyle{ \iint_{\Omega}f(x,y)dxdy  = 1}$.
+    
+    Um caso particular é o espaço uniforme (em dimensão 2): suponha $\displaystyle{ 0 < \iint_{\Omega} dxdy < \infty }$. Para cada $A\in\mathcal{A}$, 
+    $$
+    P(A) = \frac{ \text{``área'' de $A$} }{ \text{``área'' de $\Omega$} } = \frac{ \iint_{A}dxdy }{ \iint_{\Omega}dxdy } = \iint_A f(x,y) dxdy,
+    $$
+    sendo
+    $$
+    f(x,y) = \begin{cases}
+    \displaystyle{ \frac{1}{\iint_{\Omega}dxdy }, (x,y)\in\Omega } \\
+    0, (x,y)\notin\Omega
+    \end{cases}.
+    $$
+    \begin{example}
+    Considere o experimento de escolher, ao acaso, um ponto no retângulo $[-1,1]\times [-1,1]$. Nesse caso, $\Omega = \{ (x,y)\in\mathbb{R}^2 : -1\leq x\leq 1, -1\leq y\leq 1 \}$. Então a ``área'' de $\Omega$ é $\displaystyle{ \int_{-1}^{1}\int_{-1}^1 dxdy } = 4$ e, nesse caso,
+    $$
+    f(x,y) = \begin{cases}
+    \displaystyle{ \frac{1}{4}, (x,y)\in [-1,1]\times [-1,1] } \\
+    0, (x,y)\notin [-1,1]\times [-1,1]
+    \end{cases}.
+    $$
+    Por exemplo, se $A = \{ \text{o ponto escolhido dista menos de 1/2 da origem} \} = \{ (x,y)\in\Omega : x^2 + y^2 < (1/2)^2 \}$, então
+    $$
+    P(A) = \frac{ \text{``área'' de $A$} }{ \text{``área'' de $\Omega$} } = \frac{ \iint_{A}dxdy }{ \iint_{\Omega}dxdy } = \iint_A f(x,y) dxdy = \iint_A \frac{1}{4}dxdy = \frac{\frac{\pi}{4}}{4} = \frac{\pi}{16}.
+    $$
+    \end{example}
+\end{itemize}
+
+Dados os exemplos e feitas as observações, vamos ver algumas propriedades da medida de probabilidade.
+
+\begin{proposition}
+Sejam $(\Omega, \mathcal{A}, P)$ um espaço de probabilidade e $A, B, C \in\mathcal{A}$. Temos
+\begin{itemize}
+    \item[(P1)] $P(\emptyset) = 0$
+    \item[(P2)] $P(A) = 1 - P(A^C)$
+    \item[(P3)] se $A\subset B$, então
+    \begin{enumerate}[(i)]
+        \item $P(B-A) = P(B) - P(A)$
+        \item $P(A) \leq P(B)$ (monotonicidade)
+    \end{enumerate}
+    \item[(P4)] $P(A) \leq 1$
+    \item[(P5)] $P(A\cup B) = P(A) + P(B) - P(A\cap B)$ e, em geral,
+    $$
+    P\left( \bigcup_{i=1}^{n}A_i \right) = \sum_{i=1}^n P(A_i) - \sum_{1\leq i_1 < i_2 \leq n} P(A_{i_1}\cap A_{i_2}) + \sum_{1\leq i_1 < i_2 < i_3 \leq n} P(A_{i_1}\cap A_{i_2}\cap A_{i_3}) + \cdots + (-1)^{n-1}P(A_1\cap\cdots\cap A_n).
+    $$
+    \item[(P6)] $P(A\cup B)\leq P(A) + P(B)$ e, em geral,
+    $$
+    P\left( \bigcup_{i=1}^{n}A_i \right) \leq \sum_{i=1}^n P(A_i).
+    $$
+    \item[(P7)] $P(A\cap B) \geq 1 - P(A^C) - P(B^C)$.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+\begin{itemize}
+    \item[(P1)] Provada acima.
+    \item[(P2)] Da Proposição anterior, temos 
+    $$
+    P(\Omega) = 1 = P(A\cup A^C) = P(A) + P(A^C) \Longleftrightarrow P(A) = 1- P(A^C).
+    $$
+    \item[(P3)]\begin{enumerate}[(i)]
+        \item Temos
+        $$
+        P(B-A) = P(B\cap A^C) \stackrel{\text{(P2)}}{=} 1 - P(B^C\cup A) = 1 - P(B^C) - P(A) \stackrel{\text{(P2)}}{=} P(B) - P(A),
+        $$
+        pois $A\subset B$, logo $A\cap B^C = \emptyset$.
+        \item Temos 
+        $$
+        P(B-A) = P(B) - P(A) \stackrel{\text{(A2)}}{=} 0 \Longleftrightarrow P(B) \geq P(A).
+        $$
+    \end{enumerate}
+    \item[(P4)] Como $A\subset\Omega$, segue da (P3) que $P(A) \leq P(\Omega) = 1$.
+    \item[(P5)] Mostramos o resultado para dois conjuntos. Para o caso geral, veja \cite{Ross} p.50-51. Temos
+    $$
+    P(A\cup B) = P(A) + P(B-A),
+    $$
+    pois $A\cup B = A\cup (B-A)$ (conjuntos disjuntos). Como $B = (A\cap B)\cup (B-A)$ (eventos disjuntos), então
+    $$
+    P(B) = P(A\cap B) + P(B-A),
+    $$
+    isto é, 
+    $$
+    P(B-A) = P(B) - P(A\cap B).
+    $$
+    Logo, $P(A\cup B) = P(A) + P(B) - P(A\cap B).$
+    \item[(P6)] Mostramos o resultado para dois conjuntos. Para o caso geral, veja \cite{Ross} p.50-51. Temos 
+    $$
+    P(A\cup B) = P(A) + P(B) - \underbrace{P(A\cap B)}_{\geq 0} \leq P(A) + P(B).
+    $$
+    \item[(P7)] Temos 
+    $$
+    P(A\cap B) = P(A) + P(B) - P(A\cup B) = 1 - P(A^C) - P(B^C) + \underbrace{1 - P(A\cup B)}_{\geq 0} \geq 1 - P(A^C) - P(B^C).
+    $$
+\end{itemize}
+\end{proof}
+
+Enunciamos, a seguir, uma das propriedades mais importantes de uma medida de probabilidade: sua continuidade.
+
+\begin{theorem}[Cont. da Probabilidade]
+Sejam $(\Omega, \mathcal{A}, P)$ um espaço de probabilidade e $A_1, A_2, \dots \in\mathcal{A}$. Então,
+\begin{enumerate}[(a)]
+    \item se $A_1\subset A_2\subset \dots$ e 
+    $$
+    \lim_{n\to\infty} A_n := \bigcup_{n=1}^{\infty}A_n\in\mathcal{A},
+    $$
+    vale
+    $$
+    P\left( \bigcup_{n=1}^{\infty}A_n \right) = P\left( \lim_{n\to\infty} A_n \right) = \lim_{n\to\infty} P(A_n).
+    $$
+    \item se $A_1\supset A_2\supset \dots$ e 
+    $$
+    \lim_{n\to\infty} A_n := \bigcap_{n=1}^{\infty}A_n\in\mathcal{A},
+    $$
+    vale
+    $$
+    P\left( \bigcap_{n=1}^{\infty}A_n \right) = P\left( \lim_{n\to\infty} A_n \right) = \lim_{n\to\infty} P(A_n).
+    $$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}[(a)]
+    \item Defina $B_n, n\geq 1$, por
+    $$
+    B_1 = A_1 \text{ e } B_n = A_n - \bigcup_{i=1}^{n-1}A_i = A_n - A_{n-1}, n > 1.
+    $$
+    Note que $B_1 \cap B_k = \emptyset, \forall k\neq 1$, pois, nesse caso, $B_1 \cap B_k = B_1\cap (A_k - A_{k-1})$ e, como $A_1 \subset A_{k-1}$, não existe $b\in B_1$ tal que $b_1\in A_k - A_{k-1}$. De maneira análoga, temos $B_i\cap B_j = \emptyset, \forall i > j > 1$. Ademais, temos
+    $$
+    \bigcup_{i=1}^{\infty}B_i = \bigcup_{i=1}^{\infty}A_i \text{ e } \bigcup_{i=1}^{n} B_i = \bigcup_{i=1}^{n}A_i, \forall n\geq 1.
+    $$
+    Portanto, 
+    \begin{align*}
+        P\left( \bigcup_{i=1}^{\infty}A_i \right) = P\left( \bigcup_{i=1}^{\infty}B_i \right) = \sum_{i=1}^{\infty}P(B_i) 
+        &= \lim_{n\to\infty}\sum_{i=1}^{n}P(B_i) \\
+        &= \lim_{n\to\infty} P\left( \bigcup_{i=1}^{n}B_i \right) \\
+        &= \lim_{n\to\infty} P\left( \bigcup_{i=1}^{n}A_i \right) \\
+        &= \lim_{n\to\infty}P(A_n).
+    \end{align*}
+    
+    \item Como $A_1 \supset A_2 \supset \cdots$, então $A_1^C \subset A_2^C \subset \cdots $. Do item anterior, segue que
+    \begin{align*}
+        P\left( \lim_{n\to\infty} A_i^C \right) = P\left( \bigcup_{i=1}^{\infty}A_i^C \right) = \lim_{n\to\infty} P(A_n^C).
+    \end{align*}
+    Mas como
+    \begin{align*}
+        \bigcap_{i=1}^{\infty}A_i = \left( \bigcup_{i=1}^{\infty}A_i^C \right)^C,
+    \end{align*}
+    então
+    \begin{align*}
+        P\left( \left( \bigcap_{i=1}^{\infty}A_i \right)^C \right) = \lim_{n\to\infty} P(A_n^C),
+    \end{align*}
+    ou seja,
+    \begin{align*}
+        1 - P\left( \bigcap_{i=1}^{\infty}A_i \right) = \lim_{n\to\infty}\left[ 1 - P(A_n) \right] = 1 - \lim_{n\to\infty} P(A_n),
+    \end{align*}
+    e segue o resultado.
+\end{enumerate}
+\end{proof}
+
+Vamos agora mostrar que dado $\Omega$ tal que $0 < |\Omega| < \infty$ e assumindo resultados equiprováveis, temos que $P:\mathcal{A} = \mathcal{P}(\Omega) \to \mathbb{R}$ dada por $P(A) = |A|/|\Omega|, \forall A\in\mathcal{A},$ define uma medida de probabilidade.
+\begin{proof}
+É claro que $\forall A\in\mathcal{A}$ temos $P(A) = |A|/|\Omega| > 0$. Ademais, $P(\Omega) = |\Omega|/|\Omega| = 1$. Por fim, note que como $\mathcal{A} = \mathcal{P}(\Omega)$ e $|\Omega| < \infty$, então $\mathcal{A}$; daí, a única forma de termos uma sequência $A_1, A_2, \dots \in\mathcal{A}$ de elementos dois a dois disjuntos é se $A_m = \emptyset \ \forall m\geq N\in\mathbb{N}$. Assim, 
+\begin{align*}
+    P\left( \bigcup_{i=1}^{\infty}A_i \right) = P(\Omega) = 1 = \sum_{i=1}^{N-1}P(A_i) = \sum_{i=1}^{\infty}P(A_i).
+\end{align*}
+Outra maneira seria apenas pegar uma tal sequência acima e argumentar que
+\begin{align*}
+    P\left( \bigcup_{i=1}^{\infty}A_i \right) = \frac{\left| \bigcup_{i=1}^{\infty}A_i \right|}{|\Omega|} = \frac{\sum_{i=1}^{\infty}A_i}{|\Omega|} = \sum_{i=1}^{\infty}P(A_i).
+\end{align*}
+\end{proof}
+
+Aproveitando o ensejo, mostremos também que dado $\Omega = \mathbb{N}$ e sendo $\mathcal{A} = \mathcal{P}(\mathbb{N})$, temos que $P:\mathcal{A}\to\mathbb{R}$ dada por 
+\begin{align*}
+    \displaystyle{P(\{ j \}) = \frac{1}{2^j}, \{j\}\in\Omega} \ \text{ e } \ 
+    P(A) = \sum_{j\in A}P(\{ j \}) = \sum_{j\in A}\frac{1}{2^j}, \forall A\in\mathcal{A}
+\end{align*}
+define uma medida de probabilidade.
+\begin{proof}
+Note que dado $A\in\mathcal{A}$, temos $P(A) = \displaystyle{\sum_{j\in A} \frac{1}{2^j}}\geq 0$. Ademais, $P(\Omega) = \displaystyle{ \sum_{j=1}^{\infty}\frac{1}{2^j} = 1}$. Por fim, dados $A_1, A_2, \dots \in \mathcal{A}$ dois a dois disjuntos, temos
+\begin{align*}
+    P\left( \bigcup_{i=1}^{\infty} A_i \right) = \sum_{j\in\bigsqcup A_i} \frac{1}{2^j} = \sum_{j\in A_1} \frac{1}{2^j} + \sum_{j\in A_2} \frac{1}{2^j} + \cdots = \sum_{i=1}^{\infty}P(A_i).
+\end{align*}
+\end{proof}
+
+Para finalizar as demonstrações dessas medidas de probabilidade usuais, mostremos que se $\Omega \subset\mathbb{R}$ é não-enumerável tal que $\displaystyle{0 < \int_{\Omega}}dx < \infty$ e sendo $\mathcal{A} = \mathcal{B}(\Omega)$, então $P:\mathcal{A}\to\mathbb{R}$ dada por
+\begin{align}
+    P(A) = \frac{\int_A dx}{\int_{\Omega}dx}, \forall A\in\mathcal{A}
+\end{align}
+define uma medida de probabilidade.
+\begin{proof}
+Segue da monotonicidade da integral que $P(A)\geq 0, \forall A\in\mathcal{A}$. Ademais, temos $P(\Omega) = \displaystyle{ \int_{\Omega}dx / \int_{\Omega}dx = 1}$. Por último, dados $A_1, A_2, \dots \in \mathcal{A}$ dois a dois disjuntos, temos
+\begin{align*}
+    P\left( \bigcup_{i=1}^{\infty} A_i \right) = \int_{\bigsqcup A_i}dx / \int_{\Omega} dx = \sum_i \int_{A_i}dx/\int_{\Omega}dx = \sum_{i=1}^{\infty} P(A_i).
+\end{align*}
+\end{proof}
+
+
+\subsection{Condicionamento e independência}
+\subsubsection{Probabilidade Condicional}
+Para começarmos a discussão acerca da probabilidade condicional, começamos com um exemplo motivador.
+\begin{example}
+Considere uma caixa com $r$ bolas vermelhas numeradas de 1 a $r$ e $b$ bolas brancas numeradas de 1 a $b$. Seja $\mathcal{E}$ o experimento ``retira-se ao acaso uma bola da caixa''. Suponhamos resultados equiprováveis e sejam $\Omega = \{ V_1, \dots, V_r, B_1, \dots, B_b \}$ e $\mathcal{A} = \mathcal{P}(\Omega)$. Daí, $\forall \omega\in\Omega$ temos $P(\omega) = \displaystyle{\frac{1}{r+b}}$ e, $\forall A\in\mathcal{A}, P(A) = \displaystyle{\frac{|A|}{r+b}}$. Com isso, estamos interessados em saber
+\begin{enumerate}[(I)]
+    \item qual a probabilidade de retirar uma bola número 1?
+    \item qual a probabilidade de retirar uma bola número 1, sabendo que ela é vermelha?
+\end{enumerate}
+\paragraph{Solução.} Para a primeira pergunta, temos
+\begin{align*}
+    P(B) = \frac{|B|}{r+b} = \frac{2}{r+b},
+\end{align*}
+sendo $B = \{ \text{número da bola é } 1 \} = \{V_1, B_1\}$. Para a segunda pergunta, façamos $A = \{ \text{bola é vermelha} \} = \{ V_1, \dots, V_r \}$. Denotamos por $B|A$ o evento ``ocorrer $B$ dado que $A$ ocorreu''. Queremos, então, calcular $P(B|A)$. Note que estamos restringindo o espaço amostral às $r$ bolas vermelhas, i.e., $A$ é o ``novo'' espaço amostral. Nesse ``novo espaço'', a probabilidade de retirada de cada bola é $1/|A| = 1/r$. Daí,
+\begin{align*}
+    P(B|A) = \frac{1}{r} = \frac{|B\cap A|}{|A|} = \frac{|B\cap A|/|\Omega|}{|A|/|\Omega|} = \frac{P(B\cap A)}{P(A)}.
+\end{align*}
+\end{example}
+
+Isso motiva a
+\begin{definition}[Probabilidade Condicional]
+Sejam $(\Omega, \mathcal{A}, P)$ um espaço de probabilidade e $A, B\in\mathcal{A}$ tais que $P(A) > 0$. A \textbf{probabilidade condicional de $B$, dado $A$}, denotada por $P(B|A)$, é
+\begin{align*}
+    P(B|A) = \frac{P(B\cap A)}{P(A)}.
+\end{align*}
+\end{definition}
+
+\begin{remarks}
+a
+\end{remarks}
+
+
+
+
+\end{document}
