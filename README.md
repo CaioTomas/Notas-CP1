@@ -1,6 +1,5 @@
 # Notas-CP1
-Notas de aula do curso de **Cálculo de Probabilidade 1** da Universidade de Brasília - 2021/1. O curso foi ministrado pela profª Daniele da Silva Baratela Martins Neto,
-ao longo de 16 semanas, cuja ementa aborda os seguintes tópicos:
+Notas de aula do curso de **Cálculo de Probabilidade 1** da Universidade de Brasília - 2021/1. O curso foi ministrado pela profª Daniele da Silva Baratela Martins Neto, ao longo de 16 semanas, e as notas são de minha autoria, baseadas no material disponibilizado pela profª. Os seguintes tópicos foram abordados no decorrer do curso:
 
 ## Espaços de probabilidade
 ##### Definição
@@ -46,5 +45,3 @@ ao longo de 16 semanas, cuja ementa aborda os seguintes tópicos:
 ##### Função Geradora de Momentos
 ##### Desigualdades de Chebyshev-Markov e Lei dos Grandes Números
 ##### Teorema do Limite Central
-
-As notas são de minha autoria, baseadas no material disponibilizado pela profª.
