@@ -42,6 +42,9 @@ ao longo de 16 semanas, cuja ementa aborda os seguintes tópicos:
 ##### Esperança de função de variável aleatória contínua
 ##### Momentos de uma variável aleatória contínua
 
-## Função geradora de momentos, lei dos grandes números e teorema do limite central
+## F.G.M, L.G.N. e Teorema do Limite Central
+##### Função Geradora de Momentos
+##### Desigualdades de Chebyshev-Markov e Lei dos Grandes Números
+##### Teorema do Limite Central
 
 As notas são de minha autoria, baseadas no material disponibilizado pela profª.
