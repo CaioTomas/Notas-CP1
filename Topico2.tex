@@ -2,18 +2,131 @@
 \graphicspath{{\subfix{../images/}}}
 
 \begin{document}
-
-%\section{Tópico 2}
-
 \section{Noções de Análise Combinatória}
+Dado um conjunto finito $S$, apresentaremos algumas maneiras de contar seus elementos, isto é, obter $|S|$. Desejamos fazer isto para calcular as probabilidades de eventos em espaços de probabilidade uniformes com espaço amostral finito já que, como vimos anteriormente, a probabilidade de um evento $A$ neste espaço nada mais é que $|A|/|\Omega|$.
 
 \subsection{Amostras ordenadas}
+Sejam $S = \{ s_1, \dots, s_n \}$ e $T = \{t_1, \dots, t_n\}$. Temos $|S| = m$ e $|T| = n$, de modo que $\Omega = S\times T = \{ (s,t) : s\in S, t\in T \}$ é tal que $|\Omega| = mn$. De maneira geral, se $S_1, \dots, S_n$ são tais que $|S_i| = m_i, 1\leq i\leq n$, então $\Omega = S_1\times S_2\times\cdots\times S_n = \{ (s_1, \dots, s_n) : s_i\in S_i, 1\leq i\leq n \}$ é tal que $|\Omega| = m_1\cdots m_n$. Note que se $m = m_1 = \cdots = m_n$, então $|\Omega| = m^n$.
 
-\subsection{Amostras desordenadas e sem reposição}
+\subsubsection{Amostragem com reposição}
+Considere uma caixa com $m$ bolas numeradas de $1$ a $m$ em que retiramos uma bola, registramos seu número e a repomos na caixa. Repetimos esse procedimento $n$ vezes. Temos, então
+\begin{align*}
+    \Omega = \{ (x_1, \dots, x_n) : 1\leq x_i\leq n, 1\leq i\leq n \},
+\end{align*}
+sendo $x_i$ o número da $i$-ésima bola retirada, de modo que
+\begin{align*}
+    |\Omega| = m^n \ \text{(total de amostras de tamanho } n \text{\textbf{ com reposição})}.
+\end{align*}
+
+\begin{example}
+Seja $\mathcal{E}$ o experimento que consiste em lançar $n$ vezes uma moeda honesta e observar o resultado. Qual a probabilidade de se obter pelo menos uma cara entre $n$ lançamentos? Ora, note que $\mathcal{E} \leftrightarrow$ extrair uma amostra de tamanho $n$, com reposição, de uma população com 2 elementos, $S = \{ c, \widehat{c} \}$. Temos
+\begin{align*}
+    \Omega = \{ (x_1, \dots, x_n) : x_i = c, \widehat{c}, i = 1, \dots, n \}.
+\end{align*}
+Daí, $|\Omega| = 2^n$ e tomamos $\mathcal{A} = \mathcal{P}(\Omega)$ e $P(\{\omega\}) = 1/2^n, \forall \omega\in\Omega$, de modo que $P(A) = |A|/2^n, \forall A\in\mathcal{A}$. Se $A = \{\text{obter pelo menos uma cara}\}\subset\Omega$, então $A^C = \{\text{não obter nenhuma cara nos } n \text{ lançamentos}\} = \{ (\widehat{c}, \dots, \widehat{c}) \}$. Logo, $P(A) = 1 - P(A^C) = 1 - 1/2^n$.
+\end{example}
+
+\subsubsection{Amostragem sem reposição (arranjos e permutações)}
+Considere $S$ um conjunto com $m$ objetos distintos, $S = \{s_1, \dots, s_m\}$. Selecionamos um objeto de $S$ e não o repomos, repetindo esse processo $n \leq m$ vezes. Temos, então,
+\begin{align*}
+    \Omega = \{ (s_1, \dots, s_n) : s_i\in S, 1\leq i\leq n, s_i\neq s_j \forall i\neq j \}
+\end{align*}
+e, portanto, 
+\begin{align*}
+    |\Omega| = m(m-1)\cdots (m - n + 1) = \frac{m!}{(m-n)!} = A_{m,n}.
+\end{align*}
+Note que se $n=m$, então $A_{m,n} = A_{n,m} = P_m$ (permutação de $m$ elementos).
+
+\begin{example}
+Considere que temos 10 bolas numeradas de 1 a 10, $S = \{ 1, \dots, 10 \}$, e 3 caixas distintas. Suponha que queiramos escolher ao acaso 3 bolas, sem reposição, e colocar cada uma em uma das caixas. Temos
+\begin{align*}
+    \Omega = \{ (x_1, x_2, x_3) : x_i\in S, i=1,2,3, x_i\neq x_j, i\neq j \}.
+\end{align*}
+Note que, aqui, estamos considerando $(5,2,4)\neq (4,2,5)$ por exemplo, pois as caixas são distintas. Tomamos $\mathcal{A} = \mathcal{P}(\Omega)$ e $P(\{\omega\}) = 1/|\Omega|, \forall \omega\in\Omega$, com $|\Omega| = A_{10,3} = 10!/7! = 720$. Se tivéssemos $n$ bolas e $n$ caixas, então
+\begin{align*}
+    \Omega = \{ (x_1, \dots, x_n) : x_i\in S, i=1, \dots, n, x_i\neq x_j, i\neq j \},
+\end{align*}
+sendo $S = \{1, \dots, n\}$. Daí, temos $|\Omega| = n!$ e tomamos $\mathcal{A} = \mathcal{P}(\Omega)$ e $P(\{\omega\}) = 1/n!, \forall\omega\in\Omega$. Seja $A_{ij} = \{\text{bola i na caixa j}\}$, com $i , j\in S$ fixos. Note que $|A_{ij}| = (n-1)!$. Logo, $P(A_{ij}) = (n-1)!/n! = 1/n$ e, de modo geral, se $A_k = \{ \text{k bolas específicas em k caixas específicas} \}$, então $|A_k| = (n-k)!$ e $P(A_k) = (n-k)!/n! = 1/A_{n,k}$.
+\end{example}
+
+\subsection{Amostras desordenadas e sem reposição (combinações)}
+Considere $S$ com $m$ objetos numerados distintos, $S = \{1, \dots, m\}$. Escolhemos, ao acaso, $r\leq m$ elementos de $S$, sem reposição e sem considerar a ordem de escolha. Temos
+\begin{align*}
+    \Omega = \{ (x_1, \dots, x_r) : x_i\in S, i=1,\dots, r, x_i < x_j, i<j \}.
+\end{align*}
+Daí, $|\Omega| = m!/(r!(m-r)!) = C_{m,r}$. De fato, se $|\Omega|\cdot P_r = A_{m,r}$, donde segue que $\Omega$ tem a forma acima. Denotamos também $C_{m,r} = \binom{m}{r}$.
+\begin{example}
+Sejam $S = \{ 1, 2, 3, 4 \}$, $r=3$. O número de amostras é $A_{4,3}/3! = 4 = C_{4,3}$.
+\end{example}
+\begin{example}
+Suponha que há 75 professores no departamento de Matemática, sendo 25 titulares, 15 adjuntos e 35 assistentes. Queremos formar uma comissão de 6 membros, selecionados ao acaso. Seja $A = \{ \text{todos são assistentes} \}$. Temos
+\begin{align*}
+    \Omega = \{ (x_1, \dots, x_6) : x_i\in \{ 1, \dots, 75 \}, i=1,\dots, 6 \text{ e } x_i<x_j, i<j\}.
+\end{align*}
+Daí, $|\Omega| = \binom{75}{6}$ e, ademais, $A = \binom{35}{6}$, de modo que $P(A) = \binom{35}{6}/\binom{75}{6} \approx 1\%$.
+\end{example}
 
 \subsection{Permutações com elementos repetidos}
+\paragraph{(a).} Considere um conjunto de $n$ objetos distintos, agrupados em $r$ espécies distintas: $n_1$ da espécie 1, $n_2$ da espécie 2,..., $n_r$ da espécie $r$, com $n_1 + \cdots + n_r = n$. A quantidade de permutações dos $n$ objetos é
+\begin{align*}
+    P_{n}^{n_1, \dots, n_r} &= \underbrace{\binom{n}{n_1}}_{\text{lugares 1ª espécie}}\binom{n-n_1}{n_2}\cdots\binom{n - (n_1 + n_2 + \cdots + n_{r-1})}{n_r} \\
+    &= \frac{n!}{n_1!(n-n_1)!}\cdot\frac{(n-n_1)!}{n_2!(n-(n_1+n_2))!}\cdots\frac{(n-(n_1+\cdots+n_{r-1}))!}{n_r!(n-(n_1+\cdots+n_r))!} \\
+    &= \frac{n!}{n_1!n_2!\cdots n_r!}.
+\end{align*}
+Denotamos também $\displaystyle{ P_n^{n_1, \dots, n_r} = \binom{n}{n_1, n_2, \dots, n_r} }$. Note que se $n_i = 1, i=1,\dots,r$, então $P_n^{n_1, \dots, n_r} = P_n^{1,\dots, 1} = P_n = n!$ e, se $r=2$, então
+\begin{align*}
+    \binom{n}{n_1, n_2} = \frac{n!}{n_1!n_2!} = \begin{cases}
+        \frac{n!}{n_1!(n-n_1)!} &= \binom{n}{n_1} \\
+        \frac{n!}{n_2!(n-n_2)!} &= \binom{n}{n_2} \\
+    \end{cases}.
+\end{align*}
+
+\paragraph{(b).} Considere um conjunto com $n$ item distintos que deve ser dividido em $r$ grupos distintos de tamanhos $n_1, \dots, n_r$, com $n_1 + \cdots + n_r = r$. O total de divisões possíveis é $\displaystyle{ P_n^{n_1, \dots, n_r} = \binom{n}{n_1, n_2, \dots, n_r} }$. Note que tanto a expansão binomial quanto a multinomial usam desse raciocínio.
 
 \subsection{Partições --- problema da urna}
+\subsubsection{Urna simples}
+Em uma urna, temos $n$ bolas: $n_A$ do tipo $A$ e $n_B$ do tipo $B$. Retira-se $m\leq n$ bolas ao acaso. Queremos calcular a probabilidade de $A_k = \{ \text{a amostra tem exatamente k bolas do tipo A} \}$. Note que $0\leq k\leq\min\{ n_A, m \}$ se não houver reposição e $0\leq k\leq m$ se houver reposição. Supondo resultados equiprováveis, temos $P(A_k) = |A_k|/|\Omega|$. Note que se $x_i$ são as bolas do tipo $A$ e $y_j$ são as bolas do tipo $B$, então
+\begin{align*}
+    \Omega = \{ x_1, \dots, x_{n_A}, y_1, \dots, y_{n_B} \}. 
+\end{align*}
+Ademais, $\Omega$ está em bijeção com $\{1, \dots, n_A, n_A + 1, \dots, n_A + n_B \}$, de modo que podemos pensar também $\Omega = \{ 1, \dots, n \}$.
+
+\paragraph{Amostragem sem reposição.} Ao considerar $A_k$, queremos apenas a quantidade de bolas de cada tipo escolhidas, sem importar a ordem. Isso sugere que $P(A_k)$ fica inalterada se considerarmos ou não a ordem, e veremos que esse, de fato, é o caso. 
+
+\begin{itemize}
+    \item[(a1)] Considerando amostras não ordenadas, temos
+    \begin{align*}
+        \Omega = \{ \omega = (\omega_1, \dots, \omega_n) : \omega_i\in S, i = 1, \dots, m, \omega_i < \omega_j, i < j \},
+    \end{align*}
+    $\mathcal{A} = \mathcal{P}(\Omega)$ e $P(A) = |A|/|\Omega|, \forall A\in\mathcal{A}$. Note que $\displaystyle{|\Omega| = \binom{n}{m}}$ e, para todo $0\leq k\leq\min\{n_A,m\}$, temos $\displaystyle{|A_k| = \binom{n_A}{k}\binom{n_B}{m-k}}$. Daí, temos
+    \begin{align*}
+        P(A_k) = \frac{\binom{n_A}{k}\binom{n_B}{m-k}}{\binom{n}{m}} = \frac{\binom{n_A}{k}\binom{n-n_A}{m-k}}{\binom{n}{m}}, 0\leq k\leq\min\{n_A, m\},
+    \end{align*}
+    chamada de \textbf{probabilidade hipergeométrica}.
+    
+    \item[(a2)] Considerando amostras ordenadas, temos
+    \begin{align*}
+        \Omega = \{ \omega = (\omega_1, \dots, \omega_m) : \omega_i\in S_i, i=1, \dots, m \text{ e } \omega_i\neq\omega_j, i\neq j \}. 
+    \end{align*}
+    A $\sigma$-álgebra e a medida de probabilidade são as mesmas do caso acima. Agora, temos $|\Omega| = A_{n,m}$ e, para todo $0\leq k\leq\min\{n_A, m\}$, $\displaystyle{|A_k| = \binom{m}{k, m-k}A_{n_A, k}A_{n_b, m-k}}$. Daí,
+    \begin{align*}
+        P(A_k) = \frac{ \binom{m}{k}\frac{n_A!}{(n_A - k)!}\cdot\frac{n_B!}{(n_B - m + k)!} }{\frac{n!}{(n-m)!}} = \frac{ \binom{n_A}{k}\binom{n_B}{m-k} }{\binom{n}{m}}.
+    \end{align*}
+\end{itemize}
+
+\paragraph{Amostragem com reposição.} Neste caso, temos
+\begin{align*}
+    \Omega = \{ \omega = (\omega_1, \dots, \omega_m) : \omega_i \in S, i = 1, \dots, m \},
+\end{align*}
+com $m\leq n$ e $\mathcal{A}$ e $P$ como acima. Note que $|\Omega| = n^m$ e, para todo $k\in\{0, \dots, m\}$, $\displaystyle{|A_k| = \binom{m}{k, m-k}n_A^kn_B^{m-k} }$ e $\displaystyle{P(A_k) = \binom{m}{k}\frac{n_A^kn_B^{m-k}}{n^m}, k = 0, \dots, m }$, chamada de \textbf{probabilidade binomial}. Note também que se considerarmos a retirada de uma bola do tipo $A$ como ``sucesso'', então $P(\text{sucesso}) = n_A/n := p$ e $P(\text{fracasso}) = 1 - n_A/n = 1 - p$. Devido à reposição, os resultados das retiradas são mutuamente independentes, de modo que $P(A_k) = \displaystyle{ P(\text{exatamente k sucessos}) = \binom{m}{k}p^k(1-p)^{m-k}, k=0, \dots, m }$.
+
+
+\subsubsection{Urna geral}
+Agora, consideremos que em uma urna há $n$ bolas, sendo $n_i$ do tipo $i$, com $i = 1, \dots, r$. Note que $n_1 + \cdots + n_r = n$. Retiramos $m\leq n$ bolas ao acaso, e estamos interessados em calcular a probabilidade de $A = A_{k_1, \dots, k_r} = \{ \text{conter } k_i \text{ bolas do tipo } i, i = 1, \dots, r \}$, com $k_1 + \cdots + k_r = m$. Note que $0\leq k_i\leq\min\{n_i, m\}, i=1, \dots, r$ se não houver reposição e $0\leq k_i\leq m, i=1, \dots, r$ caso contrário. Sem perda de generalidade, podemos descrever o conjunto de bolas como $S = \{1, \dots, n \}$.
+
+\paragraph{Amostragem sem reposição.}
+
+\paragraph{Amostragem com reposição.}
 
 
 \section{Variáveis aleatórias discretas}
