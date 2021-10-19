@@ -562,8 +562,202 @@ Sejam $(\Omega, \mathcal{A}, P)$ um espaço de probabilidade e $A, B\in\mathcal{
 \end{definition}
 
 \begin{remarks}
-a
+\begin{enumerate}[(i)]
+    \item se $P(A) = 0$, então $P(B|A)$ é indefinida. Alguns autores adotam $P(B|A) = 0$ ou $P(B|A) = P(B)$ neste caso;
+    \item sejam $(\Omega, \mathcal{A}, P)$ espaço de probabilidade e $A\in\mathcal{A}$ fixo com $P(A) > 0$. Então $P(\cdot|A):\mathcal{A}\to\mathbb{R}$ define uma medida de probabilidade sobre $(\Omega, \mathcal{A})$.
+    \begin{proof}
+    Note que $P(\Omega|A) = \displaystyle{ \frac{P(\Omega\cap A)}{P(A)} = \frac{P(A)}{P(A)} = 1 }$ e que $P(B|A) = \displaystyle{\frac{P(B\cap A)}{P(A)}} \geq 0, \forall B\in\mathcal{A}$ uma vez que $P(B\cap A)\geq 0$ e $P(A) > 0$. Por fim, dados $A_1, A_2, \dots\in\mathcal{A}$ disjuntos dois a dois, temos
+    \begin{align*}
+        P\left( \bigcup_{i=1}^{\infty}A_i | A \right) = \frac{P\left( \bigcup_{i=1}^{\infty}A_i \cap A \right)}{P(A)} = \sum_{i=1}^{\infty}\frac{P(A_i\cap A)}{P(A)} = \sum_{i=1}^{\infty}P(A_i|A),
+    \end{align*}
+    onde a penúltima igualdade se deve ao fato de que $A_i\cap A_j = \emptyset$ se $i\neq j$ implica $A\cap A_i\cap A_j = \emptyset.$
+    \end{proof}
+\end{enumerate}
 \end{remarks}
+
+\begin{proposition}
+Seja $(\Omega, \mathcal{A}, P)$ espaço de probabilidade. Valem
+\begin{enumerate}[(a)]
+    \item Regra da Multiplicação
+    \begin{enumerate}[(i)]
+        \item se $A, B\in\mathcal{A}$, então $P(A\cap B) = P(B|A)P(A) = P(A|B)P(B)$;
+        \item se $A_1, \dots, A_n\in\mathcal{A}$, então
+        \begin{align*}
+            P\left( \bigcap_{i=1}^{\infty} A_i \right) = P(A_1)P(A_2|A_1)P(A_3|A_1\cap A_2)\cdots P(A_n|A_1\cap\cdots\cap A_{n-1}).
+        \end{align*}
+    \end{enumerate}
+    \item Regra da Probabilidade Total: se $B_1, B_2, \dots \in\mathcal{A}$ são dois a dois disjuntos tais que $\displaystyle{ \bigcup_{i=1}^{\infty}B_i = \Omega}$ e $P(B_i) > 0, \forall i$, então
+    \begin{align*}
+        P(A) = \sum_{i=1}^{\infty}P(B_i)P(A|B_i), \forall A\in\mathcal{A}.
+    \end{align*}
+    \item Fórmula de Bayes: se $B_1, B_2, \dots \in\mathcal{A}$ são dois a dois disjuntos tais que $\displaystyle{ \bigcup_{i=1}^{\infty}B_i = \Omega}$, $P(B_i) > 0, \forall i$ e $P(A) > 0, A\in\mathcal{A}$, então
+    \begin{align*}
+        P(B_j|A) = \frac{P(B_j)P(A|B_j)}{\sum_{i=1}^{\infty}P(B_i)P(A|B_i)}, \forall j\geq 1.
+    \end{align*}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Demonstramos os resultados na ordem apresentada.
+\begin{enumerate}[(i)]
+    \item Por definição, se $P(A) > 0$ então $P(A|B) = \displaystyle{\frac{P(A\cap B)}{P(A)}}$ e $P(B|A) = \displaystyle{\frac{P(B\cap A)}{P(B)}}$, i.e., $P(A\cap B) = P(A)P(A|B) = P(B)P(B|A)$.
+    \item Para $i=1,2$ vale a igualdade. Suponha que
+    \begin{align*}
+        P\left( \bigcap_{i=1}^{k}A_i \right) = P(A_1)P(A_2|A_1)\cdots P(A_k|A_1\cap\cdots\cap A_{k-1}).
+    \end{align*}
+    De (i), temos que 
+    \begin{align*}
+        P\left( \bigcap_{i=1}^{k+1}A_i \right) &= P\left( A_{k+1}|\bigcap_{i=1}^{k}A_i \right)P\left( \bigcap_{i=1}^{k}A_i \right) \\
+        &= P(A_1)P(A_2|A_1)\cdots P(A_k|A_1\cap\cdots\cap A_{k-1})P(A_{k+1}|A_1\cap\cdots\cap A_k)
+    \end{align*}
+    e o resultado segue por indução.
+\end{enumerate}
+\begin{itemize}
+    \item[(b)] Note que como os $B_i$'s são dois a dois disjuntos, então $(A\cap B_i)\cap(A\cap B_j) = \emptyset$ se $i\neq j$. Agora, como $A = A\cap\Omega = \displaystyle{A\cap \left( \bigcup_{i=1}^{\infty}B_i \right)}$, temos
+    \begin{align*}
+        P(A) = P\left( A\cap\bigcup_{i=1}^{\infty}B_i \right) = P\left( \bigcup_{i=1}^{\infty}(A\cap B_i) \right) = \sum_{i=1}^{\infty} P(A\cap B_i) = \sum_{i=1}^{\infty}P(B_i)P(A|B_i), \forall A\in\mathcal{A}.
+    \end{align*}
+    \item[(c)] Da definição de probabilidade condicional e de (b), temos
+    \begin{align*}
+        P(B_j|A) = \frac{P(B_j\cap A)}{P(A)} = \frac{P(B_j)P(A|B_j)}{\sum_{i=1}^{\infty}P(B_i)P(A|B_i)}, \forall j\geq 1.
+    \end{align*}
+\end{itemize}
+\end{proof}
+
+\subsubsection{Independência}
+Como de praxe, comecemos com um exemplo motivador: seja $\mathcal{E}$ o experimento ``jogar um dado honesto duas vezes e observar os resultados''. Temos, então $\Omega = \{ (i,j) : 1\leq i,j \leq 6 \}$ e definimos $\mathcal{A} = \mathcal{P}(\Omega)$. Daí, temos
+\begin{align*}
+    P(\{\omega\}) = P(\{(i,j)\}) = \frac{1}{36}, \forall\omega\in\Omega \ \text{ e } \ P(A) = \frac{|A|}{36}, \forall A\in\mathcal{A}. 
+\end{align*}
+Sejam $A = \{ \text{soma dos resultados é 5} \} = \{ (1,4), (2,3), (3,2), (4,1) \}$, $B = \{ \text{1º resultado é par} \} = \{(2,i), (4,i), (6,i) : i = 1, \dots, 6\}$, $C = \{\text{pelo menos um dos resultados é maior que 3}\} = \Omega\setminus\{(i,j) : 1\leq i,j\leq 3 \}$ e $D = \{ \text{pelo menos um dos resultados é 2} \} = \{ (2,i) : 1\leq i\leq 6 \}\cup \{ (j,2) : 1\leq j\leq 6, j\neq 2 \}$. Temos
+\begin{align*}
+    P(A) = \frac{4}{36} = \frac{1}{9}, P(B) = \frac{18}{36} = \frac{1}{2}, P(C) = \frac{27}{36} = \frac{3}{4}, P(D) = \frac{11}{36}.
+\end{align*}
+Ademais, temos $A\cap C = \{ (1,4), (4,1) \}$, $A\cap D = \{ (2,3), (3,2) \}$, $A\cap B = \{ (2,3), (4,1) \}$. Daí,
+\begin{align*}
+    P(A|C) = \frac{2/36}{27/36} &= \frac{2}{27} < \frac{1}{9} = P(A), \\
+    P(A|D) = \frac{2/36}{11/36} &= \frac{2}{11} > \frac{1}{9} = P(A), \\
+    P(A|B) = \frac{2/36}{18/36} &= \frac{2}{18} = \frac{1}{9} = P(A).
+\end{align*}
+Note que o conhecimento da ocorrência de $C$ \textbf{diminui} a chance de $A$ ocorrer e o conhecimento da ocorrência de $D$ \textbf{aumenta} a chance de $A$ ocorrer. Por outro lado, o conhecimento da existência de $B$ não altera a chance de ocorrência de $A$. Nesse caso, dizemos que $A$ e $B$ são \textbf{independentes}, conforme a definição abaixo.
+\begin{definition}[Independência]
+Dois eventos $A$ e $B$ num espaço de probabilidade $(\Omega, \mathcal{A}, P)$ são \textbf{independentes} se $P(A\cap B) = P(A)P(B)$.
+\end{definition}
+Alguns comentários são necessários: primeiro, note que se $P(A) = 0$, então $A$ é independente de qualquer outro evento $B$. Além disso, se $P(A), P(B) > 0$, então $A$ e $B$ são independentes se, e só se, $P(A|B) = P(A)$ (ou $P(B|A) = P(B)$).
+\begin{proof}
+Se $A$ e $B$ são independentes, então $P(A\cap B) = P(A)P(B) = P(A)P(A|B) = P(B)P(B|A)$ e, portanto, $P(B) = P(B|A)$ e $P(A) = P(A|B)$. Reciprocamente, se $P(A) = P(A|B) (P(B) = P(B|A))$, então $P(A\cap B) = P(A)P(B)$.
+\end{proof}
+
+\begin{remark}
+Se $A$ e $B$ são independentes, então
+\begin{enumerate}[(i)]
+    \item $A$ e $B^C$ são independentes
+    \item $A^C$ e $B$ são independentes
+    \item $A^C$ e $B^C$ são independentes
+\end{enumerate}
+\begin{proof}
+Se $P(A) = 0$ ou $P(B) = 0$, (i), (ii) e (iii) são imediatas. Suponha $P(A), P(B) > 0$.
+\begin{enumerate}[(i)]
+    \item Note que como $A\cap B^C$ e $A\cap B$ são disjuntos, então $P(A\cap B^C) = P(A) - P(A\cap B) = P(A) - P(A)P(B) = P(A)P(B^C)$.
+    \item Analogamente a acima, $P(B\cap A^C) = P(B) - P(B\cap A) = P(B) - P(B)P(A) = P(B)P(A^C)$.
+    \item Note que $P(A^C\cap B^C) = 1 - P(A\cup B) = 1 - P(A) - P(B) + P(A\cap B) = (1-P(A))(1-P(B)) = P(A^C)P(B^C).$
+\end{enumerate}
+\end{proof}
+\end{remark}
+
+Nada mais natural do que generalizar a definição de independência da seguinte forma.
+\begin{definition}[Independência 2 a 2 e Coletiva]
+Sejam $(\Omega, \mathcal{A}, P)$ um espaço de probabilidade e $A_1, \dots, A_n\in\mathcal{A}$. Dizemos que
+\begin{enumerate}[(a)]
+    \item $A_1, \dots, A_n$ são \textbf{2 a 2 independentes} ou \textbf{independentes aos pares} se $P(A_i\cap A_j) = P(A_i)P(A_j), \forall 1\leq i, j\leq n, i\neq j$.
+    \item $A_1, \dots, A_n$ são \textbf{independentes} ou \textbf{mutuamente independentes} ou \textbf{coletivamente independentes} se
+    \begin{align*}
+        P(A_{i_1}\cap A_{i_2}\cap\cdots\cap A_{i_m}) = P(A_{i_1})P(A_{i_2})\cdots P(A_{i_m}), \forall 1\leq i_1, i_2, \dots, i_m\leq n \ \text{ e } \ \forall 2\leq m\leq n. 
+    \end{align*}
+\end{enumerate}
+\end{definition}
+Note que a independência coletiva é um pouco mais forte que a independência aos pares. Ao longo do texto, a não ser que seja dito o contrário, quando dissermos que vários eventos são independentes estamos nos referindo à independência coletiva.
+
+\begin{example}[Ensaios ou Provas de Bernoulli]
+Consideremos um experimento qualquer (por exemplo, lançar uma moeda) que possua duas propriedades:
+\begin{enumerate}[(i)]
+    \item há somente 2 resultados possíveis: \textbf{sucesso}, com probabilidade $p$, e \textbf{fracasso}, com probabilidade $1-p$.
+    \item ao repetirmos o experimento, os resultados são \textbf{independentes}.
+\end{enumerate}
+Dado um experimento com as duas propriedades acima, os \textbf{ensaios} ou \textbf{provas de Bernoulli} consistem de $n\geq 1$ ensaios, isto é, repetições, deste experimento, resultando em um experimento \textbf{composto} (por exemplo, lançar 3 vezes uma moeda). Nessas condições, vejamos como resolver os seguintes itens.
+\begin{enumerate}[(a)]
+    \item Construir um espaço de probabilidade adequado para o experimento composto
+    \item Calcular a probabilidade de que ocorram $k\in\{0, \dots, n\}$ sucessos nas $n$ repetições
+    \item Calcular a probabilidade de pelo menos um sucesso nas $n$ repetições
+    \item Repetindo o experimento indefinidamente ($n\to\infty$), calcular a probabilidade de todas as provas terem sucesso.
+\end{enumerate}
+\end{example}
+\begin{proof}[Solução]
+\begin{enumerate}[(a)]
+    \item Para $n$ ensaios temos $2^n$ resultados possíveis ao todo. Logo, definimos
+    \begin{align*}
+        \Omega = \{ \Tilde{\omega} = (\omega_1, \omega_2, \dots, \omega_n) : \omega_i\in\{0,1\}, i=1, \dots, n  \},
+    \end{align*}
+    sendo
+    \begin{align*}
+        \omega_i = \begin{cases}
+        1, \text{ se ocorre sucesso na i-ésima repetição} \\
+        0, \text{ caso contrário}.
+        \end{cases},
+    \end{align*}
+    $\mathcal{A} = \mathcal{P}(\Omega)$ e, como $\Omega$ é finito, para definirmos $P$ basta definirmos $P(\{ \Tilde{\omega} \}), \forall \Tilde{\omega}\in\Omega$. Seja $\Tilde{\omega} = (\underbrace{1,1,\dots,1}_{k}, \underbrace{0,0,\dots,0}_{n-k})$ (sucessos nas $k$ primeiras repetições). Para cada $i\in\{1, \dots, n\}$, defina
+    \begin{align*}
+        A_i = \{ \text{ocorrer sucesso na i-ésima repetição} \}.
+    \end{align*}
+    Por hipótese, temos
+    \begin{align*}
+        P(A_i) = p, \forall i=1,\dots, n \ \text{ e } \ A_1, \dots, A_n \text{ são independentes.}
+    \end{align*}
+    Logo, 
+    \begin{align*}
+        P(\{ \Tilde{\omega} \}) &= P(\{ (\underbrace{1,1,\dots,1}_{k}, \underbrace{0,0,\dots,0}_{n-k}) \}) \\
+        &= P(A_1\cap\cdots\cap A_k\cap A_{k+1}^C\cap\cdots\cap A_n^C) \\
+        &= P(A_1)P(A_2)\cdots P(A_k)P(A_{k+1}^C)\cdots P(A_n^C) \\
+        &= p^k(1-p)^{n-k}.
+    \end{align*}
+    Temos então, denotando por $\Tilde{\omega}^{(k)}$ um elemento que corresponde a $k$ sucessos em qualquer ordem, que $P(\{ \Tilde{\omega} \}) = p^k(1-p)^{n-k}$. Está definido nosso espaço de probabilidade $(\Omega, \mathcal{A}, P)$.
+    
+    \item Seja $B_k = \{ \text{ocorrer exatamente } k \text{ sucessos nas } n \text{ repetições} \}$. Note que $\displaystyle{|B_k| = \binom{n}{k}}$, de modo que
+    \begin{align*}
+        P(B_k) = \sum_{\Tilde{\omega}\in B_k}P(\{ \Tilde{\omega} \}) = |B_k|\cdot p^k(1-p)^{n-k} = \binom{n}{k}p^k(1-p)^{n-k}, \ k = 0, 1, \dots, n.
+    \end{align*}
+    
+    \item Seja $A = \{ \text{pelo menos 1 sucesso} \}$. Note que
+    \begin{align*}
+        A = \bigcup_{i=1}^{n} \ \text{ e } \ A^C = \{ \text{nenhum sucesso nas } n \text{ repetições} \} = \bigcap_{i=1}^{n}A_i^C,
+    \end{align*}
+    sendo $A_i = \{\text{sucesso na i-ésima repetição}\}$. Temos, observando que os $A_i$ são independentes, que
+    \begin{align*}
+        P(A^C) = P\left( \bigcap_{i=1}^{n}A_i^C \right) = \prod_{i=1}^{n} P(A_i^C) = \prod_{i=1}^{n}1 - P(A_i) = \prod_{i=1}^{n}(1-p) = (1-p)^n,
+    \end{align*}
+    logo $P(A) = 1 - P(A^C) = 1 - (1-p)^n$.
+    
+    \item Seja $C = \{ \text{sucesso nas infinitas repetições} \}$. Podemos escrever
+    \begin{align*}
+        C = \bigcap_{i=1}^{\infty}A_i = A_1\cap(A_1\cap A_2)\cap(A_1\cap A_2\cap A_3)\cap\cdots = \bigcap_{n=1}^{\infty}C_n,
+    \end{align*}
+    com 
+    \begin{align*}
+        C_n = \bigcap_{i=1}^{n}A_i = \{\text{sucesso em todas as } n \text{ primeiras provas}\}.
+    \end{align*}
+    Como $C_n\supset C_{n+1} \forall n\geq 1$, então
+    \begin{align*}
+        C = \bigcap_{n=1}^{\infty} = \lim_{n\to\infty}C_n.
+    \end{align*}
+    Pela continuidade da probabilidade e independência dos $A_i$, temos
+    \begin{align*}
+        P(C) = P\left( \lim_{n\to\infty} C_n \right) = \lim_{n\to\infty}P(C_n) = \lim_{n\to\infty} P\left( \bigcap_{i=1}^{n}A_i \right) = \lim_{n\to\infty} p^n = \begin{cases}
+        0, 0\leq p\leq 1, \\
+        1, p = 1
+        \end{cases}.
+    \end{align*}
+\end{enumerate}
+\end{proof}
 
 
 
