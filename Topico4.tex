@@ -6,10 +6,100 @@
 %\section{Tópico 4}
 
 \section{Esperança de variáveis aleatórias discretas}
+Começamos com uma motivação para depois introduzirmos a definição de esperança: dada uma amostra $\{ a_1, a_2, \dots, a_n \}\subset\mathbb{R}$, a média amostral é dada por $\displaystyle{ \frac{a_1 + a_2 + \cdots + a_n}{n} }$. Podemos representar esses dados numa tabela:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+        Valores distintos na amostra & Frequência absoluta \\
+        \hline
+        $x_1$ & $N_1$ \\
+        $x_2$ & $N_2$ \\
+        \vdots & \vdots \\
+        $x_m$ & $N_m$
+    \end{tabular}
+%    \caption{Caption}
+%    \label{tab:my_label}
+\end{table}
+Note que $N_i$ é o número de vezes que $x_i$ aparece na amostra, $i= 1,2,\dots, m$. Além disso, $N_1 + N_2 + \cdots + N_m = n$ e $x_1N_1 + x_2N_2 + \cdots + x_mN_m = a_1 + a_2 + \cdots + a_n$. Com isso, podemos escrever a média dos $a_i$ como $\displaystyle{ \frac{x_1N_1 + x_2N_2 + \cdots + x_mN_m}{N_1 + N_2 + \cdots + N_m} }$ ou, ainda, $\displaystyle{ x_1\frac{N_1}{n} + \cdots + x_m\frac{N_m}{n} }$, em que $N_i/n$ é a frequência relativa de $x_i$, $i=1,2,\dots,m$. Nesse caso, a f.p. $p:\mathbb{R}\to\mathbb{R}$ é dada por
+\begin{align*}
+    p(x) = \begin{cases}
+    N_i/n, x=x_i \text{ para algum } i=1,2,\dots,m \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Agora, suponhamos que $x_1, x_2, \dots, x_m$ sejam valores possíveis de uma v.a. $X$ e que $a_1, a_2, \dots, a_n$ são valores (independentes) observados de $X$. Então, de acordo com a interpretação da probabilidade como frequência relativa (Lei Forte dos Grandes Números), temos que para $n$ grande a frequência relativa se aproxima da probabilidade real, i.e.,
+\begin{align*}
+    \lim_{n\to\infty}\frac{N_i}{n} = p(x_i) = P(X=x_i).
+\end{align*}
+Assim, o \textbf{valor esperado} de $X$, representado por $EX$ ou $E[X]$, é $\displaystyle{ EX = \sum_{i=1}^{m}x_i p(x_i) }$, sendo $p$ a f.p. de $X$.
 
-\subsection{Definição}
+\begin{definition}[Esperança]
+Seja $X$ uma v.a. discreta em $(\Omega, \mathcal{A}, P)$ com valores possíveis $\{ x_1, x_2, \dots \}$. Se $\displaystyle{ \sum_{i} |x_i|p(x_i) < \infty }$, dizemos que $X$ tem \textbf{esperança finita} e definimos sua esperança ou \textbf{esperança matemática} ou \textbf{valor esperado} ou \textbf{média} como
+\begin{align*}
+    EX = \sum_{i=1}^{\infty}x_ip(x_i) = \sum_x xp(x).
+\end{align*}
+Note, em particular, que se o conjunto dos valores possíveis de $X$ é finito, então $X$ tem esperança finita.
+\end{definition}
+
+\begin{example}
+Seja $X\sim B(n,p)$. Temos
+\begin{align*}
+    p_X(k) = \begin{cases}
+    \binom{n}{k}p^k(1-p)^{n-k}, k = 0,1,\dots,n \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Como $X$ tem uma quantidade finita de valores possíveis, então $X$ tem esperança finita dada por
+\begin{align*}
+    EX = \sum_x xp(x) = \sum_{k=0}^{n} kP(X=k) = \sum_{k=1}^{n} k\binom{n}{k}p^k(1-p)^{n-k} &= \sum_{k=1}^{n} \frac{n!}{(k-1)!(n-k)!}p^k(1-p)^{n-k} \\
+    &= np\sum_{k=1}^{n} \binom{n-1}{k-1}p^{k-1}(1-p)^{n-1-(k-1)} \\
+    &= np.
+\end{align*}
+Em particular, se $n=1$ então $EX = p$.
+\end{example}
+
+\begin{example}
+Seja $X\sim\text{Poisson}(\lambda)$. Temos
+\begin{align*}
+    p_X(k) = \begin{cases}
+    e^{-\lambda}\frac{\lambda^k}{k!}, k = 0,1,\dots \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Note que como $X$ tem infinitos valores possíveis, não sabemos a priori se $EX < \infty$. Temos
+\begin{align*}
+    \sum_x |x|p_X(x) = \sum_{k=0}^{\infty} |k|e^{-\lambda}\frac{\lambda^k}{k!} = \lambda e^{-\lambda}\sum_{k=1}^{\infty}\frac{\lambda^{k-1}}{(k-1)!} = \lambda < \infty.
+\end{align*}
+Logo, $X$ tem esperança finita e, como seus valores possíveis são não negativos, segue que $EX=\lambda$.
+\end{example}
+
+\begin{example}
+Seja $X\sim\text{Geom}(p)$. Temos
+\begin{align*}
+    p_X(k) = \begin{cases}
+    p(1-p)^{k-1}, k = 1,2,\dots \\
+    0, \text{ c.c.}
+    \end{cases}, 0 < p < 1.
+\end{align*}
+Note que
+\begin{align*}
+    \sum_x |x|p_X(x) = \sum_{k=1}^{\infty} |k|p(1-p)^{k-1} = p\sum_{k=1}^{\infty} k(1-p)^{k-1} &= -p\sum_{k=1}^{\infty} \dfrac{d}{dp}[(1-p)^k] \\
+    &= -p\dfrac{d}{dp}\left[ \sum_{k=1}^{\infty} (1-p)^k \right] \\
+    &= -p(-1/p^2) \\
+    &= 1/p,
+\end{align*}
+em que a série converge pelo teste da integral. Logo, $X$ tem esperança finita e, como seus valores possíveis são não negativos, temos $EX=1/p$.
+\end{example}
+
+\begin{example}
+
+\end{example}
+
+
 
 \subsection{Propriedades}
+
+
 
 \subsection{Momentos}
 

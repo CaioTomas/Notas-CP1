@@ -6,12 +6,586 @@
 %\section{Tópico 3}
 
 \subsection{Vetores aletórios discretos (variáveis aleatórias multidimensionais)}
+Estamos agora interessados em estudar a relação entre duas ou mais variáveis aleatórias. A título de exemplo, em uma extração de uma amostra de tamanho $n$ de bolas numeradas de 1 a $m > n$, poderíamos estar interessados, simultaneamente, no maior e no menor números retirados, digamos $X$ e $Y$, respectivamente.
+
+\begin{definition}[Vetor aleatório]
+Sejam $X_1, X_2, \dots, X_n$ v.a.'s definidas em $(\Omega, \mathcal{A}, P)$. O vetor $\Tilde{X} = (X_1, X_2, \dots, X_n)$ é chamado \textbf{vetor aleatório} ($n$-dimensional) definido em $(\Omega, \mathcal{A}, P)$. Note que $\Tilde{X}$ define uma função de $\Omega\to\mathbb{R}^n$, i.e., dado $\omega\in\Omega$ temos $\Tilde{X}(\omega) = (X_1(\omega), X_2(\omega), \dots, X_n(\omega))\in\mathbb{R}^n$. 
+\end{definition}
+
+\begin{remark}
+Se existir $A = \{ \Tilde{x_1}, \Tilde{x_2}, \dots \}\subset\mathbb{R}^n$ finito ou infinito enumerável tal que $P(\Tilde{X}\in A) = 1$, ou seja, se $\Tilde{X}$ assume valores em um subconjunto finito ou infinito enumerável de $\mathbb{R}^n$, diremos que $\Tilde{X} = (X_1, X_2, \dots, X_n)$ é um \textbf{vetor aleatório discreto}.
+\end{remark}
+
+De maneira geral, um vetor aleatório $n$-dimensional é uma função vetorial $\Tilde{X}:\Omega\to\mathbb{R}^n$ tal que $\{ \Tilde{X}\in A \}\in\mathcal{A}, \forall A\in\mathcal{A}$. Note que um vetor aleatório é uma variável aleatória com contradomínio $\mathbb{R}^n$.
+
+\begin{remark}
+Seja $\Tilde{X} = (X_1, X_2, \dots, X_n)$ vetor aleatório. Para $\Tilde{x} = (x_1, x_2, \dots, x_n)\in\mathbb{R}^n$, temos
+\begin{align*}
+    \{ \Tilde{X} = \Tilde{x} \} &= \{ (X_1, X_2, \dots, X_n) = (x_1, x_2, \dots, x_n) \} \\
+    &= \{ X_1 = x_1, X_2 = x_2, \dots, X_n = x_n \} \\
+    &:= \{ X_1=x_1 \}\cap\{X_2=x_2\}\cap\cdots\cap\{X_n=x_n\} \\
+    &= \bigcap_{i=1}^{n}\underbrace{\{ X_i = x_i \}}_{\in\mathcal{A}}\in\mathcal{A},
+\end{align*}
+ou seja, $\{ \Tilde{X} = \Tilde{x} \}$ é um evento, de modo que faz sentido calcular
+\begin{align*}
+    P(\Tilde{X} = \Tilde{x}) = P(X_1=x_1, \dots, X_n=x_n).
+\end{align*}
+\end{remark}
+
+\begin{definition}[Função de probabilidade conjunta]
+Se $\Tilde{X} = (X_1, X_2, \dots, X_n)$ é um vetor aleatório discreto definido em $(\Omega, \mathcal{A}, P)$, então a função $p_{\Tilde{X}}:\mathbb{R}^n\to\mathbb{R}$ dada por
+\begin{align*}
+    p_{\Tilde{X}}(\Tilde{x}) = P(X_1=x_1. X_2=x_2, \dots, X_n=x_n), \forall\Tilde{x}\in\mathbb{R}^n
+\end{align*}
+é chamada \textbf{função de probabilidade} de $\Tilde{X}$ ou \textbf{função de probabilidade conjunta} de $X_1, X_2, \dots, X_n$.
+\end{definition}
+
+\begin{remark}
+É comum usar a seguinte notação
+\begin{align*}
+    p_{\Tilde{X}}(\Tilde{x}) = P(\Tilde{X} = \Tilde{x}) &= P((X_1, X_2, \dots, X_n) = (x_1, x_2, \dots, x_n)) \\
+    &= P(X_1=x_1, X_2=x_2, \dots, X_n=x_n) \\
+    &= p_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n) \\ 
+    &= p_{X_1, X_2, \dots, X_n}(\Tilde{x})
+\end{align*}
+e, se $\Tilde{x} = (x_1, x_2, \dots, x_n)\in\mathbb{R}^n$ é tal que $\displaystyle{ X_1, X_2, \dots, X_n }(x_1, x_2, \dots, x_n) > 0$, então $\Tilde{x}$ é um \textbf{valor possível} de $\Tilde{X} = (X_1, X_2, \dots, X_n)$. Daí, se $\Tilde{X}$ é discreto, então existe $\{ \Tilde{x_1}, \Tilde{x_2}, \dots \}\subset\mathbb{R}^n$ finito ou infinito enumerável de valores possíveis de $\Tilde{X}$. Nesse caso,
+\begin{enumerate}[(i)]
+    \item $p_{\Tilde{X}}(\Tilde{x_i}) > 0, \forall\Tilde{x_i}\in\{\Tilde{x_1}, \Tilde{x_2}, \dots\}$
+    \item $\displaystyle{ \sum_{i=1}^{\infty}p_{\Tilde{X}}(\Tilde{x_i}) = 1 }$ se $\{ \Tilde{x_1}, \Tilde{x_2}, \dots \}$ é infinito enumerável e $\displaystyle{ \sum_{i=1}^{n}p_{\Tilde{X}}(\Tilde{x_i}) = 1 }$ caso contrário.
+    \item $\displaystyle{P(\Tilde{X}\in A) = \sum_{ i:\Tilde{x_i}\in A }p_{\Tilde{X}}(\Tilde{x_i}), \forall A\in\mathcal{B}(\mathbb{R}^n)}$.
+\end{enumerate}
+\end{remark}
+Assim como no caso unidimensional, podemos tomar a seguinte definição.
+\begin{definition}[Função de probabilidade $n$-dimensional]
+Toda função $p:\mathbb{R}^n\to\mathbb{R}$ tal que
+\begin{enumerate}[(i)]
+    \item $p(\Tilde{x}) \geq 0, \forall \Tilde{x}\in\mathbb{R}^n$;
+    \item $\{ \Tilde{x}\in\mathbb{R}^n : p(\Tilde{x}) > 0 \}$ é finito ou infinito enumerável;
+    \item $\displaystyle{ \sum_{i : p(\Tilde{x_i}) > 0} p(\Tilde{x_i}) = 1 }$
+\end{enumerate}
+é chamada \textbf{função de probabilidade $n$-dimensional}.
+\end{definition}
+Analogamente ao caso unidimensional, pode-se provar que dada uma função de probabilidade $n$-dimensional $p$, existe um espaço de probabilidade $(\Omega, \mathcal{A}, P)$ e um vetor aleatório $n$-dimensional $\Tilde{X} = (X_1, X_2, \dots, X_n)$ tal que
+\begin{align*}
+    p_{\Tilde{X}}(\Tilde{x}) = P(X_1=x_1, X_2=x_2, \dots, X_n=x_n) = p(x_1, x_2, \dots, x_n), \forall \Tilde{x} = (x_1, x_2, \dots, x_n)\in\mathbb{R}^n, \text{ i.e., } p_{\Tilde{X}} = p.
+\end{align*}
+
+\begin{definition}[Função de distribuição conjunta]
+Dado um vetor aleatório $\Tilde{X} = (X_1, X_2, \dots, X_n)$ definido em $(\Omega, \mathcal{A}, P)$, a função $F_{\Tilde{X}}:\mathbb{R}^n\to\mathbb{R}$ dada por
+\begin{align*}
+    F_{\Tilde{X}}(\Tilde{x}) = F_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n) = P(X_1\leq x_1, X_2\leq x_2, \dots, X_n\leq x_n), \Tilde{x} = (x_1, x_2, \dots, x_n)\in\mathbb{R}^n,
+\end{align*}
+é chamada \textbf{função de distribuição} de $\Tilde{X}$ ou \textbf{função de distribuição conjunta} de $X_1, X_2, \dots, X_n$.
+\end{definition}
+
+\begin{remark}
+Note, primeiro, que
+\begin{align*}
+    P(X_1\leq x_1, X_2\leq x_2, \dots, X_n\leq x_n) = P(\{ X_1\leq x_1 \}\cap\cdots\cap\{ X_n\leq x_n \}).
+\end{align*}
+Ademais, se $\Tilde{X} = (X_1, X_2, \dots, X_n)$ é um vetor aleatório discreto com função de probabilidade conjunta $p_{X_1, X_2, \dots, X_n}$, então
+\begin{align*}
+    F_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n) &= P(X_1\leq x_1, X_2\leq x_2, \dots, X_n\leq x_n) \\
+    &= \sum_{k_1\leq x_1}\sum_{k_2\leq x_2}\cdots\sum_{k_n\leq x_n}P(X_1=k_1, X_2=k_2, \dots, X_n=k_n) \\
+    &= \sum_{k_1\leq x_1}\sum_{k_2\leq x_2}\cdots\sum_{k_n\leq x_n} p_{X_1, X_2, \dots, X_n}(k_1, k_2, \dots, k_n).
+\end{align*}
+Como anteriormente, existe uma correspondência biunívoca entre a função de distribuição conjunta e a função de probabilidade conjunta. Por isso, chamamos ambas de \textbf{distribuição} de $\Tilde{X}$ ou \textbf{distribuição conjunta} de $X_1, X_2, \dots, X_n$.
+\end{remark}
+
+\begin{example}
+Seja $\alpha\in (0,1)$ e considere $p:\mathbb{R}^2\to\mathbb{R}$ dada por
+\begin{align*}
+    p(x,y) = \begin{cases}
+    \alpha^2(1-\alpha)^{x+y}, x,y\in\{0,1,2,\dots\} \\
+    0, \text{ c.c.}
+    \end{cases}
+\end{align*}
+Note que
+\begin{enumerate}[(i)]
+    \item $p(x,y)\geq 0, \forall (x,y)\in\mathbb{R}^2$ 
+    \item $\{ (x,y)\in\mathbb{R}^2 : p(x,y) > 0 \} = \{ (x,y)\in\mathbb{R}^2 : x,y\in\{ 0,1,2,\dots \} \}$ é enumerável
+    \item $\displaystyle{ \sum_{x=0}^{\infty}\sum_{y=0}^{\infty} p(x,y) = \alpha^2\sum_{x=0}^{\infty}(1-\alpha)^x\sum_{y=0}^{\infty}(1-\alpha)^y = \alpha^2\frac{1}{[1-(1-\alpha)]^2} = 1 .}$
+\end{enumerate}
+Logo, $p$ é uma função de probabilidade bidimensional. Seja $(X,Y)$ um vetor aleatório com função de probabilidade $p_{X,Y} = p$ acima. Note que $(X,Y)$ assume valores em $\{ (x,y)\in\mathbb{R}^2 : x,y\in\{0,1,2,\dots\} \}$. Daí, dado $(x,y)\in\mathbb{R}^2$ com $x,y\geq 0$, temos
+\begin{align*}
+    F_{X,Y} = \sum_{i\leq x}\sum_{j\leq y} p(i,j) &= \sum_{i=0}^{[x]}\sum_{j=0}^{[y]}\alpha^2(1-\alpha)^{i-j} \\
+    &= \alpha^2\cdot\frac{ 1- (1-\alpha)^{[x] + 1} }{1 - (1-\alpha)}\cdot\frac{ 1 - (1-\alpha)^{[y] + 1} }{ 1 - (1-\alpha) } \\
+    &= [1 - (1-\alpha)^{[x] + 1}][1 - (1-\alpha)^{[y] + 1}].
+\end{align*}
+Logo, 
+\begin{align*}
+    F_{X,Y}(x,y) = \begin{cases}
+    [1 - (1-\alpha)^{[x] + 1}][1 - (1-\alpha)^{[y] + 1}], x,y\geq 0 \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Ademais, da distribuição conjunta de $X$ e $Y$, podemos obter a distribuição de $X$ e de $Y$: para $k\in\{0,1,2,\dots\}$, temos
+\begin{align*}
+    P(X=k) &= P(X-k, Y\in\mathbb{R}) \\
+           &= P\left( X-k, \bigcup_{j=0}^{\infty}\{Y=j\} \right) \\
+           &= \sum_{j=0}^{\infty} P(X=k, Y=j) \\
+           &= \sum_{j=0}^{\infty} \alpha^2(1-\alpha)^{k+j} \\
+           &= \alpha^2(1-\alpha)^k\sum_{j=0}^{\infty}(1-\alpha)^j \\
+           &= \alpha(1-\alpha)^k,
+\end{align*}
+de modo que
+\begin{align*}
+    p_X(k) = \begin{cases}
+    \alpha(1-\alpha)^k, k = 0,1,2,\dots \\
+    0, \text{ c.c.}
+    \end{cases},
+\end{align*}
+ou seja, $X\sim\text{Geom}(\alpha)$. De maneira análoga, pode-se mostrar que $Y\sim\text{Geom}(\alpha)$.
+\end{example}
+
+\subsubsection{Distribuições marginais}
+As funções $p_{X_i}$ e $F_{X_i}$ são chamadas \textbf{função de probabilidade marginal} de $X_i$ e \textbf{função de distribuição marginal} de $X_i$, respectivamente.
+
+\paragraph{Caso bidimensional.} Seja $(X,Y)$ vetor aleatório discreto com função de probabilidade conjunta $p_{X,Y}$ e função de distribuição conjunta $F_{X,Y}$. Assuma que os valores possíveis de $X$ e $Y$ são $\{x_1, x_2, \dots\}$ e $\{y_1, y_2, \dots\}$, respectivamente. Vamos obter as distribuições marginais de $X$ e $Y$ a partir da distribuição conjunta.
+\begin{itemize}
+    \item[(F.P.M.)] Temos
+    \begin{align*}
+        p_X(x) = P(X=x, Y\in\mathbb{R}) &= P\left( X=x, \bigcup_{j=1}^{\infty}\{Y=j\} \right) \\
+        &= \sum_{j=1}^{\infty} P(X=x, Y=y_j) \\
+        &= \sum_{j=1}^{\infty} p_{X,Y}(x, y_j).
+    \end{align*}
+    Denotamos $$\displaystyle{ p_X(x) = \sum_{j=1}^{\infty} p_{X,Y}(x, y_j) = \sum_y p_{X,Y}(x,y) }$$. De maneira análoga, temos também $$\displaystyle{ p_Y(y) = \sum_x p_{X,Y}(x,y) }$$.
+    \item[(F.D.M.)] Temos
+    \begin{align*}
+        F_X(x) = P(X\leq x, Y\in\mathbb{R}) &= \sum_{j=1}^{\infty} P(X\leq x, Y=y_j) \\
+        &= \sum_{j=1}^{\infty} P\left( \bigcup_{i : x_i\leq x}\{X=x_i\}, Y=y_j \right) \\
+        &= \sum_{j=1}^{\infty}\sum_{i: x_i\leq x} P(X=x_i, Y=y_j) \\
+        &= \sum_{j=1}^{\infty}\sum_{i: x_i\leq x} p_{X,Y}(x_i,y_j) \\
+        &= \sum_{a\leq x}\sum_{b} p_{X,Y}(a,b).
+    \end{align*}
+    Analogamente, $\displaystyle{ F_Y(y) = \sum_{i=1}^{\infty}\sum_{j: y_j\leq y} p_{X,Y}(x_i,y_j) =\sum_{a}\sum_{b\leq y} p_{X,Y}(a,b) }.$
+\end{itemize}
+
+As funções de distribuição marginais $F_X$ e $F_Y$ podem também ser obtidas diretamente da função de distribuição conjunta, $F_{X,Y}:$ considere $(z_n)$ uma sequência crescente de números reais tal que $z_n\xrightarrow{n\to +\infty}+\infty$. Note que
+\begin{align*}
+    \{ X\leq x \} = \{ X\leq x, Y\in\mathbb{R} \} = \bigcup_{n=1}^{\infty} \{ X\leq x, Y\leq z_n \} = \lim_{n\to +\infty} \{ X\leq x, Y\leq z_n \}.
+\end{align*}
+Da continuidade da probabilidade, segue que
+\begin{align*}
+    F_X(x) = \lim_{n\to +\infty} P(X\leq x, Y\leq z_n) = \lim_{n\to +\infty} F_{X,Y}(x, z_n) = \lim_{y\to +\infty} F_{X, Y}(x,y).
+\end{align*}
+Denota-se $F_X(x) = \displaystyle{\lim_{y\to +\infty} F_{X,Y}(x,y) := F_{X, Y}(x, +\infty)}$ e, analogamente, $F_Y(y) = \displaystyle{F_{X, Y}(+\infty, y)}$.
+
+\begin{definition}[Distribuição marginal]
+Dado um vetor aleatório $(X_1, X_2, \dots, X_n)$, suas \textbf{distribuições marginais} são as distribuições de quaisquer $(X_{i_1}, X_{i_2}, \dots, X_{i_k})$, com $i_1, i_2, \dots, i_k\in\{ 1, 2, \dots, n \}$ e $k\leq n$.
+\end{definition}
+
+\paragraph{Caso geral.} Seja $X = (X_1, X_2, \dots, X_n)$ um vetor aleatório discreto com f.p. conjunta $p_{X_1, X_2, \dots, X_n}$ f.d. conjunta $F_{X_1, X_2, \dots, X_n}$. Alguns exemplos de f.p.m. são
+\begin{align*}
+    p_{X_1, X_2}(x_1, x_2) &= \sum_{x_3}\sum_{x_4}\cdots\sum_{x_n} p_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n) \\
+    p_{X_1}(x_1) &= \sum_{x_2}\sum_{x_3}\cdots\sum_{x_n} p_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n) \\
+    p_{X_2, X_3, X_5}(x_2, x_3, x_5) &= \sum_{x_1}\sum_{x_4}\sum_{x_6}\sum_{x_7}\cdots\sum_{x_n} p_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n).
+\end{align*}
+Alguns exemplos de f.d.m. são
+\begin{align*}
+    F_{X_1}(x_1) &= F_{X_1, X_2, \dots, X_n}(x_1, +\infty, \dots, +\infty) = \sum_{a_1\leq x_1}\sum_{x_2}\cdots\sum_{x_n}p_{X_1, X_2, \dots, X_n}(a_1, x_2, \dots, x_n) \\
+    F_{X_1, X_2}(x_1, x_2) &= F_{X_1, X_2, \dots, X_n}(x_1, x_2, +\infty, \dots, +\infty) = \sum_{a_1\leq x_1}\sum_{a_2\leq x_2}\sum_{x_3}\cdots\sum_{x_n}p_{X_1, X_2, \dots, X_n}(a_1, a_2, x_3, \dots, x_n).
+\end{align*}
+
+\begin{example}
+Considere uma caixa com 3 bolas numeradas de 1 a 3. Duas extrações são realizadas sem reposição. Assim, o espaço amostral é
+\begin{align*}
+    \Omega = \{ (1,2), (1,3), (2,1), (2,3), (3,1), (3,2) \}.
+\end{align*}
+Sejam $X$ e $Y$ os números da primeira e da segunda bolas retiradas, respectivamente. Suponha que a função de probabilidade conjunta de $X$ e $Y$ seja dada por
+\begin{align*}
+    p_{X, Y}(1,2) &= \frac{3}{8}, p_{X, Y}(1,3) = \frac{1}{8}, p_{X, Y}(2,1) = \frac{1}{8}, \\
+    p_{X, Y}(2,3) &= \frac{1}{24}, p_{X, Y}(3,1) = \frac{5}{24}, p_{X, Y}(3,2) = \frac{1}{8} \ \text{ e } \ p_{X, Y}(x,y) = 0, \text{ c.c.}
+\end{align*}
+Podemos apresentar a f.p. conjunta com a seguinte tabela.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+    $Y\setminus X$ & 1 & 2 & 3 & $P(X=x)$ \\
+    \hline
+    1 & 0 & 3/8 & 1/8 & 1/2 \\
+    \hline
+    2 & 1/8 & 0 & 1/24 & 1/6 \\
+    \hline
+    3 & 5/24 & 1/8 & 0 & 1/3 \\
+    \hline
+    $P(Y=y)$ & 1/3 & 1/2 & 1/6 & 1 \\
+\end{tabular}
+\end{table}
+\end{example}
+
+\begin{example}
+Uma urna contém 15 bolas: 5 vermelhas, 4 pretas e 6 brancas. São retiradas, aleatoriamente, 4 bolas. Considere as v.a.'s $X_1, X_2$ e $X_3$, que representam, respectivamente, o número de bolas vermelhas, pretas e brancas retiradas.
+\paragraph{Sem reposição.} A f.p. conjunta de $X_1, X_2$ e $X_3$ é dada por
+\begin{align*}
+    p_{X_1, X_2, X_3}(x_1, x_2, x_3) = \begin{cases}
+    \displaystyle{\frac{ \binom{5}{x_1}\binom{4}{x_2}\binom{6}{x_3} }{\binom{15}{4}}}, 0\leq x_i\leq 4, i = 1, 2, 3, x_1 + x_2 + x_3 = 4 \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Com ela, podemos calcular a probabilidade de se retirar exatamente 2 bolas vermelhas de uma maneira alternativa: enquanto o cálculo direto nos dá
+\begin{align*}
+    P(X_1 = 2) = \frac{ \binom{5}{2}\binom{10}{2} }{ \binom{15}{4} },
+\end{align*}
+a distribuição conjunta nos dá
+\begin{align*}
+    P(X_1 = 2) = P(X_1 = 2, X_2\in\mathbb{R}, X_3\in\mathbb{R}) &= \sum_{0\leq x_2,x_3\leq 4, x_2+x_3=2} P(X_1 = 2, X_2=x_2, X_3=x_3) \\
+    &= \sum_{x_2 = 0}^{2} P(X_1 = 2, X_2 = x_2, X_3 = 2-x_2) \\
+    &= \sum_{x_2=0}^{2} \frac{ \binom{5}{2}\binom{4}{x_2}\binom{6}{2-x_2} }{\binom{15}{4}} \\
+    &= \frac{\binom{5}{2}}{\binom{15}{4}}\sum_{x_2=0}^{2} \binom{4}{x_2}\binom{6}{2-x_2} \\
+    &= \frac{\binom{5}{2}\binom{10}{2}}{\binom{15}{4}}.
+\end{align*}
+De maneira geral,
+\begin{align*}
+    P(X_1=x_1) = \frac{\binom{5}{x_1}\binom{10}{4-x_1}}{\binom{15}{4}}, x_1 \in\{0, 1, 2, 3, 4\},
+\end{align*}
+ou seja, $X\sim\text{Hgeo}(15, 5, 4)$. Analogamente, $X_2\sim\text{Hgeo}(15,4,4)$ e $X_3\sim\text{Hgeo}(15,6,4)$.
+
+\paragraph{Com reposição.} A f.p. conjunta de $X_1, X_2$ e $X_3$ é dada por
+\begin{align*}
+    p_{X_1, X_2, X_3}(x_1, x_2, x_3) = \begin{cases}
+    \binom{4}{x_1, x_2, x_3}\left( \frac{5}{15} \right)^{x_1}\left( \frac{4}{15} \right)^{x_2}\left( \frac{6}{15} \right)^{x_3}, 0\leq x_i\leq 4, i=1,2,3, x_1+x_2+x_3=4 \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Fazendo $p_1 = P(\text{tirar uma bola vermelha}) = 5/15$, $p_2 = 4/15$ e $p_3 = 6/15$, temos
+\begin{align*}
+    p_{X_1, X_2, X_3}(x_1, x_2, x_3) = \begin{cases}
+    \binom{4}{x_1, x_2, x_3}p_1^{x_1}p_2^{x_2}p_3^{x_3}, 0\leq x_i\leq 4, i=1,2,3, x_1+x_2+x_3=4 \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Para calcular a mesma probabilidade anterior, o cálculo direto nos fornece
+\begin{align*}
+    P(X_1 = 2) = \binom{4}{2}\left(\frac{5}{15}\right)^2\left(\frac{10}{15}\right)^2,
+\end{align*}
+e, usando a distribuição conjunta, temos
+\begin{align*}
+    P(X_1 = 2) &= P(X_1 = 2, X_2\in\mathbb{R}, X_3\in\mathbb{R}) \\
+    &= \sum_{0\leq x_2,x_3\leq 4, x_2+x_3=2} P(X_1 = 2, X_2=x_2, X_3=x_3) \\
+    &= \sum_{x_2}^{2}\binom{4}{2, x_2, 2-x_2}\left(\frac{5}{15}\right)^2\left(\frac{4}{15}\right)^{x_2}\left(\frac{6}{15}\right)^{2-x_2} \\
+    &= \frac{4!}{2!2!}\left(\frac{5}{15}\right)^2\sum_{x_2=0}^{2} \frac{2!}{x_2!(2-x_2)!}\left(\frac{4}{15}\right)^{x_2}\left(\frac{6}{15}\right)^{2-x_2} \\
+    &= \binom{4}{2}\left(\frac{5}{15}\right)^2\left(\frac{10}{15}\right)^2.
+\end{align*}
+De maneira geral,
+\begin{align*}
+    P(X_1=x_1) = \binom{4}{x_1}p_1^{x_1}(1-p_1)^{1-x_1}, x_1\in\{0, 1, 2, 3, 4\},
+\end{align*}
+ou seja, $X_1\sim B(4,p_1)$. De maneira inteiramente análoga, $X_2\sim B(4,p_2)$ e $X_3\sim B(4,p_3)$.
+\end{example}
+
+\begin{example}[Distribuição multinomial]
+Sejam $\mathcal{E}$ um experimento aleatório com $r$ valores possíveis e $\{Y = i\} = \{\text{o experimento produz o i-ésimo resultado}\}$, $i=1,2,\dots,r$. Defina $p_i = P(Y=i)$. Considere $n$ repetições do experimento e seja $(Y_1, Y_2, \dots, Y_n)$ vetor aleatório tal que $Y_j$ seja o resultado da $j$-ésima prova. Defina também $X_i$ como o número de provas que produzem o resultado $i$. Temos $\{X_i=x_i\} = \{\text{exatamente } x_i \text{ das } n \text{ v.a.'s } Y_j \text{ assume o valor }i\}$. Note que $(X_1, X_2, \dots, X_r)$ é um vetor aleatório assumindo valores em $\mathbb{R}^n$ da forma $(x_1, x_2, \dots, x_r)$ com $x_i\in\{0,1,\dots,n\}$ e $x_1+\cdots+x_r = n$. A f.p. conjunta de $X_1, \dots, X_r$ é dada por
+\begin{align*}
+    p_{X_1, \dots, X_r}(x_1, x_2, \dots, x_r) = \begin{cases}
+        \binom{n}{x_1, x_2,\dots, x_r}p_1^{x_1}p_2^{x_2}\cdots p_r^{x_r}, x_i\in\{0,1,\dots, n\}, i=1,2,\dots,n, x_1+\cdots+x_r=n \\
+        0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Dizemos que $(X_1, \dots, X_r)$ tem \textbf{distribuição multinomial de parâmetros} $n, p_1, \dots, p_r$ e denotamos $(X_1, \dots, X_r)\sim\text{Multinomial}(n,p_1,\dots,p_r)$.
+
+De maneira mais concreta, se $r=3$ e $p_1 + p_2 + p_3 = 1$, então
+\begin{align*}
+    P(X_1=x_1) &= \sum_{0\leq x_2,x_3\leq n, x_1+x_2+x_3 = n}^{n}P(X_1=x_1, X_2=x_2, X_3=x_3) \\
+    &= \sum_{x_2=0}^{n-x_1}\binom{n}{x_1,x_2,n-x_1-x_2}p_1^{x_1}p_2^{x_2}p_3^{n-x_1-x_2} \\
+    &= \binom{n}{x_1}p_1^{x_1}\sum_{x_2=0}^{n-x_1}\frac{(x-x_1)!}{x_2!(n-x_1-x_2)!}p_2^{x_2}p_3^{n-x_1-x_2} \\
+    &= \binom{n}{x_1}p_1^{x_1}(1-p_1)^{n-x_1}, x_1\in\{0,1,\dots,n\},
+\end{align*}
+ou seja, $X_1\sim (n,p_1)$. Analogamente, $X_2\sim B(m,p_2)$ e $X_3\sim B(n,p_3)$. De maneira geral, se $(X_1, X_2, \dots, X_n)\sim\text{Multinomial}(n,p_1,\dots,p_r)$, então $X_i\sim B(n,p_i), i=1,2,\dots,r$.
+\end{example}
 
 \subsection{Variáveis aleatórias independentes}
+\begin{definition}[V.a.'s independentes]
+Sejam $X_1, X_2, \dots, X_n$ v.a.'s definidas em $(\Omega, \mathcal{A}, P)$. Dizemos que elas são \textbf{independentes} se 
+\begin{align*}
+    P(X_1\in A_1, X_2\in A_2, \dots, X_n\in A_n) = \prod_{i=1}^{n}P(X_i\in A_i), \forall A_1, A_2, \dots, A_n\in\mathcal{A}.
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Segue da definição que $X_1, X_2, \dots, X_n$ são independentes se, e somente se, os eventos $\{ X_1\in A_1 \}, \{X_2\in A_2\}, \dots, \{X_n\in A_n\}$ o são.
+\end{remark}
+
+\begin{proposition}
+Sejam $X_1, X_2, \dots, X_n$ v.a.'s discretas definidas em $(\Omega, \mathcal{A}, P)$. Então, temos
+\begin{enumerate}[(a)]
+    \item $X_1, X_2, \dots, X_n$ são independentes se, e só se, 
+    \begin{align*}
+        p_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n) = \prod_{i=1}^{n}p_{X_i}(x_i), \forall x_1, x_2, \dots, x_n\in\mathbb{R},
+    \end{align*}
+    \item $X_1, X_2, \dots, X_n$ são independentes se, e só se,
+    \begin{align*}
+        F_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n) = \prod_{i=1}^{n}F_{X_i}(x_i), \forall x_1, x_2, \dots, x_n\in\mathbb{R}.
+    \end{align*}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}[(a)]
+    \item ($\Rightarrow$) Se $X_1, X_2, \dots, X_n$ são independentes, então
+    \begin{align*}
+        P(X_1\in A_1, X_2\in A_2, \dots, X_n\in A_n) = \prod_{i=1}^{n}P(X_i\in A_i), \forall A_1, A_2, \dots, A_n\in\mathcal{A}.
+    \end{align*}
+    Em particular, se $A_i=\{x_i\}, i=1,2,\dots,n$ então
+    \begin{align*}
+        p_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n) &= P(X_1=x_1, X_2=x_2, \dots, X_n=x_n) \\
+        &= P(X_1=x_1)\cdots P(X_n=x_n) \\
+        &= p_{X_1}(x_1)\cdots p_{X_n}(x_n).
+    \end{align*}
+    ($\Leftarrow$) Dados $A_1, A_2, \dots, A_n\in\mathcal{A}$, temos
+    \begin{align*}
+        P(X_1\in A_1, \dots, X_n\in A_n) &= P\left( \bigcup_{x_1\in A_1}\{X_1=x_1\}, \dots, \bigcup_{x_n\in A_n}\{X_n=x_n\} \right) \\
+        &= \sum_{x_1\in A_1}\cdots\sum_{x_n\in A_n}P(X_1=x_1, \dots, X_n=x_n) \\
+        &= \sum_{x_1\in A_1}\cdots\sum_{x_n\in A_n}P(X_1=x_1)\cdots P(X_n=x_n) \\
+        &= \sum_{x_1\in A_1}P(X_1=x_1)\cdots\sum_{x_n\in A_n}P(X_n=x_n) \\
+        &= P(X_1\in A_1)\cdots P(X_n\in A_n).
+    \end{align*}
+    \item ($\Rightarrow$) Se $X_1, \dots, X_n$ são independentes, então
+    \begin{align*}
+        P(X_1\in A_1, X_2\in A_2, \dots, X_n\in A_n) = \prod_{i=1}^{n}P(X_i\in A_i), \forall A_1, A_2, \dots, A_n\in\mathcal{A}.
+    \end{align*}
+    Em particular, se $A_i=(-\infty, x_i), i=1,2,\dots,n$ temos
+    \begin{align*}
+        F_{X_1, \dots, X_n}(x_1, \dots, x_n) &= P(X_1\in A_1, \dots, X_n\in A_n) \\
+        &= P(X_1\leq x_1)\cdots P(X_n\leq x_n) \\
+        &= F_{X_1}(x_1)\cdots F_{X_n}(x_n).
+    \end{align*}
+    ($\Leftarrow$) A volta envolve técnicas de Teoria da Medida, e não será demonstrada.
+\end{enumerate}
+\end{proof}
+
+\begin{example}
+Sejam $X, Y$ v.a.'s com f.p. conjunta
+\begin{align*}
+    p_{X, Y}(x,y) = \begin{cases}
+    p^2(1-p)^{x+y}, x,y\in\{0,1,\dots\} \\
+    0, \text{ c.c.}
+    \end{cases},
+\end{align*}
+com $0<p<1$. Vimos que
+\begin{align*}
+    p_X(x) &= \begin{cases}
+    p(1-p)^x, x\in\{0,1,\dots\} \\
+    0, \text{ c.c.}
+    \end{cases} \\
+    p_Y(y) &= \begin{cases}
+    p(1-p)^y, y\in\{0,1,\dots\} \\
+    0, \text{ c.c.}
+    \end{cases},
+\end{align*}
+de modo que $p_{X,Y}(x,y) = p_X(x)p_Y(y), \forall (x,y)\in\mathbb{R}^2$, i.e., $X$ e $Y$ são independentes.
+\end{example}
+
+\begin{example}
+Uma urna contém 15 bolas: 5 vermelhas, 4 pretas e 6 brancas. São retiradas aleatoriamente 4 bolas. Considere as v.a.'s $X_1, X_2$ e $X_3$, que representam o número de bolas vermelhas, pretas e brancas retiradas, respectivamente.
+\paragraph{Sem reposição.} Vimos que
+\begin{align*}
+    p_{X_1, X_2, X_3} = \begin{cases}
+    \frac{ \binom{5}{x_1}\binom{4}{x_2}\binom{6}{x_3} }{\binom{15}{4}}, 0\leq x_i\leq 4, i=1,2,3, x_1+x_2+x_3=4 \\
+    0, \text{ c.c.}
+    \end{cases}
+\end{align*}
+e que
+\begin{align*}
+    p_{X_1}(x_1) = \frac{ \binom{5}{x_1}\binom{10}{4-x_1} }{\binom{15}{4}}, p_{X_2}(x_2) = \frac{ \binom{4}{x_2}\binom{11}{4-x_2} }{\binom{15}{4}}, p_{X_3}(x_3) = \frac{ \binom{6}{x_3}\binom{9}{4-x_3} }{\binom{15}{4}}, x_i\in\{ 0,1,2,3,4 \}, i=1,2,3.
+\end{align*}
+Note que existem $x_1, x_2, x_3\in\{0,1,2,3,4\}$ tais que
+\begin{align*}
+    p_{X_1, X_2, X_3}(x_1, x_2, x_3) \neq p_{X_1}(x_1)p_{X_2}(x_2)p_{X_3}(x_3),
+\end{align*}
+ou seja, $X_1, X_2$ e $X_3$ não são independentes.
+
+\paragraph{Com reposição.} Vimos que
+\begin{align*}
+    p_{X_1, X_2, X_3}(x_1, x_2, x_3) = \begin{cases}
+    \binom{4}{x_1, x_2, x_3}p_1^{x_1}p_2^{x_2}p_3^{x_3}, 0\leq x_i\leq 4, i=1,2,3, x_1+x_2+x_3=4 \\
+    0, \text{ c.c.}
+    \end{cases},
+\end{align*}
+com $p_1=5/15, p_2=4/15$ e $p_3=6/15$. Além disso, 
+\begin{align*}
+    p_{X_1}(x_1) = \binom{4}{x_1}p_1^{x_1}(1-p_1)^{1-x_1}, p_{X_2}(x_2) = \binom{4}{x_2}p_2^{x_2}(1-p_2)^{1-x_2},
+    p_{X_3}(x_3) = \binom{4}{x_3}p_2^{x_3}(1-p_3)^{1-x_3}.
+\end{align*}
+Logo, $X_1, X_2$ e $X_3$ não são independentes.
+\end{example}
 
 \subsection{Funções de variáveis aleatórias}
+Sejam $X_1, X_2, \dots, X_n$ v.a.'s definidas em $(\Omega, \mathcal{A}, P)$ e $g:\mathbb{R}^n\to\mathbb{R}$ uma função. É possível mostrar que $Z = g(X_1, \dots, X_n)$ é v.a. em $(\Omega, \mathcal{A}, P)$.
+\begin{example}
+$Z = X^2$, ou seja, $Z=g(X)$ com $X$ v.a. e $g:\mathbb{R}\to\mathbb{R}$ tal que $x\mapsto x^2$.
+\end{example}
+
+\begin{example}
+$W = X+Y+Z$, ou seja, $W=h(X,Y,Z)$ com $X,Y,Z$ v.a's. e $h:\mathbb{R}^3\to\mathbb{R}$ tal que $(x,y,z)\mapsto x+y+z$.
+\end{example}
+
+\begin{example}
+$Z = \max\{X,Y\}$, ou seja, $Z=l(X,Y)$ com $X,Y$ v.a's. e $l:\mathbb{R}^2\to\mathbb{R}$ tal que $(x,y)\mapsto \max\{x,y\}$.
+\end{example}
+
+\begin{remark}
+Quando as v.a.'s $X_1, \dots, X_n$ são independentes e têm a mesma distribuição, dizemos que elas são \textbf{independentes e identicamente distribuídas} (i.i.d.).
+\end{remark}
+
+\begin{example}
+Considere $X_1, \dots, X_n$ v.a.'s i.i.d. com f.d. $F$.
+\begin{enumerate}[(a)]
+    \item Seja $Z = \max\{ X_1, \dots, X_n \}$. Note que dado $z\in\mathbb{R}$,
+    \begin{align*}
+        \max\{x_1, \dots, x_n\} \leq z \iff x_i\leq z, x_i\in\mathbb{R}, i = 1, \dots, n.
+    \end{align*}
+    Logo,
+    \begin{align*}
+        F_Z(z) = P(Z\leq z) = P(\max\{x_1, \dots, x_n\}\leq z) = P(X_1\leq z)\cdots P(X_n\leq z) = [F(z)]^n
+    \end{align*}
+    \item Seja $W = \min\{ X_1, \dots, X_n \}$. Note que dado $w\in\mathbb{R}$,
+    \begin{align*}
+        \min\{x_1, \dots, x_n\} > w \iff x_i > w, x_i\in\mathbb{R}, i = 1, \dots, n.
+    \end{align*}
+    Logo,
+    \begin{align*}
+        F_W(w) &= P(\min\{x_1, \dots, x_n\}\leq w) \\
+        &= 1 - P(X_1 > w)\cdots P(X_n > w) \\
+        &= 1 - (1 - P(X_1\leq w))\cdots (1 - P(X_n\leq w))\\
+        &= 1 - [1-F(w)]^n.
+    \end{align*}
+\end{enumerate}
+\end{example}
+
+\begin{example}
+Considere $X,Y\sim\text{Geo}(p), 0 < p < 1$ independentes. Seja $W = \min\{X,Y\}$. A f.d. comum de $X$ e $Y$ é dada por
+\begin{align*}
+    F(x) = \begin{cases}
+    0, x<1 \\
+    1 - (1-p)^{[x]}, x\geq 1
+    \end{cases}.
+\end{align*}
+Do exemplo anterior, temos
+\begin{align*}
+    F_W(w) = \begin{cases}
+    0, w<1 \\
+    1 - (1-p)^{2[w]}, w\geq 1
+    \end{cases},
+\end{align*}
+ou seja $W\sim\text{Geo}(1 - (1-p)^2)$. Ademais, temos também
+\begin{align*}
+    P(\min\{ X,Y \} = X) = P(Y\geq X) = P\left( \bigcup_{k=1}^{\infty}\{X=k\}, Y\geq X \right) &= \sum_{k=1}^{\infty}P(X=k, Y\geq X) \\ 
+    &= \sum_{k=1}^{\infty} P(X=k)P(Y\geq k) \\
+    &= \sum_{k=1}^{\infty} P(X=k)[1 - P(Y\leq k-1)] \\
+    &= \sum_{k=1}^{\infty} P(X=k)[1 - F(k-1)] \\
+    &= \sum_{k=1}^{\infty} p(1-p)^{k-1}(1-p)^{k-1} \\
+    &= \frac{p}{(1-p)^2}\sum_{k=1}^{\infty}(1-p)^{2k} \\
+    &= \frac{1}{2-p}.
+\end{align*}
+\end{example}
+
+\subsubsection{Soma de v.a.'s independentes}
+Sejam $X, Y$ v.a.'s discretas independentes em $(\Omega, \mathcal{A}, P)$, $Z = X+Y$ e $\{x_1, x_2, \dots\}$ o conjunto dos valores possíveis de $X$. Dado $z\in\mathbb{R}$, temos
+\begin{align*}
+    p_Z(z) = P\left( \bigcup_{i=1}^{\infty}\{X=x_i\}, X+Y=z \right) &= \sum_{i=1}^{\infty} P(X=x_i, Y=z-x_i) \\
+    &= \sum_{i=1}^{\infty} p_{X,Y}(x_i, z-x_i) \\
+    &= \sum_{i=1}^{\infty} p_X(x_i)p_Y(z-x_i).
+\end{align*}
+Analogamente, se $\{y_1, y_2, \dots\}$ é o conjunto de valores possíveis de $Y$, então
+\begin{align*}
+    p_Z(z) = \sum_{i=1}^{\infty} p_X(z-y_i)p_Y(y_i).
+\end{align*}
+Podemos denotar também
+\begin{align*}
+    p_{X+Y}(z) = \sum_x p_{X,Y}(x,z-x) = \sum_x p_X(x)p_Y(z-x)
+\end{align*}
+e
+\begin{align*}
+    p_{X+Y}(z) = \sum_y p_{X,Y}(z-y,y) = \sum_y p_X(z-y)p_Y(y).
+\end{align*}
+
+\begin{example}
+Sejam $X, Y$ v.a.'s i.i.d. com $X\sim\text{Geom}(p), 0 < p < 1$. Note que $X+Y$ assume valores em $\{2, 3, \dots\}$. Logo, dado $z$ neste conjunto, segue que
+\begin{align*}
+    p_{X+Y}(z) = \sum_x p_{X,Y}(x,z-x) = \sum_{k=1}^{\infty} p_X(k)\underbrace{p_Y(z-k)}_{>0 \iff z-k\geq 1} = \sum_{k=1}^{z-1}p(1-p)^{k-1}p(1-p)^{z-k-1} = p^2(1-p)^{z-2}(z-1).
+\end{align*}
+Logo,
+\begin{align*}
+    p_{X+Y}(z) = \begin{cases}
+    (z-1)p^2(1-p)^{z-2}, z\in\{2,3,\dots\} \\
+    0, \text{ c.c.}
+    \end{cases},
+\end{align*}
+ou seja, $X+Y\sim BN(2,p)$.
+\end{example}
+
+\begin{example}
+Sejam $X, Y$ v.a.'s independentes com $X\sim\text{Poisson}(\lambda_1)$ e $Y\sim\text{Poisson}(\lambda_2)$. Então
+\begin{align*}
+    p_X(x) &= \begin{cases}
+    e^{-\lambda_1}\frac{\lambda_1^x}{x!}, x = 0,1,\dots \\
+    0, \text{ c.c.}
+    \end{cases}, \\
+    p_Y(y) &= \begin{cases}
+    e^{-\lambda_2}\frac{\lambda_2^y}{y!}, y = 0,1,\dots \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Note que $X+Y$ assume valores em $\{0, 1, 2, \dots\}$. Logo, dado $z$ neste conjunto, temos
+\begin{align*}
+    p_{X+Y}(z) = \sum_x p_{X,Y}(x,z-x) \sum_{k=0}^{\infty} p_X{k}p_Y{z-k} &= \sum_{k=0}^{z} e^{-\lambda_1}\frac{\lambda_1^k}{k!}e^{-\lambda_2}\frac{\lambda_2^{z-k}}{(z-k)!} \\
+    &= \frac{ e^{-(\lambda_1 + \lambda_2)} }{z!}\sum_{k=0}^{z} \binom{z}{k}\lambda_1^k\lambda_2^{z-k} \\
+    &= e^{-(\lambda_1+\lambda_2)}\frac{(\lambda_1+\lambda_2)^z}{z!}.
+\end{align*}
+Portanto,
+\begin{align*}
+    p_{X+Y}(z) = \begin{cases}
+    e^{-(\lambda_1+\lambda_2)}\frac{(\lambda_1+\lambda_2)^z}{z!}, z = 0,1,\dots \\
+    0, \text{ c.c.}
+    \end{cases},
+\end{align*}
+ou seja, $X+Y\sim\text{Poisson}(\lambda_1+\lambda_2)$.
+\end{example}
 
 \subsection{Distribuição condicional de variáveis aleatórias discretas}
+\begin{proposition}
+Sejam $X,Y$ v.a.'s discretas em $(\Omega, \mathcal{A}, P)$ e $y\in\mathbb{R}$ tal que $p_Y(y) > 0$. A função $p_{X|Y}(\cdot|y):\mathbb{R}\to\mathbb{R}$ dada por
+\begin{align*}
+    p_{X|Y}(x|y) = P(X=x|Y=y) = \frac{ P(X=x, Y=y) }{P(Y=y)} = \frac{p_{X,Y}(x,y)}{p_{Y}(y)}, x\in\mathbb{R}
+\end{align*}
+define uma função de probabilidade, chamada \textbf{f.p. condicional de } $X$ dado $Y=y$.
+\end{proposition}
+
+\begin{proof}
+    Seja $\{ x_1, x_2, \dots\}$ o conjunto de valores possíveis de $X$. Dado $y\in\mathbb{R}$ tal que $p_Y(y)>0$, temos
+    \begin{enumerate}
+        \item $p_{X|Y}(x|y) \geq 0, \forall x\in\mathbb{R}$;
+        \item $\{ x : p_{X|Y}(x|y) > 0 \} = \{ x : p_{X,Y}(x,y)\neq 0 \}\subset\{ x : p_X(x)\neq 0 \} = \{x_1, x_2, \dots\}$ é finito ou infinito enumerável;
+        \item $\displaystyle{ \sum_{x_i}p_{X|Y}(x|y) = \sum_{x_i}\frac{ p_{X,Y}(x_i,y) }{p_Y(y)} = \frac{ \sum_{x_i}p_{X,Y}(x_i,y) }{p_{Y}y} = p_Y(y)/p_Y(y) = 1 }$.
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+Sejam $X, Y$ v.a.'s i.i.d. geométricas de parâmetro $0 < p < 1$. Vimos que
+\begin{align*}
+    p_{X+Y}(z) = \begin{cases}
+    (z-1)p^2(1-p)^{z-2}, z\in\{2,3,\dots\} \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Logo, dado $z\in\{2, 3, \dots\}$ temos
+\begin{align*}
+    P_{X|X+Y}(x|z) = P(X=x|X+Y=z) = 0, x\notin \{1,2,\dots,z-1\}
+\end{align*}
+e
+\begin{align*}
+    p_{X|X+Y}(x|z) = \frac{ p(1-p)^{x-1}p(1-p)^{z-x-1} }{ (z-1)p^2(1-p)^{z-2} } = \frac{1}{z-1}, x\in\{ 1,2,\dots,z-1 \}.
+\end{align*}
+Logo,
+\begin{align*}
+    p_{X|X+Y}(x|z) = \begin{cases}
+    1/z-1, x = 1,2,\dots,z-1 \\
+    0, \text{ c.c.}
+    \end{cases}
+\end{align*}
+para cada $z\in\{2,3,\dots\}$, ou seja, $p_{X|X+Y}$ é f.p. uniforme sobre ${1, 2, \dots, z-1}$.
+\end{example}
 
 
 \end{document}
