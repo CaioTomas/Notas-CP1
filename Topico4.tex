@@ -92,12 +92,134 @@ em que a série converge pelo teste da integral. Logo, $X$ tem esperança finita
 \end{example}
 
 \begin{example}
-
+Considere $p:\mathbb{R}\to\mathbb{R}$ dada por
+\begin{align*}
+    p(x) = \begin{cases}
+    \frac{1}{x(x+1)}, x = 1,2,\dots \\
+    0, \text{ c.c.}
+    \end{cases}
+\end{align*}
+Note que $p(x)\geq 0, \forall x\in\mathbb{R}$, $\{x\in\mathbb{R} : p(x) > 0\} = \mathbb{N}$ é enumerável e $\displaystyle{ \sum_x p(x) = \sum_{x=1}^{\infty}\frac{1}{x(x+1)} = \lim_{N\to\infty}\sum_{x=1}^N \frac{1}{x} - \frac{1}{x+1} = \lim_{N\to\infty} 1 - \frac{1}{N+1} = 1 }$. Logo, $p$ é uma f.p. e, se $X$ é v.a. com f.p. $p$, temos
+\begin{align*}
+    \sum_x |x|p(x) = \sum_{x=1}^{\infty}\frac{1}{x+1}
+\end{align*}
+que diverge pelo teste da integral. Logo, $X$ não tem esperança finita e escrevemos $EX = +\infty$.
 \end{example}
 
+\subsection{Esperança de função de variável aleatória}
+Nosso interesse aqui é determinar a esperança de uma v.a. (discreta) que é função de uma ou mais v.a.'s: $Z = g(X)$, com $X = (X_1, \dots, X_n)$ e $g:\mathbb{R}^n\to\mathbb{R}$ função. Note que o conjunto de valores possíveis de $X$ é $\{x_1, x_2, \dots \}\subset\mathbb{R}^n$ (enumerável), ou seja, $P(X=x_j) > 0, j = 1,2,\dots$ e $P(X\in\{x_1, x_2, \dots\}) = 1$. Note que $x_j = (x_{j_1}, \dots, x_{j_n})\in\mathbb{R}^n, j=1,2,\dots$ e $\displaystyle{ \sum_x g(x)p_X(x) = \sum_j g(x_j)p_X(x_j) }$.
 
+\begin{theorem}
+Sejam $X = (X_1, \dots, X_n)$ um vetor aleatório discreto com f.p. $p_X$ e $g:\mathbb{R}^n\to\mathbb{R}$ função. A v.a. $Z = g(X)$ tem esperança finita se, e só se, $\displaystyle{ \sum_x |g(x)|p_X(x) < \infty }$. Nesse caso,
+\begin{align*}
+    EZ = \sum_x g(x)p_X(x) = \sum_{x_1}\cdots\sum_{x_n} g(x_1, \dots, x_n)P(X_1 = x_1, \dots, X_n=x_n).
+\end{align*}
+\end{theorem}
 
-\subsection{Propriedades}
+\begin{proof}
+Vamos mostrar o caso $n=1$; o caso $n>1$ é análogo. Temos $g:\mathbb{R}\to\mathbb{R}$ função e, se $\{x_1, x_2, \dots\}$ é o conjunto de valores possíveis de $X$, então $\{ g(x_1), g(x_2), \dots, g(x_n) \}$ é o conjunto de valores possíveis de $Z = g(X)$. Note que pode haver repetição, i.e., podemos ter $g(x_i) = g(x_k)$ com $x_i\neq x_k$. Seja $A_j = \{ x : x=x_i \text{ e } g(x) = z_j \}, j = 1,2,\dots$, sendo $\{z_1, z_2, \dots\}$ o conjunto de valores possíveis de $Z$. Note que $\{X\in A_j\} = \{Z=z_j\}$ e, para cada $j=1,2,\dots$, $A_j\subset\{ x_1, x_2, \dots \}$ e os $A_j$'s são dois a dois disjuntos já que $g$ função. Além disso,
+\begin{align*}
+    \bigcup_{j=1}^{\infty}A_j = \{x_1, x_2, \dots\}.
+\end{align*}
+Logo, 
+\begin{align*}
+\sum_j |z_j|p_Z(z_j) = \sum_j |z_j|P(X\in A_j) &= \sum_j |z_j|\sum_{i : x_i\in A_j} P(X=x_i) \\
+&= \sum_j\sum_{i:x_i\in A_j} |z_j|P(X=x_i) \\
+&= \sum_j\sum_{i:x_i\in A_j}|g(x_i)|P(X=x_i) \\
+&= \sum_k |g(x_k)|P(X=x_k).
+\end{align*}
+Logo, $EZ < \infty \iff \displaystyle{ \sum_x |g(x)|p_X(x) < \infty }$. Agora, se $EZ < \infty$, então analogamente ao acima, $EZ = \displaystyle{ \sum_x g(x)p_X(x) }$.
+\end{proof}
+
+\begin{remark}
+Dada uma v.a. discreta $X$, vimos que (i) $EX < \infty \iff \displaystyle{ \sum_x |x|P(X=x) < \infty }$ (por definição) e (ii) $E|X|$, quando existe, é $\displaystyle{ \sum_x |x|P(X=x)}$ pelo teorema acima. Logo, $EX < \infty \iff E|X| < \infty$.
+\end{remark}
+
+\begin{example}
+Sejam $X, Y$ v.a.'s independentes com $X\sim\text{Poisson}(\lambda_1)$ e $Y\sim\text{Poisson}(\lambda_2)$. Vamos calcular $E[X^2], E[XY]$ e $E[X+Y]$.
+\begin{enumerate}[(i)]
+    \item Pelo teorema,
+    \begin{align*}
+        \sum_x |g(x)|p_X(x) &= \sum_{k=0}^{\infty} k^2e^{-\lambda_1}\frac{\lambda_1^k}{k!} \\
+        &= \sum_{k=1}^{\infty} ke^{-\lambda_1}\frac{\lambda_1^{k}}{(k-1)!} \\
+        &= \lambda_1\left[ \sum_{k=1}^{\infty}(k-1)e^{-\lambda_1}\frac{\lambda_1^{k-1}}{(k-1)!} + \sum_{k=1}^{\infty}e^{-\lambda_1}\frac{\lambda_1^{k-1}}{(k-1)!} \right] \\
+        &= \lambda_1[EX + e^{\lambda_1}e^{-\lambda_1}] \\
+        &= \lambda_1(\lambda_1 + 1)\in\mathbb{R}.
+    \end{align*}
+    Logo, $X^2$ tem esperança finita e, como seus valores possíveis são não negativos, $E[X^2] = \lambda_1(\lambda_1 + 1)$.
+    
+    \item Pelo teorema,
+    \begin{align*}
+        \sum_x\sum_y |g(x,y)|p_{X,Y}(x,y) &= \sum_{k=0}^{\infty}\sum_{j=0}^{\infty}kjP(X=k, Y=j) \\
+        &= \sum_{k=1}^{\infty}\sum_{j=1}^{\infty} kje^{-\lambda_1}\frac{\lambda_1^k}{k!}e^{-\lambda_2}\frac{\lambda_2^j}{j!} \\
+        &= \sum_{k=1}^{\infty}\left[ ke^{-\lambda_1}\frac{\lambda_1^k}{k!}\sum_{j=1}^{\infty}je^{-\lambda_2}\frac{\lambda_2^j}{j!} \right] \\
+        &= \lambda_2\sum_{k=1}^{\infty} ke^{-\lambda_1}\frac{\lambda_1^k}{k!} \\
+        &= \lambda_1\lambda_2\in\mathbb{R},
+    \end{align*}
+    logo $XY$ tem esperança finita e $E[XY] = \lambda_1\lambda_2$ pois os valores possíveis de $XY$ são não negativos.
+    
+    \item Temos, pelo teorema, que
+    \begin{align*}
+        \sum_x\sum_y |g(x,y)|p_{X,Y}(x,y) &= \sum_{k=0}^{\infty}\sum_{j=0}^{\infty} (k+j)P(X=k, Y=j) \\
+        &= \sum_{k=0}^{\infty}k\sum_{j=0}^{\infty} P(X=k, Y=j) + \sum_{j=0}^{\infty}j\sum_{k=0}^{\infty} jP(X=k, Y=j) \\
+        &= \sum_{k=0}^{\infty}kp_X(k) + \sum_{j=0}^{\infty} jp_Y(j) \\
+        &= EX + EY \\
+        &= \lambda_1 + \lambda_2\in\mathbb{R},
+    \end{align*}
+    logo $X+Y$ tem esperança finita e $E[X+Y] = EX + EY = \lambda_1 + \lambda_2$ pois os valores possíveis de $X+Y$ são não negativos.
+\end{enumerate}
+\end{example}
+
+\begin{theorem}[Propriedades da esperança]
+Sejam $X$ e $Y$ v.a.'s definidas em $(\Omega, \mathcal{A}, P)$ com $EX, EY < \infty$. Temos
+\begin{enumerate}[(a)]
+    \item $P(X=c) = 1\implies EX = c, \forall c\in\mathbb{R}$
+    \item $E[cX] < \infty$ e $E[cX] = cEX, \forall c\in\mathbb{R}$
+    \item $E[X+Y] < \infty$ e $E[X+Y] = EX+EY$. De maneira geral, dados $c_1, \dots, c_n\in\mathbb{R}$ e $EX_1, \dots, EX_n < \infty$, então
+    \begin{align*}
+        E[c_1X_1 + \cdots + c_nX_n] = \sum_i c_iEX_i < \infty
+    \end{align*}
+    \item Se $P(X\geq Y) = 1$, então $EX\geq EY$ e $EX = EY\iff P(X=Y) = 1$. Em particular, $P(X\geq 0) = 1 \implies EX \geq 0$
+    \item $|EX|\leq E|X|$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}[(a)]
+    \item Temos $\displaystyle{ \sum_x |x|p(x) = |c| < \infty } \therefore EX = c < \infty$.
+    \item Temos $\displaystyle{ \sum_x |cx|p(x) = |c|\sum_x |x|p(x) < \infty \therefore E[cX] = cEX < \infty }$.
+    \item Temos
+    \begin{align*}
+        &\sum_{x_1}\cdots\sum_{x_n}|c_1x_1 + \cdots + c_nx_n|P(X_1=x_1, \dots, X_n=x_n) \\
+        &\leq \sum_{x_1}|c_1x_1|\sum_{x_2}\cdots\sum_{x_n}P(X_1=x_1, \dots, X_n=x_n) + \cdots + \sum_{x_n}|c_nx_n|\sum_{x_1}\cdots\sum_{x_{n-1}}P(X_1=x_1, \dots, X_n=x_n) \\
+        &= |c_1|\sum_{x_1}|x_1|P(X_1=x_1) + \cdots + |c_n|\sum_{x_n}|x_n|P(X_n=x_n) < \infty.
+    \end{align*}
+    Logo, $\displaystyle{ E\left[ \sum_{i}c_iX_i \right] = \sum_i c_iEX_i < \infty .}$
+    
+    \item Se $P(X\geq Y) = 1$, então $x_i\geq y_j$ para todo par de valores possíveis $(x_i, y_j)$. Daí,
+    \begin{align*}
+        EX = \sum_x xP(X=x) \geq \sum_y yP(X=x) \geq \sum_y yP(Y=y) = EY.
+    \end{align*}
+    Se $P(X=Y) = 1$, então $X$ e $Y$ têm o mesmo conjunto de valores possíveis e $P(X=x) = P(Y=y)$. Logo, $EX = \sum_x xP(X=x) = \sum_y yP(Y=y) = EY$. Se $EX=EY$, devemos ter $X$ e $Y$ com o mesmo conjunto de valores possíveis e $P(X=x) = P(Y=y)$.
+    
+    \item $\displaystyle{|EX| = \left| \sum_x xp(x) \right| \leq \sum_x |x|p(x) = E|X|}$.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+Seja $X$ v.a. definida em $(\Omega, \mathcal{A}, P)$ tal que $P(|X|\leq M) = 1, M\in\mathbb{R}$. Então $EX < \infty$ e $|EX|\leq M$.
+\end{theorem}
+
+\begin{proof}
+Seja $x$ valor possível de $X$. Se $|x|>M$, então $P(|X|>M)\geq P(X=x)>0$. Mas $P(|X|>M) = 1 - P(|X|\leq M) = 0$. Logo, $|x|\leq M$ e, assim,
+\begin{align*}
+    \sum_x |x|p_X(x) \leq M\sum_x p_X(x) = M < \infty,
+\end{align*}
+ou seja, $EX < \infty$. Por fim,
+\begin{align*}
+    |EX| \leq E|X| \leq EM = M.
+\end{align*}
+\end{proof}
 
 
 
