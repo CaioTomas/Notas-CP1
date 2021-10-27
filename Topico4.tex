@@ -423,9 +423,180 @@ Daí,
 \end{align*}
 \end{example}
 
-\subsubsection{Covariância}
+\begin{definition}[Covariância]
+Sejam $X,Y$ v.a.'s em $(\Omega, \mathcal{A}, P)$ com $E[X^2], E[Y^2] < \infty$. A \textbf{covariância} de $X$ e $Y$ é definida por
+\begin{align*}
+    \Cov(X,Y) = E[(X-EX)(Y-EY)] = \sigma_{X,Y}.
+\end{align*}
+\end{definition}
 
-\subsubsection{Coeficiente de correlação}
+\begin{proposition}[Propriedades da covariância]
+Sejam $X, Y, X_1, \dots, X_n, Y_1, \dots, Y_m$ v.a.'s com segundo momento finito. Temos
+\begin{enumerate}[(i)]
+    \item $\Cov(X,Y) = E[XY] - EXEY$
+    \item $\Cov(X,Y) = \Cov(Y,X)$
+    \item $\Cov(X,X) = \Var(X)$
+    \item $\Cov(cX,Y) = c\Cov(X,Y) = \Cov(X,cY), \forall c\in\mathbb{R}$
+    \item $\displaystyle{ \Cov\left( \sum_{i=1}^{n}X_i, \sum_{j=1}^{m}Y_j \right) = \sum_{i=1}^{n}\sum_{j=1}^{m} \Cov(X_i, Y_j) }$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}[(i)]
+    \item Temos
+    \begin{align*}
+        \Cov(X,Y) = E[(X-EX)(Y-EY)] = E[XY - XEY - YEX + EXEY] = E[XY] - EXEY.
+    \end{align*}
+    \item Note que
+    \begin{align*}
+        \Cov(X,Y) = E[XY] - EXEY = E[YX] - EYEX = \Cov(Y,X).
+    \end{align*}
+    \item Temos
+    \begin{align*}
+        \Cov(X,X) = E[X^2] - EX^2 = \Var(X).
+    \end{align*}
+    \item Basta notar que
+    \begin{align*}
+        \Cov(cX, Y) = E[cXY] - E[cX]EY = c\Cov(X,Y) = \Cov(X,cY).
+    \end{align*}
+    \item Por fim, temos
+    \begin{align*}
+        \Cov\left( \sum_{i=1}^{n}X_i, \sum_{j=1}^{m}Y_j \right) &= E\left[ \sum_{i=1}^{n}\sum_{j=1}^{m} X_iY_j \right] - E\left[ \sum_{i=1}^{n}X_i \right]E\left[ \sum_{j=1}^{m}Y_j \right] \\
+        &= \sum_{i=1}^{n}\sum_{j=1}^{m} E[X_iY_j] - EX_iEY_j \\
+        &= \sum_{i=1}^{n}\sum_{j=1}^{m} \Cov(X_i, Y_j).
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+Sejam $X_1, \dots, X_n$ v.a.'s com esperança finita. Então
+\begin{align*}
+    \Var\left( \sum_{i=1}^{n}X_i \right) = \sum_{i=1}^{n}\Var(X_i) + 2\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}\Cov(X_i, X_j).
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+Usando a proposição acima, temos
+\begin{align*}
+    \Var\left( \sum_{i=1}^{n}X_i \right) = \Cov\left( \sum_{i=1}^{n}X_i, \sum_{j=1}^{n}X_j \right) 
+    = \sum_{i=1}^n\sum_{j=1}^n \Cov(X_i, X_j) 
+    = \sum_{i=1}^n \Var(X_i) + 2\sum_{i=1}^{n-1}\sum_{j=i+1}^n\Cov(X_i, X_j).
+\end{align*}
+\end{proof}
+
+\begin{remark}
+Note que se $X$ e $Y$ são independentes, então $\Cov(X,Y) = E[XY] - EXEY = 0$ e, se $X_1, \dots, X_n$ são independentes, então $\displaystyle{ \Var\left( \sum_{i=1}^n X_i \right) = \sum_{i=1}^n\Var(X_i)}$.
+\end{remark}
+
+\begin{definition}[Correlação]
+Se $\Cov(X,Y) = 0$, então $X$ e $Y$ são ditas \textbf{não-correlacionadas}.
+\end{definition}
+
+Note, em particular, que se $X$ e $Y$ são \textbf{não-correlacionadas}, então $\Var(X+Y) = \Var(X) + \Var(Y)$. Ademais, se $X$ e $Y$ são \textbf{independentes} então elas são não-correlacionadas, mas a recíproca é \textbf{falsa!} Intuitivamente, $X$ e $Y$ serem independentes significa que não existe \textbf{nenhuma relação} entre as duas v.a.'s; por outro lado, como veremos mais à frente, as duas v.a.'s serem não-correlacionadas significa que não existe \textbf{relação linear} entre ambas.
+
+\begin{example}
+Seja $S_n\sim\text{Hgeo}(N,m,n)$. Vimos que $S_n$ é a soma das variáveis indicadoras $X_i$, com $EX_i = n/N$ e $ES_n = mn/N$. Como $X_i^2=X_i$, então $E[X_i^2] = n/N$ e $\Var(X_i) = n/N(1 - n/N)$. Ademais, dados $1\leq i < j\leq m$, então
+\begin{align*}
+    E[X_iX_j] = P(X_i = 1, X_j = 1) = \frac{n}{N}\cdot\frac{n-1}{N-1}.
+\end{align*}
+Logo,
+\begin{align*}
+    \Cov(X_i, X_j) = \frac{n}{N}\cdot\frac{n-1}{N-1} - \frac{n^2}{N^2} = \frac{n}{N}\cdot\frac{n-N}{N(N-1)}
+\end{align*}
+e, daí,
+\begin{align*}
+    \Var(S_n) &= \sum_{i=1}^m \Var(X_i) + 2\sum_{i=1}^{m-1}\sum_{j=i+1}^m \Cov(X_i, X_j) \\
+    &= \frac{mn}{N}\left(1 - \frac{n}{N}\right) + 2\sum_{i=1}^{m-1}(m-i)\frac{n}{N}\cdot\frac{n-N}{N(N-1)} \\
+    &= \frac{mn}{N}\left(1 - \frac{n}{N}\right) + 2\left[ \frac{mn}{N}\cdot\frac{n-N}{N(N-1)}(m-1) + \frac{n}{N}\cdot\frac{n-N}{N(N-1)}\cdot\frac{m(m-1)}{2} \right] \\
+    &= \frac{mn}{N}\cdot\frac{(N-n)(N-m)}{N(N-1)}.
+\end{align*}
+\end{example}
+
+\begin{definition}[Coeficiente de correlação]
+Sejam $X,Y$ v.a.'s em $(\Omega, \mathcal{A}, P)$ com variância finita e positiva. O \textbf{coeficiente de correlação} entre $X$ e $Y$ é definido por
+\begin{align*}
+    \rho(X,Y) = \frac{\Cov(X,Y)}{\sqrt{\Var(X)}\sqrt{\Var(Y)}} = \frac{\Cov(X,Y)}{\sigma_X\sigma_Y}.
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Note que $X, Y$ são não-correlacionadas se, e só se, $\rho(X,Y) = 0$. Além disso, se $X,Y$ são independentes, então $\rho(X,Y) = 0$.
+\end{remark}
+
+\begin{theorem}[Desigualdade de Cauchy-Schwarz]
+Sejam $X,Y$ v.a.'s com segundo momento finito. Então
+\begin{align*}
+    E[|XY|] \leq \sqrt{E[X^2]E[Y^2]},
+\end{align*}
+com igualdade se, e só se, $P(Y=aX) = 1,$ para algum $a\in\mathbb{R}$.
+\end{theorem}
+
+\begin{proof}
+Se $E[X^2] = 0$ ou $E[Y^2] = 0$, então $P(X=0) = 1$ ou $P(Y=0) = 1$, de modo que $P(XY=0) = 1$ e $E[XY] = 0 = E[X^2]E[Y^2]$. Se $E[X^2], E[Y^2] > 0$, temos
+\begin{align*}
+    &E\left[ \left( \frac{|X|}{\sqrt{E[X^2]}} - \frac{|Y|}{\sqrt{E[Y^2]}} \right)^2 \right] \geq 0 \\
+    &\iff 2 - 2\frac{E[|XY|]}{\sqrt{E[X^2]E[Y^2]}} \geq 0 \\
+    &\iff E[|XY|] \leq \sqrt{E[X^2]E[Y^2]}.
+\end{align*}
+A igualdade ocorre se, e só se, 
+\begin{align*}
+    P\left( \frac{|X|}{\sqrt{E[X^2]}} - \frac{|Y|}{\sqrt{E[Y^2]}} = 0 \right) = 1 &\iff P\left( |Y| = \frac{ \sqrt{E[Y^2]} }{ \sqrt{E[X^2]}|X| } \right) = 1 \\
+    &\iff P(Y = aX) = 1, a = \pm\sqrt{\frac{ E[Y^2] }{ E[X^2] }} \in\mathbb{R}.
+\end{align*}
+\end{proof}
+
+\begin{proposition}
+Sejam $X, Y$ v.a.'s com variância finita e positiva. Então
+\begin{enumerate}[(i)]
+    \item $|\rho(X,Y)| \leq 1$
+    \item $|\rho(X,Y)| = 1 \iff P(Y = aX + b) = 1$, para algum par $a,b\in\mathbb{R}$. Nesse caso, $\rho(X,Y) = 1$ se $a>0$ e $\rho(X,Y) = -1$ se $a<0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}[(i)]
+    \item Temos 
+    \begin{align*}
+        |E[(X-\mu_X)(Y-\mu_Y)]| \leq E[|(X-\mu_X)(Y-\mu_Y)|] \leq \sqrt{ E[(X-\mu_X)^2]E[(Y-\mu_Y)^2] },
+    \end{align*}
+    ou seja,
+    \begin{align*}
+        |\Cov(X,Y)| \leq \sigma_X\sigma_Y \iff |\rho(X,Y)| \leq 1.
+    \end{align*}
+    \item Se $\rho(X,Y) = \pm 1$, então
+    \begin{align*}
+        &\Cov(X,Y) = \pm\sigma_X\sigma_Y \\
+        &\implies E[(X-\mu_X)(Y-\mu_Y)] = \pm\sqrt{ E[(X-\mu_X)^2]E[(Y-\mu_Y)^2] } \\
+        &\implies P(Y - \mu_Y = a(X-\mu_X)) = 1,
+    \end{align*}
+    ou seja, 
+    \begin{align*}
+        P(Y = aX+b) = 1, a = \pm\sqrt{ \frac{ E[(Y-\mu_Y)^2] }{ E[(X-\mu_X)^2] } }, b = \mu_Y - a\mu_X.
+    \end{align*}
+    Se $P(Y = aX+b) = 1$, então $\mu_Y = a\mu_X + b$ e $\sigma_Y^2 = a^2\sigma_X^2$. Logo,
+    \begin{align*}
+        \Cov(X,Y) = E[XY] - \mu_X\mu_Y = E[X(aX+b) - \mu_X(a\mu_X + b)] = a\sigma_X^2,
+    \end{align*}
+    de modo que
+    \begin{align*}
+        \rho(X,Y) = \frac{ a\sigma_X^2 }{ \sigma_X|a|\sigma_X } = \frac{a}{|a|} = \begin{cases}
+        1, a>0 \\
+        -1, a<0
+        \end{cases}.
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+Como mencionamos, note que $\rho(X,Y)$ é uma medida do grau de dependência \textbf{linear} entre $X$ e $Y$: $\rho(X,Y)\approx\pm 1$ indica alta linearidade entre $X$ e $Y$, com $\rho(X,Y) > 0$ indicando que $Y$ cresce quando $X$ cresce e $\rho(X,Y) < 0$ indicando que $Y$ decresce quando $X$ cresce; $\rho(X,Y) \approx 0$ indica ausência/fraca de linearidade entre $X$ e $Y$. Se $X$ e $Y$ são independentes, então elas são não-correlacionadas pois não existe nenhuma relação (em particular, nenhuma relação linear) entre $X$ e $Y$. Entretanto, a recíproca é \textbf{falsa!} Por exemplo,
+\begin{align*}
+    P(Y=X^2) = 1 \implies \begin{cases}
+    \rho(X,Y) = 0 \\
+    X, Y \text{ não independentes}
+    \end{cases}.
+\end{align*}
+Observe que, nesse caso, a dependência entre $X$ e $Y$ não é linear.
+\end{remark}
 
 
 \end{document}
