@@ -221,9 +221,182 @@ ou seja, $EX < \infty$. Por fim,
 \end{align*}
 \end{proof}
 
+\begin{example}
+Se $X\sim B(n,p)$, então $EX = np$, como vimos. Outra maneira de calcular $EX$ seria tomar $X_i\sim B(1,p), i=1,\dots, n$ e $S_n = X_1 + \cdots + X_n\sim B(n,p)$. Então $ES_n = E[X_1 + \cdots + X_n] = \sum_i EX_i = np$.
+\end{example}
 
+\begin{example}
+Seja $X\sim\text{Hgeo}(N,m,n)$. Temos
+\begin{align*}
+    p_{S_n}(k) = \begin{cases}
+    \frac{ \binom{m}{k}\binom{N-m}{n-k} }{ \binom{N}{n} }, k = 0,1,\dots,n \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Poderíamos calcular $ES_n$ pela definição, mas isso seria trabalhoso e complicado; vamos proceder de outro modo. Sejam $X_i$ v.a.'s indicadoras da presença do objeto de tipo $i$. Temos, então,
+\begin{align*}
+    EX_i = \frac{ \binom{1}{1}\binom{N-1}{n-1} }{\binom{N}{n}} = \frac{n}{N}, i = 1, 2, \dots, n.
+\end{align*}
+Logo, $ES_n = \sum_i EX_i = mn/N$.
+\end{example}
+
+\begin{remark}
+Vimos que $EX, EY < \infty$ implica $E[X+Y] = EX+EY$. Contudo, o mesmo não vale para $E[XY]$. De fato, sejam $X,Y$ v.a.'s com $p_X(-1) = 1/2 = p_X(1)$ e $Y=X$. A f.p. conjunta de $X$ e $Y$ pode ser representada como
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        $X\setminus Y$ & -1 & 1 & $p_X(x)$ \\
+        \hline
+        -1 & 1/2 & 0 & 1/2 \\
+        1 & 0 & 1/2 & 1/2 \\
+        \hline
+        $p_Y(y)$ & 1/2 & 1/2 & 1
+    \end{tabular}
+%    \caption{Caption}
+%    \label{tab:my_label}
+\end{table}
+Temos $EX = -1/2 + 1/2 = 0 = EY$ mas $E[XY] = 1/2 + 1/2 = 1 \neq EXEY$. É importante notar que $X$ e $Y$ \textbf{não são independentes!}
+\end{remark}
+
+\begin{theorem}
+Sejam $X$ e $Y$ v.a.'s definidas em $(\Omega, \mathcal{A}, P)$ com $EX, EY <\infty$. Se $X$ e $Y$ são independentes, então $E[XY] < \infty$ e $E[XY] = EXEY$.
+\end{theorem}
+
+\begin{proof}
+Temos
+\begin{align*}
+    \sum_x\sum_y |xy|p_{X,Y}(x,y) = \sum_x |x|p_X(x)\sum_y |y|p_Y(y) < \infty
+\end{align*}
+pois $EX, EY < \infty$. Daí, segue que
+\begin{align*}
+    E[XY] = \left( \sum_x xp_X(x) \right)\left( \sum_y yp_Y(y) \right) = EXEY.
+\end{align*}
+\end{proof}
+
+\begin{remark}
+Note que a recíproca deste teorema \textbf{é falsa!} O exemplo anterior é um contraexemplo disso.
+\end{remark}
+
+\begin{theorem}
+Seja $X$ v.a. inteira não negativa, i.e., com conjunto de valores possíveis $\{0, 1, 2, \dots\}$. Então $EX < \infty \iff \displaystyle{ \sum_{x=1}^{\infty} P(X\geq x) < \infty }$ e, nesse caso, $EX = \displaystyle{ \sum_{x=1}^{\infty} P(X\geq x) = \sum_{x=0}^{\infty} 1 - F_X(x) }$. 
+\end{theorem}
+
+\begin{proof}
+Temos que $EX < \infty$ se, e só se,
+\begin{align*}
+    \sum_x |x|p_X(x) = \sum_{x=1}^{\infty} xp_X(x) = \sum_{x=1}^{\infty}p_X(x) + \sum_{x=2}^{\infty}p_X(x) + \cdots = \sum_{k=1}^{\infty}\sum_{x=k}^{\infty}p_X(x) = \sum_{k=1}^{\infty}P(X\geq k) < \infty,
+\end{align*}
+em que a segunda igualdade vale pois a convergência é absoluta. Daí, quando existe, $EX$ é dada por
+\begin{align*}
+    \sum_{k=1}^{\infty} P(X\geq k) = \sum_{k=0}^{\infty} 1 - F_X(k).
+\end{align*}
+\end{proof}
+
+\begin{example}
+$X\sim\text{Geo}(p)$ é inteira não negativa, logo
+\begin{align*}
+    EX = \sum_{k=1}^{\infty} P(X\geq k) = \sum_{k=0}^{\infty} 1 - F_X(k) = \sum_{k=0}^{\infty} (1-p)^k = 1/p.
+\end{align*}
+\end{example}
+
+\begin{example}
+Sejam $X, Y\sim\text{Geom}(p)$ e $W = \min\{X,Y\}$. Temos $W$ inteira não negativa e
+\begin{align*}
+    F_W(w) = \begin{cases}
+    0, w < 1 \\
+    1 - (1-p)^{2[w]}, w\geq 1
+    \end{cases}.
+\end{align*}
+Logo, 
+\begin{align*}
+    EW = \sum_{k=0}^{\infty} 1 - F_W(k) = \sum_{k=0}^{\infty} (1-p)^{2k} = \frac{1}{1-(1-p)^2} = \frac{1}{2p-p^2} = \frac{1}{p(2-p)}.
+\end{align*}
+\end{example}
 
 \subsection{Momentos}
+\begin{definition}[Momentos e variância]
+Sejam $X$ v.a. e $k\in\mathbb{N}$. Se $E[X^k]<\infty$, dizemos que $X$ tem \textbf{momento de ordem} $k$ e chamamos $E[X^k]$ de \textbf{momento de ordem} $k$ ou $k$-ésimo momento de $X$. Quando $X$ tem momento de ordem $k$, chamamos $E[(X-b)^k]$ de \textbf{momento de ordem} $k$ em torno de $b, \forall b\in\mathbb{R}$. Em particular, se $k=2$ e $b=EX$, temos
+\begin{align*}
+    E[(X-EX)^2] := \Var(X) = \sigma_X^2 \ \text{ e } \ \sqrt{\Var(X)} := \sigma_X
+\end{align*}
+a \textbf{variância} e o \textbf{desvio-padrão} de $X$, respectivamente. É comum denotar também $EX = \mu$.
+\end{definition}
+
+\begin{proposition}[Propriedades dos momentos]
+Os momentos de uma v.a. satisfazem as seguintes propriedades.
+\begin{itemize}
+    \item[(P1)] Se $X$ é v.a. com momento de ordem $r$, então $X$ tem momento de ordem $k$ para todo $k\leq r$.
+    \item[(P2)] Se $X$ e $Y$ são v.a.'s com momento de ordem $r$, então $X+Y$ também tem momento de ordem $r$ e, de maneira geral, se $X_1, \dots, X_n$ são v.a.'s com momento de ordem $r$, então $X_1+\cdots+X_n$ também tem momento de ordem $r$ e, se $E[X^2] < \infty$, então $\Var(X) < \infty$.
+    \item[(P3)] Seja $X$ v.a. com segundo momento finito. Então
+    \begin{enumerate}[(i)]
+        \item $\Var(X) \geq 0$
+        \item $\Var(X) = E[X^2] - EX^2$
+        \item $P(X=c) = 1 \iff \Var(X) = 0$
+        \item $\Var(X+c) = \Var(X), \forall c\in\mathbb{R}$
+        \item $\Var(cX) = c^2\Var(X), \forall c\in\mathbb{R}$
+        \item Se $Y$ é v.a. com segundo momento finito, então $\Var(X+Y) = \Var(X) + \Var(Y) + 2E[(X-EX)(Y-EY)] < \infty$.
+    \end{enumerate}
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+\begin{itemize}
+    \item[(P1)] Da definição de esperança, temos $E[X^r] = \displaystyle{ \sum_x x^rp_X(x) < \infty }$ e essa série converge absolutamente. Logo, podemos derivá-la, obtendo os demais momentos.
+    
+    \item[(P2)] Note que $E[Y^r] < \infty \implies E[(-Y)^r] = (-1)^rE[Y^r] <\infty$, logo $-Y$ tem momento de ordem $k$. Note que
+    \begin{align*}
+        E[X^2] < \infty \implies EX < \infty \implies E[(EX)^2] = EX^2,
+    \end{align*}
+    logo $EX$ tem segundo momento finito; como $X$ e $EX$ têm segundo momento finito, então $X-EX$ também tem e $\Var(X) < \infty$.
+    
+    \item[(P3)]\begin{enumerate}[(i)]
+        \item Temos
+        \begin{align*}
+            \Var(X) = E[(X-EX)^2] \geq 0
+        \end{align*}
+        pois $(X-EX)^2$ é não negativa.
+        
+        \item Temos
+        \begin{align*}
+            \Var(X) = E[(X-EX)^2] &= E[X^2 - 2XEX + EX^2] \\
+            &= E[X^2] - 2EXEX + EX^2 \\
+            &= E[X^2] - EX^2.
+        \end{align*}
+        
+        \item Note que
+        \begin{align*}
+            P(X=c) = 1 \implies P(X^2=c^2) = 1 \implies E[X^2] = c^2 \therefore \Var(X) = c^2-c^2 = 0.
+        \end{align*}
+        Reciprocamente,
+        \begin{align*}
+            \Var(X) = 0 \implies E[(X-EX)^2] = 0 &\implies \sum_i \underbrace{(x_i - EX)^2}_{\geq 0} \underbrace{P(X=x_i)}_{> 0} = 0 \\
+            &\implies x_i = EX, i=1,2,\dots \\
+            &\implies EX = c \text{ é o único valor possível de } X \\
+            &\therefore P(X=c) = 1.
+        \end{align*}
+        
+        \item Temos
+        \begin{align*}
+            \Var(X+c) = E[(X+c - E[X+c])^2] &= E[(X + c - EX - c)^2] \\
+            &= E[(X-EX)^2] \\
+            &= \Var(X), \forall c\in\mathbb{R}.
+        \end{align*}
+        
+        \item Temos
+        \begin{align*}
+            \Var(cX) = E[(cX - E[cX])^2] = E[c^2(X-EX)^2] = c^2\Var(X), \forall c\in\mathbb{R}.
+        \end{align*}
+        
+        \item Temos
+        \begin{align*}
+            \Var(X+Y) &= E[(X+Y - E[X+Y])^2] \\
+            &= E[(X+Y-EX-EY)^2] \\
+            &= E[(X-EX)^2 + (Y-EY)^2 + 2(X-EX)(Y-EY)] \\
+            &= \Var(X) + \Var(Y) +2E[(X-EX)(Y-EY)].
+        \end{align*}
+    \end{enumerate}
+\end{itemize}
+\end{proof}
 
 
 
