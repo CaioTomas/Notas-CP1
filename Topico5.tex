@@ -6,6 +6,101 @@
 %\section{Tópico 5}
 
 \section{Variáveis aleatórias contínuas}
+Vimos situações em que as v.a.'s representavam o número de ``objetos'' ou ``coisas''. Entretanto, há muitas situações (tanto teóricas quanto práticas) em que a v.a. natural a se considerar é ``contínua'' num certo sentido, e.g. o tempo que decorre até a recuperação completa de um paciente com determinada doença.
+
+\begin{definition}[V.a. contínua]
+Uma v.a. $X$ em $(\Omega, \mathcal{A}, P)$ é dita \textbf{contínua} se $P(X=x) = 0, \forall x\in\mathbb{R}$.
+\end{definition}
+
+Recordando das propriedades da f.d. de uma v.a., temos o seguinte fato.
+
+\begin{proposition}
+$X$ é v.a. contínua se, e só se, $F_X$ é contínua.
+\end{proposition}
+
+\begin{proof}
+Dado $x\in\mathbb{R}$,
+\begin{align*}
+    0 = P(X=x) = F_X(x) - F_X(x^-) \iff F_X(x^+) = F_X(x) = F_X(x^-).
+\end{align*}
+\end{proof}
+
+No caso de v.a.'s contínuas, podemos trocar os sinais $<$ e $\leq$ à vontade nos cálculos de probabilidades.
+
+\begin{example}
+Considere o experimento de escolher um ponto ao acaso no círculo de centro na origem e raio $R>0$ (jogar um dardo). Vimos que, nesse caso, um espaço de probabilidade adequado é $(\Omega, \mathcal{A}, P)$ com
+\begin{align*}
+    \Omega = \{ (x,y)\in\mathbb{R}^2 : x^2+y^2\leq R^2 \}, \mathcal{A} = \mathcal{B}^2(\Omega)
+\end{align*}
+e $P:\mathcal{A}\to\mathbb{R}$ tal que
+\begin{align*}
+    P(A) = \iint_A \frac{1}{\pi R^2}dxdy, \forall A\in\mathcal{A}.
+\end{align*}
+Podemos definir a v.a. $X:\Omega\to\mathbb{R}$ por $X(\omega) = X((x,y)) = \sqrt{x^2+y^2}$. Note que, dado $z\in\mathbb{R}$, temos $\{X = z\} = \emptyset$ se $z < 0$ ou $z>R$ e $\{ X=z \} = \{ (x,y)\in\Omega : x^2+y^2 = z^2 \}$ se $0\leq z \leq R$. Logo, $P(X=z) = 0, \forall z\in\mathbb{R}$, ou seja, $X$ é v.a. contínua. Por outro lado, $\{X\leq z\} = \emptyset$ se $z<0$, $\{X\leq z\} = \{ (x,y)\in\Omega : x^2+y^2 \leq z^2 \}$ se $0\leq z < R$ e $\{X\leq z\} = \Omega$ se $z\geq R$. Logo,
+\begin{align*}
+    F_X(z) = \begin{cases}
+    0, z < 0 \\
+    z^2/R^2, 0\leq z < R \\
+    1, z\geq R
+    \end{cases}.
+\end{align*}
+Em particular, se $0\leq a < b\leq R$, então
+\begin{align*}
+    P(a < X < b) = F_X(b) - F_X(a) = \frac{b^2 - a^2}{R^2} > 0.
+\end{align*}
+\begin{center}
+    \textbf{GRÁFICO P.104}
+\end{center}
+\end{example}
+
+\begin{definition}[Função de densidade]
+Uma função $f:\mathbb{R}\to\mathbb{R}$ tal que
+\begin{enumerate}[(i)]
+    \item $f(x)\geq 0, \forall x\in\mathbb{R}$ 
+    \item $\displaystyle{ \int_{\mathbb{R}} f(x)dx  = 1}$
+\end{enumerate}
+é dita \textbf{função de densidade de probabilidade} ou apenas \textbf{densidade}.
+\end{definition}
+
+\begin{definition}[Função de distribuição]
+Uma função $F:\mathbb{R}\to\mathbb{R}$ tal que
+\begin{align*}
+    F(x) = \int_{-\infty}^x f(t) dt, \forall x\in\mathbb{R}
+\end{align*}
+para alguma densidade $f$ é dita \textbf{função de distribuição (absolutamente) contínua}. Dizemos ainda que $f$ é a densidade de $F$.
+\end{definition}
+
+\begin{remark}
+É possível, mas complicado, construir exemplos de funções $F$ que sejam contínuas mas não tenham densidade. As que têm densidade são chamadas de \textbf{absolutamente} contínuas. Aqui não faremos distinção, pois os casos não absolutamente contínuos são raros; sempre que nos referirmos a uma f.d., estará implícito que ela é absolutamente contínua.
+
+Outro ponto importante é que dada $F$, a densidade $f$ não é única, já que $F$ pode não ser derivável. Contudo, os pontos onde $F$ não é derivável (ou onde $f$ não é contínua) formam um conjunto enumerável, de maneira que a integral não se altera. Em geral é comum tomar $f$ como
+\begin{align*}
+    f(x) = \begin{cases}
+    F'(x), \forall x\in\mathbb{R} : \exists F'(x) \\
+    0, \text{ c.c.}
+    \end{cases}
+\end{align*}
+\end{remark}
+
+\begin{definition}
+Uma v.a. $X$ definida em $(\Omega, \mathcal{A}, P)$ é \textbf{(absolutamente) contínua} se sua f.d. $F_X$ é \textbf{(absolutamente) contínua}, i.e., se $F_X(x) = \displaystyle{ \int_{-\infty}^x f(t)dt, \forall x\in\mathbb{R} }$ para alguma função de densidade $f:=f_X$, chamada \textbf{densidade} de $X$.
+\end{definition}
+
+\begin{remark}
+Como no caso discreto, podemos nos referir tanto a $F_X$ quanto a $f_X$ quando dizemos ``distribuição'', devido à relação biunívoca entre ambas as funções. Além disso, se $X$ é v.a. contínua com densidade $f_X$, então dados $a,b\in\mathbb{R}$ quaisquer com $a\leq b$, temos
+\begin{align*}
+    P(a < X < b) = F_X(b) - F_X(a) = \int_a^b f_X(x) dx,
+\end{align*}
+ou seja, $P(a < X < b)$ é a área da região $A$.
+\begin{center}
+    \textbf{GRÁFICO P.105}
+\end{center}
+\end{remark}
+
+\begin{example}
+
+\end{example}
+
 
 \subsection{Variável aleatória contínua, função de distribuição contínua e densidade}
 
