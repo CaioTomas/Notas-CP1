@@ -398,6 +398,34 @@ Os momentos de uma v.a. satisfazem as seguintes propriedades.
 \end{itemize}
 \end{proof}
 
+\begin{example}
+Seja $X\sim B(n,p)$. Temos
+\begin{align*}
+    E[X^2] &= \sum_{k=0}^{n}k^2\binom{n}{k}p^k(1-p)^{n-k} \\
+    &= \sum_{k=1}^{n} [k(k-1) + k]\binom{n}{k}p^k(1-p)^{n-k} \\
+    &= \sum_{k=1}^{n} k(k-1)\binom{n}{k}p^k(1-p)^{n-k} + \sum_{k=1}^{n} k\binom{n}{k}p^k(1-p)^{n-k} \\
+    &= np + n(n-1)p^2\sum_{k=2}^{n}\binom{n-2}{k-2}p^{k-2}(1-p)^{n-2 - (k-2)} \\
+    &= np + n(n-1)p^2 \\
+    &= np(1-p) + n^2p^2 \therefore \Var(X) = n^2p^2 + np(1-p) - n^2p^2 = np(1-p).
+\end{align*}
+\end{example}
+
+\begin{example}
+Seja $X\sim\text{Geom}(p)$. Temos
+\begin{align*}
+    E[X^2] = \sum_{k=1}^{\infty} k^2 p(1-p)^{k-1} &= p\sum_{k=1}^{\infty} [(k-1)+1]^2 (1-p)^{k-1} \\
+    &= \sum_{k=1}^{\infty} (k-1)^2 p(1-p)^{k-1} + \sum_{k=1}^{\infty} 2(k-1)p(1-p)^{k-1} + \sum_{k=1}^{\infty} p(1-p)^{k-1} \\
+    &= (1-p)E[X^2] + 2(1-p)EX + 1.
+\end{align*}
+Daí,
+\begin{align*}
+    E[X^2] = \frac{2-p}{p^2} \therefore \Var(X) = \frac{2-p}{p^2} - \frac{1}{p^2} = \frac{1-p}{p^2}.
+\end{align*}
+\end{example}
+
+\subsubsection{Covariância}
+
+\subsubsection{Coeficiente de correlação}
 
 
 \end{document}
