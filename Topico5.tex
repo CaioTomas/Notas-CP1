@@ -98,13 +98,198 @@ ou seja, $P(a < X < b)$ é a área da região $A$.
 \end{remark}
 
 \begin{example}
+No exemplo do dardo acima, vimos que
+\begin{align*}
+    F_X(x) = \begin{cases}
+    0, x < 0 \\
+    x^2/R^2, 0\leq x < R \\
+    1, x\geq R
+    \end{cases}.
+\end{align*}
+Logo, a densidade $f$ de $X$ é
+\begin{align*}
+    f_X(x) = \begin{cases}
+    0, x < 0 \\
+    2x/R^2, 0\leq x < R \\
+    0, x\geq R
+    \end{cases}.
+\end{align*}
+Note que não existe $F'_X(R)$, pois $F_{X_-}'(R) = 2/R \neq 0 = F'_{X_+}(R)$, ou seja, $f$ não é contínua em $R$. Assim, sem perda de generalidade, tomamos $f(R) = 0$, de modo que
+\begin{align*}
+    f_X(x) = \begin{cases}
+    2x/R^2, 0\leq x < R \\
+    0, \text{ c.c.}
+    \end{cases}
+\end{align*}
+e ainda vale $\displaystyle{ F_X(x) = \int_{-\infty}^x f_X(t) dt, \forall x\in\mathbb{R}. }$
+\end{example}
 
+\begin{remark}
+É importante notar que há v.a.'s que não são nem contínuas nem discretas, chamadas \textbf{mistas}. Por exemplo, a v.a. $X$ com f.d. $F_X$ dada pelo gráfico abaixo não é contínua, pois $F_X$ é descontínua em $a$; entretanto, $X$ tampouco é discreta, pois $F_X$ não é do tipo escada.
+\begin{center}
+    \textbf{GRÁFICO P.106}
+\end{center}
+\end{remark}
+
+\begin{definition}
+Seja $X$ uma v.a.; dizemos que
+\begin{enumerate}[(i)]
+    \item $X$ é simétrica em torno de 0 se $P(X\geq x) = P(X\leq -x), \forall x\in\mathbb{R}$, i.e., $X$ e $-X$ têm a mesma distribuição;
+    \item $X$ é simétrica em torno de $\mu$ se existe $\mu\in\mathbb{R}$ tal que $P(X\geq \mu + x) = P(X\leq \mu - x), \forall x\in\mathbb{R}$.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+Seja $X$ v.a. contínua com densidade $f$. Então $X$ é simétrica em torno de 0 se, e só se, $f$ é par; nesse caso, $f$ é \textbf{densidade simétrica}. De modo geral, $X$ é simétrica em torno de $\mu\in\mathbb{R}$ se, e só se, $f(\mu + x) = f(\mu - x)$. Nesse caso, $f$ é \textbf{densidade simétrica em torno de} $\mu$.
+\end{theorem}
+
+\begin{proof}
+Provamos em torno de 0. Se $f$ é par, então
+\begin{align*}
+    P(X\geq x) = \int_x^{\infty} f(t)dt = \int_{-\infty}^{-x} f(-y)dy = \int_{-\infty}^{-x} f(y)dy = P(X\leq -x),
+\end{align*}
+logo $X$ é simétrica. Reciprocamente, se $P(X\geq x) = P(X\geq -x)$, defina
+\begin{align*}
+    g(x) = \frac{f(x) + f(-x)}{2}.
+\end{align*}
+Note que $g$ é simétrica, logo
+\begin{align*}
+    \int_{-\infty}^x g(y) dy &= \frac{1}{2}\int_{-\infty}^x f(y) dy + \frac{1}{2}\int_{-\infty}^x f(-y) dy \\
+    &= \frac{1}{2}\int_{-\infty}^x f(y) dy + \frac{1}{2}\int_{-x}^{\infty} f(y) dy \\
+    &= \frac{1}{2}P(X\leq x) + \frac{1}{2}P(-X\geq -x) \\
+    &= P(X\leq x),
+\end{align*}
+ou seja, $X$ tem densidade $g$ simétrica. A demonstração do caso geral é análoga, substituindo $x$ por $x+\mu$.
+\end{proof}
+
+\begin{center}
+    \textbf{GRÁFICO P.106}
+\end{center}
+
+\begin{remark}
+É possível mostrar que o resultado acima vale também para v.a.'s discretas; além disso, note que se $X$ é simétrica em torno da origem então $F(0) = 1/2$ e, se $X$ é simétrica em torno de $\mu$, então $F(\mu) = 1/2$. De maneira geral, se $X$ é simétrica em torno da origem então
+\begin{align*}
+    F(-x) = \int_{-\infty}^{-x}f(y) dy = \int_x^{\infty} f(-y)dy = \int_x^{\infty} f(y) dy = \int_{-\infty}^{\infty} f(y) dy - \int_{-\infty}^x f(y) dy,
+\end{align*}
+ou seja, $F(-x) = 1 - F_X(x), \forall x\in\mathbb{R}$.
+\end{remark}
+
+\subsection{Exemplos clássicos de distribuições contínuas}
+\begin{example}[Uniforme contínua, $X\sim U(a,b)$]
+Dizemos que $X$ é uma v.a. contínua com distribuição uniforme no intervalo $(a,b)$ se tem densidade dada por
+\begin{align*}
+    f(x) = \begin{cases}
+    \frac{1}{b-a}, a < x < b \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Note que $f(x)\geq 0, \forall x\in\mathbb{R}$ e $\displaystyle{ \int_{\mathbb{R}} f(x) dx = 1 }$. A f.d. $F$ associada a $f$ é calculada como segue:
+\begin{align*}
+    F(x) &= \int_{-\infty}^x f(t) dt = 0, x < a \\
+    F(x) &= \int_{-\infty}^x f(t) dt = \int_a^x \frac{1}{b-a} dt = \frac{x-a}{b-a}, a\leq x < b \\
+    F(x) &= \int_{-\infty}^x f(t) dt = \int_a^b \frac{1}{b-a} dt = 1, x \geq b, 
+\end{align*}
+ou seja,
+\begin{align*}
+    F(x) = \begin{cases}
+    0, x<a \\
+    \frac{x-a}{b-a}, a\leq x < b \\
+    1, x\geq b
+    \end{cases}.
+\end{align*}
+Note também que $f(x) = F'(x), \forall x\in\mathbb{R}\setminus\{a,b\}$.
+\end{example}
+
+\begin{example}[Exponencial, $X\sim\text{Exp}(\lambda)$]
+Dizemos que $X$ é uma v.a. contínua com distribuição exponencial de parâmetro $\lambda > 0$ se tem densidade dada por
+\begin{align*}
+    f(x) = \begin{cases}
+    \lambda e^{-\lambda x}, x > 0 \\
+    0, x \leq 0
+    \end{cases}
+\end{align*}
+ou, equivalentemente, f.d. dada por
+\begin{align*}
+    F(x) = \begin{cases}
+    1 - e^{-\lambda x}, x > 0 \\
+    0, x\leq 0
+    \end{cases}.
+\end{align*}
+Note que, de fato, $f(x) \geq 0, \forall x\in\mathbb{R}$ e que
+\begin{align*}
+    \int_{\mathbb{R}} f(t) dt = \int_0^{+\infty} \lambda e^{-\lambda t} dt = 1.
+\end{align*}
+Ademais, $f(x) = F'(x), \forall x\in\mathbb{R}\setminus\{0\}$.
+\end{example}
+
+\begin{remark}
+A distribuição exponencial é utilizada muitas vezes quando a v.a. em questão é um tempo de espera, e.g. o tempo até que um componente eletrônico apresente falhas. Além disso, se $X\sim\text{Exp}(\lambda)$, então $X$ tem perda de memória, i.e., $P(X > a+b) = P(X>a)P(X>b), a,b\geq 0$ ou, equivalentemente, $P(X>a+b| X>a) = P(X>b), a,b\geq 0$.
+\begin{proof}
+De fato, se $X\sim\text{Exp}(\lambda)$, então
+\begin{align*}
+    P(X>a+b|X>a) &= \frac{P(X>a+b, X>a)}{P(X>a)} \\
+    &= \frac{P(X>a+b)}{P(X>a)} \\
+    &= \frac{ e^{-\lambda (a+b)} }{ e^{-\lambda a} } \\
+    &= e^{-\lambda b} \\
+    &= P(X>b), \forall a,b\geq 0.
+\end{align*}
+\end{proof}
+Na verdade, a v.a. exponencial é a única v.a. contínua não negativa com perda de memória.
+\end{remark}
+
+\begin{theorem}
+$X$ é v.a. contínua com perda de memória se, e só se, $X\sim\text{Exp}(\lambda)$ para algum $\lambda > 0$ ou $P(X>0) = 0$.
+\end{theorem}
+
+\begin{proof}
+($\Leftarrow$) Já vimos o caso que $X$ tem distribuição exponencial; se $P(X>0) = 0$, então $P(X > a+b) = 0 = P(X>a)P(X>b), \forall a,b\geq 0$.
+
+($\Rightarrow$) Se $X$ tem perda de memória e $P(X > 0) \neq 0$, então tomando $a = 0 = b$ segue que
+\begin{align*}
+    P(X>0) = [P(X>0)]^2 \implies P(X > 0) = 1, 
+\end{align*}
+ou seja, $X$ é v.a. positiva. Seja $F$ a f.d. de $X$ e defina $G(x) = 1 - F(x)$. Temos $G$ não crescente, contínua à direita, $G(0) = 1, G(+\infty) = 0$ e $G(a+b) = G(a)G(b), \forall a,b>0$. Daí, se $c\in\mathbb{R}^*_+$ e $m,n\in\mathbb{R}$, temos
+\begin{align*}
+    G(c) = G(c - c/m)G(c/m) = G(c - 2c/m)[G(c/m)]^2 = \cdots = G(0)[G(c/m)]^m = [G(c/m)]^m,
+\end{align*}
+donde segue que
+\begin{align*}
+    G(nc) = [G(c)]^n.
+\end{align*}
+Além disso, temos $0 < G(1) < 1$. De fato, se $G(1) = 1$ então teríamos
+\begin{align*}
+    G(n) = [G(1)]^n \implies G(+\infty) = 1,
+\end{align*}
+absurdo. Se $G(1) = 0$, então teríamos
+\begin{align*}
+    G(1/m) = 0 \implies G(0) = G(0^+) = \lim_{m\to +\infty} G(1/m) = \lim_{m\to +\infty} [G(1)]^{1/m} = 0,
+\end{align*}
+absurdo. Logo, como $0 < G(1) < 1$, podemos tomar $G(1) = e^{-\lambda}$, para algum $\lambda > 0$. Tomando $c=1$, segue que $G(1/m) = e^{-\lambda /m}, m\in\mathbb{N}$ e, fazendo $c = 1/m$, temos $G(n/m) = [G(1/m)]^n = e^{-\lambda n/m}, \forall n,m\in\mathbb{N}$. Logo, $G(y) = e^{-\lambda y}, \forall y\in\mathbb{Q}$. Da continuidade à direita, temos
+\begin{align*}
+    G(x) = \lim_{y\to x^+, y\in\mathbb{Q}} G(y) = e^{-\lambda x}, \forall x\in\mathbb{R}^*_+,
+\end{align*}
+pois $\mathbb{Q}$ é denso em $\mathbb{R}$. Daí, segue que $F(x) = 1 - e^{-\lambda x}, \forall x>0$, ou seja, $X\sim\text{Exp}(\lambda)$.
+\end{proof}
+
+\begin{remark}
+Além de tempo de falha, variáveis exponenciais são úteis para estudar o tempo de decaimento de uma partícula radioativa e, também, no estudo de processos de Poisson e cadeias de Markov. Ademais, pensando na variável exponencial como o tempo de falha, a propriedade de perda de memória diz que dado que não houve falha até o tempo $a$, a probabilidade de que não haja falha nas próximas $b$ unidades de tempo é igual à probabilidade incondicional de que não haja falha nas primeiras $b$ unidades de tempo. Isso implica que o desgaste de uma peça de equipamento não aumenta nem diminui a probabilidade de falha em um dado intervalo de tempo.
+\end{remark}
+
+\begin{example}[Normal/gaussiana]
+Dizemos que $X$ é v.a. com distribuição normal \textbf{padrão} se tem densidade dada por
+\begin{align*}
+    f(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}, x\in\mathbb{R}.
+\end{align*}
+\begin{proof}
+Vamos mostrar que $f$ de fato é densidade. Primeiro, $f(x) > 0, \forall x\in\mathbb{R}$. Ademais, vamos verificar que $\displaystyle{ \int_{\mathbb{R}} f(x) dx = 1 }$. Seja $g(x) = e^{-x^2/2}, x\in\mathbb{R}$. Note que $g$ é par, contínua e não negativa. Além disso, se $x\geq 1$ então $0 < g(x) < e^{-x/2}$ e, então,
+\begin{align*}
+    \int_{1}^{\infty} e^{-x^2/2} dx \leq \int_{1}^{\infty} e^{-x/2} dx = \lim_{a\to +\infty} \int_{1}^{a} e^{-x/2} dx = \lim_{a\to +\infty} -2e^{-x/2}\Big|_{1}^a = 2e^{-1/2}\in\mathbb{R},
+\end{align*}
+logo
+\end{proof}
 \end{example}
 
 
-\subsection{Variável aleatória contínua, função de distribuição contínua e densidade}
-
-\subsection{Exemplos clássicos de distribuições contínuas}
 
 \subsection{Funções de variáveis aleatórias contínuas}
 
