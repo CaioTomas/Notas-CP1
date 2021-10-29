@@ -310,16 +310,260 @@ As variáveis aleatórios com distribuição normal ocorrem frequentemente em ap
 \end{example}
 
 \begin{example}[Gama, $X\sim\Gamma(\alpha, \lambda)$]
-Dizemos que
+Dizemos que $X$ é v.a. contínua com distribuição \textbf{gama} de parâmetros $\alpha$ e $\lambda$ (positivos) se tem densidade dada por
+\begin{align*}
+    f(x) = \begin{cases}
+    \frac{\lambda^{\alpha}}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\lambda x}, x > 0 \\
+    0, x\leq 0
+    \end{cases}
+\end{align*}
+sendo
+\begin{align*}
+    \Gamma(\alpha) = \int_{0}^{\infty} x^{\alpha - 1}e^{-x} dx, \alpha > 0
+\end{align*}
+a \textbf{função gama}. Em particular, pode-se mostrar que $\Gamma(\alpha) \in\mathbb{R}^*_+$ para todo $\alpha$ real positivo, apesar de não haver uma forma fechada para a integral. Verificamos que $f$ é densidade.
+\begin{proof}
+É imediato que $f(x)\geq 0, \forall x\in\mathbb{R}$. Ademais, temos
+\begin{align*}
+    \int_{0}^{\infty} x^{\alpha - 1}e^{-\lambda x} dx = \int_{0}^{\infty} y^{\alpha - 1}\lambda^{1 - \alpha}e^{-y}\frac{1}{\lambda} dy = \frac{1}{\lambda^{\alpha}}\int_{0}^{\infty} y^{\alpha - 1}e^{-y} dy = \frac{\Gamma(\alpha)}{\lambda^{\alpha}},
+\end{align*}
+logo
+\begin{align*}
+    \int_{\mathbb{R}} f(x) dx = \int_{0}^{\infty} \frac{\lambda^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1}e^{-\lambda x} dx = \frac{\lambda^{\alpha}}{\Gamma(\alpha)}\frac{\Gamma(\alpha)}{\lambda^{\alpha}} = 1.
+\end{align*}
+\end{proof}
+A função gama possui algumas propriedades, muito úteis nos cálculos:
+\begin{enumerate}[(i)]
+    \item $\displaystyle{ \Gamma(1) = \int_{0}^{\infty} e^{-x} dx = 1 }$
+    \item $\displaystyle{ \Gamma(1/2) = \int_{0}^{\infty} \frac{e^{-x}}{\sqrt{x}} dx = \sqrt{2} \int_{0}^{\infty} e^{-t^2/2} dt = \sqrt{2}\frac{1}{2}\sqrt{2\pi} = \sqrt{\pi}}$
+    \item $\displaystyle{ \Gamma(\alpha + 1) = \int_{0}^{\infty} x^{\alpha} e^{-x} dx = -x^{\alpha}e^{-x}\Big|_{0}^{\infty} + \int_{0}^{\infty} \alpha x^{\alpha - 1} e^{-x} dx = \alpha\Gamma(\alpha)}$
+    \item $\Gamma(1) = 1$ e $\Gamma(\alpha + 1) = \alpha\Gamma(\alpha)$ implicam $\Gamma(n) = (n-1)!, \forall n\in\mathbb{N}$
+    \item $\Gamma(\alpha + 1) = \alpha\Gamma(\alpha)$ e $\Gamma(1/2) = \sqrt{\pi}$ implicam
+    \begin{align*}
+        \Gamma(n/2) = \frac{ \sqrt{\pi} }{ 2^{\frac{n-1}{2}} } \prod_{j=1}^{\frac{n-1}{2}} (n-2j) = \frac{ \sqrt{\pi} }{ 2^{\frac{n-1}{2}} }\frac{1}{2^{\frac{n-1}{2}}}\frac{(n-1)!}{\left( \frac{n-1}{2} \right)!} = \frac{ \sqrt{\pi} }{ 2^{n-1} }\frac{(n-1)!}{\left( \frac{n-1}{2} \right)!}, \forall n\in\mathbb{N} \text{ ímpar.}
+    \end{align*}
+    \begin{center}
+        \textbf{GRÁFICO P.111}
+    \end{center}
+    \item $X\sim\text{Exp}(\lambda)\iff X\sim\Gamma(1, \lambda)$, ou seja, a distribuição exponencial é um caso particular da distribuição gama
+    \item se $\alpha = m \in\mathbb{N}$ com $m\geq 2$, então a f.d. $F$ de $X\sim\Gamma(m,\lambda)$ tem uma forma fechada:
+    \begin{align*}
+        \int_{0}^x \frac{ \lambda^m y^{m-1} e^{-\lambda y} }{(m-1)!} dy &= \frac{ -(\lambda y)^{m-1} e^{-\lambda y} }{(m-1)!}\Big|_{0}^{x} + \int_{0}^x \frac{ \lambda^{m-1} y^{m-2} e^{-\lambda y} }{ (m-2)! } dy \\
+        &= \int_{0}^x \frac{ \lambda^{m-1} y^{m-2} e^{-\lambda y} }{ (m-2)! } dy - \frac{ (\lambda x)^{m-1} e^{-\lambda x} }{(m-1)!} \\
+        &\vdots \\
+        &= 1 - \sum_{k=0}^{m-1} \frac{ (\lambda x)^k }{k!}e^{-\lambda x}, x>0,
+    \end{align*}
+    em que integramos por partes $m$ vezes. Isso sugere uma conexão com $Y\sim\text{Poisson}(\lambda x)$. De fato, segue do fato acima que $P(X\leq x) = P(Y\geq m)$, e essa conexão tem aplicações em processos de Poisson.
+\end{enumerate}
 \end{example}
 
+\begin{remark}[Construção de funções de densidade]
+Seja $g:\mathbb{R}\to\mathbb{R}$ uma função tal que $g(x)\geq 0, \forall x\in\mathbb{R}$ e $\displaystyle{ \int_{\mathbb{R}} g(x) dx = c\in\mathbb{R}^{*}_{+} }$. Logo, se $f(x) := g(x)/c, \forall x\in\mathbb{R}$, então $f$ é densidade.
+\begin{example}
+Seja $g(x) = \displaystyle{ \frac{1}{1+x^2}, x\in\mathbb{R} }$. Temos $g(x)\geq 0, \forall x\in\mathbb{R}$ e 
+\begin{align*}
+    \int_{\mathbb{R}} g(x) dx = \lim_{a\to +\infty} \left[ \arctan x \Big|_{-a}^{a} \right] = \pi\in\mathbb{R}^*_+.
+\end{align*}
+Logo, $f(x) = \displaystyle{ \frac{1}{\pi(1 + x^2)} }$ é densidade.
+\end{example}
+\end{remark}
 
+\begin{example}[Cauchy padrão, $X\sim\text{Cauchy}(0,1)$]
+Dizemos que $X$ é v.a. contínua com distribuição \textbf{Cauchy} de parâmetros 0 e 1 se tem densidade dada por
+\begin{align*}
+    f(x) = \frac{1}{\pi(1+x^2)}, \forall x\in\mathbb{R}.
+\end{align*}
+A f.d. $F$ associada a $f$ é dada por
+\begin{align*}
+    F(x) = \int_{-\infty}^x f(t) dt = \frac{1}{\pi}\arctan t\Big|_{-\infty}^{x} = \frac{1}{2} + \frac{1}{\pi}\arctan x, \forall x\in\mathbb{R}.
+\end{align*}
+Podemos considerar também $X\sim\text{Cauchy}(\mu, \beta)$, com $\mu$ real e $\beta$ real positivo, chamada \textbf{distribuição Cauchy} de parâmetros $\mu$ e $\beta$. Essa v.a. tem densidade dada por
+\begin{align*}
+    f(x) = \frac{\beta}{\pi(\beta^2 + (x-\mu)^2)}, \forall x\in\mathbb{R}.
+\end{align*}
+Verificamos que $f$ é densidade.
+\begin{proof}
+Note que $f(x) \geq 0, \forall x\in\mathbb{R}$ e que
+\begin{align*}
+    \int_{\mathbb{R}} f(x) dx = \frac{1}{\pi}\int_{-\infty}^{\infty} \frac{1}{\beta}\cdot\frac{ 1 }{ 1 + \left( \frac{x-\mu}{\beta} \right)^2 } dx = \frac{1}{\pi}\int_{-\infty}^{\infty} \frac{1}{1+y^2} dy = 1.
+\end{align*}
+\end{proof}
+\end{example}
 
 \subsection{Funções de variáveis aleatórias contínuas}
+Sendo $X$ v.a. contínua e $g$ função em $\mathbb{R}$, estamos interessados em determinar a densidade $f_Y$ de $Y = g(X)$.
 
-\subsection{Funções de distribuição inversas}
+\begin{example}
+Seja $Y = X^2$, i.e., $Y = g(X)$ com $g:\mathbb{R}\to\mathbb{R}$ tal que $g(x) = x^2$. Note que se $y\leq 0$, então $F_Y(y) = P(Y\leq y) = 0$ e, se $y>0$, então $F_Y(y) = P(Y\leq y) = P(X^2\leq y) = P(-\sqrt{y} \leq X\leq \sqrt{y}) = F_X(\sqrt{y}) - F_X(-\sqrt{y})$. Logo, segue que para $y>0$ temos
+\begin{align*}
+    f_Y(y) = F_X'(\sqrt{y})\frac{d}{dy}(\sqrt{y}) - F_X'(-\sqrt{y})\frac{d}{dy}(-\sqrt{y}) = \frac{1}{2\sqrt{y}}[f_X(\sqrt{y}) + f_X(-\sqrt{y})],
+\end{align*}
+ou seja, 
+\begin{align*}
+    f_Y(y) = \begin{cases}
+    \frac{1}{2\sqrt{y}}[f_X(\sqrt{y}) + f_X(-\sqrt{y})], y > 0 \\
+    0, y\leq 0
+    \end{cases}.
+\end{align*}
+Essa fórmula vale para todo $y$ onde $F_X'(\sqrt{y})$ existe.
+\end{example}
+
+\begin{remark}
+Se $X$ é v.a. contínua com densidade $f_X$ e $g$ é uma função discreta, i.e., com imagem finita ou enumerável, então $Y=g(X)$ é v.a. discreta.
+\end{remark}
+
+\begin{example}
+Se $X\sim\text{Exp}(1)$ e $Y = I_{X\leq 3}$, i.e.,
+\begin{align*}
+    Y = g(X) = \begin{cases}
+    1, X\leq 3 \\
+    0, X > 3
+    \end{cases},
+\end{align*}
+então os valores possíveis de $Y$ são 0 e 1. Temos $P(Y=1) = P(X\leq 3) = 1 - e^{-3}$, $P(Y=0) = P(X>3) = e^{-3}$ e $P(Y=y) = 0, \forall y\in\mathbb{R}\setminus\{0,1\}$. Logo,
+\begin{align*}
+    p_Y(y) = \begin{cases}
+    e^{-3}, y = 0 \\
+    1 - e^{-3}, y = 1 \\
+    0, \text{ c.c.}
+    \end{cases}
+\end{align*}
+é a f.p. de $Y$ (discreta!).
+\end{example}
+
+\begin{theorem}[Mudança de variável]
+Seja $X$ v.a. contínua com f.d. $f_X$ tal que $f_X(x) = 0$ para todo $x\in I$, sendo $I$ um aberto da reta. Suponha que $g:\mathbb{R}\to\mathbb{R}$ seja uma função estritamente monótona e derivável em $I$. Então $Y=g(X)$ tem densidade dada por
+\begin{align*}
+    f_Y(y) = \begin{cases}
+    f_x(g^{-1}(y))\left| \frac{d}{dy}g^{-1}(y) \right|, y\in g(I) \\
+    0, y\notin g(I)
+    \end{cases}.
+\end{align*}
+Podemos simplificar a notação tomando $x = g^{-1}(y)$.
+\end{theorem}
+
+\begin{proof}
+Note que $g$ é derivável e inversível em $I$. Suponhamos $g$ estritamente crescente em $I$. Então $g^{-1}$ é estritamente crescente em $g(I)$. Daí, dado $y\in g(I)$, temos
+\begin{align*}
+    F_Y(y) = P(Y\leq y) = P(g(X)\leq y) = P(X\leq g^{-1}(y)) = F_X(g^{-1}(y)).
+\end{align*}
+Logo,
+\begin{align*}
+    f_Y(y) = \frac{d}{dy}\left[ F_X(g^{-1}(y)) \right] = f_X(g^{-1}(y))\underbrace{\frac{d}{dy}(g^{-1}(y))}_{>0},
+\end{align*}
+ou seja, temos
+\begin{align*}
+    f_Y(y) = f_x(g^{-1}(y))\left| \frac{d}{dy}g^{-1}(y)\right|.
+\end{align*}
+Se $g$ é estritamente decrescente em $I$, então $g^{-1}$ também o é e, dado $y\in g(I)$, temos
+\begin{align*}
+    F_Y(y) = P(Y\leq y) = P(g(X)\leq y) = P(X\geq g^{-1}(y)) = 1 - F_X(g^{-1}(y)).
+\end{align*}
+Logo,
+\begin{align*}
+    f_Y(y) = \frac{d}{dy}\left[1 - F_X(g^{-1}(y)) \right] = f_X(g^{-1}(y))\underbrace{\frac{d}{dy}(-g^{-1}(y))}_{>0},
+\end{align*}
+ou seja, temos
+\begin{align*}
+    f_Y(y) = f_x(g^{-1}(y))\left| \frac{d}{dy}g^{-1}(y)\right|.
+\end{align*}
+\end{proof}
+
+\begin{example}
+Sejam $X\sim\text{Exp}(\lambda)$ e $Y = X^{1/\beta}, \beta\in\mathbb{R}^*$. Temos
+\begin{align*}
+    f_X(x) = \begin{cases}
+    \lambda e^{-\lambda x}, x > 0 \\
+    0, x\leq 0
+    \end{cases}.
+\end{align*}
+Ademais, $Y = g(X)$ com $g$ função da reta dada por $g(x) = x^{1/\beta}$. Note que $g$ é crescente e derivável em $(0, +\infty)$ e também
+\begin{align*}
+    y = x^{1/\beta} \iff x = y^{\beta} \implies \frac{dx}{dy} = \beta y^{\beta - 1}.
+\end{align*}
+Daí, se $y>0$, temos
+\begin{align*}
+    f_Y(y) = f_X(x)\left|\frac{dx}{dy}\right| = \lambda e^{-\lambda y^{\beta}}|\beta y^{\beta -1}|
+\end{align*}
+e, portanto,
+\begin{align*}
+    f_Y(y) = \begin{cases}
+    \lambda |\beta| y^{\beta - 1}e^{-\lambda y^{\beta}}, y> 0 \\
+    0, y\leq 0.
+    \end{cases}
+\end{align*}
+\end{example}
+
+\begin{example}
+Sejam $X$ v.a. contínua com densidade $f_X$ e $a,b\in\mathbb{R}$ com $b\neq 0$. Se $Y = a + bX$, então
+\begin{align*}
+    y = a + bx \iff x = \frac{y-a}{b} \implies \frac{dx}{dy} = \frac{1}{b},
+\end{align*}
+com $g$ função da reta dada por $g(x) = a + bx$ estritamente monótona em $\mathbb{R}$ (que é um aberto). Logo, dadao $y\in\mathbb{R}$, temos
+\begin{align*}
+    f_Y(y) = f_X\left( \frac{y-a}{b} \right)\left|\frac{1}{b}\right|.
+\end{align*}
+\end{example}
+
+\begin{proposition}
+Sejam $X$ v.a. contínua e $\mu, \sigma\in\mathbb{R}$ com $\sigma > 0$. Temos
+\begin{enumerate}[(i)]
+    \item se $Y = \displaystyle{ \frac{X-\mu}{\sigma} }$, então $X\sim N(\mu, \sigma^2) \iff Y\sim N(0,1)$
+    \item se $X\sim N(\mu, \sigma^2)$ e $Y = a + bX$ com $a,b\in\mathbb{R}$ e $b\neq 0$, então $Y\sim N(a+b\mu, b^2\sigma^2)$
+    \item se $X\sim N(0,1)$ e $Y=-X$, então $Y\sim N(0,1)$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}[(i)]
+    \item Note que $g:\mathbb{R}\to\mathbb{R}$ dada por $g(x) = \displaystyle{ \frac{x-\mu}{\sigma} }$ é estritamente crescente e derivável na reta. Daí, temos
+    \begin{align*}
+        x = \sigma y + \mu \implies \frac{dx}{dy} = \sigma.
+    \end{align*}
+    Logo, 
+    \begin{align*}
+        f_Y(y) = \frac{1}{\sqrt{2\pi}\sigma}e^{ -\frac{(y-\mu)^2}{2\sigma^2} }\sigma = \frac{1}{\sqrt{2\pi}}e^{-y^2/2}, y\in\mathbb{R},
+    \end{align*}
+    ou seja, $Y\sim N(0,1)$. Reciprocamente, se $Y\sim N(0,1)$ então
+    \begin{align*}
+        f_X(x) = f_Y(g(x))\left|\frac{dy}{dx}\right| = \frac{1}{\sqrt{2\pi}\sigma}\exp[-\frac{1}{2}(\frac{x-\mu}{\sigma})^2]
+    \end{align*}
+    ou seja, $X\sim N(\mu, \sigma^2)$.
+    \item Utilizando o exemplo anterior, temos
+    \begin{align*}
+        f_Y(y) = f_X(g^{-1}(y))\left|\frac{dx}{dy}\right| = \frac{1}{\sqrt{2\pi}\sigma}\exp[-\frac{1}{2}\frac{1}{\sigma^2}(\frac{y-a}{b} - \mu)^2]\left|\frac{1}{b}\right| = \frac{1}{\sqrt{2\pi}\sigma|b|} \exp[ -\frac{1}{2}\frac{ [ y - (a+b\mu) ]^2 }{ (\sigma b)^2 } ],
+    \end{align*}
+    ou seja, $Y\sim N(a + b\mu, b^2\sigma^2)$.
+    \item Note que $g:\mathbb{R}\to\mathbb{R}$ dada por $g(x) = -x$ é estritamente decrescente e derivável em $\mathbb{R}$. Ademais, temos $x = -y$ e $dx/dy = -1$, de modo que
+    \begin{align*}
+        f_Y(y) = f_X(g^{-1}(y)) \left|\frac{dx}{dy}\right| = \frac{1}{\sqrt{2\pi}}\exp[ -\frac{1}{2}(-y)^2 ]|-1| = \frac{1}{\sqrt{2\pi}} e^{-y^2/2},
+    \end{align*}
+    ou seja, $Y\sim N(0,1)$.
+\end{enumerate}
+\end{proof}
 
 \section{Vetores aleatórios contínuos}
+Começamos com as definições gerais, generalizando de maneira natural as definições vistas na seção anterior.
+\begin{definition}[Vetor aleatório]
+Sejam $X_1, X_2, \dots, X_n$ v.a.'s absolutamente contínuas, definidas em $(\Omega, \mathcal{A}, P)$. Chamamos $\overline{X} = (X_1, \dots, X_n)$ de \textbf{vetor aleatório contínuo} ($n$-dimensional).
+
+Dito de outro modo, $\overline{X}$ é vetor aleatório contínuo se sua função de distribuição $F_{X_1, \dots, X_n}$ é dada por
+\begin{align*}
+    F_{\overline{X}}(\overline{x}) = P(X_1\leq x_1, \dots, X_n\leq x_n) = \int_{-\infty}^{x_1}\cdots\int_{-\infty}^{x_n} f(u_1, \dots, u_n) du_n\cdots du_1, \forall \overline{x}\in\mathbb{R}^n,
+\end{align*}
+para alguma função $f:\mathbb{R}^n\to\mathbb{R}$ função de densidade $n$-dimensional, isto é, $f(\overline{x}) \geq 0 \forall\overline{x}\in\mathbb{R}$ e $\displaystyle{ \int_{\mathbb{R}} \cdots \int_{\mathbb{R}} f(x_1, \dots, x_n) dx_1\cdots dx_n = 1 }$. Nesse caso, dizemos que $f$ é \textbf{função de densidade} de $\overline{X}$ e denotamos $f:= f_{\overline{X}}$.
+\end{definition}
+
+\begin{definition}
+Seja $F_{X_1, \dots, X_n}$ a f.d. de $(X_1, \dots, X_n)$. Para cada $k\in\{1,\dots,n\}$, definimos a \textbf{função de distribuição marginal} de $X_k$ por
+\begin{align*}
+    F_{X_k}(x_k) = P(X_k\leq x_k) = \lim_{x_i\to +\infty, i\neq k} F_{X_1, \dots, X_n}(x_1, \dots, x_n), x_k\in\mathbb{R}.
+\end{align*}
+Podemos definir a f.d. marginal de pares, triplas e $r$-uplas de maneira inteiramente análoga.
+\end{definition}
+
+
+
 
 \subsection{Definições gerais}
 
