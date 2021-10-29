@@ -276,7 +276,7 @@ Além de tempo de falha, variáveis exponenciais são úteis para estudar o temp
 \end{remark}
 
 \begin{example}[Normal/gaussiana]
-Dizemos que $X$ é v.a. com distribuição normal \textbf{padrão} se tem densidade dada por
+Dizemos que $X$ é v.a. com distribuição normal \textbf{padrão}, $X\sim N(0,1)$, se tem densidade dada por
 \begin{align*}
     f(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}, x\in\mathbb{R}.
 \end{align*}
@@ -285,8 +285,32 @@ Vamos mostrar que $f$ de fato é densidade. Primeiro, $f(x) > 0, \forall x\in\ma
 \begin{align*}
     \int_{1}^{\infty} e^{-x^2/2} dx \leq \int_{1}^{\infty} e^{-x/2} dx = \lim_{a\to +\infty} \int_{1}^{a} e^{-x/2} dx = \lim_{a\to +\infty} -2e^{-x/2}\Big|_{1}^a = 2e^{-1/2}\in\mathbb{R},
 \end{align*}
-logo
+logo $\displaystyle{ \int_{1}^{\infty} e^{-x^2/2} dx \in\mathbb{R}}$. Como $g$ é par, temos $\displaystyle{ \int_{1}^{\infty} e^{-x^2/2} dx = \int_{-\infty}^{-1} e^{-x^2/2} dx \in\mathbb{R}}$ e, como $g$ é contínua em $\mathbb{R}$, temos também $\displaystyle{ \int_{-1}^{1} e^{-x^2/2} dx \in\mathbb{R}}$. Logo, $\displaystyle{ \int_{-\infty}^{\infty} e^{-x^2/2} dx \in\mathbb{R}}$, digamos $c$. Segue então que
+\begin{align*}
+    c^2 = \int_{-\infty}^{\infty} e^{-x^2/2} dx\int_{-\infty}^{\infty} e^{-y^2/2} dy = \iint_{\mathbb{R}^2} e^{-\frac{x^2+y^2}{2}} dxdy = \int_{0}^{\infty}\int_{0}^{2\pi} re^{-r^2/2} drd\theta = 2\pi \int_{0}^{\infty} re^{-r^2/2} dr = 2\pi,
+\end{align*}
+ou seja, $c = \sqrt{2\pi}$, pois $c>0$. Logo, $\displaystyle{ \int_{\mathbb{R}} f(x) dx = \frac{1}{\sqrt{2\pi}} \int_{\mathbb{R}} g(x) dx = 1.}$ Note que $f$ é simétrica em torno de 0 e, além disso, a f.d. $F$ associada a $f$ é dada por
+\begin{align*}
+    F(x) = \int_{-\infty}^x \frac{1}{\sqrt{2\pi}} e^{-t^2/2} dt, x\in\mathbb{R}.
+\end{align*}
+Verifica-se que $F$ não tem uma forma fechada, mas podemos aproximar seus valores numericamente. Como mencionado antes, temos $F(0) = 1/2 = 1 - F(0)$ e $F(x) = 1 - F(x), \forall x\in\mathbb{R}$. É comum também denotar $f$ por $\varphi$ e $F$ por $\Phi$ no caso da densidade e da f.d. de uma v.a. normal padrão, respectivamente.
 \end{proof}
+\begin{remark}
+Tabelas de valores para a distribuição normal geralmente fornecem as probabilidades do tipo $P(0 < X < a)$. De fato, basta apenas esta probabilidade, pois $P(X\leq a) = 1/2 + P(0 < X < a), a>0$ e analogamente para os demais casos.
+\end{remark}
+De maneira geral, dizemos que $X$ é v.a. contínua com distribuição \textbf{normal de parâmetros} $\mu$ \textbf{e} $\sigma^2$, $X\sim N(\mu, \sigma^2)$ (veremos o que esses parâmetros significam mais à frente), se tem densidade dada por
+\begin{align*}
+    f(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}, x\in\mathbb{R},
+\end{align*}
+com $\mu,\sigma\in\mathbb{R}$ e $\sigma>0$. A verificação de que $f$ de fato é densidade é análoga ao que fizemos acima, bastando apenas efetuar a mudança de variável $y = \displaystyle{\frac{x-\mu}{\sigma}}$. Note também que $f$ é simétrica em torno de $\mu$.
+\begin{center}
+    \textbf{GRÁFICO P.110}
+\end{center}
+As variáveis aleatórios com distribuição normal ocorrem frequentemente em aplicações práticas. A Lei de Maxwell da Física afirma que, sob condições adequadas, as componentes da velocidade de uma molécula de gás estarão aleatoriamente distribuídas seguindo uma distribuição normal $N(0,\sigma^2)$, onde $\sigma^2$ depende de certas quantidades físicas. Entretanto, na maioria das aplicações, as v.a.'s de interesse têm distribuições que é \textbf{aproximadamente} normal. Por exemplo, erros instrumentais em experimentos físicos e variabilidade biológica (e.g., altura e massa) foram verificados, empiricamente, como possuindo distribuições aproximadamente normais. Veremos esse tipo de comportamente mais adiante.
+\end{example}
+
+\begin{example}[Gama, $X\sim\Gamma(\alpha, \lambda)$]
+Dizemos que
 \end{example}
 
 
