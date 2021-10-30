@@ -544,6 +544,8 @@ Sejam $X$ v.a. contínua e $\mu, \sigma\in\mathbb{R}$ com $\sigma > 0$. Temos
 
 \section{Vetores aleatórios contínuos}
 Começamos com as definições gerais, generalizando de maneira natural as definições vistas na seção anterior.
+
+\subsection{Definições gerais}
 \begin{definition}[Vetor aleatório]
 Sejam $X_1, X_2, \dots, X_n$ v.a.'s absolutamente contínuas, definidas em $(\Omega, \mathcal{A}, P)$. Chamamos $\overline{X} = (X_1, \dots, X_n)$ de \textbf{vetor aleatório contínuo} ($n$-dimensional).
 
@@ -562,12 +564,118 @@ Seja $F_{X_1, \dots, X_n}$ a f.d. de $(X_1, \dots, X_n)$. Para cada $k\in\{1,\do
 Podemos definir a f.d. marginal de pares, triplas e $r$-uplas de maneira inteiramente análoga.
 \end{definition}
 
-
-
-
-\subsection{Definições gerais}
-
 \subsection{Distribuições marginais e independência}
+\paragraph{Caso bidimensional.} Seja $(X,Y)$ um vetor aleatório contínuo com densidade conjunta $f = f_{X,Y}$ e f.d. conjunta $F = F_{X,Y}$. Temos
+\begin{align*}
+    F(x,y) = P(X\leq x, Y\leq y) = \int_{-\infty}^x\int_{-\infty}^y f(u,v) dvdu, \forall (x,y)\in\mathbb{R}^2
+\end{align*}
+e também
+\begin{align*}
+    P(a < X\leq b, c < Y\leq d) = \int_{a}^{b}\int_{c}^{d} f(x,y) dydx.
+\end{align*}
+De maneira geral, 
+\begin{align*}
+    P((X,Y)\in A) = \iint_A f(x,y) dxdy, \forall A\in\mathcal{B}^2(\mathbb{R}).
+\end{align*}
+Podemos, ainda, obter as densidades marginais de $X$ e $Y$. Note que
+\begin{align*}
+    F_X(x) = P(X\leq x) = P(X\leq x, Y\in\mathbb{R}) = \int_{-\infty}^{x}\int_{-\infty}^{\infty} f(u,y) dydu.
+\end{align*}
+Por outro lado, sabemos que
+\begin{align*}
+    F_X(x) = \int_{-\infty}^{x} f_X(u) du.
+\end{align*}
+Logo, como ambas as igualdades valem para todo $x\in\mathbb{R}$, devemos ter
+\begin{align*}
+    f_X(x) = \int_{-\infty}^{\infty} f_{X,Y}(x,y) dy, \forall x\in\mathbb{R}.
+\end{align*}
+De maneira análoga, temos
+\begin{align*}
+    F_Y(y) = \int_{-\infty}^{y}\int_{-\infty}^{\infty} f(x,v) dxdv
+\end{align*}
+e
+\begin{align*}
+    f_Y(y) = \int_{-\infty}^{\infty} f_{X,Y}(x,y) dx, \forall y\in\mathbb{R}.
+\end{align*}
+Sob algumas fracas condições de regularidades e para $(x,y)$ ponto de continuidade de $f$, temos
+\begin{align*}
+    \frac{\partial}{\partial y}F(x,y) = \int_{-\infty}^x \left( \frac{\partial}{\partial y} \int_{-\infty}^y f(u,v) dv \right) du = \int_{-\infty}^x f(u,y) du,
+\end{align*}
+de modo que
+\begin{align*}
+    \frac{\partial^2}{\partial x\partial y}F(x,y) = f(x,y)
+\end{align*}
+e também, de maneira análoga,
+\begin{align*}
+    \frac{\partial^2}{\partial y\partial x}F(x,y) = f(x,y).
+\end{align*}
+
+\begin{example}
+Sejam $X, Y$ v.a.'s contínuas com f.d. conjunta $F$ dada por
+\begin{align*}
+    F(x,y) = \begin{cases}
+    0, x<0 \text{ e } y<0 \\
+    \frac{x}{5}(1 - e^{-y}), 0\leq x\leq 5 \text{ e } y\geq 0 \\
+    1 - e^{-y}, x\geq 5 \text{ e } y\geq 0
+    \end{cases}.
+\end{align*}
+Note que
+\begin{align*}
+    F_X(x) = \lim_{y\to\infty} F(x,y) = \begin{cases}
+    0, x < 0 \\
+    x/5, 0\leq x < 5 \\
+    1, x\geq 5
+    \end{cases}
+\end{align*}
+e também
+\begin{align*}
+    F_Y(y) = \lim_{x\to\infty} F(x,y) = \begin{cases}
+    0, y < 0 \\
+    1 - e^{-y}, y\geq 0
+    \end{cases}.
+\end{align*}
+Ademais, para todo $(x,y)\in\mathbb{R}^2$ com $x\notin\{0,5\}$ e $y\neq 0$, temos
+\begin{align*}
+    \frac{\partial}{\partial y}F(x,y) = \begin{cases}
+    0, x < 0 \text{ e } y < 0 \\
+    \frac{x}{5}e^{-y}, 0 < x < 5 \text{ e } y > 0 \\
+    e^{-y}, x > 5 \text{ e } y>0
+    \end{cases}
+\end{align*}
+e também
+\begin{align*}
+    \frac{\partial^2}{\partial x\partial y}F(x,y) = \begin{cases}
+    0, x < 0 \text{ e } y < 0 \\
+    \frac{e^{-y}}{5}, 0 < x < 5 \text{ e } y > 0 \\
+    0, x > 5 \text{ e } y>0
+    \end{cases}.
+\end{align*}
+Portanto, 
+\begin{align*}
+    f_{X,Y}(x,y) = \begin{cases}
+    e^{-y}/5, 0 < x < 5 \text{ e } y > 0 \\
+    0, \text{ c.c.}
+    \end{cases}
+\end{align*}
+e obtemos
+\begin{align*}
+    f_X(x) &= \frac{d}{dx}F_X(x) = \begin{cases}
+    1/5, 0 < x < 5 \\
+    0, \text{ c.c.}
+    \end{cases} \\
+    f_Y(y) &= \frac{d}{dy}F_Y(y) = \begin{cases}
+    e^{-y}, y > 0 \\
+    0, \text{ c.c.}
+    \end{cases},
+\end{align*}
+ou seja, $X\sim U(0,5)$ e $Y\sim\text{Exp}(1)$.
+\end{example}
+
+\begin{example}
+a
+\end{example}
+
+
 
 \subsection{Função de distribuição $n$-dimensional}
 
