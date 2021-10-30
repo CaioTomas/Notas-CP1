@@ -672,12 +672,181 @@ ou seja, $X\sim U(0,5)$ e $Y\sim\text{Exp}(1)$.
 \end{example}
 
 \begin{example}
-a
+Seja $D = \{ (x,y)\in\mathbb{R}^2 : x^2+y^2\leq R^2 \}$ e considere o experimento de escolher um ponto em $D$. Defina $X$ e $Y$ como as coordenadas do ponto escolhido. Supondo uniformidade, temos que a densidade conjunta de $X$ e $Y$ é dada por
+\begin{align*}
+    f(x,y) = \begin{cases}
+    \frac{1}{\pi R^2}, (x,y)\in D \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+De fato, note que dado $A\subset D$ temos
+\begin{align*}
+    P((X,Y)\in A) = \iint_A f(x,y) dxdy.
+\end{align*}
+Da hipótese de uniformidade, temos
+\begin{align*}
+    P((X,Y)\in A) = \frac{ \iint_A dxdy }{ \pi R^2 } = \iint_A \frac{1}{\pi R^2} dxdy,
+\end{align*}
+de modo que $f$ tem a forma acima. Para as densidades marginais, temos que dado $-R < x < R$,
+\begin{align*}
+    f_X(x) = \int_{\mathbb{R}} f(x,y)dy = \int_{-\sqrt{R^2-x^2}}^{\sqrt{R^2-x^2}} \frac{1}{\pi R^2} dy = 2\frac{\sqrt{R^2 - x^2}}{\pi R^2}.
+\end{align*}
+Logo,
+\begin{align*}
+    f_X(x) = \begin{cases}
+    2\frac{\sqrt{R^2 - x^2}}{\pi R^2}, -R < x < R \\
+    0, \text{ c.c.}
+    \end{cases}
+\end{align*}
+e, de maneira análoga,
+\begin{align*}
+    f_Y(y) = \begin{cases}
+    2\frac{\sqrt{R^2 - y^2}}{\pi R^2}, -R < y < R \\
+    0, \text{ c.c.}
+    \end{cases}
+\end{align*}
+\begin{center}
+    \textbf{GRÁFICO P.121}
+\end{center}
 \end{example}
 
+Queremos agora discutir sobre a independência de duas v.a.'s contínuas. Recorde que duas v.a.'s $X$ e $Y$ são ditas independentes se estão definidas no mesmo espaço $(\Omega, \mathcal, P)$ e, dados quaisquer $A_1, A_2\in\mathcal{B}(\Omega)$, vale $P(X\in A_1, Y\in A_2) = P(X\in A_1)P(Y\in A_2)$. Vimos anteriormente que $X$ e $Y$ são v.a.'s independentes se, e só se, $F(x,y) = F_X(x)F_Y(y), \forall (x,y)\in\mathbb{R}^2$. Um resultado análogo vale para a densidade.
+\begin{proposition}
+Duas v.a.'s contínuas $X$ e $Y$ definidas em $(\Omega, \mathcal{A}, P)$ são independentes se, e só se, $f_{X,Y}(x,y) = f_X(x)f_Y(y), \forall (x,y)\in\mathbb{R}^2$.
+\end{proposition}
+\begin{proof}
+Dado $(x,y)\in\mathbb{R}^2$, temos $X$ e $Y$ independentes se, e só se,
+\begin{align*}
+    \int_{-\infty}^{x}\int_{-\infty}^{y} f_{X,Y}(u,v) dvdu &= F_{X,Y}(x,y) \\
+    &= F_X(x)F_Y(y) \\
+    &= \left( \int_{-\infty}^{x} f_X(u) du \right)\left( \int_{-\infty}^{y} f_Y(v) dv \right) \\
+    &= \int_{-\infty}^{x}\int_{-\infty}^{y} f_X(u)f_Y(v) dvdu.
+\end{align*}
+Como $(x,y)$ é um ponto arbitrário do plano, devemos ter
+\begin{align*}
+    f_{X,Y}(x,y) = f_X(x)f_Y(y), \forall (x,y)\in\mathbb{R}^2.
+\end{align*}
+\end{proof}
 
+\begin{example}
+No dois exemplos anteriores temos $X$ e $Y$ independentes no primeiro mas não no segundo.
+\end{example}
+
+\begin{example}[Construção de densidade conjunta]
+Suponha $X$ e $Y$ v.a.'s i.i.d. com $X\sim N(0,1)$. Então temos
+\begin{align*}
+    f(x,y) = f_X(x)f_Y(y) = \frac{1}{2\pi}\exp[-\frac{x^2+y^2}{2}], \forall (x,y)\in\mathbb{R}^2.
+\end{align*}
+Pode-se verificar, de maneira análoga à densidade da distribuição normal, que esta $f$ define uma densidade; ela é chamada \textbf{densidade normal bidimensional padrão}.
+\end{example}
+
+\begin{example}
+Sejam $X$ e $Y$ v.a.'s com densidade conjunta dada por $f(x,y) = \displaystyle{c\exp[-\frac{x^2 - xy + y^2}{2}], \forall (x,y)\in\mathbb{R}^2}$, com $c$ real positivo tal que $\displaystyle{ \iint_{\mathbb{R}^2} f(x,y)dxdy = 1 }$. Note que esta última integral é complicada de calcular diretamente. Portanto, tomamos uma rota alternativa para encontrar $c$. Note que
+\begin{align*}
+    f(x,y) = c\exp[ -\frac{1}{2}\left( \left(y - \frac{x}{2}\right)^2 + \frac{3}{4}x^2 \right) ].
+\end{align*}
+Daí, segue que
+\begin{align*}
+    f_X(x) = \int_{\mathbb{R}} f(x,y)dy = ce^{-3x^2/8}\int_{\mathbb{R}} \exp[ -\frac{1}{2}\left( y - \frac{x}{2} \right)^2 ]dy = ce^{-3x^2/8}\int_{\mathbb{R}} e^{-u^2/2} du = c\sqrt{2\pi}e^{-3x^2/8}, \forall x\in\mathbb{R}.
+\end{align*}
+Ora, mas $c$ deve ser tal que $\displaystyle{ \int_{\mathbb{R}} f_X(x) dx = 1 }$, logo
+\begin{align*}
+    c\sqrt{2\pi}\int_{\mathbb{R}} e^{-3x^2/8} dx = 1 \implies c\sqrt{2\pi}\frac{2}{\sqrt{3}}\int_{\mathbb{R}} e^{-u^2/2} du = 1 \implies c = \frac{\sqrt{3}}{4\pi}.
+\end{align*}
+Logo,
+\begin{align*}
+    f(x,y) = \displaystyle{\frac{\sqrt{3}}{4\pi}\exp[-\frac{x^2 - xy + y^2}{2}], \forall (x,y)\in\mathbb{R}^2}   
+\end{align*}
+e $X\sim N(0, 4/3)$. De maneira análoga, $Y\sim N(0, 4/3)$ e observamos que $X$ e $Y$ não são independentes, pois
+\begin{align*}
+    \frac{3}{8\pi} = f_X(0)f_Y(0) \neq f(0,0) = \frac{\sqrt{3}}{4\pi}.
+\end{align*}
+\end{example}
+
+\paragraph{Caso $n$-dimensional.} Considere $(X_1, \dots, X_n)$ um vetor aleatório contínuo com densidade $f = f_{X_1, \dots, X_n}$ e f.d. $F = F_{X_1, \dots, X_n}$. As distribuições marginais são dadas por
+\begin{align*}
+    f_{X_k}(x_k) = \int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty} f(x_1, \dots, x_n) dx_1\cdots dx_{k-1}dx_{k+1}\cdots dx_n
+\end{align*}
+e analogamente para os demais casos. Ademais,
+\begin{align*}
+    F_{X_k}(x_k) = \int_{-\infty}^{x_k} f_{X_k}(u) du = \int_{-\infty}^{x_k}\int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty} f(x_1, \dots, x_{k-1}, u, x_{k+1}, \dots, x_n) dx_1\cdots dx_{k-1}dx_{k+1}\cdots dx_ndu
+\end{align*}
+e analogamente para os demais casos. De maneira geral, se $A\in\mathcal{B}^n(\mathbb{R})$ então
+\begin{align*}
+    P((X_1, \dots, X_n)\in A) = \int \cdots \int_A f(x_1, \dots, x_n) dx_1\cdots dx_n.
+\end{align*}
+Novamente sob algumas condições fracas de regularidade, podemos escrever
+\begin{align*}
+    f(x_1, \dots, x_n) = \frac{\partial^n}{\partial x_1\cdots\partial x_n}F(x_1, \dots, x_n), \forall (x_1, \dots, x_n)\in\mathbb{R}^n \text{ tal que } f \text{ é contínua.}
+\end{align*}
+Naturalmente, $X_1, \dots, X_n$ são independentes se, e só se, $F(x_1, \dots, x_n) = F_{X_1}(x_1)\cdots F_{X_n}(x_n), \forall (x_1, \dots, x_n)\in\mathbb{R}^n$ ou, equivalentemente, se, e só se, $f(x_1, \dots, x_n) = f_{X_1}(x_1)\cdots f_{X_n}(x_n), \forall (x_1, \dots, x_n)\in\mathbb{R}^n$.
 
 \subsection{Função de distribuição $n$-dimensional}
+Dada $F:\mathbb{R}^n\to\mathbb{R}$ uma função, estamos interessados em saber as condições que $F$ deve satisfazer para ser função de distribuição em $\mathbb{R}^n$. Pensando na f.d. unidimensional, as três condições a seguir são naturais de serem exigidas.
+\begin{itemize}
+    \item[(F1)] $F(x_1, \dots, x_n)$ é não decrescente em cada variável, ou seja, se $x<y$ então
+    \begin{align*}
+        F(x_1, \dots, x_{k-1}, x, x_{k+1}, \dots, x_n) \leq F(x_1, \dots, x_{k-1}, y, x_{k+1}, \dots, x_n), \forall k\in\{1,\dots, n\}.
+    \end{align*}
+    \item[(F2)] $F(x_1, \dots, x_n)$ é contínua à direita em cada variável, ou seja, se $y_m\xrightarrow{m\to\infty} x_k$ então
+    \begin{align*}
+        F(x_1, \dots, x_{k-1}, y_m, x_{k+1}, \dots, x_n) \xrightarrow{m\to\infty} F(x_1, \dots, x_{k-1}, x_k, x_{k+1}, \dots, x_n), \forall k\in\{1, \dots, n\}.
+    \end{align*}
+    \item[(F3)] Vale
+    \begin{align*}
+        \lim_{x_i\to -\infty} F(x_1, \dots, x_i, \dots, x_n) := F(x_1, \dots, -\infty, \dots, x_n) = 0, \forall i = 1,2, \dots, n
+    \end{align*}
+    e também
+    \begin{align*}
+        \lim_{x_1\to \infty}\cdots\lim_{x_n\to \infty} F(x_1, \dots, x_n) := F(+\infty, \dots, +\infty) = 1.
+    \end{align*}
+\end{itemize}
+No entanto, apenas essas três condições não são suficientes. De fato, tome $F:\mathbb{R}^2\to\mathbb{R}$ tal que
+\begin{align*}
+    F(x,y) = \begin{cases}
+    1, x\geq 0, y\geq 0 \text{ e } x+y\geq 1 \\
+    0, \text{ c.c.}
+    \end{cases}.
+\end{align*}
+Note que $F$ satisfaz as três condições acima, mas supondo que $F$ fosse f.d. de $(X,Y)$ então teríamos
+\begin{align*}
+    0\leq P(0 < X\leq 1, 0 < Y\leq 1) &= P(X\leq 1, 0 < Y\leq 1) - P(X\leq 0, 0 < Y\leq 1) \\
+    &= F(1,1) - F(1,0) - F(0,1) + F(0,0) \\
+    &= 1 - 1 - 1 + 0 \\
+    &= -1,
+\end{align*}
+absurdo. Assim, queremos que dados $a_1 < b_1$ e $a_2 < b_2$ reais, $F$ seja tal que
+\begin{align*}
+    0\leq P(a_1 < X\leq b_1, a_2 < Y\leq b_2) = F(b_1, b_2) - F(b_1, a_2) - [F(a_1, b_2) - F(a_1, a_2)].
+\end{align*}
+De maneira geral, temos a condição
+\begin{itemize}
+    \item[(F4)] Se $I_k = (a_k, b_k], k = 1,2,\dots,n$ e $\Delta_{k, I_k}F(x_1, \dots, x_n)$ for definido como
+    \begin{align*}
+        F(x_1, \dots, x_{k-1}, b_k, x_{k+1}, \dots, x_n) - F(x_1, \dots, x_{k-1}, a_k, x_{k+1}, \dots, x_n),
+    \end{align*}
+    então
+    \begin{align*}
+        \Delta_{1, I_1}\cdots\Delta_{n,I_n}F(x_1, \dots, x_n) \geq 0, \forall I_k = (a_k,b_k], k = 1,\dots,n.
+    \end{align*}
+\end{itemize}
+Com isso, definimos
+\begin{definition}
+Uma função $F:\mathbb{R}^n\to\mathbb{R}$ que satisfaz (F1), (F2), (F3) e (F4) é chamada \textbf{função de distribuição} $n$-dimensional.
+\end{definition}
+
+\begin{proposition}
+Dado um vetor aleatório $(X_1, \dots, X_n)$, a função $F:\mathbb{R}^n\to\mathbb{R}$ dada por
+\begin{align*}
+    F_{X_1, \dots, X_n}(x_1, \dots, x_n) = P(X_1\leq x_1, \dots, X_n\leq x_n), \forall (x_1, \dots, x_n)\in\mathbb{R}^n
+\end{align*}
+define uma f.d. em $\mathbb{R}^n$.
+\end{proposition}
+
+\begin{proof}
+a
+\end{proof}
+
 
 \subsection{Funções de vetores aleatórios}
 
