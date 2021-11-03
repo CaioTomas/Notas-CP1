@@ -6,14 +6,381 @@
 \section{Função Geradora de Momentos, Lei dos Grandes Números e o Teorema do Limite Central}
 
 \subsection{Função Geradora de Momentos}
+\begin{definition}
+Seja $X$ uma v.a. definida em $(\Omega, \mathcal{A}, P)$. A \textbf{função geradora de momentos} de $X$, $M_X:\mathbb{R}\to\mathbb{R}$, é dada por
+\begin{align*}
+    M_X(t) = E[e^{tX}],
+\end{align*}
+para todo $t\in\mathbb{R}$ tal que $e^{tX}$ tem esperança finita. Note que se $X$ é discreta, então
+\begin{align*}
+    M_X(t) = \sum_x e^{tx}p_X(x)
+\end{align*}
+e, se $X$ é contínua, então
+\begin{align*}
+    M_X(t) = \int_{\mathbb{R}} e^{tx}f_X(x) dx.
+\end{align*}
+\end{definition}
+
+\begin{example}
+Seja $X\sim B(n,p)$. Temos
+\begin{align*}
+    \sum_{k=0}^{n} e^{tk}\binom{n}{k}p^k(1-p)^{n-k} &= \sum_{k=0}^{n} \binom{n}{k}(pe^t)^k(1-p)^{n-k} \\
+    &= [ pe^t + 1 - p ]^n\in\mathbb{R}, \forall t\in\mathbb{R} \therefore M_X(t) = [ pe^t + 1 - p ]^n, t\in\mathbb{R}.
+\end{align*}
+\end{example}
+
+\begin{example}
+Seja $X\sim\Gamma(\alpha, \lambda)$. Temos
+\begin{align*}
+    \int_{\mathbb{R}} e^{tx}f_X(x) dx &= \int_{0}^{\infty} e^{tx}\frac{\lambda^{\alpha}}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\lambda x} dx \\
+    &= \frac{\lambda^{\alpha}}{\Gamma(\alpha)} \underbrace{\int_{0}^{\infty} x^{\alpha - 1}e^{-(\lambda - t)x} dx}_{\frac{\Gamma(\alpha)}{(\lambda - t)^{\alpha}}, \text{ se } t<\lambda} \\
+    &= \left( \frac{\lambda}{\lambda - t} \right)^{\alpha}, t < \lambda \therefore M_X(t) = \left( \frac{\lambda}{\lambda - t} \right)^{\alpha}, t < \lambda.
+\end{align*}
+\end{example}
+
+\begin{example}
+Seja $X\sim N(\mu, \sigma^2)$. Temos
+\begin{align*}
+    \int_{\mathbb{R}} e^{tx} f_X(x) dx &= \int_{\mathbb{R}} e^{tx}\frac{1}{\sigma\sqrt{2\pi}}\exp[ -\frac{(x-\mu)^2}{2\sigma^2} ] dx \\
+    &= \int_{\mathbb{R}} e^{t(y+\mu)}\frac{1}{\sigma\sqrt{2\pi}}e^{-y^2/2\sigma^2} dy \\
+    &= e^{\mu t}\int_{\mathbb{R}} \frac{1}{\sigma\sqrt{2\pi}} e^{ty - y^2/2\sigma^2} dy \\
+    &= e^{\mu t}e^{\sigma^2t^2/2}\int_{\mathbb{R}} \frac{1}{\sigma\sqrt{2\pi}}\exp[ -\frac{(y-\sigma^2t)^2}{2\sigma^2} ] dy \\
+    &= e^{\mu t}e^{\sigma^2 t^2/2}, t\in\mathbb{R} \therefore M_X(t) = e^{\mu t}e^{\sigma^2 t^2/2}, t\in\mathbb{R}.
+\end{align*}
+\end{example}
+
+O nome da f.g.m. vem do fato de que $E[X^n] = M_X(0)^{(n)}$. De fato, pode-se mostrar que para $t\in(-t_0, t_0)$ tal que $M_X(t)$ está definida, temos
+\begin{align*}
+    M_X(t) = E[e^{tX}] = E\left[ \sum_{n=0}^{\infty} \frac{t^n X^n}{n!} \right] = \sum_{n=0}^{\infty} E\left[ \frac{t^nX^n}{n!} \right] = \sum_{n=0}^{\infty} E[X^n]\frac{t^n}{n!}.
+\end{align*}
+Em particular, se $M_X$ está definida para todo $t$, então as igualdades acima valem para todo $t$. Note que a expansão em série de Taylor de $M_X$ é
+\begin{align*}
+    \sum_{n=0}^{\infty} \frac{t^n}{n!}\frac{d^n}{dt^n}M_X(t)\Big|_{t=0}. 
+\end{align*}
+Comparando os coeficientes, temos o resultado afirmado.
+
+\begin{remark}
+Note que se $X$ e $Y$ são v.a.'s independentes, então $e^{tX}$ e $e^{tY}$ também o são e, daí,
+\begin{align*}
+    M_{X+Y}(t) = E[e^{t(X+Y)}] = E[e^{tX}e^{tY}] = E[e^{tX}]E[e^{tY}] = M_X(t)M_Y(t).
+\end{align*}
+Segue daí, por indução, que se $X_1, \dots, X_n$ são i.i.d. então
+\begin{align*}
+    M_{X_1 + \cdots + X_n}(t) = M_{X_1}(t)^n.
+\end{align*}
+\end{remark}
+
+\begin{example}
+Para $X\sim B(n,p)$, temos $M_X(t) = (pe^t + 1 - p)^n, \forall t\in\mathbb{R}$. Daí,
+\begin{align*}
+    M_X(t)' = n(pe^t + 1 - p)^{n-1}pe^t \implies M_X(0)' = EX = np
+\end{align*}
+e também
+\begin{align*}
+    M_X(t)'' = n(n-1)(pe^t + 1- p)^{n-2}p^2e^{2t} + n(pe^t + 1- p)^{n-1}pe^t \implies M_X(0)'' = E[X^2] = n(n-1)p^2 + np,
+\end{align*}
+de modo que $\Var(X) = E[X^2] - EX^2 = np(1-p)$.
+\end{example}
+
+\begin{example}
+Se $X\sim N(0, \sigma^2)$, vimos que
+\begin{align*}
+    M_X(t) = e^{\sigma^2t^2/2} = \sum_{n=0}^{\infty} \left( \frac{\sigma^2 t^2}{2} \right)^n\frac{1}{n!} = \sum_{n=0}^{\infty} \frac{\sigma^{2n}}{2^n n!}t^{2n}.
+\end{align*}
+Daí, os momentos de ordem ímpar de $X$ são nulos e os de ordem par são tais que
+\begin{align*}
+    \frac{E[X^{2n}]}{(2n)!} = \frac{\sigma^{2n}}{2^n n!} \iff E[X^{2n}] = \frac{\sigma^{2n}(2n)!}{2^n n!}.
+\end{align*}
+\end{example}
 
 \subsection{Desigualdades de Chebyshev-Markov e Lei dos Grandes Números}
 
-\subsubsection{Desigualdades de Chebyshev-Markov}
+\subsubsection{Desigualdades de Chebyshev e Markov}
+\begin{proposition}[Desigualdade de Chebyshev]
+Seja $X$ v.a. tal que $E[X^2] < \infty$. Dado $\varepsilon > 0$, considere $\mu = EX$. Então
+\begin{align*}
+    P(|X - \mu|\geq\varepsilon) \leq \frac{\Var(X)}{\varepsilon^2}.
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+Dado $\varepsilon > 0$, considere a v.a. discreta
+\begin{align*}
+    Y = \begin{cases}
+    \varepsilon^2, (X-\mu)^2\geq\varepsilon^2 \\
+    0, (X-\mu)^2 < \varepsilon^2
+    \end{cases}.
+\end{align*}
+Note que $P(Y=0) = P((X-\mu)^2 < \varepsilon^2)$ e $P(Y=\varepsilon^2) = P((X-\mu)^2 \geq \varepsilon^2)$. Daí, $EY = \varepsilon^2 P((X-\mu)^2 \geq \varepsilon^2)$, ou seja, $P((X-\mu)^2 \geq \varepsilon^2) = EY/\varepsilon^2$. Ademais, $(X-\mu)^2\geq Y$, pois $Y = 0 \leq (X-\mu)^2$ ou $Y = \varepsilon^2\leq(X-\mu)^2$. Da monotonicidade da esperança, temos $E[(X-\mu)^2]\geq EY$, de modo que
+\begin{align*}
+    P(|X-\mu| \geq \varepsilon) = P((X-\mu)^2 \geq \varepsilon^2) \leq \frac{E[(X-\mu)^2]}{\varepsilon^2} = \frac{\Var(X)}{\varepsilon^2}.
+\end{align*}
+\end{proof}
+
+\begin{remark}
+Considere $X$ v.a. não negativa com $EX < \infty$ e seja
+\begin{align*}
+    Y = \begin{cases}
+    \varepsilon, X\geq\varepsilon \\
+    0, X < \varepsilon
+    \end{cases},
+\end{align*}
+para $\varepsilon > 0$ dado. Raciocinando como acima, temos $EX\geq EY = \varepsilon P(X\geq\varepsilon)$, isto é, $P(X\geq\varepsilon) \leq EX/\varepsilon$, chamada \textbf{desigualdade básica de Chebyshev}. A desigualdade de Chebyshev nos dá uma cota superior, em termos de $\Var(X)$ e $t$, para a probabilidade de que $X$ desvie de sua média em mais de $t$ unidades. Sua força está na sua grande generalidade: nenhuma hipótese é feita acerca da distribuição de $X$ além de que tenha variância finita. Essa desigualdade é o ponto inicial de vários desenvolvimentos teóricos. Para a maioria das distribuições que surgem na prática, há limites muito mais precisos para $P(|X-\mu|\geq t)$ do que a cota fornecida pela desigualdade de Chebyshev; entretanto, exemplos mostram que, em geral, a cota dada pela desigualdade não pode ser melhorada.
+\end{remark}
+
+\begin{proposition}[Desigualdade de Markov]
+Seja $X$ v.a. qualquer com variância finita. Dados $\varepsilon, k > 0$ quaisquer, temos
+\begin{align*}
+    P(|X|\geq\varepsilon) \leq \frac{E[|X|^k]}{\varepsilon^k}.
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+Pela desigualdade básica de Chebyshev, 
+\begin{align*}
+    P(|X|\geq\varepsilon) = P(|X|^k\geq \varepsilon^k) \leq\frac{E[|X|^k]}{\varepsilon^k}.
+\end{align*}
+\end{proof}
+
+\begin{example}
+Uma fábrica produz, em média, 50 peças por semana. Considere $X$ a v.a. que denota o número de peças produzidas semanalmente. Nesse contexto, (a) o que é possível dizer sobre a probabilidade da produção semanal exceder 75 peças? e, supondo que a produção semanal tenha variância 25, (b) como estimar a probabilidade de que a produção semanal exceda 75 peças e (c) o que podemos dizer sobre a probabilidade da produção semanal estar entre 40 e 60?
+\begin{enumerate}[(a)]
+    \item Note que $EX = 50$ e, pela desigualdade de Markov,
+    \begin{align*}
+        P(X>75) \leq \frac{50}{75} = \frac{2}{3}.
+    \end{align*}
+    \item Temos $E[X^2] = \Var(X) - EX^2 = 2525$. Pela desigualdade de Markov,
+    \begin{align*}
+        P(X>75) \leq \frac{E[X^2]}{75^2} = \frac{2525}{5625} = \frac{101}{225}.
+    \end{align*}
+    \item Temos, usando a desigualdade de Chebyshev, que
+    \begin{align*}
+        P(40 < X < 60) &= P(-10 < X-50 < 10) \\
+        &= P(|X-50|<10) \\
+        &= 1 - P(|X-50|\geq 10) \\
+        &\geq 1 - \frac{25}{100} \\
+        &= \frac{3}{4}.
+    \end{align*}
+\end{enumerate}
+\end{example}
 
 \subsubsection{Lei dos Grandes Números (L.G.N.)}
+Seja $X_1, X_2, \dots$ uma sequência de v.a.'s i.i.d. com $E[X_i] = \mu\in\mathbb{R}, \forall i\in\mathbb{N}$. Queremos analisar a média amostral $S_n/n = (X_1 + \cdots + X_n)/n$ e verificar que, em algum sentido, $S_n/n \xrightarrow{b\to\infty} E[X_1] = \mu$. Dito de outro modo, queremos verficiar que a média amostral se ``aproxima'' da média real. 
+
+Para tanto, considere $F$ uma função de distribuição cuja média é finita e desconhecida. Queremos estimar $\mu$ a partir de uma amostra de $F$, digamos $X_1, \dots, X_n$ i.i.d. com distribuição $F$. Considerando $S_n = X_1 + \cdots + X_n$, queremos saber se $S_n/n\to\mu$ ou, equivalentemente, se $(S_n - E[S_n])/n\to 0$ de alguma maneira. O que nos fornece essa resposta são as leis dos grandes números.
+
+\begin{proposition}[Lei Fraca dos Grandes Números (LfGN)]
+Sejam $X_1, X_2, \dots$ v.a.'s i.i.d. com $E[X_1] = \mu < \infty$ e $S_n = X_1 + \cdots + X_n$. Daí, para todo $\varepsilon > 0$,
+\begin{align*}
+    \lim_{n\to\infty} P\left( \left| \frac{S_n}{n} - \mu \right| > \varepsilon \right) = 0.
+\end{align*}
+\end{proposition}
+
+Note que $\varepsilon$ representa a precisão desejada na aproximação de $\mu$ pela média amostral. Assim, por menor que seja $\varepsilon$, a probabilidade de $S_n/n$ se aproximar de $\mu$ com precisão $\varepsilon$ se aproxima de 1 à medida que $n$ cresce. Nesse caso, a LfGN nos diz que $S_n/n$ converge \textbf{em probabilidade} para $\mu$, denotando-se $S_n/n\xrightarrow{p}\mu$. A demonstração da LfGN (e também do TLC, que será visto mais à frente, usa funções características, e será dada ao final da seção.
+
+\begin{proposition}[Lei Forte dos Grandes Números (LFGN)]
+Sejam $X_1, X_2, \dots$ v.a.'s i.i.d. com $E[X_1] = \mu < \infty$ e $S_n = X_1 + \cdots + X_n$. Daí, para todo $\varepsilon > 0$,
+\begin{align*}
+    P\left(\lim_{n\to\infty} \left| \frac{S_n}{n} - \mu \right| > \varepsilon \right) = 0.
+\end{align*}
+\end{proposition}
+
+A LFGN nos diz que $S_n/n\to\mu$ com probabilidade 1. Nesse caso, dizemos que $S_n/n$ converge \textbf{quase certamente} para $\mu$, e denotamos $S_n/n\xrightarrow{\text{q.c.}} \mu$. Dizemos também, nesse caso, que $T_n = S_n/n$ é um \textbf{estimador fortemente consistente} para $\mu$. A demonstração da LFGN envolve argumentos de Teoria da Medida, e não será apresentada.
+
+\begin{example}
+Um candidato a prefeito gostaria de ter uma ideia de quantos votos receberá nas próximas eleições. Para isso, foi feita uma pesquisa com a população da cidade, onde $p$ representa a proporção de votos a favor do candidato em questão. Quantas pessoas devem ser entrevistadas para que a pesquisa tenha 95\% de confiança de que o erro seja inferior a 5\%, supondoq que a escolha dos entrevistados é feita de maneira aleatória e independente?
+
+Seja $n$ o número de pessoas entrevistadas e defina
+\begin{align*}
+    X_k = \begin{cases}
+    1, k\text{-ésima pessoa entrevistada a favor do candidato} \\
+    0, \text{ c.c.}
+    \end{cases}, k = 1, \dots, n.
+\end{align*}
+Temos $X_1, \dots, X_n$ v.a.'s i.i.d. Bernoulli, de modo que $P(X_k = 1) = p$ e $P(X_k = 0) = 1-p, k=1,\dots,n$. Sendo $S_n = X_1 + \cdots + X_n$, temos $E[S_n] = np$ e $\Var(S_n) = np(1-p)$, com $S_n/n$ fornecendo uma aproximação de $p$, que é desconhecida. Queremos $n$ tal que
+\begin{align*}
+    P\left( \left| \frac{S_n}{n} - p \right| < 0,05 \right) > 0,95 \iff P\left( \left| \frac{S_n}{n} - p \right| \geq 0,05 \right) \leq 0,05.
+\end{align*}
+Por Chebyshev, temos
+\begin{align*}
+    P\left( \left| \frac{S_n}{n} - p \right| > 0,05 \right) \leq \frac{p(1-p)}{n(0,05)^2} \leq \frac{1}{4n(0,05)^2} \leq 0,05 \implies n\geq 2000.
+\end{align*}
+\end{example}
 
 \subsection{Teorema do Limite Central}
+\begin{theorem}[Limite Central]
+Dada uma sequência $X_1, X_2, \dots$ de v.a.'s i.i.d. com $E[X_1] = \mu < \infty$ e $0\neq \Var(X_1) = \sigma^2 < \infty$, vale
+\begin{align*}
+    \lim_{n\to\infty} P\left( \frac{S_n - E[S_n]}{\sqrt{\Var(S_n)}} \leq x \right) = \Phi(x), \forall x\in\mathbb{R},
+\end{align*}
+sendo $S_n = X_1 + \cdots + X_n$ e $\Phi$ a f.d. de $N(0,1)$.
+\end{theorem}
+
+Note que $\displaystyle{ \frac{S_n - E[S_n]}{\sqrt{\Var(S-n)}} = \frac{S_n - n\mu}{\sigma\sqrt{n}} }$, de modo que o TLC nos diz que $\displaystyle{ \frac{S_n - n\mu}{\sigma\sqrt{n}} }$ converge \textbf{em distribuição} para $N(0,1)$. Podemos ainda enxergar o TLC como uma aproximação através da normal: para $n$ suficientemente grande, 
+\begin{align*}
+    \Phi(x) \approx P\left( \frac{S_n - n\mu}{\sigma\sqrt{n}} \leq x \right) = P(S_n \leq x\sigma\sqrt{n} + n\mu),
+\end{align*}
+ou seja,
+\begin{align*}
+    P(S_n \leq x) = P\left( \frac{S_n - n\mu}{\sigma\sqrt{n}} \leq \frac{x - n\mu}{\sigma\sqrt{n}} \right) \approx \Phi\left( \frac{x - n\mu}{\sigma\sqrt{n}} \right), \forall x\in\mathbb{R}.
+\end{align*}
+Note também que como $\Phi$ é simétrica, temos
+\begin{align*}
+     P\left( \left| \frac{S_n}{n} - \mu \right| \leq \varepsilon \right) &= P\left( \frac{S_n}{n} \leq \mu + \varepsilon \right) - P\left( \frac{S_n}{n} < \mu - \varepsilon \right) \\
+     &= P(S_n \leq n\mu + n\varepsilon) - P(S_n < n\mu - n\varepsilon) \\
+     &= P\left( \frac{S_n - n\mu}{\sigma\sqrt{n}} \leq \frac{n\varepsilon}{\sigma\sqrt{n}} \right) - P\left( \frac{S_n - n\mu}{\sigma\sqrt{n}} < -\frac{n\varepsilon}{\sigma\sqrt{n}} \right) \\
+     &= \Phi\left( \frac{n\varepsilon}{\sigma\sqrt{n}} \right) - \Phi\left( -\frac{n\varepsilon}{\sigma\sqrt{n}} \right) \\
+     &= 2\Phi\left( \frac{n\varepsilon}{\sigma\sqrt{n}} \right) - 1.
+\end{align*}
+
+\begin{example}
+Suponha que a duração de um certo componente eletrônico distribui-se exponencialmente, com duração média de 2 meses. Quando o componente queima, instala-se outro do mesmo tipo em seu lugar. Estamos interessados na probabilidade de que o 30º componente não queime antes de 3 anos.
+
+Seja $X_i$ o tempo de duração, em meses, de um componente $i$. Temos $X_i\sim\text{Exp}(\lambda)$, $\lambda = 1/2$, $E[X_i] = 2$ e $\Var(X_i) = 4, i = 1, 2, \dots$; temos $X_1, X_2 \dots$ i.i.d. e $S_n = X_1 + \cdots + X_n$ é o tempo necessário para que o $n$-ésimo componente queime. Temos $E[S_n] = 2n$ e $\Var(S_n) = 4n$, e queremos estimar $P(S_{30} > 36)$. Uma primeira maneira de calcular é notar que $S_n\sim\Gamma(n, \lambda)$, donde
+\begin{align*}
+    P(S_n > x) = \sum_{k=0}^{n-1} e^{-\lambda x}\frac{(\lambda x)^k}{k!} \implies \sum_{k=0}^{29}e^{-18}\frac{18^k}{k!} \approx 0,9941 = P(S_{30} > 36).
+\end{align*}
+Uma segunda maneira seria usar o TLC:
+\begin{align*}
+    &P(S_n > x) = P\left( \frac{S_n - n/\lambda}{\sqrt{n}/\lambda} > \frac{x - n/\lambda}{\sqrt{n}/\lambda} \right) \approx 1 - \Phi\left( \frac{x - n/\lambda}{\sqrt{n}/\lambda} \right) \\
+    \implies &P(S_{30} > 36) \approx 1 - \Phi\left( \frac{36 - 2\cdot 30}{2\sqrt{30}} \right) \approx 1 - \Phi(-2,19) = \Phi(2,19) \approx 0,9857,
+\end{align*}
+em que o valor de $\Phi(2,19)$ foi retirado da tabela ao final da subseção. Note que o erro entre as duas formas é de aproximadamente 0,8\%.
+\end{example}
+
+\begin{example}
+    Numa determinada rota doméstica são utilizados aviões com 90 assentos. Verificou-se que cerca de 20\% dos pasageiros com reserva marcada não comparecem para o voo. Por isso, a companhia adotou a estratégia de confirmar a reserva de 100 passageiros em cada voo. Pergunta-se (a) qual a probabilidade aproximada de no máximo 90 passageiros que confirmaram reserva compareçam para o voo? e (b) qual a probabilidade aproximada de que o número de passageiros que confirmaram reserva e compareceram ao voo esteja entre 85 e 90?
+    \begin{enumerate}[(a)]
+        \item Defina
+        \begin{align*}
+            X_i = \begin{cases}
+                  1, i-\text{ésimo passageiro com reserva comparece} \\
+                  0, \text{ c.c.}
+            \end{cases}, i = 1, \dots, 100.
+        \end{align*}
+        Logo, $X_1, \dots, X_{100}$ são i.i.d. com $P(X_i = 1) = 0,8$ e $P(X_i = 0) = 0,2$. Seja $S_n = X_1 + \cdots + X_n$, que representa o número de passageiros, entre os $n$, que fizeram reserva e compareceram para o voo. Temos $E[X_i] = 0,8 = \mu$ e $E[X_i^2] = 0,8$, donde $\Var(X_i) = 0,16 = \sigma^2$. Ademais, $E[S_n] = n\mu$ e $\Var(S_n) = n\sigma^2$. Por Chebyshev,
+        \begin{align*}
+            P(S_{100}\leq 90) &= P(S_{100} - 80 \leq 10) \geq P(|S_{100} - 80|\leq 10) \\
+            &= 1 - P(|S_{100} - 80| > 10) \\
+            &\geq 1 - \frac{100\cdot 0,16}{100} \\
+            &= 0,84.
+        \end{align*}
+        Usando o TLC, temos
+        \begin{align*}
+            P(S_{100} \leq 90) &= P\left( \frac{S_{100} - 80}{\sqrt{16}} \leq \frac{90 - 80}{\sqrt{16}} \right) \\
+            &= P\left( \frac{S_{100} - 80}{4} \leq 2,5 \right) \\
+            &\approx \Phi(2,5) \\
+            &\approx 0,9938.
+        \end{align*}
+        \item Pelo TLC
+        \begin{align*}
+            P(85 < S_{100} < 90) &= P(S_{100} < 90) - P(S_{100} < 85) \\
+            &= P\left( \frac{S_{100} - 80}{4} < 2,5 \right) - P\left( \frac{S_{100} - 80}{4} < 1,25 \right) \\ 
+            &\approx \Phi(2,5) - \Phi(1,25) \\
+            &\approx 0,9938 - 0,8944 \\
+            &= 0,0994 \\
+            &\approx 10\%.
+        \end{align*}
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Decide-se tomar uma amostra de tamanho $n$ para determinar a porcentagem de eleitores que têm intenção de votar num determinado candidato. Considere
+    \begin{align*}
+        X_k = \begin{cases}
+            1, k-\text{ésimo eleitor vota no candidato} \\
+            0, \text{ c.c.}
+        \end{cases}, k = 1, \dots, n.
+    \end{align*}
+    Suponha $X_1, \dots, X_n$ i.i.d. com $P(X_k = 1) = p$ e $P(X_k = 0) = 1-p, k = 1, \dots, n$. Daí, $\mu = E[X_1] = p$ e $\sigma^2 = \Var(X_1) = p(1-p)$. Note que $\sigma^2$ é máximo para $p=1/2$, valendo $1/4$. Consideraremos este valor para $p$. A v.a. $S_n/n$ representa a proporção (ou frequência relativa) de eleitores que têm a intenção de votar no candidato, e pode ser usada para estimar a proporção verdadeira $p$.
+    \begin{enumerate}[(a)]
+        \item Suponha $n=900$. Temos
+        \begin{align*}
+            P\left( \left| \frac{S_n}{n} - p \right| \geq 0,025 \right) &= 1 - P\left( \left| \frac{S_n}{n} - p \right| < 0,025 \right) \\
+            &\approx 1 - \left[ 2\Phi\left( \frac{0,025n}{\sigma\sqrt{n}} \right) - 1 \right] \\
+            &= 2\left[ 1 - \Phi\left( \frac{900\cdot 0,025}{1/2\sqrt{900}} \right) \right] \\
+            &= 2(1 - \Phi(1,5)) \\
+            &\approx 2(1 - 0,9332) \\
+            &= 0,134 \therefore P\left( \left| \frac{S_n}{n} - p \right| < 0,025 \right) \approx 0,87.
+        \end{align*}
+        \item Suponha $n=900$. Queremos determinar $\varepsilon$ tal que 
+        \begin{align*}
+            P\left( \left| \frac{S_n}{n} - p \right| \geq \varepsilon \right) = 0,01
+        \end{align*}
+        ou seja, tal que
+        \begin{align*}
+            \Phi\left( \frac{\sqrt{900}\varepsilon}{0,5} \right) = 0,995,
+        \end{align*}
+        donde devemos ter
+        \begin{align*}
+            \frac{\sqrt{900}\varepsilon}{0,5}\approx 2,58 \implies \varepsilon\approx 0,043,
+        \end{align*}
+        ou seja,
+        \begin{align*}
+            P\left( \left| \frac{S_n}{n} - p \right| < 0,043 \right) \approx 0,99.
+        \end{align*}
+        Dito de outro modo, tem-se aproximadamente 99\% de chance de garantir um erro menor que 0,043 quando estima-se $p$ por $S_n/n$ com $n=900$.
+        \item Queremos determinar $n$ tal que
+        \begin{align*}
+            P\left( \left| \frac{S_n}{n} - p \right| \geq 0,025 \right) = 0,01,
+        \end{align*}
+        ou seja, tal que
+        \begin{align*}
+            \Phi\left( \frac{0,025\sqrt{n}}{0,5} \right) = 0,995,
+        \end{align*}
+        isto é,
+        \begin{align*}
+            \frac{0,025\sqrt{n}}{0,5} \approx 2,58 \implies n\approx 2663.
+        \end{align*}
+    \end{enumerate}
+\end{example}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
+        $z$ & 0,00 & 0,01 & 0,02 & 0,03 & 0,04 & 0,05 & 0,06 & 0,07 & 0,08 & 0,09 \\
+        \hline 
+        0,0 & 0,5000 & 0,5040 & 0,5080 & 0,5120 & 0,5160 & 0,5199 & 0,5239 & 0,5279 & 0,5319 & 0,5359 \\
+        0,1 & 0,5398 & 0,5438 & 0,5478 & 0,5517 & 0,5557 & 0,5596 & 0,5636 & 0,5675 & 0,5714 & 0,5753 \\
+        0,2 & 0,5793 & 0,5832 & 0,5871 & 0,5910 & 0,5948 & 0,5987 & 0,6026 & 0,6064 & 0,6103 & 0,6141 \\
+        0,3 & 0,6179 & 0,6217 & 0,6255 & 0,6293 & 0,6331 & 0,6368 & 0,6406 & 0,6443 & 0,6480 & 0,6517 \\
+        0,4 & 0,6554 & 0,6591 & 0,6628 & 0,6664 & 0,6700 & 0,6736 & 0,6772 & 0,6808 & 0,6844 & 0,6879 \\
+        0,5 & 0,6915 & 0,6950 & 0,6985 & 0,7019 & 0,7054 & 0,7088 & 0,7123 & 0,7157 & 0,7190 & 0,7224 \\
+        0,6 & 0,7257 & 0,7291 & 0,7324 & 0,7357 & 0,7389 & 0,7422 & 0,7454 & 0,7486 & 0,7517 & 0,7549 \\
+        0,7 & 0,7580 & 0,7611 & 0,7642 & 0,7673 & 0,7704 & 0,7734 & 0,7764 & 0,7794 & 0,7823 & 0,7852 \\
+        0,8 & 0,7881 & 0,7910 & 0,7939 & 0,7967 & 0,7995 & 0,8023 & 0,8051 & 0,8078 & 0,8106 & 0,8133 \\
+        0,9 & 0,8159 & 0,8186 & 0,8212 & 0,8238 & 0,8264 & 0,8289 & 0,8315 & 0,8340 & 0,8365 & 0,8389 \\
+        1,0 & 0,8413 & 0,8438 & 0,8461 & 0,8485 & 0,8508 & 0,8531 & 0,8554 & 0,8577 & 0,8599 & 0,8621 \\
+        1,1 & 0,8643 & 0,8665 & 0,8686 & 0,8708 & 0,8729 & 0,8749 & 0,8770 & 0,8790 & 0,8810 & 0,8830 \\
+        1,2 & 0,8849 & 0,8869 & 0,8888 & 0,8907 & 0,8925 & 0,8944 & 0,8962 & 0,8980 & 0,8997 & 0,9015 \\
+        1,3 & 0,9032 & 0,9049 & 0,9066 & 0,9082 & 0,9099 & 0,9115 & 0,9131 & 0,9147 & 0,9162 & 0,9177 \\
+        1,4 & 0,9192 & 0,9207 & 0,9222 & 0,9236 & 0,9251 & 0,9265 & 0,9279 & 0,9292 & 0,9306 & 0,9319 \\
+        1,5 & 0,9332 & 0,9345 & 0,9357 & 0,9370 & 0,9382 & 0,9394 & 0,9406 & 0,9418 & 0,9429 & 0,9441 \\
+        1,6 & 0,9452 & 0,9463 & 0,9474 & 0,9484 & 0,9495 & 0,9505 & 0,9515 & 0,9525 & 0,9535 & 0,9545 \\
+        1,7 & 0,9554 & 0,9564 & 0,9573 & 0,9582 & 0,9591 & 0,9599 & 0,9608 & 0,9616 & 0,9625 & 0,9633 \\
+        1,8 & 0,9641 & 0,9649 & 0,9656 & 0,9664 & 0,9671 & 0,9678 & 0,9686 & 0,9693 & 0,9699 & 0,9706 \\
+        1,9 & 0,9713 & 0,9719 & 0,9726 & 0,9732 & 0,9738 & 0,9744 & 0,9750 & 0,9756 & 0,9761 & 0,9767 \\
+        2,0 & 0,9772 & 0,9778 & 0,9783 & 0,9788 & 0,9793 & 0,9798 & 0,9803 & 0,9808 & 0,9812 & 0,9817 \\
+        2,1 & 0,9821 & 0,9826 & 0,9830 & 0,9834 & 0,9838 & 0,9842 & 0,9846 & 0,9850 & 0,9854 & 0,9857 \\
+        2,2 & 0,9861 & 0,9864 & 0,9868 & 0,9871 & 0,9875 & 0,9878 & 0,9881 & 0,9884 & 0,9887 & 0,9890 \\
+        2,3 & 0,9893 & 0,9896 & 0,9898 & 0,9901 & 0,9904 & 0,9906 & 0,9909 & 0,9911 & 0,9913 & 0,9916 \\
+        2,4 & 0,9918 & 0,9920 & 0,9922 & 0,9925 & 0,9927 & 0,9929 & 0,9931 & 0,9932 & 0,9934 & 0,9936 \\
+        2,5 & 0,9938 & 0,9940 & 0,9941 & 0,9943 & 0,9945 & 0,9946 & 0,9948 & 0,9949 & 0,9951 & 0,9952 \\
+        2,6 & 0,9953 & 0,9955 & 0,9956 & 0,9957 & 0,9959 & 0,9960 & 0,9961 & 0,9962 & 0,9963 & 0,9964 \\
+        2,7 & 0,9965 & 0,9966 & 0,9967 & 0,9968 & 0,9969 & 0,9970 & 0,9971 & 0,9972 & 0,9973 & 0,9974 \\
+        2,8 & 0,9974 & 0,9975 & 0,9976 & 0,9977 & 0,9977 & 0,9978 & 0,9979 & 0,9979 & 0,9980 & 0,9981 \\
+        2,9 & 0,9981 & 0,9982 & 0,9982 & 0,9983 & 0,9984 & 0,9984 & 0,9985 & 0,9985 & 0,9986 & 0,9986 \\
+        3,0 & 0,9987 & 0,9987 & 0,9987 & 0,9988 & 0,9988 & 0,9989 & 0,9989 & 0,9989 & 0,9990 & 0,9990 \\
+        3,1 & 0,9990 & 0,9991 & 0,9991 & 0,9991 & 0,9992 & 0,9992 & 0,9992 & 0,9992 & 0,9993 & 0,9993 \\
+        3,2 & 0,9993 & 0,9993 & 0,9994 & 0,9994 & 0,9994 & 0,9994 & 0,9994 & 0,9995 & 0,9995 & 0,9995 \\
+        3,3 & 0,9995 & 0,9995 & 0,9995 & 0,9996 & 0,9996 &  0,9996 & 0,9996 & 0,9996 & 0,9996 & 0,9997 \\
+        3,4 & 0,9997 & 0,9997 & 0,9997 & 0,9997 & 0,9997 & 0,9997 & 0,9997 & 0,9997 & 0,9997 & 0,9998 \\
+        3,5 & 0,9998 & 0,9998 & 0,9998 & 0,9998 & 0,9998 &  0,9998 & 0,9998 & 0,9998 & 0,9998 & 0,9998
+    \end{tabular}
+    \caption{$\Phi(z)$ para $0,00 \leq z \leq 3,59$.}
+%    \label{tab:my_label}
+\end{table}
+
 
 \subsection{Funções Características}
 
