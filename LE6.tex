@@ -5,4 +5,38 @@
 
 \subsection{Exercícios - variância e covariância}
 
+\begin{enumerate}
+    \item Suponha que $X$ se distribui uniformemente em $\{1,\dots, N\}$. Determine $\Var(X)$. [\textit{Sugestão:} use o exercício 4 da Lista 5.]
+    \item Considere a seguinte função:
+    \begin{align*}
+        p(x) = \begin{cases}
+            x^{-(r+2)}/c, x\in\mathbb{N} \\
+            0, \text{ c.c.}
+        \end{cases},
+    \end{align*}
+    onde $c$ é um número real positivo e $r$ um número inteiro positivo.
+    \begin{enumerate}[a)]
+    \item Mostre que $\displaystyle{ \sum_{x=1}^{\infty} x^{-(r+2)} }$ converge. Conclua que $p$ é uma função de probabilidade com $c = \displaystyle{ \sum_{x=1}^{\infty} x^{-(r+2)} }$.
+    \item Seja $X$ uma v.a. com função de probabilidade $p$. Mostre que $E[X^r]$ é finito, mas $X$ não tem nenhum momento de ordem maior do que $r$.
+    \end{enumerate}
+    \item Em ensaios de Bernoulli independentes, com probabilidade $p$ de sucesso, sejam $X$ o número de ensaios até a ocorrência do $r$-ésimo sucesso e $Y$ o número de fracassos anteriores ao $r$-ésimo sucesso. Determine $\Var(X)$ e $\Var(Y)$. [\textit{Sugestão:} use o exercício 8 da Lista 5.]
+    \item Suponha que $X$ e $Y$ são duas v.a.’s independentes tais que $E[X^4] = 2$, $E[X^2] = 1$, $E[Y^2] = 1$ e $EY = 0.$ Determine $\Var(X^2Y)$.
+    \item Sejam $X_1 ,\dots, X n$ v.a.’s i.i.d. com média $\mu$ e variância $\sigma^2$ e seja $\overline{X} = S_n/n$, onde $S_n = X_1 + \cdots + X_n$. (Se $X_1,\dots, X_n$ têm função de distribuição $F$, dizemos que eles são uma amostra aleatória de tamanho $n$ da v.a. $X$, cuja função de distribuição é $F$, e $\overline{X}$ é chamada média amostral.) Mostre que:
+    \begin{enumerate}[a)]
+    \item $E[\overline{X}] = \mu$
+    \item $\Var(\overline{X}) = \sigma^2/n$
+    \item $E \left[ \sum_{i=1}^n (X_i - \overline{X})^2 \right] = (n - 1)\sigma^2$.
+    \end{enumerate}
+    \item Suponha que tenhamos dois baralhos de $n$ cartas, cada um com as cartas numeradas de 1 a $n$. Utilizando-se estas cartas forma-se $n$ pares, de tal forma que cada par contendo uma carta de cada baralho. Dizemos que ocorre um encontro na posição $i$ se o par $i$ é constituído de cartas de mesmo número. Seja $S_n$ o número de encontros. Determine:
+    \begin{enumerate}[a)]
+    \item $E[S_n]$
+    \item $\Var(S_n)$
+    \end{enumerate}
+    [\textit{Sugestões:} para cada $i = 1,2,\dots, n$, considere a v.a. $X_i$ definida por $X_i = 1$ se ocorre um encontro na $i$-ésima posição e $X_i = 0$ caso contrário. Assim, $S_n = X_1 + \cdots + X_n$; use os seguintes resultados: para cada $i, j = 1,2,\dots,n$, tem-se que $P(X_i = 1) = 1/n$ e $P(X_i = 1, X_j = 1) = 1/n(n-1)$ se $i\neq j$.
+    \item Sejam $X_1, X_2$ e $X_3$ variáveis aleatórias independentes tendo variâncias finitas e positivas $\sigma_1^2$, $\sigma_2^2$ e $\sigma_3^2$, respectivamente. Obtenha a correlação entre $X_1 - X_2$ e $X_2 + X_3$.
+    \item Suponha que $X$ e $Y$ são duas v.a.’s tais que $\rho(X,Y) = 1/2$, $\Var(X) = 1$ e $\Var(Y) = 2$. Obtenha $\Var(X - 2Y)$.
+    \item Uma caixa contém 3 bolas vermelhas e 2 pretas. Extrai-se uma amostra sem reposição de tamanho dois. Sejam $U$ e $V$ os números de bolas vermelhas e pretas, respectivamente, na amostra. Determine $\rho(U, V)$.
+    \item Suponha que uma caixa contém 3 bolas numeradas de 1 a 3. Seleciona-se, ao acaso e sem reposição, duas bolas da caixa. Sejam $X$ o número da primeira bola e $Y$ o número da segunda bola. Determine $\Cov(X, Y)$ e $\rho(X, Y)$.
+\end{enumerate}
+
 \end{document}

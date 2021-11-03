@@ -5,4 +5,92 @@
 
 \subsection{Exercícios}
 
+\begin{enumerate}
+    \item A função de probabilidade conjunta de uma vetor aleatório $(X,Y)$ é dada por
+    \begin{align*}
+        p_{X,Y}(x,y) = \begin{cases}
+            k(2x+y), x,y = 1,2 \\
+            0, \text{ c.c.}
+        \end{cases},
+    \end{align*}
+    sendo $k$ uma constante real.
+    \begin{enumerate}[a)]
+        \item Determine o valor de $k$.
+        \item Determine as funções de probabilidade marginais de $X$ e $Y$.
+        \item São $X$ e $Y$ independentes?
+    \end{enumerate}
+    \item Considere um experimento de lançar três vezes duas moedas distintas $A$ e $B$. Suponha que a moeda $A$ é honesta, isto é, $P(\text{cara}) = P(\text{coroa}) = 1/2$, e a moeda $B$ não é honesta, com $P(\text{cara}) = 1/4$ e $P(\text{coroa}) = 3/4$. Seja $X$ a v.a. que denota o número de caras resultantes da moeda $A$ e $Y$ a v.a. que denota o número de caras da moeda $B$.
+    \begin{enumerate}[a)]
+        \item Determine os valores possíveis do vetor $(X,Y)$.
+        \item Determine as funções de probabilidade marginais de $X$ e $Y$.
+        \item Determine a função de probabilidade conjunta de $X$ e $Y$.
+        \item Calcule $P(X=Y)$, $P(X>Y)$ e $P(X+Y\leq 4)$.
+    \end{enumerate}
+    \item Seja $X$ uma variável aleatória geometricamente distribuída com parâmetro $p$ e seja $M\in\mathbb{N}$ uma constante. Determine a função de probabilidade de $Y = \min(X,M)$.
+    \item Considere 10 lançamentos independentes de um dado honesto e seja $X_i$ o número de ocorrências da face $i$,$i=1,\dots,6$.
+    \begin{enumerate}[a)]
+    \item Determine a função de probabilidade conjunta de $X_1, \dots, X_6$.
+    \item Determine as funções de probabilidade marginais de $X_i$, para $i=1,\dots,6$
+    \item São $X_1, \dots, X_6$ independentes?
+    \end{enumerate}
+    \item Suponha que se distribui aleatoriamente $2r$ bolas em $r$ caixas. Seja $X_i$ o número de bolas na caixa $i$.
+    \begin{enumerate}[a)]
+    \item Obtenha a função de probabilidade conjunta de $X_1, \dots, X_r$.
+    \item Obtenha a probabilidade de que cada caixa contenha exatamente 2 bolas.
+    \end{enumerate}
+    \item Sejam $X$ e $Y$ duas variáveis aleatórias independentes que se distribuem uniformemente sobre $\{0, \dots, N\}$. Determine:
+    \begin{enumerate}[a)]
+    \item $P(X\geq Y)$.
+    \item $P(X=Y)$.
+    \item a função de probabilidade de $Z = \min(X,Y)$.
+    \item a função de probabilidade de $W = \max(X,Y)$.
+    \item a função de probabilidade de $U = |Y-X|$.
+    \end{enumerate}
+    \item Sejam $X$ e $Y$ duas variáveis aleatórias independentes com funções de probabilidade geométricas de parâmetros $p_1$ e $p_2$, respectivamente. Obtenha:
+    \begin{enumerate}[a)]
+    \item $P(X\geq Y)$
+    \item $P(X=Y)$
+    \item a função de probabilidade de $Z=\min(X,Y)$
+    \item a função de probabilidade de $W = X+Y$.
+    \end{enumerate}
+    \item Sejam $X$ e $Y$ duas variáveis aleatórias independentes com a mesma função de probabilidade geométrica de parâmetro $p$. Sejam $Z=Y-X$ e $W=\min(X,Y)$.
+    \begin{enumerate}[a)]
+    \item Mostre que para $w\geq 1$ e $z$ inteiros, temos
+    \begin{align*}
+        P(W=w, Z=z) = \begin{cases}
+        P(X = w-z)P(Y=w), z < 0 \\
+        P(X=w)P(Y = w+z), z\geq 0
+        \end{cases}
+    \end{align*}
+    \item Conclua do item anterior que dados $w\geq 1$ e $z$ inteiros, temos
+    \begin{align*}
+        P(W=w, Z=z) = p^2(1-p)^{2(w-1)}(1-p)^{|z|}
+    \end{align*}
+    \item Use o item anterior e o exercício 7c) para mostrar que $W$ e $Z$ são independentes.
+    \end{enumerate}
+    \item Sejam $X$ e $Y$ v.a.’s independentes. Determine a função de probabilidade de $Z = X+Y$ seguintes casos:
+    \begin{enumerate}[a)]
+    \item $X\sim\text{Poisson}(\lambda_1)$ e $Y\sim\text{Poisson}(\lambda_2)$.
+    \item $X$ e $Y$ uniformemente distribuídas sobre $\{1, 2, \dots, N\}$.
+    \end{enumerate}
+    \item Sejam $X_1, \dots, X_l$ v.a.’s independentes, tais que $X_j\sim\text{Poisson}(\lambda_j), j=1, \dots, l$. Determine a função de probabilidade de $Z = X_1 + \cdots + X_l$.
+    \item Considere um experimento com três resultados possíveis que ocorrem com probabilidades $p_1$, $p_2$ e $p_3$, respectivamente. Suponha que se realiza $n$ repetições independentes do experimento e seja $X_i$ o número de vezes que ocorre o resultado $i, i =1, 2, 3$.
+    \begin{enumerate}[a)]
+    \item Determine a probabilidade de $X_1+X_2$.
+    \item Para cada $z$, determine $P(X_2=y|X_1+X_2 = z), y\in\mathbb{R}$.
+    \end{enumerate}
+    \item Use a aproximação de Poisson para calcular a probabilidade de:
+    \begin{enumerate}[a)]
+    \item que no máximo 2 dentre 50 motoristas tenham carteiras de habilitação inválida se normalmente 5\% dos motoristas o tem;
+    \item que uma caixa com 100 fusíveis contenha no máximo 2 fusíveis defeituosos se 3\% dos fusíveis fabricados são defeituosos.
+    \end{enumerate}
+    \item Lança-se um dado até observar o número 6. Considere $X$ o número de lançamentos até observar 6 pela primeira vez. Responda:
+    \begin{enumerate}[a)]
+    \item qual é a probabilidade de que sejam necessários seis lançamentos no máximo?
+    \item quantos lançamentos são necessários para que a probabilidade de obter 6 seja no mínimo $1/2$?
+    \end{enumerate}
+    \item Sejam $X$ e $Y$ v.a.'s independentes com distribuição de Poisson de parâmetros $\lambda_1$ e $\lambda_2$, respectivamente. Para cada $z\in\{0,1,\dots\}$ determine $P(X=x|X+Y=z), x\in\mathbb{R}$.
+    \item Sejam $X$, $Y$ e $Z$ v.a.'s independentes com distribuições de Poisson de parâmetros $\lambda_1, \lambda_2$ e $\lambda_3$, respectivamente. Para cada $m=0,1,\dots$, determine  $P(X=x, Y=y, Z=z|X+Y+Z=m)$, para números inteiros $x$, $y$ e $z$.
+\end{enumerate}
+
 \end{document}

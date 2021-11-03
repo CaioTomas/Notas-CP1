@@ -5,4 +5,61 @@
 
 \subsection{Exercícios - esperança e momentos de v.a.'s contínuas}
 
+\begin{enumerate}
+    \item Sejam $X$ e $Y$ v.a.’s independentes tais que $X\sim\Gamma(\alpha_1,\lambda)$ e $Y\sim\Gamma(\alpha_2,\lambda)$. Considere $Z = Y/X$.
+    \begin{enumerate}[a)]
+    \item Determine para quais valores de $\alpha_1$ e $\alpha_ 2$ teremos $EZ$ finita e calcule $EZ$ neste caso.
+    Determine para quais valores de $\alpha_1$ e $\alpha_2$ teremos $E[Z^2]$ finita e calcule $\Var(Z)$ neste caso.
+    \end{enumerate}
+    \item Seja $X\sim\chi^2(n)$, ou seja, $X\sim\Gamma(n/2,1/2)$. Calcule a esperança de $Y = \sqrt{X}$.
+    \item Sejam $U_1$ e $U_2$ v.a.’s i.i.d. com distribuição comum Exp$(\lambda)$ e seja $Y = \max(U_1,U_2)$. Obtenha a esperança e a variância de $Y$.
+    \item Seja $X = \sin\Theta$, em que $\Theta\sim U(-2,2)$. Determine $EX$ e $\Var(X)$.
+    \item Seja $X\sim N(0, \sigma^2)$. Determine a esperança e a variância das seguintes v.a.’s:
+    \begin{enumerate}[a)]
+    \item $|X|$;
+    \item $X^2$.
+    \end{enumerate}
+    \item Sejam $X$ e $Y$ v.a.’s com densidade conjunta
+    \begin{align*}
+        f_{X,Y}(x,y) = \frac{\sqrt{15}}{4\pi}\exp[ -\frac{x^2 - xy + 4y^2}{2} ], (x,y)\in\mathbb{R}^2.
+    \end{align*}
+    Determine o coeficiente de correlação entre $X$ e $Y$.
+    \item Sejam $X$ e $Y$ v.a.’s independentes tais que $X\sim N(\mu, \sigma^2)$ e $Y\sim\Gamma(\alpha,\lambda)$. Obtenha a esperança e a variância de $Z = XY$.
+    \item Sejam $X$ e $Y$ v.a.’s tais que $EX = EY = 0$, $\Var(X) = \Var(Y) = 1$ e $\rho(X, Y) = \rho$. Mostre que $X - \rho Y$ e $Y$ são não-correlacionadas, $E[X - \rho Y] = 0$ e $\Var(X - \rho Y) = 1 - \rho^2$.
+    \item Seja $X\sim U(a,b)$. Obtenha $M_X(t)$, a função geradora de momentos de $X$.
+    \item Use a função geradora de momentos para obter a esperança e a variância de $X$, nos seguintes casos:
+    \begin{enumerate}[a)]
+    \item $X\sim B(n, p)$ 
+    \item $X\sim\text{Poisson}(\lambda)$
+    \end{enumerate}
+    \item Use a função geradora de momentos para obter os momentos de todas as ordens de $X$, nos seguintes casos:
+    \begin{enumerate}[a)]
+    \item $X\sim N(0,\sigma^2)$ 
+    \item $X$ tem densidade $f_X(x) = e^{-|x|}, x \in\mathbb{R}$.
+    \end{enumerate}
+    \item Sejam $X_1,X_2,\dots,X_n$ v.a.’s independentes. Use a função geradora de momentos para obter a distribuição de $S_n = X_1 + X_2 + \cdots + X_n$, nos seguintes casos:
+    \begin{enumerate}[a)]
+    \item $X_i\sim\Gamma(\alpha_i,\lambda)$
+    \item $X_i\sim\text{Exp}(\lambda)$
+    \item $X_i\sim B(n_i , p)$
+    \item $X_i\sim\text{Poisson}(\lambda_i)$, para $i = 1,\dots, n.$
+    \end{enumerate}
+    \item Sejam $X_1, X_2,\dots, X_n$ v.a.'s i.i.d. tendo média $\mu$ e variância $\sigma^2$ e seja $\overline{X} = S_n/n$, onde $S_n = X_1 + \cdots + X_n$.
+    \begin{enumerate}[a)]
+    \item Mostre que $EX = \mu$ e $\Var(\overline{X}) = \sigma^2/n$
+    \item Qual o tamanho da amostra que devemos considerar de tal forma que $P(|\overline{X} - \mu| \leq \sigma/10) \geq 0,95$?
+    \end{enumerate}
+    \item Da experiência passado, um professor sabe que a pontuação de um estudante no seu exame final é uma v.a. com média 75.
+    \begin{enumerate}[a)]
+    \item Dê um limite superior para a probabilidade de que a pontuação do estudante excederá 85.
+    \item Se, além disso, o professor também saiba que a variância da pontuação do estudante é 25, o que pode ser dito sobre a probabilidade de que o estudante terá uma pontuação entre 65 e 85?
+    \end{enumerate}
+    \item Um corredor procura controlar seus passos em uma corrida de 100 metros. De sua experiência, ele sabe que o tamanho de seu passo na corrida é uma v.a. com média 0,97 metro e desvio-padrão 0,1 metro. Determine a probabilidade de que 100 passos difiram de 100 metros por não mais de 5 metros.
+    
+    
+    
+    
+    
+\end{enumerate}
+
 \end{document}

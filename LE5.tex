@@ -5,4 +5,62 @@
 
 \subsection{Exercícios - esperança e funções de v.a.'s discretas}
 
+\begin{enumerate}
+    \item Seja $X$ uma v.a. com função de distribuição dada por:
+    \begin{align*}
+        F_X(x) = \begin{cases}
+            0, x < -2 \\
+            1/8, -2\leq x < 1 \\
+            5/8, 1\leq x < 2 \\
+            7/8, 2\leq x < 4 \\
+            1, x\geq 4
+        \end{cases}.
+    \end{align*}
+    Determine:
+    \begin{enumerate}[a)]
+        \item a função de probabilidade de $X$;
+        \item $EX$.
+    \end{enumerate}
+    \item Seja $X$ uma v.a. com função de probabilidade dada por:
+    \begin{align*}
+        p_X(x) = \begin{cases}
+        \frac{1}{2|x|(|x|+1)}, x = \pm 1, \pm 2, \dots \\
+        0, \text{ c.c.}
+        \end{cases}.
+    \end{align*}
+    \begin{enumerate}[a)]
+        \item Calcule $\displaystyle{ \sum_{x\in\mathbb{Z}} |x|p_X(x) }$.
+        \item Mostre que $EX$ não existe.
+    \end{enumerate}
+    \item Seja $N$ um número inteiro positivo e seja $p$ a função definida por
+    \begin{align*}
+        p = \begin{cases}
+            \frac{2x}{N(N+1)}, x\in\{1, 2, \dots N\} \\
+            0, \text{ c.c.}
+        \end{cases}.
+    \end{align*}
+    \begin{enumerate}[a)]
+        \item Mostre que $p$ é uma função de probabilidade.
+        \item Seja $X$ v.a. com f.p. $p$; calcule $EX$.
+    \end{enumerate}
+    \item Suponha que $X$ se distribui uniformemente em $\{1, \dots , N\}$. Determine $EX$ e $E[X^2]$.
+    \item Suponha que $X$ tem distribuição binomial de parâmetros $n = 4$ e $p$. Obtenha $E[\sin(\pi X/2)]$.
+    \item Suponha que $X$ tem distribuição de Poisson de parâmetro $\lambda$. Determine $\displaystyle{E[\frac{1}{1+X}]}$.
+    \item Seja $X$ uma variável aleatória com distribuição geométrica de parâmetro $p$ e seja $M > 0$ um número inteiro positivo. Determine a esperança das seguintes v.a.’s:
+    \begin{enumerate}[a)]
+    \item $Z = \min(X, M)$
+    \item $W = \max(X, M)$.
+    \end{enumerate}
+    \item Em ensaios de Bernoulli independentes, com probabilidade $p$ de sucesso, sejam $X$ o número de ensaios até a ocorrência do $r$-ésimo sucesso e $Y$ o número de fracassos anteriores ao $r$-ésimo sucesso. Determine $EX$ e $EY$.
+    \item Seja $(X,Y)$ um vetor aleatório com função de probabilidade conjunta dada por:
+    \begin{align*}
+        p_{X,Y}(x,y)\begin{cases}
+            p, x = \pm 1, y = 0 \\
+            1-2p, x = 0, y = 1 \\
+            0, \text{ c.c.}
+        \end{cases},
+    \end{align*}
+onde $0 < p < 1/2$. Verifique que $E[XY] = EXEY$, mas $X$ e $Y$ não são independentes.
+\end{enumerate}
+
 \end{document}

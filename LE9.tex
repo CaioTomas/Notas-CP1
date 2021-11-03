@@ -5,4 +5,43 @@
 
 \subsection{Exercícios - soma e quociente de v.a.'s contínuas}
 
+\begin{enumerate}
+    \item Sejam X e Y variáveis aleatórias independentes, cada uma com distribuição uniforme em $(0,1)$. Obtenha:
+    \begin{enumerate}[a)]
+    \item $P(|X - Y| \leq 1/2)$
+    \item $P(|X/Y - 1 | \leq 1/2)$
+    \end{enumerate}
+    \item Suponha que os tempos que dois estudantes levam para resolver um problema são independentes e se distribuem exponencialmente com parâmetro $\lambda$. Determine a probabilidade de que o primeiro estudante necessite pelo menos do dobro do tempo gasto pelo segundo para resolver o problema.
+    \item Seja $f(x, y) = ce^{-(x^2-xy+4y^2)/2 }, (x, y) \in\mathbb{R}^2$.
+    \begin{enumerate}[a)]
+    \item Determine o valor de $c$ para que $f$ seja uma densidade.
+    \item Se $X$ e $Y$ têm densidade conjunta $f$, determine as densidades marginais de $X$ e $Y$ e verifique se são independentes.
+    \end{enumerate}
+    \item Suponha que $X$ e $Y$ têm densidade conjunta uniforme no interior do triângulo com vértices em $(0,0)$, $(2,0)$ e $(1,2)$. Obtenha $P(X \leq 1, Y \leq 1)$.
+    \item Sejam $X$ e $Y$ v.a.’s contínuas independentes tendo as densidades marginais especificadas abaixo. Obtenha, em cada item, a densidade de $Z = X + Y$.
+    \begin{enumerate}[a)]
+    \item $X\sim\text{Exp}(\lambda_1)$ e $Y\sim\text{Exp}(\lambda_2)$
+    \item $X\sim\Gamma(\alpha_1,\lambda)$ e $Y\sim\Gamma(\alpha_2, \lambda)$
+    \item $X\sim N(\mu_1, \sigma_1^2)$ e $Y\sim N(\mu_2, \sigma_2^2)$
+    \end{enumerate}
+    \item Verifique que se $X_1, X_2,\dots, X_n$ são v.a.’s i.i.d. com distribuição comum $N(0,1)$, então $X_1^2 + X_2^2 + \cdots + X_n^2$ tem distribuição $\Gamma(n/2, 1/2)$ (esta distribuição é conhecida como qui-quadrado com $n$ graus de liberdade e denotada por $\chi^2(n)$). [\textit{Sugestão:} use os exercícios (7b) da lista 8 e (5b) anterior.]
+    \item Suponha que se escolhe aleatoriamente um ponto no plano de tal forma que suas coordenadas $X$ e $Y$ se distribuem independentemente segundo a densidade normal $N(0, \sigma^2)$. Obtenha a função densidade da v.a. $R$ que representa a distância do ponto escolhido à origem. (Esta densidade é conhecida como densidade de Rayleigh).
+    \item Sejam $X$ e $Y$ v.a.’s i.i.d. com distribuição comum $\text{Exp}(\lambda)$. Obtenha a densidade de $Z = Y/X$.
+    \item Sejam $X$ e $Y$ v.a.’s independentes tais que $X\sim\Gamma(\alpha_1, \lambda)$ e $Y\sim\Gamma(\alpha_2,\lambda)$. Obtenha a densidade de $Z = X/X+Y$. [\textit{Sugestão:} expresse Z em função de $Y/X$].
+    \item Sejam $U$ e $V$ v.a.’s i.i.d. com distribuição comum $N(0,1)$. Seja $Z = \rho U + \sqrt{1-\rho^2} V$, onde $-1 < \rho < 1$.
+    \begin{enumerate}[a)]
+    \item Obtenha a densidade de $Z$.
+    \item Obtenha a densidade conjunta de $U$ e $Z$.
+    \item Obtenha a densidade conjunta de $X = \mu_1 + \sigma_1 U$ e $Y = \mu_2 + \sigma_2 Z$, onde $\sigma_1, \sigma_2 > 0$. Esta densidade é conhecida como densidade normal bidimensional.
+    \end{enumerate}
+    \item Sejam R e $\Theta$ v.a.’s independentes de modo que R tem densidade de Rayleigh:
+    \begin{align*}
+        f_R(r) = \begin{cases}
+            \sigma^{-2}re^{-r^2/2\sigma^2}, r\geq 0 \\
+            0, r < 0
+        \end{cases}.
+    \end{align*}
+e $\Theta$ se distribui uniformemente em $U(-\pi, \pi)$. Mostre que se $X = R\cos\Theta$ e $Y = R\sin\Theta$ são v.a.’s independentes e que cada uma tem densidade normal $N(0, \sigma^2)$.
+\end{enumerate}
+
 \end{document}
