@@ -383,10 +383,383 @@ em que o valor de $\Phi(2,19)$ foi retirado da tabela ao final da subseção. No
 
 
 \subsection{Funções Características}
+\begin{definition}[Função característica]
+A \textbf{função característica} de uma v.a. $X$ é definida por
+\begin{align*}
+    \varphi_X(t) = E[e^{itX}], t\in\mathbb{R}.
+\end{align*}
+\end{definition}
+Funções características são um pouco mais complicadas que funções geradoras de momentos por envolverem números complexos; entretanto, elas têm duas vantagens importantes sobre f.g.m.'s: primeiro, $\varphi_X(t)$ é finita para toda v.a. $X$ e todo $t\in\mathbb{R}$; segundo, a f.d. de $X$ (e geralmente a densidade, se existir) pode ser obtida a partir da função característica através de uma ``fórmula de inversão''. Usando propriedades das funções características poderemos provar a LfGN e o TLC. Assumimos, daqui em diante, conhecimentos sobre números complexos e o básico de derivadas complexas.
+
+Uma v.a. complexa $Z$ pode ser escrita como $X+iY$, sendo $X$ e $Y$ v.a.'s reais. As mesmas propriedades da esperança continuam válidas para $Z$, notando que $EZ = EX + iEY$. Reservaremos $X$ e $Y$ para denotar v.a.'s reais. Suponha que $X$ é uma v.a. e $t\in\mathbb{R}$ é constante (reservamos $t$ para denotar constantes reais). Então $|e^{itX}| = 1$, de modo que $e^{itX}$ tem esperança finita e a função característica de $X$ é bem definida. Note que $\varphi_X(0) = E[1] = 1$ e, dado $t\in\mathbb{R}$,
+\begin{align*}
+    |\varphi_X(t)| = |E[e^{itX}]| \leq E[|e^{itX}|] = E[1] = 1.
+\end{align*}
+A explicação para que as funções características sejam finitas para todo $t\in\mathbb{R}$ enquanto as f.g.m.'s não são finitas em geral é que $e^{it}$ é limitado e $e^t$ não.
+
+\begin{example}
+    Seja $X$ uma v.a. que toma o valor $a$ com probabilidade $1$. Então
+    \begin{align*}
+        \varphi_X(t) = E[e^{itX}] = e^{ita}, t\in\mathbb{R}.
+    \end{align*}
+    Em particular, se $X$ toma o valor 0 com probabilidade 1, então sua função característica é identicamente igual a 1.
+\end{example}
+Se $X$ é v.a. e $a,b$ são reais quaisquer, então
+\begin{align*}
+    \varphi_{a+bX}(t) = E[e^{it(a+bX)}] = E[e^{ita}e^{ibtX}] = e^{ita}E[e^{ibtX}],
+\end{align*}
+logo
+\begin{align*}
+    \varphi_{a+bX}(t) = e^{ita}\varphi_X(bt), t\in\mathbb{R}.
+\end{align*}
+
+\begin{example}
+    Seja $U$ uniformemente distribuída em $(-1,1)$. Então dado $t\neq 0$,
+    \begin{align*}
+        \varphi_U(t) &= \int_{-1}^{1} e^{itu}\frac{1}{2} du \\
+        &= \frac{1}{2}\left( \frac{e^{it} - e^{-it}}{it} \right) \\
+        &= \frac{\sin t}{t}.
+    \end{align*}
+    Dados $a<b$, seja
+    \begin{align*}
+        X = \frac{a+b}{2} + \frac{b-a}{2}U.
+    \end{align*}
+    Temos $X$ uniformemente distribuída em $(a,b)$ e, para $t\neq 0$,
+    \begin{align*}
+        \varphi_X(t) = e^{it(a+b)/2}\frac{ \sin((b-a)t/2) }{(b-a)t/2}.
+    \end{align*}
+    Por outro lado,
+    \begin{align*}
+        \varphi_X(t) &= \int_{a}^{b} e^{itx}\frac{1}{b-a}dx \\
+        &= \frac{e^{ibt} - e^{iat}}{it(b-a)}.
+    \end{align*}
+    Não é muito complicado verificar que os dois valores concordam.
+\end{example}
+
+\begin{example}
+    Seja $X$ uma v.a. exponencial de parâmetro $\lambda$. Então
+    \begin{align*}
+        \varphi_X(t) &= \int_{0}^{\infty} e^{itx}\lambda e^{-\lambda x} dx \\
+        &= \lambda\int_{0}^{\infty} e^{-(\lambda - it)x} dx \\
+        &= \frac{\lambda}{\lambda - it}e^{-(\lambda-it)x}\Big|_{\infty}^0.
+    \end{align*}
+    Como $\displaystyle{ \lim_{x\to\infty} e^{-\lambda x} = 0 }$ e $e^{itx}$ é limitado em $x$, segue que
+    \begin{align*}
+        \lim_{x\to\infty} e^{-(-\lambda -it)x} = \lim_{x\to\infty} e^{-\lambda x}e^{itx} = 0.
+    \end{align*}
+    Logo,
+    \begin{align*}
+        \varphi_X(t) = \frac{\lambda}{\lambda - it}.
+    \end{align*}
+\end{example}
+Suponha que $X$ e $Y$ são v.a.'s independentes. Então $e^{itX}$ e $e^{itY}$ também são independentes, de modo que
+\begin{align*}
+    \varphi_{X+Y}(t) = E[e^{it(X+Y)}] = E[e^{itX}e^{itY}] = E[e^{itX}]E[e^{itY}],
+\end{align*}
+ou seja,
+\begin{align*}
+    \varphi_{X+Y}(t) = \varphi_X(t)\varphi_Y(t), t\in\mathbb{R}.
+\end{align*}
+Essa fórmula se estende facilmente para nos dar o fato de que a função característica de uma soma finita de v.a.'s independentes é o produto das funções características individuais.
+
+Podemos mostrar também que $\varphi_X(t)$ é contínua em $t$; ademais, se $X$ tem $n$-ésimo momento finito, então $\varphi_X^{(n)}(t)$ existe, é contínua em $t$ e pode ser calculada por
+\begin{align*}
+    \varphi_X^{(n)}(t) = \frac{d^n}{dt^n}E[e^{itX}] = E[\frac{d^n}{dt^n}e^{itX}] = E[(iX)^ne^{itX}].
+\end{align*}
+Em particular,
+\begin{align*}
+    \varphi_X^{(n)}(0) = i^nE[X^n].
+\end{align*}
+Expandindo $\varphi_X(t)$ em série de potências, temos
+\begin{align*}
+    \varphi_X(t) = E[e^{itX}] = E\left[ \sum_{n=0}^{\infty} \frac{(itX)^n}{n!} \right] = \sum_{n=0}^{\infty} \frac{i^nE[X^n]}{n!}t^n.
+\end{align*}
+
+\begin{example}
+    Seja $X$ normalmente distribuída com média 0 e variância $\sigma^2$. Vimos que $E[X^n] = 0$ se $n$ é ímpar e, se $n$ é par,
+    \begin{align*}
+        E[X^n] = E[X^{2k}] = \frac{\sigma^{2k}(2k)!}{2^kk!}.
+    \end{align*}
+    Logo,
+    \begin{align*}
+        \varphi_X(t) = \sum_{k=0}^{\infty} \frac{i^{2k}E[X^{2k}]}{(2k)!}t^{2k} = \sum_{k=0}^{\infty} \frac{(-\sigma^2t^2/2)^k}{k!} = e^{-\sigma^2t^2/2}.
+    \end{align*}
+    De forma geral, se $X\sim N(\mu, \sigma^2)$, então $X = \mu + Y$ com $Y\sim N(0,\sigma^2)$. Daí,
+    \begin{align*}
+        \varphi_X(t) = e^{it\mu}e^{-\sigma^2t^2/2}, t\in\mathbb{R}.
+    \end{align*}
+\end{example}
+Seja $X$ v.a. com f.g.m. $M_X(t)$ finita em $(-t_0, t_0)$ para algum $t_0>0$. Como
+\begin{align*}
+    M_X(t) = E[e^{tX}]
+\end{align*}
+e
+\begin{align*}
+    \varphi_X(t) = E[e^{itX}],
+\end{align*}
+é razoável esperar que
+\begin{align*}
+    \varphi_X(t) = M_X(it).
+\end{align*}
+Dito de outro modo, é razoável esperar que trocando $t$ por $it$ na f.g.m. obtemos a fórmula da função característica. Esse de fato é o caso, mas um entendimento adequado da teoria envolve o conceito de continuação analítica da teoria de funções complexas. Para exemplificar, seja $X\sim N(\mu, \sigma^2)$. Vimos que
+\begin{align*}
+    M_X(t) = e^{\mu t}e^{\sigma^2t^2/2},
+\end{align*}
+de modo que
+\begin{align*}
+    M_X(it) = e^{\mu(it)}e^{\sigma^2(it)^2/2} = e^{i\mu t}e^{-\sigma^2t^2/2},
+\end{align*}
+como vimos.
 
 \subsection{Fórmulas de inversão e o Teorema da Continuidade}
+Seja $X$ uma v.a. inteira. Sua função característica é dada por
+\begin{align*}
+    \varphi_X(t) = \sum_{j\in\mathbb{Z}} e^{ijt}f_X(j).
+\end{align*}
+Uma das propriedades mais úteis de $\varphi_X(t)$ é que ela pode ser usada para calcular $f_X(k)$. Mais especificamente, temos a ``fórmula de inversão''
+\begin{align*}
+    f_X(k) = \frac{1}{2\pi}\int_{-\pi}^{\pi} e^{-ikt}\varphi_X(t) dt.
+\end{align*}
+Para verificá-la, escrevemos o lado direito como
+\begin{align*}
+    \frac{1}{2\pi}\int_{-\pi}^{\pi} e^{-ikt}\left[ \sum_{j\in\mathbb{Z}} e^{ijt}f_X(j) \right] dt.
+\end{align*}
+Pode-se mostrar que é permitido trocar a integral com a série, de maneira que temos
+\begin{align*}
+    \sum_{j\in\mathbb{Z}} f_X(j)\frac{1}{2\pi}\int_{-\pi}^{\pi} e^{i(j-k)t} dt.
+\end{align*}
+Para completar a demonstração, precisamos mostrar que essa última expressão é igual a $f_X(k)$. Para isso, é suficiente mostrar que
+\begin{align*}
+    \frac{1}{2\pi}\int_{-\pi}^{\pi} e^{i(j-k)t} dt = \begin{cases}
+    1, j = k \\
+    0, j\neq k
+    \end{cases}.
+\end{align*}
+É claro que para $j=k$ vale o exposto acima. Se $j\neq k$, então
+\begin{align*}
+    \frac{1}{2\pi}\int_{-\pi}^{\pi} e^{i(j-k)t} dt &= \frac{e^{i(j-k)\pi} - e^{-i(j-k)\pi}}{2\pi i(j-k)} \\
+    &= \frac{ \sin((j-k)\pi) }{\pi(j-k)} \\
+    &= 0,
+\end{align*}
+como queríamos.
+
+\begin{example}
+    Sejam $X_1, \dots, X_n$ v.a.'s inteiras i.i.d. e $S_n = X_1 + \cdots + X_n$. Então $\varphi_{S_n}(t) = (\varphi_{X_1}(t))^n$ e, pela fórmula de inversão,
+    \begin{align*}
+        f_{S_n}(k) = \frac{1}{2\pi}\int_{-\pi}^{\pi} e^{ikt}(\varphi_{X_1}(t))^n dt.
+    \end{align*}
+    Essa igualdade é a base de quase todos os métodos para a análise do comportamento de $f_{S_n}(k)$ para $n$ grande e, em particular, é a base da prova do TLC ``local''.
+\end{example}
+
+Existe, ainda, uma análogo para v.a.'s contínuas da fórmula de inversão. Seja $X$ v.a. cuja função característica é integrável, ou seja,
+\begin{align*}
+    \int_{\mathbb{R}} |\varphi_X(t)| dt < \infty.
+\end{align*}
+Pode-se mostrar que nesse caso $X$ é v.a. contínua com densidade $f_X$ dada por
+\begin{align*}
+    f_X(x) = \frac{1}{2\pi}\int_{\mathbb{R}} e^{-ixt}\varphi_X(t) dt.
+\end{align*}
+
+\begin{example}
+    Seja $X\sim N(0, \sigma^2)$. Vamos mostrar que a fórmula de inversão acima é válida para $X$. Sabemos que $\varphi_X(t) = e^{-\sigma^2t^2/2}$. Logo, por definição,
+    \begin{align*}
+        e^{-\sigma^2t^2/2} = \int_{\mathbb{R}} e^{itx}\frac{1}{\sigma\sqrt{2\pi}}e^{-x^2/2\sigma^2} dx.
+    \end{align*}
+    Se substituirmos $t$ por $-t$ e $\sigma$ por $1/\sigma$, obtemos
+    \begin{align*}
+        e^{-t^2/2\sigma^2} = \int_{\mathbb{R}} e^{-itx}\frac{\sigma}{\sqrt{2\pi}}e^{-\sigma^2x^2/2} dx
+    \end{align*}
+    ou, equivalentemente,
+    \begin{align*}
+        \frac{1}{\sigma\sqrt{2\pi}}e^{-t^2/2\sigma^2} = \frac{1}{2\pi}\int_{\mathbb{R}} e^{-itx}e^{-\sigma^2x^2/2} dx.
+    \end{align*}
+    Finalmente, trocando $x$ por $t$ na última igualdade, obtemos
+    \begin{align*}
+        \frac{1}{\sigma\sqrt{2\pi}}e^{-x^2/2\sigma^2} = \frac{1}{2\pi}\int_{\mathbb{R}} e^{-itx}e^{-\sigma^2t^2/2} dt,
+    \end{align*}
+    que nada mais é que a fórmula de inversão no caso particular de $X\sim N(0, \sigma^2)$.
+\end{example}
+
+Seja $X$ v.a. qualquer e seja $Y$ v.a. independente de $X$ com distribuição normal padrão. Seja ainda $c>0$ uma constante positiva. Então $X+cY$ tem função característica
+\begin{align*}
+    \varphi_X(t)e^{-c^2t^2/2}.
+\end{align*}
+Como $\varphi_X(t)$ é limitada em módulo por 1 e $e^{-c^2t^2/2}$ é integrável, segue que $X+cY$ tem uma função característica integrável. Logo, podemos aplicar a fórmula de inversão e $X+cY$ é v.a. contínua com densidade dada por
+\begin{align*}
+    \varphi_{X+cY}(x) = \frac{1}{2\pi}\int_{\mathbb{R}} e^{-itx}\varphi_X(t)e^{-c^2t^2/2} dt.
+\end{align*}
+Integrando ambos os lados em $[a,b]$ e trocando a ordem de integração, concluímos que
+\begin{align*}
+    P(a\leq X+cY\leq b) &= \frac{1}{2\pi}\int_{a}^{b}\left( \int_{\mathbb{R}} e^{-itx}\varphi_X(t)e^{-c^2t^2/2} dt \right) dx \\
+    &= \frac{1}{2\pi}\int_{\mathbb{R}}\left( e^{-itx} dx \right)\varphi_X(t) e^{-c^2t^2/2} dt
+\end{align*}
+ou
+\begin{align*}
+    P(a\leq X+cY\leq b) = \frac{1}{2\pi}\int_{\mathbb{R}} \left( \frac{e^{-ibt} - e^{-iat}}{-it} \right)\varphi_X(t)e^{-c^2t^2/2} dt.
+\end{align*}
+A importância desta última equação é que ela é válida para qualquer v.a. $X$. O lado direito dela depende apenas de $X$ através de $\varphi_X(t)$. Usando esse fato e fazendo $c\to 0$, pode-se mostrar que a f.d. de $X$ é determinada por sua função característica. Esse resultado é conhecido como \textbf{teorema da unicidade}, e pode ser enunciado como segue.
+
+\begin{theorem}[Unicidade]
+Se duas v.a.'s têm a mesma função característica, elas têm a mesma função de distribuição.
+\end{theorem}
+
+\begin{example}
+    Vamos usar o teorema da unicidade para mostrar que a soma de duas v.a.'s normais independentes é também normal. Sejam $X$ e $Y$ independentes com distribuições $N(\mu_1, \sigma_1^2)$ e $N(\mu_2, \sigma_2^2)$, respectivamente. Então
+    \begin{align*}
+        \varphi_X(t) = e^{i\mu_1 t}e^{-\sigma_1^2t^2/2}
+    \end{align*}
+    e
+    \begin{align*}
+        \varphi_Y(t) = e^{i\mu_2 t}e^{-\sigma_2^2t^2/2},
+    \end{align*}
+    de modo que
+    \begin{align*}
+        \varphi_{X+Y}(t) = \varphi_X(t) = e^{i(\mu_1 + \mu_2)t}e^{-(\sigma_1^2 + \sigma_2^2)t^2/2}.
+    \end{align*}
+    Logo, a função característica de $X+Y$ é a mesma que a de uma v.a. com distribuição normal de média $\mu_1+\mu_2$ e variância $\sigma_1^2+\sigma_2^2$. Pelo teorema da unicidade, $X+Y$ deve ter essa distribuição normal.
+\end{example}
+
+A aplicação mais importante da fórmula de inversão ``contínua'' é que ela pode ser usada para derivar o resultado a seguir, que é a base da prova da LfGN e do TLC.
+
+\begin{theorem}[Continuidade]
+Sejam $X_n, n\geq 1$ e $X$ v.a.'s tais que
+\begin{align*}
+    \lim_{n\to\infty} \varphi_{X_n}(t) = \varphi_X(t), t\in\mathbb{R}.
+\end{align*}
+Então
+\begin{align*}
+    \lim_{n\to\infty} F_{X_n}(t) = F_X(x)
+\end{align*}
+em todos os pontos onde $F_X$ é contínua.
+\end{theorem}
+
+Esse teorema diz que a convergência de funções características implica a convergêencia das funções de distribuição correspondentes ou, dito de outro modo, que as funções de distribuição ``dependem continuamente'' de suas funções características. Por isso, esse teorema é conhecido por \textbf{teorema da continuidade.} Sua demonstração é trabalhosa e não será apresentada aqui.
+
 
 \subsection{Demonstração da Lei Fraca dos Grandes Números e do Teorema do Limite Central}
+Nessa seção, usaremos o teorema da continuidade para provar a LfGN e o TLC. Para tal, precisamos discutir primeiro o comportamento assintótico de $\log\varphi_X(t)$ próximo de $t=0$. 
 
+Seja $z\in\mathbb{C}$ tal que $|z-1| < 1$. Podemos definir $\log z$ pela série de potências (para $|z-1|\geq 1$, outras definições de $\log z$ são necessárias)
+\begin{align*}
+    \log z = (z-1) - \frac{(z-1)^2}{2} + \frac{(z-1)^3}{3} - \cdots 
+\end{align*}
+Com essa definição, temos as propriedades usuais que $\log 1 = 0$, $e^{\log z} = z, |z-1|<1$, e se $h(t), a < t < b$ é uma função holomorfa tal que $|h(t) - 1| < 1$, então
+\begin{align*}
+    \frac{d}{dt}\log h(t) = \frac{h'(t)}{h(t)}.
+\end{align*}
+Seja $X$ v.a. com função característica $\varphi_X$. Então $\varphi_X$ é contínua e $\varphi_X(0) = 1$. Logo, $\log\varphi_X(t)$ é bem definida para $t$ próximo de 0 e $\log\varphi_X(0) = 0$.
 
+Suponha agora que $X$ tem média finita $\mu$. Então $\varphi_X(t)$ é diferenciável e $\varphi_X'(0) = i\mu$. Logo,
+\begin{align*}
+    \lim_{t\to 0}\frac{\log\varphi_X(t)}{t} &= \lim_{t\to 0}\frac{ \log\varphi_X(t) - \log\varphi_X(0) }{t-0} \\
+    &= \frac{\varphi_X'(0)}{\varphi_X(0)} \\
+    &= i\mu.
+\end{align*}
+Consequentemente,
+\begin{align*}
+    \lim_{t\to 0} \frac{ \log\varphi_X(t) - i\mu t }{t} = 0.
+\end{align*}
+Suponha que $X$ tem variância finita $\sigma^2$. Então $\varphi_X(t)$ é duas vezes diferenciável e
+\begin{align*}
+    \varphi_X''(0) = -E[X^2] = -(\mu^2 + \sigma^2).
+\end{align*}
+Podemos aplicar a regra de l'Hôspital para obter
+\begin{align*}
+    \lim_{t\to 0} \frac{ \log\varphi_X(t) - i\mu t }{t^2} &= \lim_{t\to 0} \frac{ \varphi_X'(t)/\varphi_X(t) - i\mu }{2t} \\
+    &= \lim_{t\to 0}\frac{ \varphi_X'(t) - -i\mu\varphi_X(t) }{2t\varphi_X(t)} \\
+    &= \lim_{t\to 0}\frac{ \varphi_X'(t) - i\mu\varphi_X(t) }{2t}.
+\end{align*}
+Aplicando a regra de l'Hôspital novamente, temos
+\begin{align}
+    \lim_{t\to 0}\frac{ \log\varphi_X(t) - i\mu t }{t^2} &= \frac{ \varphi_X''(0) - i\mu\varphi_X'(0) }{2} \\
+    &= \frac{ -(\mu^2 + \sigma^2) - (i\mu)^2}{2} \\
+    &= \frac{ -\sigma^2 }{2}.
+\end{align}
+
+\begin{theorem}[LfGN]
+Sejam $X_1, \dots, X_n$ v.a.'s i.i.d. com média finita $\mu$ e $S_n = X_1 + \cdots + X_n$. Então para todo $\varepsilon < 0$,
+\begin{align*}
+    \lim_{n\to\infty} P\left( \left|\frac{S_n}{n} - \mu\right| > \varepsilon \right) = 0.
+\end{align*}
+\end{theorem}
+\begin{proof}
+A função característica de $S_n/n - \mu$ é
+\begin{align}
+    e^{-i\mu t}(\varphi_{X_1}(t/n))^n.
+\end{align}
+Fixe $t$. Então para $n$ suficientemente grande, $t/n$ está suficientemente próximo de 0 de modo que $\log\varphi_{X_1}(t/n)$ é bem definida e
+\begin{align*}
+    e^{-i\mu t}(\varphi_{X_1}(t/n))^n = \exp[n(\log\varphi_{X_1}(t/n) - i\mu(t/n))].
+\end{align*}
+Afirmamos que
+\begin{align*}
+    \lim_{n\to\infty} n(\log\varphi_{X_1}(t/n) - i\mu(t/n)) = 0.
+\end{align*}
+Essa equação é imediata para $t=0$ já que $\log\varphi_{X_1}(0) = \log 1 = 0$. Se $t\neq 0$, podemos escrever o lado esquerdo como
+\begin{align*}
+    t\lim_{n\to\infty} \frac{ \log\varphi_X(t/n) - i\mu(t/n) }{t/n}.
+\end{align*}
+Mas $t/n\xrightarrow{n\to\infty} 0$, de modo que o último limite é 0, e está mostrado o limite desejado. Segue então que a função característica de $S_n/n - \mu$ se aproxima de 1 quando $n\to\infty$. Agora, 1 é a função característica de uma v.a. $X$ tal que $P(X=0) = 1$. A f.d. de $X$ é dada por
+\begin{align*}
+    F_X(x) = \begin{cases}
+    1, x\geq 0 \\
+    0, x < 0
+    \end{cases}.
+\end{align*}
+A f.d. é contínua em todo ponto menos em $x=0$. Tome $\varepsilon > 0$. Pelo teorema da continuidade,
+\begin{align*}
+    \lim_{n\to\infty} P\left( S_n/n - \mu \leq -\varepsilon \right) = F_X(-\varepsilon) = 0
+\end{align*}
+e
+\begin{align*}
+    \lim_{n\to\infty} P\left( S_n/n - \mu \leq \varepsilon \right) = F_X(\varepsilon) = 1.
+\end{align*}
+Esse último resultado implica que
+\begin{align*}
+    \lim_{n\to\infty} P\left( \frac{S_n}{n} - \mu > \varepsilon \right) = 0
+\end{align*}
+que, junto com o penúltimo limite, implica a LfGN.
+\end{proof}
+
+\begin{theorem}[Limite Central]
+Sejam $X_1, X_2, \dots$ v.a.'s i.i.d. com média finita $\mu$ e variância não nula $\sigma^2$. Então
+\begin{align*}
+    \lim_{n\to\infty} P\left( \frac{S_n - n\mu}{\sigma\sqrt{n}} \leq x\right) = \Phi(x), x\in\mathbb{R}.
+\end{align*}
+\end{theorem}
+\begin{proof}
+Faça
+\begin{align*}
+    S_n^* = \frac{S_n - n\mu}{\sigma\sqrt{n}}.
+\end{align*}
+Então, para $t$ fixo e $n$ suficientemente grande,
+\begin{align*}
+    \varphi_{S_n^*}(t) = e^{-in\mu t/\sigma\sqrt{n}}\varphi_{S_n}(t/\sigma\sqrt{n}) = e^{-in\mu t/\sigma\sqrt{n}}(\varphi_{X_1}(t/\sigma\sqrt{n}))^n,
+\end{align*}
+ou
+\begin{align*}
+    \varphi_{S_n^*}(t) = \exp[ n( \log\varphi_{X_1}(t/\sigma\sqrt{n}) - i\mu(t/\sigma\sqrt{n}) ) ].
+\end{align*}
+Afirmamos que
+\begin{align*}
+    \lim_{n\to\infty} n( \log\varphi_{X_1}(t/\sigma\sqrt{n}) - i\mu(t/\sigma\sqrt{n}) ) = -t^2/2.
+\end{align*}
+Se $t=0$, então ambos os lados são 0 e a equação vale. Se $t\neq 0$, podemos escrever o lado esquerdo como
+\begin{align*}
+    \frac{t^2}{\sigma^2}\lim_{n\to\infty} \frac{ \log\varphi_{X_1}(t/\sigma\sqrt{n}) - i\mu(t/\sigma\sqrt{n}) }{(t/\sigma\sqrt{n})^2},
+\end{align*}
+que é igual a
+\begin{align*}
+    \frac{t^2}{\sigma^2}\left( -\frac{\sigma^2}{2} \right) = -\frac{t^2}{2}.
+\end{align*}
+Logo a equação vale para todo $t$. Segue daí que
+\begin{align*}
+    \lim_{n\to\infty} \varphi_{S_n^*}(t) = e^{-t^2/2}, t\in\mathbb{R}.
+\end{align*}
+Ora, mas essa é a função característica de uma v.a. $X$ com distribuição normal padrão e f.d. $\Phi(x)$. Logo, pelo teorema da continuidade,
+\begin{align*}
+    \lim_{n\to\infty} P(S_n^* \leq x) = \Phi(x), x\in\mathbb{R},
+\end{align*}
+como queríamos mostrar.
+\end{proof}
 \end{document}
