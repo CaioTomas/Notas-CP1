@@ -440,7 +440,7 @@ então os valores possíveis de $Y$ são 0 e 1. Temos $P(Y=1) = P(X\leq 3) = 1 -
 Seja $X$ v.a. contínua com f.d. $f_X$ tal que $f_X(x) = 0$ para todo $x\in I$, sendo $I$ um aberto da reta. Suponha que $g:\mathbb{R}\to\mathbb{R}$ seja uma função estritamente monótona e derivável em $I$. Então $Y=g(X)$ tem densidade dada por
 \begin{align*}
     f_Y(y) = \begin{cases}
-    f_x(g^{-1}(y))\left| \frac{d}{dy}g^{-1}(y) \right|, y\in g(I) \\
+    f_X(g^{-1}(y))\left| \frac{d}{dy}g^{-1}(y) \right|, y\in g(I) \\
     0, y\notin g(I)
     \end{cases}.
 \end{align*}
@@ -789,7 +789,7 @@ Novamente sob algumas condições fracas de regularidade, podemos escrever
 \end{align*}
 Naturalmente, $X_1, \dots, X_n$ são independentes se, e só se, $F(x_1, \dots, x_n) = F_{X_1}(x_1)\cdots F_{X_n}(x_n), \forall (x_1, \dots, x_n)\in\mathbb{R}^n$ ou, equivalentemente, se, e só se, $f(x_1, \dots, x_n) = f_{X_1}(x_1)\cdots f_{X_n}(x_n), \forall (x_1, \dots, x_n)\in\mathbb{R}^n$.
 
-\subsection{Função de distribuição $n$-dimensional}
+\subsection{Função de distribuição \texorpdfstring{$n$}{n}-dimensional}
 Dada $F:\mathbb{R}^n\to\mathbb{R}$ uma função, estamos interessados em saber as condições que $F$ deve satisfazer para ser função de distribuição em $\mathbb{R}^n$. Pensando na f.d. unidimensional, as três condições a seguir são naturais de serem exigidas.
 \begin{itemize}
     \item[(F1)] $F(x_1, \dots, x_n)$ é não decrescente em cada variável, ou seja, se $x<y$ então
