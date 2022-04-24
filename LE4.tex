@@ -11,7 +11,7 @@
         p_{X,Y}(x,y) = \begin{cases}
             k(2x+y), x,y = 1,2 \\
             0, \text{ c.c.}
-        \end{cases},
+        \end{cases}
     \end{align*}
     sendo $k$ uma constante real.
     \begin{enumerate}[a)]
@@ -19,6 +19,33 @@
         \item Determine as funções de probabilidade marginais de $X$ e $Y$.
         \item São $X$ e $Y$ independentes?
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Devemos ter
+            %
+            \[
+            \sum_{x,y} p_{X,Y}(x,y) = 1 \implies k\sum_{x=1}^22x\sum_{y=1}^2 y = 1
+                                        \implies k = 1/18.
+            \]
+            %
+            \item Para $x=1,2$, temos
+            %
+            \[
+            p_X(x) = \sum_y p_{X,Y}(x,y) = \frac{1}{18}(4x+3)
+            \]
+            %
+            e, caso contrário, $p_X(x) = 0$. Analogamente, para $y=1,2$ temos
+            %
+            \[
+            p_Y(y) = \sum_x p_{X,Y}(x,y) = \frac{1}{18}(2y+6)
+            \]
+            %
+            e, caso contrário, $p_Y(y) = 0$.
+            \item Não, pois $p_{X,Y}(1,1) = 1/6 \neq (7/18)(8/18) = p_X(1)p_Y(1)$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Considere um experimento de lançar três vezes duas moedas distintas $A$ e $B$. Suponha que a moeda $A$ é honesta, isto é, $P(\text{cara}) = P(\text{coroa}) = 1/2$, e a moeda $B$ não é honesta, com $P(\text{cara}) = 1/4$ e $P(\text{coroa}) = 3/4$. Seja $X$ a v.a. que denota o número de caras resultantes da moeda $A$ e $Y$ a v.a. que denota o número de caras da moeda $B$.
     \begin{enumerate}[a)]
         \item Determine os valores possíveis do vetor $(X,Y)$.
@@ -26,18 +53,104 @@
         \item Determine a função de probabilidade conjunta de $X$ e $Y$.
         \item Calcule $P(X=Y)$, $P(X>Y)$ e $P(X+Y\leq 4)$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item O conjunto de valores possíveis é $\{(i,j) : i,j = 0, 1, 2, 3\}$.
+            \item Temos
+            %
+            \[
+            p_X(x) = \begin{cases}
+            1/8, x = 0,3 \\
+            3/8, x = 1,2 \\
+            0, \text{c.c.}
+            \end{cases}, \qquad
+            p_X(y) = \begin{cases}
+            27/64, y = 0,1 \\
+            9/64, y = 2 \\
+            1/64, y = 3 \\
+            0, \text{c.c.}
+            \end{cases}.
+            \]
+            %
+            \item $p_{X,Y}(x,y) = p_X(x)p_Y(y)$.
+            \item Temos 
+            %
+            \[
+            P(X=Y) = \sum_{k=1}^3 P(X=k)P(Y=k) = \frac{27+81+27+1}{512} = 136/512,
+            \]
+            %
+            \[
+            P(X>Y) = \frac{81+162+63}{512} = \frac{306}{512}
+            \]
+            %
+            e
+            %
+            \[
+            P(X+Y\leq 4) = \frac{1}{8} + \frac{3}{8} + \frac{189+54}{512} = \frac{499}{512}.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Seja $X$ uma variável aleatória geometricamente distribuída com parâmetro $p$ e seja $M\in\mathbb{N}$ uma constante. Determine a função de probabilidade de $Y = \min(X,M)$.
     \item Considere 10 lançamentos independentes de um dado honesto e seja $X_i$ o número de ocorrências da face $i$,$i=1,\dots,6$.
+    %
+    \begin{proof}[Solução]
+        Temos dois casos
+        %
+        \begin{enumerate}
+            \item $k<M$: $P(Y=k) = P(X=k) = p(1-p)^{k-1}$ \\
+            \item $k=M$: $P(Y=M) = P(X\geq M) = (1-p)^{M-1}$.
+        \end{enumerate}
+        %
+        Portanto,
+        %
+        \[
+        p_Y(k) = \begin{cases}
+        p(1-p)^{k-1}, k\in\{2, \dots, M-1\} \\
+        (1-p)^{M-1}, k=M \\
+        0, \text{c.c.}
+        \end{cases}
+        \]
+        %
+    \end{proof}
+    %
     \begin{enumerate}[a)]
     \item Determine a função de probabilidade conjunta de $X_1, \dots, X_6$.
     \item Determine as funções de probabilidade marginais de $X_i$, para $i=1,\dots,6$
     \item São $X_1, \dots, X_6$ independentes?
     \end{enumerate}
+     %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos $(X_1, X_2, \dots, X_6) \sim \text{Multinomial}(10,1/6,1/6,1/6,1/6,1/6,1/6)$.
+            \item Temos $X_i\sim B(n, 1/6), \, i=1,2,\dots,6$.
+            \item Não, porque 
+            $p_{X_1, \dots, X_6}(x_1, \dots, x_6) \neq p_{X_1}(x_1)\cdots p_{X_6}(x_6)$ em geral.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Suponha que se distribui aleatoriamente $2r$ bolas em $r$ caixas. Seja $X_i$ o número de bolas na caixa $i$.
     \begin{enumerate}[a)]
     \item Obtenha a função de probabilidade conjunta de $X_1, \dots, X_r$.
     \item Obtenha a probabilidade de que cada caixa contenha exatamente 2 bolas.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos $(X_1, \dots, X_r) \sim \text{Multinomial}(2r, p_1, \dots, p_r)$, com
+            $p_i = 1/r$, $i=1,2,\dots,r$.
+            \item Temos
+            %
+            \[
+            P(X_1 = 2, \dots, X_r = 2) = \binom{2r}{2,2,\dots,2}\cdot\frac{1}{r^2}\cdots\frac{1}{r^2}
+                                       = \frac{(2r)!}{2^r\cdot r^{2r}}.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ duas variáveis aleatórias independentes que se distribuem uniformemente sobre $\{0, \dots, N\}$. Determine:
     \begin{enumerate}[a)]
     \item $P(X\geq Y)$.
@@ -46,6 +159,60 @@
     \item a função de probabilidade de $W = \max(X,Y)$.
     \item a função de probabilidade de $U = |Y-X|$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \begin{align*}
+                P(X\geq Y) &= P(X=0)P(Y\leq 0) + \cdots + P(X=N)P(Y\leq N) \\
+                           &= \frac{1}{N+1}\left( \frac{1}{N+1} + \frac{2}{N+1} 
+                           + \cdots + \frac{N}{N+1} + 1 \right) \\
+                           &= \frac{N+2}{2(N+1)}.
+            \end{align*}
+            %
+            \item Temos
+            %
+            \[
+            P(X=Y) = \sum_{i=0}^N P(X=i)P(Y=i) = \frac{1}{N+1}.
+            \]
+            %
+            \item Para $k=0,1,\dots,N$ temos
+            %
+            \begin{align*}
+                P(Z=k) &= P(X=k)P(Y=k) + P(X>k)P(Y=k) + P(X=k)P(Y>k) \\
+                       &= \frac{1}{(N+1)^2} + 2\frac{N-k}{(N+1)^2} \\
+                       &= \frac{2(N-k) + 1}{(N+1)^2}
+            \end{align*}
+            %
+            e, caso contrário, $P(Z=k) = 0.$
+            \item Para $k=0,1,\dots,N$, temos
+            %
+            \begin{align*}
+                P(W = k) &= P(X=k)P(Y=k) + P(X=k)P(Y<k) + P(X<k)P(Y=k) \\
+                         &= \frac{1}{(N+1)^2} + 2\frac{k}{(N+1)^2} \\
+                         &= \frac{2k + 1}{(N+1)^2}
+            \end{align*}
+            %
+            e, caso contrário, $P(W=k) = 0$.
+            \item Para $k=0$, temos
+            %
+            \[
+            P(U=k) = P(X=Y) = \frac{1}{N+1}.
+            \]
+            %
+            Para $k=1, \dots, N$, temos
+            %
+            \begin{align*}
+                P(U=k) &= 2P(X = Y+k) \\
+                       &= 2[P(X=k)P(Y=0) + P(X=k+1)P(Y=1) + \cdots + P(X=N)P(Y = N-k)] \\
+                       &= 2\frac{N-k+1}{(N+1)^2}
+            \end{align*}
+            %
+            e, para $k\notin\{0, 1, \dots, N\}$, temos $P(U=k) = 0$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ duas variáveis aleatórias independentes com funções de probabilidade geométricas de parâmetros $p_1$ e $p_2$, respectivamente. Obtenha:
     \begin{enumerate}[a)]
     \item $P(X\geq Y)$
@@ -53,6 +220,48 @@
     \item a função de probabilidade de $Z=\min(X,Y)$
     \item a função de probabilidade de $W = X+Y$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \begin{align*}
+                P(X\geq Y) &= \sum_{i=1}^{\infty} P(X=i)P(Y\leq i).
+            \end{align*}
+            %
+            Após algumas simplificações, chegamos em
+            %
+            \[
+            P(X\geq Y) = \frac{p_2}{p_1 + p_2 - p_1p_2}.
+            \]
+            %
+            \item Temos
+            %
+            \begin{align*}
+                P(X=Y) &= \sum_{i=1}^{\infty} P(X=i)P(Y=i) \\
+                       &= \frac{p_1p_2}{p_1 + p_2 - p_1p_2}
+            \end{align*}
+            %
+            após algumas simplificações.
+            \item Para $k=1,2,\dots$, temos que
+            %
+            \[
+            P(Z>k) = P(X>k)P(Y>k) = [(1-p_1)(1-p_2)]^k.
+            \]
+            %
+            Daí,
+            %
+            \[
+            F_Z(k) = \begin{cases}
+            0, k < 1 \\
+            1 - [(1-p_1)(1-p_2)]^{[k]}, k\geq 1.
+            \end{cases}
+            \]
+            %
+            Logo, $Z \sim\text{Geo}(1 - (1-p_1)(1-p_2)) = \text{Geo}(p_1 + p_2 - p_1p_2)$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ duas variáveis aleatórias independentes com a mesma função de probabilidade geométrica de parâmetro $p$. Sejam $Z=Y-X$ e $W=\min(X,Y)$.
     \begin{enumerate}[a)]
     \item Mostre que para $w\geq 1$ e $z$ inteiros, temos
@@ -68,29 +277,180 @@
     \end{align*}
     \item Use o item anterior e o exercício 7c) para mostrar que $W$ e $Z$ são independentes.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Se $z<0$, então $X>Y$, ou seja, $Y = w$ e $X = w-z$. Se $z\geq 0$,
+            então $Y\geq X$, ou seja, $X = w$ e $Y = w+z$. Portanto,
+            %
+            \[
+            P(W=w, Z=z) = \begin{cases}
+            P(X = w-z)P(Y=w), z < 0 \\
+            P(X=w)P(Y = w+z), z\geq 0.
+            \end{cases}
+            \]
+            %
+            \item Do item anterior,
+            %
+            \begin{align*}
+                P(W=w, Z=z) = \begin{cases}
+                p^2(1-p)^{2(w-1)}(1-p)^{-z}, z < 0 \\
+                p^2(1-p)^{2(w-1)}(1-p)^z, z\geq 0.
+                \end{cases} = p^2(1-p)^{2(w-1)}(1-p)^{|z|}.
+            \end{align*}
+            %
+            \item Note que
+            %
+            \begin{align*}
+                p_Z(z) &= p^2(1-p)^{|z|-2}\sum_{w=1}^{\infty} (1-p)^{2w} \\
+                       &= p^2(1-p)^{|z|-2}\frac{(1-p)^2}{1 - (1-p)^2}.
+            \end{align*}
+            %
+            Logo,
+            %
+            \begin{align*}
+                p_Z(z)p_W(w) &= p^2(1-p)^{|z|-2}\frac{(1-p)^2}{1-(1-p)^2}[1-(1-p)^2](1-p)^{2(w-1)} \\
+                             &= p_{Z,W}(z,w)
+            \end{align*}
+            %
+            e, portanto, $Z$ e $W$ são independentes.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ v.a.’s independentes. Determine a função de probabilidade de $Z = X+Y$ seguintes casos:
     \begin{enumerate}[a)]
     \item $X\sim\text{Poisson}(\lambda_1)$ e $Y\sim\text{Poisson}(\lambda_2)$.
     \item $X$ e $Y$ uniformemente distribuídas sobre $\{1, 2, \dots, N\}$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}
+            \item Foi feito no texto.
+            \item Para $z = 2, \dots, N$, temos
+            %
+            \[
+            p_Z(z) = P(X+Y = z) = \sum_{x=1}^{z-1} P(X=x)P(Y=z-x) = \frac{z-1}{N^2}.
+            \]
+            %
+            Para $z = N+1, \dots, 2N$, temos
+            %
+            \[
+            p_Z(z) = P(X+Y = z) = \sum_{x=1}^{2N-z+1} P(X=x)P(Y=z-x) = \frac{2N-z+1}{N^2}.
+            \]
+            %
+            Para $z\notin\{2,3,\dots,2N\}$, $p_Z(z) = 0.$
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam $X_1, \dots, X_l$ v.a.’s independentes, tais que $X_j\sim\text{Poisson}(\lambda_j), j=1, \dots, l$. Determine a função de probabilidade de $Z = X_1 + \cdots + X_l$.
+    %
+    \begin{proof}[Solução]
+        Do exercício anterior, temos que
+        %
+        \[
+        \sum_{i=1}^l X_i \sim \text{Poisson}\left( \sum_{i=1}^l \lambda_i \right).
+        \]
+        %
+    \end{proof}
+    %
     \item Considere um experimento com três resultados possíveis que ocorrem com probabilidades $p_1$, $p_2$ e $p_3$, respectivamente. Suponha que se realiza $n$ repetições independentes do experimento e seja $X_i$ o número de vezes que ocorre o resultado $i, i =1, 2, 3$.
     \begin{enumerate}[a)]
     \item Determine a probabilidade de $X_1+X_2$.
     \item Para cada $z$, determine $P(X_2=y|X_1+X_2 = z), y\in\mathbb{R}$.
     \end{enumerate}
+    %
+    \begin{proof}
+        \begin{enumerate}[a)]
+            \item Para $z=0,1,\dots,n$, temos
+            %
+            \begin{align*}
+                p_{X_1 + X_2}(z) &= \sum_{x_1} p_{X_1, X_2}(x_1, z-x_1) \\
+                                 &= \sum_{x_1=0}^{z}
+                                 \frac{n!}{(n-z)!x_1!(z-x_1)!}p_1^{x_1}p_2^{z-x_1}p_3^{n-z} \\
+                                 &= \binom{n}{z}p_3^{n-z}
+                                 \sum_{x_1=0}^z\binom{z}{x_1}p_1^{x_1}p_2^{z-x_1} \\
+                                 &= \binom{n}{z}[1 - (p_1+p_2)]^{n-z}(p-1+p_2)^z.
+            \end{align*}
+            %
+            Logo, $X_1+X_2\sim B(n, p_1+p_2)$.
+            \item Dado $z\in\{0, 1, \dots, n\}$, temos
+            %
+            \begin{align*}
+                P(X_2 = y|X_1+X_2 = z) &= \frac{P(X_2 = y, X_1 = z-y)}{P(X_1+X_2 = z)} \\
+                                       &= \frac{P(X_2 = y, X_1 = z-y, X_3 = n-z)}{P(X_1+X_2 = z)} \\
+                                       &= \frac{n!}{(z-y)!y!(n-z)!}\cdot
+                                       \frac{p_1^{z-y}p_2^{y}p_3^{n-z}}{(p_1+p_2)^zp_3^{n-z}}\cdot
+                                       \frac{z!(n-z)!}{n!} \\
+                                       &= \binom{z}{y}\left(\frac{p_1}{p_1+p_2}\right)^{z-y}
+                                       \left(\frac{p_2}{p_1+p_2}\right)^y
+            \end{align*}
+            %
+            para $y = 0, 1, \dots, z$ e $0$ caso contrário.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Use a aproximação de Poisson para calcular a probabilidade de:
     \begin{enumerate}[a)]
     \item que no máximo 2 dentre 50 motoristas tenham carteiras de habilitação inválida se normalmente 5\% dos motoristas o tem;
     \item que uma caixa com 100 fusíveis contenha no máximo 2 fusíveis defeituosos se 3\% dos fusíveis fabricados são defeituosos.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos $X\sim B(50, 0,05) \approx \text{Poisson}(5/2)$. Daí, 
+            $P(X\leq 2) = e^{-5/2}53/8$.
+            \item Temos $X\sim B(100, 0,03) \approx \text{Poisson}(3)$. Logo,
+            $P(X\leq 2) = e^{-3}17/2$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Lança-se um dado até observar o número 6. Considere $X$ o número de lançamentos até observar 6 pela primeira vez. Responda:
     \begin{enumerate}[a)]
     \item qual é a probabilidade de que sejam necessários seis lançamentos no máximo?
     \item quantos lançamentos são necessários para que a probabilidade de obter 6 seja no mínimo $1/2$?
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos $P(X\leq 6) = 1 - (5/6)^6$.
+            \item Queremos $k$ inteiro tal que $(5/6)^k \leq 1/2$. Para isso, devemos ter
+            %
+            \[
+            k \geq \frac{\ln(1/2)}{\ln(5/6)} = 3,8.
+            \]
+            %
+            Logo, $k=4$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ v.a.'s independentes com distribuição de Poisson de parâmetros $\lambda_1$ e $\lambda_2$, respectivamente. Para cada $z\in\{0,1,\dots\}$ determine $P(X=x|X+Y=z), x\in\mathbb{R}$.
-    \item Sejam $X$, $Y$ e $Z$ v.a.'s independentes com distribuições de Poisson de parâmetros $\lambda_1, \lambda_2$ e $\lambda_3$, respectivamente. Para cada $m=0,1,\dots$, determine  $P(X=x, Y=y, Z=z|X+Y+Z=m)$, para números inteiros $x$, $y$ e $z$.
+    %
+    \begin{proof}[Solução]
+        Para $x=0,1,\dots,z$ temos 
+        %
+        \begin{align*}
+            P(X=x|X+Y=z) &= \frac{P(X=x)P(Y=z-x)}{P(X+Y=z)} \\
+                         &= \binom{z}{x}\frac{\lambda_1^{x}\lambda_2^{z-x}}{(\lambda_1+\lambda_2)^z}.
+        \end{align*}
+        %
+        Caso contrário, a probabilidade é 0.
+    \end{proof}
+    %
+    \item Sejam $X$, $Y$ e $Z$ v.a.'s independentes com distribuições de Poisson de parâmetros $\lambda_1, \lambda_2$ e $\lambda_3$, respectivamente. Para cada $m=0,1,\dots$, determine 
+    $P(X=x, Y=y, Z=z|X+Y+Z=m)$, para números inteiros $x$, $y$ e $z$.
+    %
+    \begin{proof}[Solução]
+        Para $x,y,z\in\{0,1,2,\dots\}$ tais que $x+y+z=m$, temos
+        %
+        \begin{align*}
+            P(X=x, Y=y, Z=z|X+Y+Z=m) &= \frac{P(X=x)P(Y=y)P(Z=z)}{P(X+Y+Z=m)} \\
+                                     &= \frac{m!}{x!y!z!}\cdot
+                        \frac{\lambda_1^x\lambda_2^y\lambda_3^z}{(\lambda_1+\lambda_2+\lambda_3)^m}.
+        \end{align*}
+        %
+        Do contrário, a probabilidade é nula.
+    \end{proof}
+    %
 \end{enumerate}
 
 \end{document}

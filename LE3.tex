@@ -7,16 +7,82 @@
 
 \begin{enumerate}
     \item Qualquer ponto no intervalo $[0, 1)$ pode ser representado por meio de sua expansão decimal $0, x_1x_2\cdots$; suponha que se escolhe, aleatoriamente, um ponto do intervalo $[0, 1)$. Seja $X$ o primeiro dígito da expansão decimal que representa o ponto. Determine a função de probabilidade de $X$.
+    %
+    \begin{proof}[Solução]
+        Como $X$ é uma v.a. uniforme, segue que
+        %
+        \[
+        p_X(x) = \begin{cases}
+        1/10, x\in\{0, 1, \dots, 9\} \\
+        0, \text{c.c.}
+        \end{cases}.
+        \]
+        %
+    \end{proof}
+    %
     \item \begin{enumerate}[a)]
         \item Se $X\sim B(n, p)$, determine a função de probabilidade de $Y = n - X$.
         \item Se $X\sim \text{Geom}(p)$, determine a função de probabilidade de $Y = X - 1$.
         \item Se $X$ tem uma função de probabilidade Binomial Negativa de parâmetros $r$ e $p$, (sendo $r$ inteiro e $0 < p < 1$), determine a função de probabilidade de $Y = X - r$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        %
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \[
+            p_X(k) = \begin{cases}
+            \binom{n}{k}p^k(1-p)^{n-k}, k = 0,1,\dots,n \\
+            0, \text{c.c}
+            \end{cases},
+            \]
+            %
+            logo
+            %
+            \[
+            p_Y(k) = \begin{cases}
+            \binom{n}{n-k}p^{n-k}(1-p)^{k}, k = 0, 1, \dots, n \\
+            0, \text{c.c}
+            \end{cases},
+            \]
+            %
+            ou seja, $Y\sim B(n, 1-p)$.
+            \item Temos
+            %
+            \[
+            p_Y(k) = \begin{cases}
+            (1-p)^kp, k = 0, 1, \dots \\
+            0, \text{c.c.}
+            \end{cases}.
+            \]
+            %
+            \item Temos
+            %
+            \[
+            p_Y(k) = \begin{cases}
+            \binom{r+k-1}{r-1}p^r(1-p)^{k}, k = 0, 1, \dots \\
+            0, \text{c.c.}
+            \end{cases}.
+            \]
+            %
+        \end{enumerate}
+        %
+    \end{proof}
+    %
     \item Suponha que uma caixa contenha 6 bolas vermelhas e 4 pretas. Seleciona-se uma amostra aleatória de tamanho $n$. Seja $X$ o número de bolas vermelhas na amostra. Determine a função de probabilidade de $X$ para a amostragem:
     \begin{enumerate}[a)]
     \item sem reposição;
     \item com reposição.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos $X\sim Hgeo(10,6,n)$.
+            \item Temos $X\sim B(n, 6/10)$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Seja N um número inteiro positivo e seja
     \begin{align*}
         p(x) = \begin{cases}
@@ -25,36 +91,219 @@
         \end{cases}
     \end{align*}
     Determine o valor de $c$ para o qual $p$ é uma função de probabilidade.
+    %
+    \begin{proof}[Solução]
+        Devemos ter $\sum_i p(x_i) = 1$, ou seja,
+        %
+        \[
+        \sum_{i=1}^N c2^i = 1 \iff 2c(2^N - 1) = 1 \iff c = \frac{1}{2(2^N - 1)}.
+        \]
+        %
+    \end{proof}
+    %
     \item Suponha que $X$ tem uma distribuição geométrica com $p = 0,8$. Determine as probabilidades dos seguintes eventos:
     \begin{enumerate}[a)]
     \item $P(X > 3)$
-    \item $P(4 \leq X \leq 7 \text{ou} X > 9)$;
-    \item $P(3 \leq X \leq 5 \text{ou} 7 \leq X \leq 10)$;
+    \item $P(4 \leq X \leq 7 \text{ ou } X > 9)$;
+    \item $P(3 \leq X \leq 5 \text{ ou } 7 \leq X \leq 10)$;
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}
+            \item Temos
+            %
+            \[
+            P(X>3) = 1 - P(X\leq 3)
+                   = 1 - P(X=1) - P(X=2) - P(X=3)
+                   = 0,008.
+            \]
+            %
+            \item Usando a f.d. de $X$, temos
+            %
+            \[
+            P(4\leq X\leq 7 \text{ ou } X>9) = P(X\leq 7) - P(X < 4) + 1 - P(X\leq 9)
+                                             = 0,2^3 - 0,2^7 + 0,2^9.
+            \]
+            %
+            \item Analogamente ao item b, temos que a probabilidade desejada é
+            %
+            \[
+            P(X\leq 5) - P(X < 3) + P(X\leq 10) - P(X < 7)
+            = 0,2^2 - 0,2^5 + 0,2^6 - 0,2^{10}.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Suponha que $X$ tem uma distribuição uniforme sobre $0, 1, \dots , 99$. Determine:
     \begin{enumerate}[a)]
     \item $P(X \geq 25)$;
     \item $P(2,6 < X < 12,2)$;
-    \item $P(8 < X \leq 10 ou 30 < X \leq 32)$;
+    \item $P(8 < X \leq 10 \text{ ou } 30 < X \leq 32)$;
     \item $P(25 \leq X \leq 30)$
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}
+            \item Temos
+            %
+            \[
+            P(X\geq 25) = 1 - P(X<25) = 1 - P(X\leq 24) = 1 - 25/100 = 3/4.
+            \]
+            %
+            \item Temos
+            %
+            \[
+            P(2,6<X<12,2) = P(3\leq X\leq 12) = P(X\leq 12) - P(X\leq 2) = 1/10.
+            \]
+            %
+            \item Temos
+            %
+            \[
+            P(8 < X \leq 10 \text{ ou } 30 < X \leq 32)
+            = P(9\leq X\leq 10) + P(31\leq X\leq 32)
+            = 1/25.
+            \]
+            %
+            \item Temos
+            %
+            \[
+            P(25\leq X\leq 30) = P(X\leq 30) - P(X\leq 24) = 3/50.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Suponha que o número de chegadas de clientes em um posto de informações turísticas seja uma variável aleatória com distribuição Poisson com taxa de 2 pessoas por hora ($X\sim\text{Poisson}(2)$). Para uma hora qualquer, determine a probabilidade de ocorrer:
     \begin{enumerate}[a)]
     \item pelo menos uma chegada;
     \item mais de duas chegadas, dado que chegaram menos de 5 pessoas.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item A probabilidade desejada é dada por
+            %
+            \[
+            P(X\geq 1) = 1 - P(X<1) = 1 - P(X\leq 0) = 1 - P(X=0) = 1 - e^{-2}.
+            \]
+            %
+            \item A probabilidade desejada é
+            %
+            \[
+            P(X>2|X<5) = \frac{P(2 < X < 5)}{P(X<5)} = \frac{P(3\leq X\leq 4)}{P(X\leq 4)}
+            = \frac{2e^{-2}}{7e^{-2}} = \frac{2}{7}.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Suponha que uma caixa contém 12 bolas numeradas de 1 a 12. Faz-se duas repetições independentes do experimento de selecionar aleatoriamente uma bola da caixa. Seja $X$ o maior entre os dois números observados. Determine a função de probabilidade de $X$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        p_X(k) = \begin{cases}
+        \frac{2k-1}{144}, k = 1, 2, \dots, 12 \\
+        0, \text{c.c.}
+        \end{cases}.
+        \]
+        %
+    \end{proof}
+    %
     \item Considere a situação do Exercício 8 em que a seleção é feita sem reposição. 
     \begin{enumerate}[a)]
     \item Determine a função de probabilidade de $X$;
     \item Determine a função de distribuição de $X$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \[
+            p(k) = \begin{cases}
+            \frac{k-1}{\binom{12}{2}}, k=1,2\dots, 12 \\
+            0, \text{c.c.}
+            \end{cases}.
+            \]
+            %
+            \item Temos
+            %
+            \[
+            F_X(x) = \begin{cases}
+            0, x < 2 \\
+            \frac{\binom{[x]}{2}}{\binom{12}{2}}, 2\leq x < 12 \\
+            1, x\geq 12.
+            \end{cases}
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Suponha que uma caixa contenha $r$ bolas numeradas de 1 a $r$. Seleciona-se sem reposição uma amostra aleatória de tamanho $n$. Seja $Y$ o maior número observado na amostra e $Z$ o menor. Determine:
     \begin{enumerate}[a)]
     \item $P(Y \leq y), \forall y \in \mathbb{R}$;
     \item $P(Z \geq z), \forall y \in \mathbb{R}$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \[
+            P(Y\leq y) = \begin{cases}
+            0, y<n \\
+            \frac{\binom{[y]}{n}}{\binom{r}{n}}, n\leq y < r \\
+            1, y\geq r.
+            \end{cases}
+            \]
+            %
+            \item Temos
+            %
+            \[
+            P(Z\geq z) = \begin{cases}
+            1, z<1 \\
+            \frac{\binom{r+1-z}{n}}{\binom{r}{n}}, z = 1, 2, \dots, r-n+1 \\
+            \frac{\binom{r-[z]}{n}}{\binom{r}{n}}, i < z < i+1, i = 1, 2, \dots, r-n \\
+            0, z > r-n+1
+            \end{cases}.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Considere $X$ uma variável aleatória assumindo valores em $\{0, \pm 1, \pm 2\}$. Suponha que $P(X = -2) = P(X = -1)$ e $P(X = 1) = P (X = 2)$ com a informação que $P(X > 0) = P(X < 0) = P(X = 0)$. Encontre a função de probabilidade e a função de distribuição de $X$.
+    %
+    \begin{proof}[Solução]
+        Sejam $P(X=-2) = x = P(X=-1)$, $P(X=2) = y = P(X=1)$ e $P(X=0) = z$. De
+        $P(X>0) = P(X=0) = P(X<0)$, temos $2x = 2y = z$. Daí, como $2x + 2y + z = 1$, temos
+        $x = y = 1/6$ e $z=1/3$. Portanto,
+        %
+        \[
+        p_X(k) = \begin{cases}
+        1/6, k = \pm1, \pm2 \\
+        1/3, k=0 \\
+        0, \text{c.c.}
+        \end{cases}
+        \]
+        %
+        e
+        %
+        \[
+        F_X(k) = \begin{cases}
+        0, x<-2 \\
+        1/6, -2\leq x < -1 \\
+        1/3, -1\leq x < 0 \\
+        2/3, 0\leq x < 1 \\
+        5/6, 1\leq x < 2 \\
+        1, x\geq 2
+        \end{cases}.
+        \]
+        %
+    \end{proof}
+    %
     \item Seja $X$ uma v.a. com função de distribuição dada por:
     \begin{align*}
         F_X(x) = \begin{cases}
@@ -69,13 +318,21 @@
     \begin{enumerate}[a)]
         \item $P(X < 3)$; 
         \item $P(X = 1)$; 
-        \item $P (X > 2 )$; 
+        \item $P (X > 1/2 )$; 
         \item $P(2 < X \leq 4)$; 
         \item $P(2 \leq X \leq 4)$.
     \end{enumerate}
-    
-    
-    
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos $P(X<3) = F(3^{-}) = 11/12$.
+            \item Temos $P(X=1) = F(1) - F(1^-) = 1/6$.
+            \item Temos $P(X>1/2) = 1 - F(1/2) = 3/4$.
+            \item Temos $P(2 < X\leq 4) = F(4) - F(2) = 1/12$.
+            \item Temos $P(2\leq X\leq 4) = F(4) - F(2^-) = 1/3$.
+        \end{enumerate}
+    \end{proof}
+    %
 \end{enumerate}
 
 \end{document}

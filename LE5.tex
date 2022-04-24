@@ -21,6 +21,28 @@
         \item a função de probabilidade de $X$;
         \item $EX$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \[
+            p_X(x) = \begin{cases}
+            1/8, x=-2,4 \\
+            1/2, x=1 \\
+            1/4, x=2
+            \end{cases}
+            \]
+            %
+            \item Temos
+            %
+            \[
+            EX = -2/8 + 4/8 + 1/2 + 2/4 = 5/4.
+            \]
+            %
+        \end{enumerate}   
+    \end{proof}
+    %
     \item Seja $X$ uma v.a. com função de probabilidade dada por:
     \begin{align*}
         p_X(x) = \begin{cases}
@@ -32,6 +54,19 @@
         \item Calcule $\displaystyle{ \sum_{x\in\mathbb{Z}} |x|p_X(x) }$.
         \item Mostre que $EX$ não existe.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \[
+            \sum_{x\in\mathbb{Z}}|x|p_X(x) = \frac{1}{2}\sum_{x\in\mathbb{Z}} \frac{1}{|x|+1} = \infty.
+            \]
+            %
+            \item Como a série acima diverge, não existe $EX$.
+        \end{enumerate}   
+    \end{proof}
+    %
     \item Seja $N$ um número inteiro positivo e seja $p$ a função definida por
     \begin{align*}
         p = \begin{cases}
@@ -43,15 +78,104 @@
         \item Mostre que $p$ é uma função de probabilidade.
         \item Seja $X$ v.a. com f.p. $p$; calcule $EX$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}
+            \item Temos $p(x)\geq 0$ para todo $x\in \mathbb{R}$, o conjunto $\{1, 2, \dots, N\}$
+            é finito e
+            %
+            \[
+            \sum_{x=1}^N \frac{2x}{N(N+1)} = 1.
+            \]
+            %
+            \item Temos
+            %
+            \[
+            \sum_x |x|p(x) = \sum_{x=1}^N \frac{2x^2}{N(N+1)} = \frac{2N+1}{3}.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Suponha que $X$ se distribui uniformemente em $\{1, \dots , N\}$. Determine $EX$ e $E[X^2]$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        EX = \sum_{x=1}^N \frac{x}{N} = \frac{N+1}{2}
+        \]
+        %
+        e
+        %
+        \[
+        EX^2 = \sum_{x=1}^N \frac{x^2}{N} = \frac{(N+1)(2N+1)}{6}.
+        \]
+        %
+    \end{proof}
+    %
     \item Suponha que $X$ tem distribuição binomial de parâmetros $n = 4$ e $p$. Obtenha $E[\sin(\pi X/2)]$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        E[\sin(\pi X/2)] = \sum_{x=0}^3 \sin(\pi x/2)\binom{4}{x}p^x(1-p)^{4-x}
+                         = 4p(1-p)(1-2p).
+        \]
+        %
+    \end{proof}
+    %
     \item Suponha que $X$ tem distribuição de Poisson de parâmetro $\lambda$. Determine $\displaystyle{E[\frac{1}{1+X}]}$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        E[1/(1+X)] = \sum_{x=0}^{\infty} \frac{1}{1+x}e^{-\lambda}\frac{\lambda^x}{x!}
+                   = \frac{e^{-\lambda}}{\lambda}(e^{\lambda} - 1)
+                   = \frac{1 - e^{-\lambda}}{\lambda}.
+        \]
+        %
+    \end{proof}
+    %
     \item Seja $X$ uma variável aleatória com distribuição geométrica de parâmetro $p$ e seja $M > 0$ um número inteiro positivo. Determine a esperança das seguintes v.a.’s:
     \begin{enumerate}[a)]
     \item $Z = \min(X, M)$
     \item $W = \max(X, M)$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item A esperança é
+            %
+            \[
+            \sum_{x=1}^{\infty} |\min(x,M)|p(1-p)^{x-1} 
+            = \sum_{x=1}^{\infty} \min(x,M)p(1-p)^{x-1}
+            = \frac{1 - (1-p)^M}{p}
+            \]
+            %
+            após algumas simplificações.
+            \item A esperança é
+            %
+            \[
+            \sum_{x=1}^{\infty} |\max(x,M)|p(1-p)^{x-1} 
+            = \sum_{x=1}^{\infty} \max(x,M)p(1-p)^{x-1}
+            = M + \frac{(1-p)^M}{p}
+            \]
+            %
+            após algumas simplificações.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Em ensaios de Bernoulli independentes, com probabilidade $p$ de sucesso, sejam $X$ o número de ensaios até a ocorrência do $r$-ésimo sucesso e $Y$ o número de fracassos anteriores ao $r$-ésimo sucesso. Determine $EX$ e $EY$.
+    %
+    \begin{proof}[Solução]
+        Note que $X = \sum_{i=1}^r T_i$, sendo $T_i\sim\text{Geo}(p)$, $i=1,2,\dots,r$.
+        Daí, $EX = r/p$ e, além disso, $Y = X-r$, ou seja, $Y = \sum_{i=1}^r T_i - r$.
+        Logo, $EY = r/p - r = r(1-p)/p$.
+    \end{proof}
+    %
     \item Seja $(X,Y)$ um vetor aleatório com função de probabilidade conjunta dada por:
     \begin{align*}
         p_{X,Y}(x,y)\begin{cases}
@@ -60,7 +184,19 @@
             0, \text{ c.c.}
         \end{cases},
     \end{align*}
-onde $0 < p < 1/2$. Verifique que $E[XY] = EXEY$, mas $X$ e $Y$ não são independentes.
+    onde $0 < p < 1/2$. Verifique que $E[XY] = EXEY$, mas $X$ e $Y$ não são independentes.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        E(XY) = \sum_{x=-1}^1\sum_{y=0}^1 xyp_{X,Y}(x,y) = 0.
+        \]
+        %
+        Ademais, $EXEY = 0(1-2p) = 0 = E(XY)$. Ora, mas 
+        $P(X=0, Y=1) = 1-2p \neq (1-2p)^2 = P(X=0)P(Y=1)$, logo $X$ e $Y$ não são independentes.
+    \end{proof}
+    %
 \end{enumerate}
 
 \end{document}

@@ -6,7 +6,12 @@
 \subsection{Exercícios - variância e covariância}
 
 \begin{enumerate}
-    \item Suponha que $X$ se distribui uniformemente em $\{1,\dots, N\}$. Determine $\Var(X)$. [\textit{Sugestão:} use o exercício 4 da Lista 5.]
+    \item Suponha que $X$ se distribui uniformemente em $\{1,\dots, N\}$. Determine $\Var(X)$.
+    %
+    \begin{proof}[Solução]
+        Já sabemos que $EX = (N+1)/2$ e $EX^2 = (N+1)(2N+1)/6$, logo $\Var(X) = (N^2 - 1)/12$.
+    \end{proof}
+    %
     \item Considere a seguinte função:
     \begin{align*}
         p(x) = \begin{cases}
@@ -19,24 +24,145 @@
     \item Mostre que $\displaystyle{ \sum_{x=1}^{\infty} x^{-(r+2)} }$ converge. Conclua que $p$ é uma função de probabilidade com $c = \displaystyle{ \sum_{x=1}^{\infty} x^{-(r+2)} }$.
     \item Seja $X$ uma v.a. com função de probabilidade $p$. Mostre que $E[X^r]$ é finito, mas $X$ não tem nenhum momento de ordem maior do que $r$.
     \end{enumerate}
-    \item Em ensaios de Bernoulli independentes, com probabilidade $p$ de sucesso, sejam $X$ o número de ensaios até a ocorrência do $r$-ésimo sucesso e $Y$ o número de fracassos anteriores ao $r$-ésimo sucesso. Determine $\Var(X)$ e $\Var(Y)$. [\textit{Sugestão:} use o exercício 8 da Lista 5.]
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item A convergência dessa série é garantida pelo teste da integral. Portanto, como
+            o produto de $1/c$ por essa série deve ser igual a 1, segue que $c$ é igual a essa série.
+            \item Temos
+            %
+            \[
+            E(X^r) = \frac{1}{c}\sum_{x=1}^{\infty} \frac{1}{x^2} < \infty,
+            \]
+            %
+            logo $X$ tem momento de ordem $r$. Note que se $k>r$, então a série que aparece em
+            $E(X^k)$ diverge pois é uma $p$-série com $p = -k+r_2 \leq 1$.
+        \end{enumerate}
+    \end{proof}
+    %
+    \item Em ensaios de Bernoulli independentes, com probabilidade $p$ de sucesso, sejam $X$ o número de ensaios até a ocorrência do $r$-ésimo sucesso e $Y$ o número de fracassos anteriores ao $r$-ésimo sucesso. Determine $\Var(X)$ e $\Var(Y)$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \begin{align*}
+            E(X^2) &= \sum_{n=r}^{\infty} n^2\binom{n-1}{r-1}p^r(1-p)^{n-r} \\
+                   &= \frac{r}{p}E(Z-1) \\
+                   &= \frac{r}{p}\left( \frac{r+1}{p} - 1 \right),
+        \end{align*}
+        %
+        sendo $Z\sim BN(r+1,p)$. Daí,
+        %
+        \[
+        \Var(X) = \frac{r(1-p)}{p^2}.
+        \]
+        %
+        Como $Y = X-r$, temos $\Var(Y) = \Var(X)$.
+    \end{proof}
+    %
     \item Suponha que $X$ e $Y$ são duas v.a.’s independentes tais que $E[X^4] = 2$, $E[X^2] = 1$, $E[Y^2] = 1$ e $EY = 0.$ Determine $\Var(X^2Y)$.
+    %
+    \begin{proof}[Solução]
+        Como $X$ e $Y$ são independentes, temos $\Var(X^2Y) = E(X^4)E(Y^2) - E(X^2)^2E(Y)^2 = 2$.
+    \end{proof}
+    %
     \item Sejam $X_1 ,\dots, X n$ v.a.’s i.i.d. com média $\mu$ e variância $\sigma^2$ e seja $\overline{X} = S_n/n$, onde $S_n = X_1 + \cdots + X_n$. (Se $X_1,\dots, X_n$ têm função de distribuição $F$, dizemos que eles são uma amostra aleatória de tamanho $n$ da v.a. $X$, cuja função de distribuição é $F$, e $\overline{X}$ é chamada média amostral.) Mostre que:
     \begin{enumerate}[a)]
     \item $E[\overline{X}] = \mu$
     \item $\Var(\overline{X}) = \sigma^2/n$
     \item $E \left[ \sum_{i=1}^n (X_i - \overline{X})^2 \right] = (n - 1)\sigma^2$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \[
+            E(\overline{X}) = E(S_n/n) = n\mu/n = \mu.
+            \]
+            %
+            \item Temos
+            %
+            \[
+            \Var(\overline{X}) = \Var(S_n/n) = \Var(S_n)/n^2 = \sigma^2/n.
+            \]
+            %
+            \item Temos
+            %
+            \begin{align*}
+                E \left[ \sum_{i=1}^n (X_i - \overline{X})^2 \right] 
+                &= \sum_{i=1}^n E[(X_i - \overline{X})^2] \\
+                &= n\sigma^2 + 2n\mu^2 + \sigma^2 - \frac{2}{n}\sum_{i=1}^n E[X_i(X_1+\cdots+X_n)] \\
+                &= (n-1)\sigma^2.
+            \end{align*}
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Suponha que tenhamos dois baralhos de $n$ cartas, cada um com as cartas numeradas de 1 a $n$. Utilizando-se estas cartas forma-se $n$ pares, de tal forma que cada par contendo uma carta de cada baralho. Dizemos que ocorre um encontro na posição $i$ se o par $i$ é constituído de cartas de mesmo número. Seja $S_n$ o número de encontros. Determine:
     \begin{enumerate}[a)]
     \item $E[S_n]$
     \item $\Var(S_n)$
     \end{enumerate}
-    [\textit{Sugestões:} para cada $i = 1,2,\dots, n$, considere a v.a. $X_i$ definida por $X_i = 1$ se ocorre um encontro na $i$-ésima posição e $X_i = 0$ caso contrário. Assim, $S_n = X_1 + \cdots + X_n$; use os seguintes resultados: para cada $i, j = 1,2,\dots,n$, tem-se que $P(X_i = 1) = 1/n$ e $P(X_i = 1, X_j = 1) = 1/n(n-1)$ se $i\neq j$.
+    [\textit{Sugestões:} para cada $i = 1,2,\dots, n$, considere a v.a. $X_i$ definida por $X_i = 1$ se ocorre um encontro na $i$-ésima posição e $X_i = 0$ caso contrário. Assim, $S_n = X_1 + \cdots + X_n$; use os seguintes resultados: para cada $i, j = 1,2,\dots,n$, tem-se que $P(X_i = 1) = 1/n$ e $P(X_i = 1, X_j = 1) = 1/n(n-1)$ se $i\neq j$.]
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Segue da linearidade da esperança que $E(S_n) = 1.$
+            \item Usando que $E(X_iX_j) = 1/n(n-1)$ para todo $i\neq j$, temos que
+            %
+            \[
+            \Var(S_n) = 2\cdot\frac{n(n-1)}{2}\cdot\frac{1}{n(n-1)} = 1.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam $X_1, X_2$ e $X_3$ variáveis aleatórias independentes tendo variâncias finitas e positivas $\sigma_1^2$, $\sigma_2^2$ e $\sigma_3^2$, respectivamente. Obtenha a correlação entre $X_1 - X_2$ e $X_2 + X_3$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        \Cov(X_1 - X_2, X_2 + X_3) = E[(X_1 - X_2 - E(X_1 - X_2))(X_2 + X_3 - E(X_2 + X_3))]
+                                   = -\sigma_2^2
+        \]
+        %
+        após várias simplificações. Daí, como $\Var(X_1 - X_2) = \sigma_1^2 + \sigma_2^2$ e
+        $\Var(X_2 + X_3) = \sigma_2^2 + \sigma_3^2$, obtemos
+        %
+        \[
+        \rho(X_1 - X_2, X_2 + X_3) 
+        = -\frac{\sigma_2^2}{\sqrt{(\sigma_1^2 + \sigma_2^2)(\sigma_2^2 + \sigma_3^2)}}.
+        \]
+        %
+    \end{proof}
+    %
     \item Suponha que $X$ e $Y$ são duas v.a.’s tais que $\rho(X,Y) = 1/2$, $\Var(X) = 1$ e $\Var(Y) = 2$. Obtenha $\Var(X - 2Y)$.
+    %
+    \begin{proof}[Solução]
+        Temos $1/2 = \Cov(X,Y)/\sqrt{2}$, logo $\Cov(X,Y) = \sqrt{2}/2$. Daí, segue que
+        %
+        \[
+        \Var(X - 2Y) = E[(X-2Y)^2] = \Var(X) + 4\Var(Y) - 4\Cov(X,Y) = 9-2\sqrt{2}.
+        \]
+        %
+    \end{proof}
+    %
     \item Uma caixa contém 3 bolas vermelhas e 2 pretas. Extrai-se uma amostra sem reposição de tamanho dois. Sejam $U$ e $V$ os números de bolas vermelhas e pretas, respectivamente, na amostra. Determine $\rho(U, V)$.
+    %
+    \begin{proof}[Solução]
+        Temos $U\sim\text{Hgeo}(5,3,2)$ e $V\sim\text{Hgeo}(5,2,2)$. Daí, $\Var(U) = 9/25$ e
+        $\Var(V) = 9/25$. Ademais, $\Cov(U,V) = -9/25$ e, portanto, $\rho(U,V) = -1$.
+    \end{proof}
+    %
     \item Suponha que uma caixa contém 3 bolas numeradas de 1 a 3. Seleciona-se, ao acaso e sem reposição, duas bolas da caixa. Sejam $X$ o número da primeira bola e $Y$ o número da segunda bola. Determine $\Cov(X, Y)$ e $\rho(X, Y)$.
+    %
+    \begin{proof}[Solução]
+        Temos $E(XY) = 11/3$ e $E(X)E(Y) = 4$. Logo, $\Cov(X,Y) = -1/3$. Como $\Var(X) = 2/3 = \Var(Y)$,
+        segue que $\rho(X,Y) = -1/2$.
+    \end{proof}
+    %
 \end{enumerate}
 
 \end{document}

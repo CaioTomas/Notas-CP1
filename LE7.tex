@@ -7,20 +7,115 @@
 
 \begin{enumerate}
     \item Seja $X$ uma variável aleatória tal que $P(|X - 1| = 2) = 0$. Expresse $P(|X - 1| \geq 2)$ em termos da função de distribuição $F_X$.
+    %
+    \begin{proof}[Solução]
+        Como $P(|X-1|=2) = 0$, temos $P(X=3) = 0 = P(X=1)$. Daí, $P(|X+1|\geq 2) = P(X\leq -1) + P(X\geq 3)
+        = F_X(-1) + 1 - F_X(3)$.
+    \end{proof}
+    %
     \item Considere um ponto escolhido uniformemente no intervalo $[0, a]$. Seja $X$ a distância da origem ao ponto escolhido. Obtenha a função de distribuição de $X$.
+    %
+    \begin{proof}[Solução]
+        Se $x<0$, $\{X\leq x\} = \varnothing$; se $0\leq x<a$, $\{X\leq x\} = [0,x]$; se $x\geq a$,
+        $\{X\leq x\} = [0,a]$. Logo,
+        %
+        \[
+        F_X(x) = \begin{cases}
+        0, x<0 \\
+        x/a, 0\leq x < a \\
+        1, x\geq a
+        \end{cases}.
+        \]
+        %
+    \end{proof}
+    %
     \item Seja o ponto $(u, v)$ escolhido uniformemente no quadrado $[0, 1] \times [0, 1]$. Seja $X$ a v.a. que associa o número $u + v$ ao ponto $(u, v)$. Obtenha a função de distribuição de $X$.
+    %
+    \begin{proof}[Solução]
+        Se $x<0$, então $\{X\leq x\} = \varnothing$; se $0\leq x<1$, então $\{X\leq x\} = 
+        \{(u,v)\in\mathbb{R}^2 | 0\leq u+v< 1\}$ (triângulo); se $1\leq x<2$, então
+        $\{X\leq x\} = \{(u,v)\in\mathbb{R}^2 | 1 \leq u+v<2\}$; se $x\geq 2$, então 
+        $\{X\leq x\} = [0,1]\times[0,1]$. Logo
+        %
+        \[
+        F_X(x) = \begin{cases}
+        0, x<0 \\
+        x^2/2, 0\leq x<1 \\
+        -1+2x-x^2/2, 1\leq x < 2 \\
+        1, x\geq 2
+        \end{cases}.
+        \]
+        %
+    \end{proof}
+    %
     \item Obtenha a função de densidade para cada uma das variáveis aleatórias dos exercícios 2 e 3.
+    %
+    \begin{proof}[Solução]
+        Para o exercício 2, temos
+        %
+        \[
+        f_X(x) = \begin{cases}
+        0, x\leq 0 \text{ ou } x\geq a \\
+        1/a, 0<x<a
+        \end{cases}.
+        \]
+        %
+        Para o exercício 3, temos
+        %
+        \[
+        f_X(x) = \begin{cases}
+        x, 0<x<1 \\
+        2-x, 1 < x < 2 \\
+        0, \text{c.c.}
+        \end{cases}.
+        \]
+        %
+    \end{proof}
+    %
     \item Seja $F$ a função de distribuição exponencial de parâmetro $\lambda$. Obtenha um número $m$ tal que $F(m) = 1/2$ ($m$ é chamado de mediana de $F$).
+    %
+    \begin{proof}[Solução]
+        Temos $F(m) = 1/2 \iff e^{-\lambda m} = 1/2 \iff m = \ln(2)/\lambda$.
+    \end{proof}
+    %
     \item Seja $X$ uma variável aleatória contínua com densidade $f$ dada por:
     \begin{align*}
         f(x) = \frac{1}{2}e^{-|x|}, x\in\mathbb{R}.
     \end{align*}
     Obtenha $P(1 \leq |X| \leq 2)$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        P(1 \leq |X| \leq 2) = 2P(1\leq X\leq 2) = 2(F_X(2) - F_X(1)) = e^{-1} - e^{-2}.
+        \]
+        %
+    \end{proof}
+    %
     \item Seja $F$ a função de distribuição definida por:
     \begin{align*}
         F(x) = \frac{1}{2} + \frac{x}{2(|x| + 1)}, x\in\mathbb{R}.
     \end{align*}
     Obtenha uma densidade $f$ para $F$. Para que valores de $x$ teremos $F'(x) = f(x)$?
+    %
+    \begin{proof}[Solução]
+        Se $x\geq 0$, então
+        %
+        \[
+        F'(x) = \frac{1}{2(|x|+1)^2}.
+        \]
+        %
+        Se $x<0$, então
+        %
+        \[
+        F'(x) = \frac{1}{2(|x| + 1)^2}.
+        \]
+        %
+        Logo, podemos tomar $f(x) = 1/[2(|x|+1)^2]$ para todo $x\in\mathbb{R}$ e vale $f(x) = F'(x)$
+        para todo $x\in\mathbb{R}$.
+    \end{proof}
+    %
 \end{enumerate}
 
 \end{document}
