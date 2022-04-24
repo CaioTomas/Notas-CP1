@@ -10,28 +10,239 @@
         \item Mostre que $\Omega$ deve ter um número finito de pontos [\textit{Sugestão:} mostre que $\Omega$ não pode ter mais de $p^{-1}$ pontos.]
         \item Mostre que se $n$ é o número de pontos em $\Omega$, então $p$ deve ser igual a $n^{-1}$.
     \end{enumerate}
+    \begin{proof}[Solução]
+        Seja $A_i$ o evento ``escolher o ponto $w_i$''.
+        %
+        \begin{enumerate}[a)]
+            \item Temos $A_i\cap A_j = \varnothing$ para $i\neq j$. Logo, segue da $\sigma$-aditividade
+            que
+            %
+            \[
+            P\left( \bigcup_{i=1}^N A_i \right) = \sum_{i=1}^N P(A_i) = Np \leq 1 \iff N\leq 1/p.
+            \]
+            %
+            Portanto, $|\Omega| \leq 1/p < +\infty$.
+            \item Temos que
+            %
+            \[
+            1 = P(\Omega) = P\left( \bigcup_{i=1}^n A_i \right) = \sum_{i=1}^n P(A_i) = np \iff p = 1/n.
+            \]
+            %
+        \end{enumerate}
+        %
+    \end{proof}
     \item Pode-se construir um modelo para um \textit{spinner} aleatório tomando um espaço uniforme de probabilidade sobre a circunferência de um círculo de raio 1, de modo que a probabilidade de que o ponteiro do \textit{spinner} pare sobre um arco de comprimento $s$ é $s/2\pi$. Suponha que o círculo esteja dividido em 37 zonas numeradas de 1 a 37. Determine a probabilidade de que o ponteiro pare sobre uma zona de número par.
+    %
+    \begin{proof}[Solução]
+        Cada zona tem comprimento $2\pi/37$, uma vez que o espaço de probabilidade é uniforme. Seja $Z_i$ o
+        evento ``parar sobre a zona de número $i$''. Temos
+        %
+        \[
+        P\left( \bigcup_{i \text{ par}} Z_i \right) 
+        = \sum_{i \text{ par}} P(Z_i) 
+        = 13\cdot\frac{2\pi/37}{2\pi}
+        = 13/37,
+        \]
+        %
+        já que $Z_i\cap Z_j = \varnothing$ para $i\neq j$.
+    \end{proof}
+    %
     \item Considere um ponto escolhido ao acaso sobre um quadrado unitário. Determine a probabilidade de que o ponto esteja no triângulo limitado por $x=0, y=0$ e $x+y=1$.
+    %
+    \begin{proof}[Solução]
+        Sejam $\Omega = [0,1]\times[0,1]$ e $\mathcal{A} = \mathcal{B}^2(\Omega)$. Defina uma medidade de
+        probabilidade $P$ sobre $(\Omega, \mathcal{A})$ por
+        %
+        \[
+        P(A) = \iint_A f(x,y) \, dx \,dy
+        \]
+        %
+        sendo
+        %
+        \[
+        f(x,y) = \begin{cases}
+        1/\iint_{\Omega} \, dx \, dy, (x,y)\in\Omega \\
+        0, (x,y) \notin\Omega
+        \end{cases}, \, \forall A\in\mathcal{A}.
+        \]
+        %
+        Assim, sendo $A$ o evento ``escolger um ponto no triângulo limitado por $x=0$, $y=0$ e $x+y=1$'',
+        temos
+        %
+        \[
+        P(A) = \iint_A \frac{1}{\iint_{\Omega} \, dx \, dy} \, dx \, dy
+             = \iint_A 1 \, dx \, dy
+             = 1/2.
+        \]
+        %
+    \end{proof}
+    %
     \item Seja $P$ um ponto escolhido ao acaso sobre um círculo unitário. Determine a probabilidade de que $P$ esteja no setor angular de 0 a $\pi/4$ radianos.
+    %
+    \begin{proof}[Solução]
+        Seja $(\Omega, \mathcal{A}, P)$ o espaço de probabilidade definido acima, mas com 
+        $\Omega = \overline{D}(0,1)$. Seja $A$ o evento ``$P$ no setor circular de $0$ a $\pi/4$''.
+        Temos
+        %
+        \[
+        P(A) = \iint_A \frac{1}{\iint_{\Omega} \, dx \, dy} \, dx \, dy
+             = \int_{0}^{\pi/4}\int_0^1 \frac{r}{\pi} \, dr \, d\theta
+             = \frac{1}{\pi}\cdot\frac{1}{2}\cdot\frac{\pi}{4}
+             = 1/8.
+        \]
+        %
+    \end{proof}
+    %
     \item Uma caixa contém 10 bolas numeradas de 1 a 10. Extrai-se ao acaso uma bola da caixa. Determine a probabilidade de que o número da bola seja 3, 4 ou 5.
+    %
+    \begin{proof}[Solução]
+        Sejam $\Omega = \{1, 2, \dots, 10\}$, $\mathcal{P}(\Omega) = \mathcal{A}$ e $P$ a medida de 
+        probabilidade sobre $(\Omega, \mathcal{A})$ definida por $P(A) = |A|/|\Omega|, 
+        \, \forall A\in\mathcal{A}$. Defina $A$ como o evento ``o número da bola é 3, 4 ou 5''. Temos
+        %
+        \[
+        P(A) = |A|/|\Omega| = 3/10.
+        \]
+        %
+    \end{proof}
+    %
     \item Suponha que se lance um par de dados e que os 36 resultados possíveis são igualmente prováveis. Determine a probabilidade de que a soma dos números observados seja par.
+    %
+    \begin{proof}[Solução]
+        Sejam $\Omega = \{ (i,j), 1\leq i,j\leq 6 \}$, $\mathcal{A} = \mathcal{P}(\Omega)$ e $P$ a medida
+        de probabilidade sobre $(\Omega, \mathcal{A})$ definida por $P(A) = |A|/|\Omega|, \, \forall 
+        A\in\mathcal{A}$. Defina $A$ como sendo o evento ``a soma dos números é par''. Temos que
+        $|A| = 18$, logo $P(A) = 18/36 = 1/2$.
+    \end{proof}
+    %
     \item Suponha que $A$ e $B$ sejam eventos tais que $P(A) = 2/5$, $P(B) = 2/5$ e $P(A \cup B) = 1/2$. Determine $P(A \cap B)$.
+    %
+    \begin{proof}[Solução]
+        Como $P(A\cup B) = P(A) + P(B) - P(A\cap B)$, temos que $P(A\cap B) = 2/5 + 2/5 - 1/2 = 3/10$.
+    \end{proof}
+    %
     \item Se $P(A) = 1/3$, $P(A \cup B) = 1/2$ e $P(A \cap B) = 1/4$, determine $P(B)$.
+    %
+    \begin{proof}[Solução]
+        Como no item anterior, temos $P(B) = 1/2 - 1/3 + 1/4 = 5/12$.
+    \end{proof}
+    %
     \item Suponha que se escolha ao acaso um ponto sobre um quadrado unitário. Seja $A$ o evento de que o ponto está no triângulo limitado por $y = 0$, $x = 1$ e $x = y$, e $B$ o evento de que o ponto está no retângulo com vértices em $(0,0)$, $(1,0)$, $(1, 1/2)$ e $(0,1/2)$. Determine $P(A \cup B)$ e $P(A \cap B)$.
+    %
+    \begin{proof}[Solução]
+        Sejam $\Omega = [0,1]\times[0,1]$, $\mathcal{A} = \mathcal{B}^2(\Omega)$ e $P$ a medida de probabilidade
+        definida nos exercícios 3 e 4. Sendo $A$ e $B$ os eventos do enunciado, temos
+        %
+        \[
+        P(A\cap B) = \iint_{A\cap B} \frac{1}{\iint_{\Omega} \, dx \, dy} \, dx \, dy
+                   = \iint_{A\cap B} \, dx \, dy
+                   = 1/8,
+        \]
+        %
+        e também $P(A) = 1/2 = P(B)$. Logo, $P(A\cup B) = 1 - 1/8 = 7/8$.
+    \end{proof}
+    %
     \item Suponha que temos quatro cofres, cada um com 2 gavetas. Os cofres 1 e 2, têm uma moeda de ouro em uma gaveta e uma de prata na outra. O cofre 3, tem duas moedas de ouro e, o cofre 4 tem duas de prata. Escolhe-se um cofre ao acaso, abre-se uma gaveta e encontra-se uma moeda de ouro. Determine a probabilidade de que a outra gaveta contenha: 
     \begin{enumerate}[a)]
     \item Uma moeda de prata;
     \item Uma moeda de ouro.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}
+            \item Sejam $Au_i$ e $Ag_i$ os eventos ``tirar uma moeda de ouro do cofre $i$'' 
+            e ``tirar uma moeda de prata do cofre $i$'', respectivamente. 
+            Queremos calcular $P(Ag|Au)$, sendo $Ag$ e $Au$ os eventos
+            ``tirar moeda de prata'' e ``tirar moeda de ouro'', respectivamente. Note que
+            %
+            \[
+            P(Ag|Au) = \frac{1}{3}\cdot 1 + \frac{1}{3}\cdot\frac{1}{2} + \frac{1}{3}\cdot\frac{1}{2}
+                     = 2/3.
+            \]
+            %
+            \item Analogamente, a probabilidade desejada é $1/3 = (1/3)(1/2) + (1/3)(1/2)$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Uma caixa contém 10 bolas das quais 6 são pretas e 4 são brancas. Remove-se três bolas sem observar suas cores. Determine a probabilidade de que uma quarta bola removida da caixa seja branca. Assuma que as 10 bolas são igualmente prováveis de serem removidas da caixa.
+    %
+    \begin{proof}[Solução]
+        A probabilidade da quarta bola ser branca é
+        %
+        \[
+        \frac{4\cdot 3\cdot 2\cdot 1}{10\cdot 9\cdot 8\cdot 7} 
+        + \frac{4\cdot 3\cdot 6\cdot 2}{10\cdot 9\cdot 8\cdot 7}
+        + \frac{4\cdot 6\cdot 5\cdot 3}{10\cdot 9\cdot 8\cdot 7}
+        + \frac{6\cdot 5\cdot 4\cdot 4}{10\cdot 9\cdot 8\cdot 7}
+        = 1/5.
+        \]
+        %
+    \end{proof}
+    %
     \item Para uma caixa de mesma composição que a do exercício 11, determine a probabilidade de que todas as 3 primeiras bolas removidas sejam pretas, sabendo-se que pelo menos uma delas é preta.
+    %
+    \begin{proof}[Solução]
+        Sejam $PPP$ e $P+$ os eventos ``três pretas'' e ``pelo menos uma preta'', respectivamente. Seja ainda
+        $BBB$ o evento ``três brancas''. Temos
+        %
+        \[
+        P(PPP|P+) = \frac{P(PPP\cap P+)}{P(P+)} = \frac{P(PPP)}{1 - P(BBB)}.
+        \]
+        %
+        Note que
+        %
+        \[
+        P(PPP) = \frac{6\cdot 5\cdot 4}{10\cdot 9\cdot 8} = 1/6
+        \]
+        %
+        e
+        %
+        \[
+        1 - P(BBB) = 1 - \frac{4\cdot 3\cdot 2}{10\cdot 9\cdot 8} = 29/30.
+        \]
+        %
+        Logo, $P(PPP|P+) = 5/29$.
+    \end{proof}
+    %
     \item Suponha que uma fábrica tem duas máquinas $A$ e $B$, responsáveis, respectivamente, por 60\% e 40\% da produção total. A máquina $A$ produz 3\% de itens defeituosos, enquanto a máquina $B$ produz 5\% de itens defeituosos. Determine a probabilidade de que um dado item defeituoso foi produzido pela máquina $B$.
+    %
+    \begin{proof}[Solução]
+        Sejam $D$, $A$ e $B$ os eventos ``dar defeito'', ``ser produzido por $A$'' e ``ser produzido por $B$'',
+        respectivamente. A probabilidade pedida é
+        %
+        \[
+        P(B|D) = \frac{P(D|B)P(B)}{P(D|B)P(B) + P(D|A)P(A)} 
+               = \frac{0,05\cdot 0,4}{0,05\cdot 0,4 + 0,03\cdot 0,6}
+               = 10/19.
+        \]
+        %
+    \end{proof}
+    %
     \item Um estudante se submete a um exame de múltipla escolha no qual cada questão tem 5 respostas possíveis das quais exatamente uma é correta. O estudante seleciona a resposta correta se ele sabe a resposta. Caso contrário, ele seleciona ao acaso uma resposta entre as 5 possíveis. Suponha que o estudante saiba a resposta de 70\% das questões.
     \begin{enumerate}[a)]
     \item Qual a probabilidade de que o estudante escolha a resposta correta para uma dada questão?
     \item Se o estudante escolhe a resposta correta para uma dada questão, qual a probabilidade de que ele sabia a resposta?
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        Sejam $A$ e $C$ os eventos ``acertar a questão'' e ``chutar a resposta'', respectivamente.
+        Assim, temos
+        %
+        \begin{enumerate}[a)]
+            \item $P(A) = P(A|C)P(C) + P(A|C^c)P(C^c) = (1/5)(3/10) + 7/10 = 19/25$.
+            \item $P(C^c|A) = P(A|C^c)P(C^c)/P(A) = (7/10)(25/19) = 35/38$.
+        \end{enumerate}
+        %
+    \end{proof}
+    %
     \item Suponha que se escolha ao acaso um ponto sobre um quadrado unitário. Sabendo-se que o ponto está no retângulo limitado por $y = 0$, $y = 1$ e $x = 0$ e $x = 1/2$, qual é a probabilidade de que o ponto esteja no triângulo limitado por $y = 0$, $x = 1/2$ e $x + y = 1$?
+    %
+    \begin{proof}[Solução]
+        Seja $(\Omega, \mathcal{A}, P)$ o espaço de probabilidade definido no exercício 9. Temos que a
+        probabilidade $p$ procurada é igual a $0$, haja vista que o triângulo e o retângulo do enunciado
+        não têm pontos em comum.
+    \end{proof}
+    %
     \item Suponha que uma caixa contenha $r$ bolas vermelhas e $b$ bolas pretas. Extrai-se ao acaso uma bola da caixa e a seguir extrai-se, também ao acaso, uma segunda bola dentre as que ficaram na caixa. Determine a probabilidade de que:
     \begin{enumerate}[a)]
     \item Ambas as bolas sejam vermelhas;
@@ -39,34 +250,225 @@
     \item A primeira bola seja preta e a segunda vermelha;
     \item Ambas as bolas sejam pretas.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item $\dfrac{r(r-1)}{(r+b)(r+b-1)}$.
+            \item $\dfrac{rb}{(r+b)(r+b-1)}$.
+            \item $\dfrac{rb}{(r+b)(r+b-1)}$.
+            \item $\dfrac{b(b-1)}{(r+b)(r+b-1)}$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Uma caixa contém 10 bolas vermelhas e 5 pretas. Extrai-se uma bola da caixa. Se ela é vermelha, ela é recolocada na caixa. Se é preta, além de recolocá-la na caixa, adiciona-se duas bolas pretas à caixa. Determine a probabilidade de que uma segunda bola extraída da caixa seja
     \begin{enumerate}[a)]
     \item vermelha;
     \item preta.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        Sejam $V_i$ e $P_i$ os eventos ``vermelha na $i$-ésima retirada'' e ``preta na $i$-ésima retirada''.
+        Temos
+        %
+        \begin{enumerate}[a)]
+            \item $P(V_2) = P(V_2|V_1)P(V_1) + P(V_2|P_1)P(P_1) = (10/15)(10/15) + (10/17)(5/15) = 98/153$.
+            \item $P(P_2) = P(P_2|V_1)P(V_1) + P(P_2|P_1)P(P_1) = (5/15)(10/15) + (7/17)(5/15) = 55/153$.
+        \end{enumerate}
+        %
+    \end{proof}
+    %
     \item Extrai-se duas bolas, com reposição da primeira, de uma caixa contendo 3 bolas brancas e 2 bolas pretas.
     \begin{enumerate}[a)]
     \item Construa um espaço amostral com pontos igualmente prováveis para este experimento
     \item Determine a probabilidade de que as bolas extraídas sejam da mesma cor.
     \item Determine a probabilidade de que, pelo menos, uma das bolas extraídas seja branca
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item $\Omega = \{ (i,j), \, i,j = B,P \}$
+            \item Sejam $A$ e $B$ os eventos ``bolas da mesma cor'' e ``pelo menos uma bola branca'',
+            respectivamente. Temos que
+            %
+            \[
+            P(A) = \frac{3}{5}\cdot\frac{3}{5} + \frac{2}{5}\cdot\frac{2}{5} = 13/25.
+            \]
+            %
+            \item $P(B) = 1 - (2/5)(2/5) = 21/25$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Resolva o exercício 18, caso a primeira bola não seja reposta na caixa.
+    %
+    \begin{proof}[Solução]
+        $P(A) = (3/5)(2/4) + (2/5)(1/4) = 2/5$ e $P(B) = 1 - (2/5)(1/4) = 9/10$.
+    \end{proof}
+    %
     \item Uma caixa contém 3 bolas brancas e 2 bolas pretas. Selecionam-se duas bolas sem reposição.
     \begin{enumerate}[a)]
     \item Calcule a probabilidade de que a segunda bola seja preta, dado que a primeira é preta.
     \item Calcule a probabilidade de que a segunda bola seja da mesma cor da primeira.
     \item Calcule a probabilidade de que a primeira bola seja branca, dado que a segunda é branca.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        Sejam $B_i$ e $P_i$ os eventos ``branca na $i$-ésima retirada'' e ``preta na $i$-ésima retirada'',
+        respectivamente.
+        %
+        \begin{enumerate}[a)]
+            \item $P(P_2|P_1) = P(P_2\cap P_1)/P(P_1) = 1/4$.
+            \item $P(B_1 \cap B_2) + P(P_1 \cap P_2) = (3/5)(1/2) + (2/5)(1/4) = 2/5$.
+            \item $P(B_1|B_2) = \dfrac{P(B_2|B_1)P(B_1)}{P(B_2|B_1)P(B_1) + P(B_2|P_1)P(P_1)} = 1/2$.
+        \end{enumerate}
+        %
+    \end{proof}
+    %
     \item Suponha que existisse um teste para câncer com probabilidade de que 90\% das pessoas com câncer e 5\% das pessoas sem câncer reagem positivamente. Admita que 1\% dos pacientes de um hospital têm câncer. Qual a probabilidade de que um paciente escolhido ao acaso, que reage positivamente a esse teste, realmente tenha câncer?
+    %
+    \begin{proof}[Solução]
+        Sejam $D$ e $P$ os eventos ``ter câncer'' e ``testar positivo'', respectivamente.
+        %
+        \begin{enumerate}[a)]
+            \item $P(D|P) = \dfrac{P(P|D)P(D)}{P(P|D)P(D) + P(P|D^c)P(D^c)} 
+                          = \dfrac{0,9\cdot 0,01}{0,9\cdot 0,01 + 0,05\cdot 0,99}
+                          = 2/13$.
+        \end{enumerate}
+        %
+    \end{proof}
+    %
     \item Suponha que se lança três moedas idênticas e perfeitamente equilibradas. Seja $A_i$ o evento de observar cara na $i$-ésima moeda. Mostre que os eventos $A_1$ , $A_2$ e $A_3$ são mutuamente independentes.
+    %
+    \begin{proof}[Solução]
+        Basta notar que
+        %
+        \begin{align*}
+            P(A_1\cap A_2) &= 1/4 = P(A_1)P(A_2) \\
+            P(A_1\cap A_3) &= 1/4 = P(A_1)P(A_3) \\
+            P(A_2\cap A_3) &= 1/4 = P(A_3)P(A_3) \\
+            P(A_1\cap A_2\cap A_3) &= 1/8 = P(A_1)P(A_2)P(A_3).
+        \end{align*}
+        %
+    \end{proof}
+    %
     \item Suponha que as seis faces de um dado têm igual probabilidade de ocorrência e que sucessivos lançamentos do dado são independentes. Construa um espaço de probabilidade para o experimento composto de três lançamentos do dado.
+    %
+    \begin{proof}[Solução]
+        Defina
+        %
+        \[
+        \Omega = \{ (i,j,k) : 1\leq i,j,k\leq 6 \}, 
+        \, \mathcal{A} = \mathcal{P}(\Omega)
+        \]
+        %
+        e $P:\mathcal{A}\to\mathbb{R}$ por $P(A) = |A|/|\Omega|$.
+    \end{proof}
+    %
     \item Suponha que $A$, $B$ e $C$ são eventos mutuamente independentes e $P(A \cap B) \neq 0$. Mostre que $P(C|A \cap B) = P(C)$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        P(C|A\cap B) = \frac{P(A\cap B\cap C)}{P(A\cap B)} = \frac{P(A)P(B)P(C)}{P(A)P(B)} = P(C).
+        \]
+        %
+    \end{proof}
+    %
     \item Experiência mostra que 20\% das pessoas que fazem reservas de mesa num certo restaurante deixam de comparecer. Se o restaurante tem 50 mesas e aceita 52 reservas, qual a probabilidade de que seja capaz de acomodar todos os fregueses?
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        P(\text{acomodar}) = 1 - P(\text{só 1 não vai}) - P(\text{todos vão})
+                           = 1 - \frac{1}{5}\cdot 52\cdot\left(\frac{4}{5}\right)^{51} 
+                           - \frac{4}{5}\left(\frac{4}{5}\right)^{51}
+                           = 1 - \left(\frac{4}{5}\right)^{51}\cdot\frac{56}{5}.
+        \]
+        %
+    \end{proof}
+    %
     \item Um certo componente de um motor de foguete falha 5\% das vezes quando o motor é acionado. Para obter maior confiabilidade no funcionamento do motor, usa-se $n$ componentes em paralelo, de maneira que o motor falha somente se todos os componentes falharem. Suponha que as falhas dos componentes sejam independentes uma das outras. Qual é o menor valor de n que pode ser usado para garantir que o motor funcione 99\% das vezes?
+    %
+    \begin{proof}[Solução]
+        Queremos $n$ tal que
+        %
+        \[
+        1 - (0,05)^n \geq 0,99 \iff n(1 + \log 2) \geq 2 \iff n\geq 1,53.
+        \]
+        %
+        Portanto, $n=2$.
+    \end{proof}
+    %
     \item Existem 4 reis num baralho de 52 cartas. Extrai-se uma carta do baralho, registra-se o seu valor e a seguir repõe-se a carta extraída. Este procedimento é repetido 4 vezes. Determine a probabilidade de que existam exatamente 2 reis entre as cartas selecionadas, sabendo-se que entre elas existe pelo menos um rei.
+    %
+    \begin{proof}[Solução]
+        Sejam $RR$ e $R+$ os eventos ``exatamente dois reis'' e ``pelo menos um rei''. Temos
+        %
+        \[
+        P(RR|R+) = \frac{P(RR\cap R+)}{P(R+)} 
+                 = \frac{P(RR)}{1 - P(R^c)}
+                 = \frac{16\cdot 48^2\cdot 6/52^4}{52^4 - 48^4/52^4}
+                 = \frac{16\cdot 48\cdot 48\cdot 6}{4^4}\cdot\frac{1}{13^4 - 12^4}
+                 = \frac{6\cdot 12^2}{13^4 - 12^4}.
+        \]
+        %
+    \end{proof}
+    %
     \item Mostre que se $A$, $B$ e $C$ são eventos tais que $P(A \cap B \cap C) \neq 0$ e $P(C|A \cap B)$ = $P(C|B)$, então $P(A|B \cap C) = P(A|B)$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        P(C|A\cap B) = \frac{P(A\cap B\cap C)}{P(A\cap B)}
+                     = \frac{P(B\cap C)}{P(B)}
+                     = P(C|B).
+        \]
+        %
+        Daí, segue que
+        %
+        \[
+        P(A|B\cap C) = \frac{P(A\cap B\cap C}{P(B\cap C)}
+                     = \frac{P(A\cap B)P(B\cap C)}{P(B\cap C)P(B)}
+                     = P(A|B).
+        \]
+        %
+    \end{proof}
+    %
     \item Um homem dispara 12 tiros independentes num alvo. Qual a probabilidade de que ele atinja o alvo pelo menos uma vez, se tem probabilidade $9/10$ de atingir o alvo em qualquer tiro?
+    %
+    \begin{proof}[Solução]
+        A probabilidade desejada é $1 - (1/10)^{12}$.
+    \end{proof}
+    %
     \item No Exercício 29 qual a probabilidade de que o alvo seja atingido pelo menos duas vezes, sabendo-se que o mesmo foi atingido pelo menos uma vez?
+    %
+    \begin{proof}[Solução]
+        Sejam $A$, $B$, $C$ e $D$ os eventos ``acertar pelo menos uma vez'', ``acertar pelo
+        menos 2 vezes'', ``acertar apenas uma vez'' e ``não acertar nada'', respectivamente.
+        Temos
+        %
+        \[
+        P(B|A) = \frac{P(B\cap A)}{P(A)} = \frac{P(B)}{P(A)}.
+        \]
+        %
+        Ademais,
+        %
+        \[
+        P(B) = 1 - P(C) - P(D)
+             = 1 - 12\frac{9}{10^{12}} - \frac{1}{10^{12}}
+             = 1 - \frac{109}{10^{12}}
+        \]
+        %
+        e, portanto,
+        %
+        \[
+        P(B|A) = \frac{1 - \frac{109}{10^{12}}}{1 - \frac{1}{10^{12}}}.
+        \]
+        %
+    \end{proof}
+    %
     \end{enumerate}
 
 \end{document}

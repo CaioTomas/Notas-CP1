@@ -33,7 +33,15 @@
 
 %\renewcommand*{\finalnamedelim}{\addcomma\addspace} %forces authors' names to be separated by comma, instead of "and"
 %\addbibresource{bibliography}
-\usepackage{hyperref}
+\usepackage[pdfstartview=FitH, %
+            %backref, %
+            colorlinks, %
+            bookmarksnumbered, %
+            bookmarksopen, %
+            linktocpage, %
+            urlcolor=blue, %
+            linkcolor=red!70!black, %
+            citecolor=red!70!black]{hyperref}
 \usepackage[nameinlink]{cleveref} %nameinlink ensures that the entire element is clickable in the pdf, not just the number
 
 \newcommand{\remind}[1]{\textcolor{red}{\textbf{#1}}} %To remind me of unfinished work to fix later
