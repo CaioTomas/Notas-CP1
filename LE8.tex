@@ -7,36 +7,193 @@
 
 \begin{enumerate}
     \item Considere um ponto escolhido uniformemente no intervalo $[0, a]$. Seja $X$ a distância da origem ao ponto escolhido. Obtenha a função de distribuição de $Y = \min(X, a/2$).
+    %
+    \begin{proof}[Solução]
+        Se $y<0$, então $P(Y\leq y) = 0$ pois $\min(X, a/2)\geq 0$. Se $0\leq y<a/2$, então
+        $F_Y(y) = F_X(y) = y/a$; se $y\geq a/2$, então $F_Y(y) = 1$ pois $Y\leq a/2$.
+    \end{proof}
+    %
     \item Escolhe-se aleatoriamente um ponto em $(-10, 10)$. Seja $X$ uma variável aleatória definida de tal forma que $X$ represente a coordenada do ponto se o mesmo estiver em $[-5, 5]$, $X = -5$ se o ponto estiver em $(-10, -5)$ e $X = 5$ se o ponto estiver em $(5, 10)$. Obtenha a função de distribuição de $X$.
+    %
+    \begin{proof}[Solução]
+        Se $x<-5$, então $F_X(x) = 0$ pois $X$ assume valores em $[-5,5]$; se $-5\leq x<5$, então
+        $F_X(x) = P(X\in(-10,x)) = (x+10)/20$; se $x\geq 5$, então $P(X\leq x) = 1$.
+    \end{proof}
+    %
     \item Verifique que:
     \begin{enumerate}[a)]
     \item $X\sim N(0,1)$ se, e somente se, $\sigma X + \mu \sim N(\mu, \sigma^2)$, onde $\mu \in \mathbb{R}$ e $\sigma > 0$.
     \item $X\sim\text{Cauchy}(0, 1)$ se, e somente se, $bX + a \sim \text{Cauchy}(a, b)$, onde $a\in\mathbb{R}$ e $b > 0$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Foi feito no texto.
+            \item Temos
+            %
+            \[
+            f_{a+bX}(x) = \frac{1}{b}\cdot\frac{1}{\pi(1 + (\frac{x-a}{b})^2)} 
+                        = \frac{b}{\pi(b^2 + (x-a)^2)},
+            \]
+            %
+            logo $a+bX\sim\text{Cauchy}(a,b)$. A recíproca segue de maneira análoga.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Suponha que $X\sim\text{Exp}(\lambda), \lambda > 0$. Obtenha a densidade de $Y = cX$, onde $c > 0$.
+    %
+    \begin{proof}[Solução]
+        Temos $Y=g(X)$ sendo $g(x) = cx$ para todo $x$ real. Note que $g$ é crescente e derivável
+        em $I = (0, +\infty)$ e que, nesse intervalo, temos $dx/dy = 1/c$ e $x = y/c$. Logo,
+        %
+        \[
+        f_Y(y) = \frac{1}{c}\lambda e^{-\lambda y/c}, y>0
+        \]
+        %
+        e $f_Y(y) = 0$ caso contrário, ou seja, $Y\sim\text{Exp}(\lambda/c)$.
+    \end{proof}
+    %
     \item Suponha que $X\sim U(0, 1)$. Obtenha a densidade de $Y = X^{1/\beta}$, onde $\beta \neq 0$.
+    %
+    \begin{proof}[Solução]
+        Temos $Y=g(X)$ com $g(x) = x^{1/\beta}$. Temos $g$ estritamente monótona (crescente se $\beta>0$
+        e decrescente caso contrário) e derivável em $(0, +\infty)$. Logo, $x = y^{\beta}$ e 
+        $dx/dy = \beta y^{\beta-1}$. Para $\beta > 0$, temos $f_Y(y) = \beta y^{\beta - 1}$ para
+        $0<y<1$ e $f_Y(y) = 0$ caso contrário; se $\beta < 0$, então $f_Y(y) = -\beta y^{\beta - 1}$
+        para $y>1$ e $f_Y(y) = 0$ caso contrário.
+    \end{proof}
+    %
     \item Seja $X$ uma variável aleatória contínua com densidade $f$.
     \begin{enumerate}[a)]
     \item Obtenha uma fórmula para a densidade de $Y = |X|$ em termos de $f$.
     \item Obtenha uma fórmula para a densidade de $Y = X^2$ em termos de $f$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Se $y>0$, então $Y=\pm X$ e $f_Y(y) = f(y) + f(-y)$. Se $y\leq 0$, então 
+            $f_Y(y) = 0$.
+            \item Foi feito no texto.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Seja $X\sim N(0,\sigma^2)$. Obtenha a densidade de:
     \begin{enumerate}[a)]
     \item $Y = |X|$;
     \item $Y = X^2$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Do exercício anterior,
+            %
+            \[
+            f_Y(y) = \begin{cases}
+            \frac{2}{\sqrt{2\pi}\sigma}e^{-y^2/2\sigma^2}, y>0 \\
+            0, \text{c.c.}
+            \end{cases}
+            \]
+            %
+            \item Temos
+            %
+            \[
+            f_Y(y) = \begin{cases}
+            \frac{(1/2\sigma^2)^{1/2}}{\sqrt{\pi}}y^{-1/2}e^{-y/2\sigma^2}, y>0 \\
+            0, \text{c.c.}
+            \end{cases},
+            \]
+            %
+            ou seja, $Y\sim\text{Gama}(1/2, 1/2\sigma^2)$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Seja $X\sim N(\mu, \sigma^2)$. Obtenha a densidade de $Y = e^X$. Essa densidade chama-se densidade lognormal.
+    %
+    \begin{proof}[Solução]
+        Temos $Y=g(X)$ com $g(x) = e^x$. Temos $g$ crescente e derivável em $\mathbb{R}$ e também
+        $x = \ln y$, donde segue que $dx/dy = 1/y$. Portanto,
+        %
+        \[
+        f_Y(y) = \begin{cases}
+        \frac{1}{\sqrt{2\pi}\sigma}e^{-(\ln y - \mu)^2/2\sigma^2}\frac{1}{y}, y > 0 \\
+        0, \text{c.c.}
+        \end{cases}
+        \]
+        %
+    \end{proof}
+    %
     \item Seja $X$ uma v.a. contínua com densidade simétrica $f$ e tal que $X^2 \sim\text{Exp}(\lambda), \lambda > 0$. Obtenha $f$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        f_{X^2}(y) = \begin{cases}
+        \lambda e^{-\lambda y}, y > 0 \\
+        0, \text{c.c.}
+        \end{cases},
+        \]
+        %
+        logo $\lambda e^{-\lambda y} = f(\sqrt{y})/\sqrt{y}$, ou seja, $f(|x|) 
+        = \lambda|x|e^{-\lambda x^2} = f(x), x\in\mathbb{R}$.
+    \end{proof}
+    %
     \item Seja $\Theta \sim U[-\pi/2 , \pi/2]$. Determine a função de distribuição e a densidade de:
     \begin{enumerate}[a)]
     \item $X = \tan(\Theta)$
     \item $Y = \sin(\Theta)$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Como a função tangente é estritamente crescente e derivável em $\mathbb{R}$, temos
+            $\Theta = \arctan x$ e $d\Theta/dx = 1/(1+x^2)$ e, daí, $f_X(x) = (1/\pi)1/(1+x^2)$ para
+            todo $x\in\mathbb{R}$, ou seja, $X\sim\text{Cauchy}(0,1)$.
+            \item Como a função seno é estritamente crescente e derivável em $(-\pi/2, \pi/2)$, temos
+            $\Theta = \arcsin y$ e $d\Theta/dy = 1/\sqrt{1-y^2}$ e, daí,
+            %
+            \[
+            f_Y(y) = \begin{cases}
+            \frac{1}{\pi}\cdot\frac{1}{\sqrt{1-y^2}}, -1<y<1 \\
+            0, \text{c.c.}
+            \end{cases}
+            \]
+            %
+        \end{enumerate}
+        %
+    \end{proof}
+    %
     \item Seja $X\sim\Gamma(\alpha,\lambda)$. Determine a densidade de
     \begin{enumerate}[a)]
     \item $Y = cX$, $c > 0$;
     \item $Y = \sqrt{X}$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Raciocinando como no exercício 4, temos
+            %
+            \[
+            f_Y(y) = \begin{cases}
+            \frac{\lambda^{\alpha}}{\Gamma(\alpha)}
+            \cdot\frac{1}{c^{\alpha}}y^{\alpha-1}e^{-\lambda y/c}, y > 0 \\
+            0, \text{c.c.}
+            \end{cases},
+            \]
+            %
+            ou seja, $Y\sim\text{Gama}(\alpha, \lambda/c)$.
+            \item Raciocinando como no exercício 5, temos
+            %
+            \[
+            f_Y(y) = \begin{cases}
+            \frac{\lambda^{\alpha}}{\Gamma(\alpha)}2y^{2\alpha - 1}e^{-\lambda y^2}, y > 0 \\
+            0, \text{c.c.}
+            \end{cases}.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
 \end{enumerate}
 
 \end{document}
