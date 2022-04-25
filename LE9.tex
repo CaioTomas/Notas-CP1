@@ -11,29 +11,212 @@
     \item $P(|X - Y| \leq 1/2)$
     \item $P(|X/Y - 1 | \leq 1/2)$
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Usando desenhos, temos que $P(|X-Y| \leq 1/2)$ é a área de um hexágono, a saber
+            $3/4$. Também podemos calcular como $P(X-Y\leq 1/2) - P(X-Y\leq-1/2) = 7/8-1/8 = 3/4$.
+            \item Analogamente, podemos calcular a probabilidade através de uma área ou simplesmente
+            como $P(X/Y\leq 3/2) - P(X/Y\leq 1/2) = 2/3 - 1/4 = 5/12$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Suponha que os tempos que dois estudantes levam para resolver um problema são independentes e se distribuem exponencialmente com parâmetro $\lambda$. Determine a probabilidade de que o primeiro estudante necessite pelo menos do dobro do tempo gasto pelo segundo para resolver o problema.
+    %
+    \begin{proof}[Solução]
+        Sejam $X$ e $Y$ os tempos do primeiro e segundo estudantes, respectivamente. Temos que
+        %
+        \[
+        P(X\geq 2Y) = \int_0^{\infty} P(X\geq 2t, Y = t) \, dt 
+                    = \int_0^{\infty} P(X\geq 2t)P(Y = t) \, dt
+                    = \lambda\int_0^{\infty} e^{-3\lambda t} \, dt
+                    = 1/3.
+        \]
+        %
+    \end{proof}
+    %
     \item Seja $f(x, y) = ce^{-(x^2-xy+4y^2)/2 }, (x, y) \in\mathbb{R}^2$.
     \begin{enumerate}[a)]
     \item Determine o valor de $c$ para que $f$ seja uma densidade.
     \item Se $X$ e $Y$ têm densidade conjunta $f$, determine as densidades marginais de $X$ e $Y$ e verifique se são independentes.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Podemos reescrever
+            %
+            \[
+            f(x,y) = c\exp\left[ -\frac{1}{2}\left( x - \frac{y}{2} \right)^2 \right]
+            \exp\left[-\frac{15y^2}{8}\right].
+            \]
+            %
+            Daí, temos
+            %
+            \begin{align*}
+                f_Y(y) &= \int_{\mathbb{R}} f(x,y) \, dx \\
+                       &= c\exp\left[-\frac{15y^2}{8}\right]\int_{\mathbb{R}} 
+                       \exp\left[-\frac{1}{2}\left(x - \frac{y}{2}\right)^2 \right] \, dx \\
+                       &= c\sqrt{2\pi}e^{-15y^2/8}, \, \forall y\in\mathbb{R}.
+            \end{align*}
+            %
+            Devemos ter $c$ tal que a integral de $f_Y(y)$ em $y$ sobre a reta seja igual a 1,
+            ou seja,
+            %
+            \[
+            c\sqrt{2\pi}\int_{\mathbb{R}} f_Y(y) \, dy = 1 \implies c = \frac{\sqrt{15}}{4\pi}.
+            \]
+            %
+            \item Do item anterior, temos que $Y\sim N(0, 4/15)$. Realizando um procedimento análogo,
+            concluímos também que $X\sim N(0, 16/15)$. Observe que como $f(x,y) \neq f_X(x)f_Y(y)$
+            em geral, então $X$ e $Y$ não são independentes.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Suponha que $X$ e $Y$ têm densidade conjunta uniforme no interior do triângulo com vértices em $(0,0)$, $(2,0)$ e $(1,2)$. Obtenha $P(X \leq 1, Y \leq 1)$.
+    %
+    \begin{proof}[Solução]
+        Podemos interpretar essa probabilidade como a área de uma região de um triângulo, de modo que
+        $P(X\leq 1, Y\leq 1) = 3/8$.
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ v.a.’s contínuas independentes tendo as densidades marginais especificadas abaixo. Obtenha, em cada item, a densidade de $Z = X + Y$.
     \begin{enumerate}[a)]
     \item $X\sim\text{Exp}(\lambda_1)$ e $Y\sim\text{Exp}(\lambda_2)$
     \item $X\sim\Gamma(\alpha_1,\lambda)$ e $Y\sim\Gamma(\alpha_2, \lambda)$
     \item $X\sim N(\mu_1, \sigma_1^2)$ e $Y\sim N(\mu_2, \sigma_2^2)$
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}
+            \item Para $z>0$, temos
+            %
+            \begin{align*}
+                f_{X+Y}(z) &= \int_{\mathbb{R}} f_{X,Y}(x, z-x) \, dx \\
+                           &= \lambda_1\lambda_2e^{-\lambda_2z}
+                           \int_0^z e^{(\lambda_2 - \lambda_1)x} \, dx \\
+                           &= \frac{\lambda_1\lambda_2}{\lambda_2 - \lambda_1}
+                           (e^{-\lambda_1z} - e^{-\lambda_2z}).
+            \end{align*}
+            %
+            Do contrário, $f_{X+Y}(z) = 0.$
+            \item Para $z>0$, temos
+            %
+            \begin{align*}
+                f_{X+Y}(z) &= \frac{\lambda_1^{\alpha_1 + \alpha_2}
+                e^{-\lambda z}}{\Gamma(\alpha_1)\Gamma(\alpha_2)} 
+                \int_0^z x^{\alpha_1 - 1}(z-x)^{\alpha_2 - 1} \, dx \\
+                &= \frac{\lambda^{\alpha_1+\alpha_2}z^{\alpha_1+\alpha_2-1}}
+                {\Gamma(\alpha_1+\alpha_2)}e^{-\lambda z}.
+            \end{align*}
+            %
+            Do contrário, $f_{X+Y}(z) = 0$. Logo, $X+Y\sim\text{Gama}(\alpha_1+\alpha_2, \lambda)$.
+            \item Por simplicidade, supomos $\mu_1 = 0 = \mu_2$. Realizando contas análogas às acima,
+            obtemos que $X+Y\sim N(0, \sigma_1^2 + \sigma_2^2)$. Daí, basta somar $\mu_1 + \mu_2$
+            para obter que $X+Y\sim N(\mu_1+\mu_2, \sigma_1^2 + \sigma_2^2)$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Verifique que se $X_1, X_2,\dots, X_n$ são v.a.’s i.i.d. com distribuição comum $N(0,1)$, então $X_1^2 + X_2^2 + \cdots + X_n^2$ tem distribuição $\Gamma(n/2, 1/2)$ (esta distribuição é conhecida como qui-quadrado com $n$ graus de liberdade e denotada por $\chi^2(n)$). [\textit{Sugestão:} use os exercícios (7b) da lista 8 e (5b) anterior.]
+    %
+    \begin{proof}[Solução]
+        Do exercício 7b, temos $X_i^2\sim\text{Gama}(1/2, 1/2)$ para $i=1,\dots,n$. Do exercício 5b,
+        temos $\sum_i X^2_i \sim \text{Gama}(n/2, 1/2)$.
+    \end{proof}
+    %
     \item Suponha que se escolhe aleatoriamente um ponto no plano de tal forma que suas coordenadas $X$ e $Y$ se distribuem independentemente segundo a densidade normal $N(0, \sigma^2)$. Obtenha a função densidade da v.a. $R$ que representa a distância do ponto escolhido à origem. (Esta densidade é conhecida como densidade de Rayleigh).
+    %
+    \begin{proof}[Solução]
+        Temos $Z = X^2 + Y^2 \sim\Gamma(1/2, 1/2\sigma^2)$. Temos então $R = g(Z)$ sendo $g$ a 
+        função raiz quadrada. Como ela é estritamente crescente e derivável em $(0, +\infty)$,
+        segue que para $r>0$ temos
+        %
+        \[
+        f_R(r) = \frac{2r}{2\sigma^2}e^{-r^2/2\sigma^2} = \frac{r}{\sigma^2}e^{-r^2/2\sigma^2}
+        \]
+        %
+        e, para $r\leq 0$, $f_R(r) = 0$.
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ v.a.’s i.i.d. com distribuição comum $\text{Exp}(\lambda)$. Obtenha a densidade de $Z = Y/X$.
+    %
+    \begin{proof}[Solução]
+        Para $z>0$, temos
+        %
+        \begin{align*}
+            f_{Y/X}(z) &= \int_{\mathbb{R}} |x|f_{X,Y}(x,xz) \, dx \\
+                       &= \int_0^{\infty} xf_X(x)f_Y(xz) \, dx \\
+                       &= \lambda^2\int_0^{\infty} xe^{-\lambda x(z+1)} \, dx \\
+                       &= \lambda^2\cdot\frac{\Gamma(2)}{[\lambda(z+1)]^2} \\
+                       &= \frac{1}{(z+1)^2}.
+        \end{align*}
+        %
+        Do contrário, $f_{Y/X}(z) = 0.$
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ v.a.’s independentes tais que $X\sim\Gamma(\alpha_1, \lambda)$ e $Y\sim\Gamma(\alpha_2,\lambda)$. Obtenha a densidade de $Z = X/X+Y$. [\textit{Sugestão:} expresse Z em função de $Y/X$].
+    %
+    \begin{proof}[Solução]
+        Observe que $Z = (1+W)^{-1}$ sendo $W = Y/X$. Como $W$ é uma v.a. positiva, os valores
+        possíveis de $Z$ formam o intervalo $(0,1)$. Ademais, a função de $W$ que define $Z$ é
+        estritamente decrescente e derivável nesse intervalo, de modo que podemos usar a mudança de
+        variáveis para obter
+        %
+        \[
+        f_Z(z) = \frac{1}{z^2}\cdot\frac{\Gamma(\alpha_1+\alpha_2)}{\Gamma(\alpha_1)\Gamma(\alpha_2)}
+        \cdot\frac{(1-z)^{\alpha_2-1}z^{1 - \alpha_2}}{z^{-\alpha_1-\alpha_2}}
+        = \frac{\Gamma(\alpha_1+\alpha_2)}{\Gamma(\alpha_1)\Gamma(\alpha_2)}
+        z^{\alpha_1-1}(1-z)^{\alpha_2-1}
+        \]
+        %
+        para $0<z<1$ e $f_Z(z) = 0$ caso contrário.
+    \end{proof}
+    %
     \item Sejam $U$ e $V$ v.a.’s i.i.d. com distribuição comum $N(0,1)$. Seja $Z = \rho U + \sqrt{1-\rho^2} V$, onde $-1 < \rho < 1$.
     \begin{enumerate}[a)]
     \item Obtenha a densidade de $Z$.
     \item Obtenha a densidade conjunta de $U$ e $Z$.
     \item Obtenha a densidade conjunta de $X = \mu_1 + \sigma_1 U$ e $Y = \mu_2 + \sigma_2 Z$, onde $\sigma_1, \sigma_2 > 0$. Esta densidade é conhecida como densidade normal bidimensional.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}
+            \item Temos $\rho U\sim N(0, \rho^2)$ e $\sqrt{1-\rho^2}V \sim N(0, 1-\rho^2)$. Logo,
+            $Z\sim N(0,1)$.
+            \item Usando a fórmula da mudança de variáveis com o jacobiano, temos que
+            %
+            \[
+            J(u,v) = \begin{vmatrix}
+            1 & 0 \\
+            \rho & \sqrt{1-\rho^2}
+            \end{vmatrix} = \sqrt{1-\rho^2}.
+            \]
+            %
+            Daí, temos
+            %
+            \begin{align*}
+                f_{U,Z}(u,z) &= \frac{1}{|J(u,v)|}f_{U,V}\left(u,\frac{z-\rho u}{\sqrt{1-\rho^2}}\right)\\
+                             &= \frac{1}{2\pi\sqrt{1-\rho^2}}
+                             \exp\left[-\frac{u^2-2\rho uz + z^2}{2(1-\rho^2)} \right],
+            \end{align*}
+            %
+            para todo $(u,z)\in\mathbb{R}^2$.
+            \item Utilizando a mesma fórmula com o jacobiano, temos que
+            %
+            \begin{align*}
+                f_{X,Y}(x,y) &= \frac{1}{|J(u,z)|}
+                f_{U,Z}\left(\frac{x-\mu_1}{\sigma_1}, \frac{x-\mu_2}{\sigma_2}\right) \\
+                             &= \frac{1}{\sigma_1\sigma_2}\cdot\frac{1}{2\pi\sqrt{1-\rho^2}} \\
+                             &\exp\left[ -\frac{1}{2(1-\rho^2)}
+                             \left( \left(\frac{x-\mu_1}{\sigma_1}\right)^2 
+                             - 2\rho\left(\frac{x-\mu_1}{\sigma_1}\right)
+                             \left(\frac{y-\mu_2}{\sigma_2}\right) 
+                             + \left(\frac{y-\mu_2}{\sigma_2}\right)^2 \right) \right],
+            \end{align*}
+            %
+            para todo $(x,y)\in\mathbb{R}^2$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam R e $\Theta$ v.a.’s independentes de modo que R tem densidade de Rayleigh:
     \begin{align*}
         f_R(r) = \begin{cases}
@@ -41,7 +224,36 @@
             0, r < 0
         \end{cases}.
     \end{align*}
-e $\Theta$ se distribui uniformemente em $U(-\pi, \pi)$. Mostre que se $X = R\cos\Theta$ e $Y = R\sin\Theta$ são v.a.’s independentes e que cada uma tem densidade normal $N(0, \sigma^2)$.
+    e $\Theta$ se distribui uniformemente em $U(-\pi, \pi)$. Mostre que se $X = R\cos\Theta$ e $Y = R\sin\Theta$ são v.a.’s independentes e que cada uma tem densidade normal $N(0, \sigma^2)$.
+    %
+    \begin{proof}[Solução]
+        Usando novamente a fórmula da mudança de variáveis com o jacobiano, temos
+        %
+        \begin{align*}
+            f_{X,Y}(x,y) &= \frac{1}{|J(r,\theta)|}f_{R, \Theta}(r, \theta) \\
+                         &= \frac{1}{r}f_R(r)f_{\Theta}(\theta) \\
+                         &= \frac{1}{\sqrt{x^2+y^2}}\cdot\frac{\sqrt{x^2+y^2}}{\sigma^2}
+                         \exp\left[-\frac{x^2+y^2}{2\sigma^2}\right]\cdot\frac{1}{2\pi} \\
+                         &= \frac{1}{2\pi\sigma^2}\exp\left[-\frac{x^2+y^2}{2\sigma^2}\right].
+        \end{align*}
+        %
+        Daí,
+        %
+        \[
+        f_X(x) = \int_{\mathbb{R}} f_{X,Y}(x,y) \, dy = \frac{1}{\sqrt{2\pi}\sigma}e^{-x^2/2\sigma^2}
+        \]
+        %
+        e também
+        %
+        \[
+        f_Y(y) = \int_{\mathbb{R}} f_{X,Y}(x,y) \, dx = \frac{1}{\sqrt{2\pi}\sigma}e^{-y^2/2\sigma^2}
+        \]
+        %
+        para todo $(x,y)\in\mathbb{R}^2$, ou seja, $X,Y\sim N(0, \sigma^2)$.
+        Como $f_X(x)f_Y(y) = f_{X,Y}(x,y)$ para todo $(x,y)\in\mathbb{R}^2$, temos $X$ e $Y$
+        independentes.
+    \end{proof}
+    %
 \end{enumerate}
 
 \end{document}
