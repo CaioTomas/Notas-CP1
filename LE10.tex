@@ -387,7 +387,28 @@
     \begin{proof}[Solução]
         \begin{enumerate}[a)]
             \item Feito em exercícios anteriores.
-            \item 
+            \item Temos que
+            %
+            \begin{align*}
+                P(|\overline{X} - \mu| \leq \sigma/10) &= P(-\sigma/10 \leq \overline{X} - \mu \leq \sigma/10) \\
+                                                       &= P(\overline{X} \leq \mu + \sigma/10) - 
+                                                       P(\overline{X} \leq \mu - \sigma/10) \\
+                                                       &= P(S_n \leq n\mu + n\sigma/10) - P(S_n \leq n\mu - n\sigma/10).
+            \end{align*}
+            %
+            Usando o TLC, temos que essa probabilidade pode ser aproximada por
+            %
+            \[
+            \Phi(\sqrt{n}/10) - \Phi(-\sqrt{n}/10) = 2\Phi(\sqrt{n}/10) - 1.
+            \]
+            %
+            Portanto, para que a probabilidade desejada seja pelo menos $0,95$, devemos ter $n$ tal que
+            %
+            \[
+            \Phi(\sqrt{n}/10) \geq 0,975 \iff \frac{\sqrt{n}}{10} \geq 1,96 \iff n \geq 384,16.
+            \]
+            %
+            Como $n\in\mathbb{N}$, devemos ter uma amostra de tamanho 385, pelo menos.
         \end{enumerate}
     \end{proof}
     %
@@ -399,14 +420,42 @@
     %
     \begin{proof}[Solução]
         \begin{enumerate}[a)]
-            \item 
+            \item Pela desigualdade de Markov, temos
+            %
+            \[
+            P(X\geq 85) \leq \frac{75}{85} \approx 0,88.
+            \]
+            %
+            \item Usando o TLC, temos
+            %
+            \begin{align*}
+                P(65 \leq X \leq 85) &= P(X\leq 85) - P(X\leq 65) \\
+                                     &= P\left(\frac{X - 75}{5} \leq 2\right) - P\left(\frac{X - 75}{5} \leq -2\right) \\
+                                     &\approx \Phi(2) - \Phi(-2) \\
+                                     &= 2\Phi(2) - 1 \\
+                                     &= 2\cdot 0,9772 - 1 \\
+                                     &= 0,9544.
+            \end{align*}
+            %
+            Portanto, a probabilidade procurada é aproximadamente $0,9544$.
         \end{enumerate}
     \end{proof}
     %
     \item Um corredor procura controlar seus passos em uma corrida de 100 metros. De sua experiência, ele sabe que o tamanho de seu passo na corrida é uma v.a. com média 0,97 metro e desvio-padrão 0,1 metro. Determine a probabilidade de que 100 passos difiram de 100 metros por não mais de 5 metros.
     %
     \begin{proof}[Solução]
-        
+        Se $X$ é a v.a. que modela o tamanho do passo na corrida, queremos estimar $P(|100X - 100| \leq 5)$.
+        Temos, usando o TLC, que essa probabilidade é igual a
+        %
+        \begin{align*}
+            P(|X-1|\leq 0,05) &= P(0,95 \leq X \leq 1,05) \\
+                              &= P\left( \frac{X-0,97}{0,1} \leq 0,8 \right) - P\left( \frac{X-0,97}{0,1} \leq -0,2 \right) \\
+                              &\approx \Phi(0,8) - \Phi(-0,2) \\
+                              &\approx \Phi(0,8) + \Phi(0,2) - 1 \\
+                              &= 0,7881 + 0,5793 - 1 \\
+                              &= 0,3674.
+        \end{align*}
+        %
     \end{proof}
     %
 \end{enumerate}
