@@ -11,32 +11,319 @@
     \item Determine para quais valores de $\alpha_1$ e $\alpha_ 2$ teremos $EZ$ finita e calcule $EZ$ neste caso.
     Determine para quais valores de $\alpha_1$ e $\alpha_2$ teremos $E[Z^2]$ finita e calcule $\Var(Z)$ neste caso.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \begin{align*}
+                EZ &= \int_0^{\infty}\int_0^{\infty} \frac{y}{x}
+                \cdot\frac{\lambda^{\alpha_2}y^{\alpha_2-1}}{\Gamma(\alpha_2)}
+                e^{-\lambda y}
+                \cdot\frac{\lambda^{\alpha_1}x^{\alpha_1-1}}{\Gamma(\alpha_1)}
+                e^{-\lambda x} \, dx \, dy \\
+                   &= \frac{\lambda^{\alpha_1}}{\Gamma(\alpha_1)}
+                   \int_0^{\infty} x^{\alpha_1-1-1}e^{-\lambda x}
+                   \frac{\alpha_2}{\lambda} \, dx \\
+                   &= \frac{\lambda^{\alpha_1 - 1}}{\Gamma(\alpha_1)}\cdots
+                   \frac{\Gamma(\alpha_1 - 1)}{\lambda^{\alpha_1-1}}\alpha_2 \\
+                   &= \frac{\alpha_2}{\alpha_1-1},
+            \end{align*}
+            %
+            onde impomos as condições $\alpha_2>0$ e $\alpha_1>1$ para que as integrais
+            existam.
+            \item Para $\alpha_1 > 2$, temos
+            %
+            \begin{align*}
+                EZ^2 &= \int_0^{\infty}\int_0^{\infty} \frac{y^2}{x^2}\cdot
+                \frac{\lambda^{\alpha_2}y^{\alpha_2-1}}{\Gamma(\alpha_2)}e^{-\lambda y}
+                \frac{\lambda^{\alpha_1}x^{\alpha_1-1}}{\Gamma(\alpha_1)}e^{-\lambda x}
+                \, dx \, dy \\
+                &= \frac{\lambda^{\alpha_1}}{\Gamma(\alpha_1)}\cdot
+                \frac{\alpha_2(\alpha_2+1)}{\lambda^2}
+                \int_0^{\infty} x^{\alpha_1 - 2 - 1} e^{-\lambda x} \, dx \\
+                &= \frac{\lambda^{\alpha_1-1}}{\Gamma(\alpha_1)}\alpha_2(\alpha_2+1)
+                \cdot\frac{\Gamma(\alpha_1-2)}{\lambda^{\alpha_1-2}} \\
+                &= \frac{\alpha_2(\alpha_2+1)}{(\alpha_1-1)(\alpha_1-2)},
+            \end{align*}
+            %
+            onde impomos a condição $\alpha_1 > 2$ para que a integral exista. Daí,
+            temos
+            %
+            \[
+            \Var(Z) = \frac{\alpha_2(\alpha_2+1)}{(\alpha_1-1)(\alpha_1-2)}
+            - \frac{\alpha_2}{(\alpha_1 - 1)^2}
+            = \frac{\alpha_2(\alpha_1+\alpha_2-1)}{(\alpha_1-1)^2(\alpha_1-2)}.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Seja $X\sim\chi^2(n)$, ou seja, $X\sim\Gamma(n/2,1/2)$. Calcule a esperança de $Y = \sqrt{X}$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \begin{align*}
+            EY &= \int_{\mathbb{R}} \sqrt{x}f_X(x) \, dx \\
+               &= \int_0^{\infty} \frac{x^{1/2}(1/2)^{n/2}}{\Gamma(n/2)}
+               x^{n/2 - 1}e^{-x/2} \, dx \\
+               &= \frac{(1/2)^{n/2}}{\Gamma(n/2)}\int_0^{\infty} x^{(n+1)/2 - 1}
+               e^{-x/2} \, dx \\
+               &= \sqrt{2}\frac{\Gamma((n+1)/2)}{\Gamma(n/2)}.
+        \end{align*}
+        %
+    \end{proof}
+    %
     \item Sejam $U_1$ e $U_2$ v.a.’s i.i.d. com distribuição comum Exp$(\lambda)$ e seja $Y = \max(U_1,U_2)$. Obtenha a esperança e a variância de $Y$.
+    %
+    \begin{proof}[Solução]
+        Da independência de $U_1$ e $U_2$, temos que
+        %
+        \[
+        F_Y(y) = F_U(y)F_V(y) = (1 - e^{-\lambda y})^2,
+        \]
+        %
+        para todo $y\geq 0$ e $F_Y(y)$ caso contrário. Portanto,
+        %
+        \[
+        f_Y(y) = \begin{cases}
+        2\lambda e^{-\lambda y}(1 - e^{-\lambda y}), y\geq 0 \\
+        0, \text{c.c.}
+        \end{cases}
+        \]
+        %
+        Daí, segue que
+        %
+        \begin{align*}
+            EY &= \int_{\mathbb{R}} yf_Y(y) \, dy \\
+               &= 2\left( \int_0^{\infty} y\lambda e^{-\lambda y} \, dy
+               - \int_0^{\infty} y\lambda e^{-2\lambda y} \, dy \right) \\
+               &= 2\left( \frac{1}{\lambda} - \frac{1}{4\lambda} \right) \\
+               &= \frac{3}{2\lambda}.
+        \end{align*}
+        %
+        Temos também
+        %
+        \begin{align*}
+            EY^2 &= 2\left( \int_0^{\infty} y^2\lambda e^{-\lambda y} \, dy
+               - \int_0^{\infty} y^2\lambda e^{-2\lambda y} \, dy \right) \\
+               &= 2\left( \frac{2}{\lambda^2} - \frac{1}{4\lambda^2} \right) \\
+               &= \frac{7}{2\lambda^2}.
+        \end{align*}
+        %
+        Portanto,
+        %
+        \[
+        \Var(Y) = \frac{5}{4\lambda^2}.
+        \]
+        %
+    \end{proof}
+    %
     \item Seja $X = \sin\Theta$, em que $\Theta\sim U(-2,2)$. Determine $EX$ e $\Var(X)$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \begin{align*}
+            EX &= \int_{\mathbb{R}} \sin\theta f_{\Theta}(\theta) \, d\theta \\
+               &= \int_{-\pi/2}^{\pi/2} \sin\theta\cdot\frac{1}{\pi} \, d\theta \\
+               &= 0
+        \end{align*}
+        %
+        e
+        %
+        \begin{align*}
+            EX^2 &= \int_{\mathbb{R}} \sin^2\theta f_{\Theta}(\theta) \, d\theta \\
+                 &= \int_{-\pi/2}^{\pi/2} \sin^2\theta\cdot\frac{1}{\pi} \, d\theta \\
+                 &= \frac{1}{2\pi}\int_{-\pi/2}^{\pi/2} 1 - \cos(2\theta) \, d\theta \\
+                 &= 1/2.
+        \end{align*}
+        %
+        Portanto, $\Var(X) = 1/2$.
+    \end{proof}
+    %
     \item Seja $X\sim N(0, \sigma^2)$. Determine a esperança e a variância das seguintes v.a.’s:
     \begin{enumerate}[a)]
     \item $|X|$;
     \item $X^2$.
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \begin{align*}
+                E|X| &= 2\int_0^{\infty} xf_X(x) \, dx \\
+                     &= \sqrt{\frac{2}{\pi}}\sigma
+                     \int_0^{\infty} e^{-u} \, du \\
+                     &= \sqrt{\frac{2}{\pi}}\sigma.
+            \end{align*}
+            %
+            Ademais,
+            %
+            \[
+            \Var(X) = E(X^2) - E|X|^2 = \sigma^2\left(1 - \frac{2}{\pi}\right).
+            \]
+            %
+            \item Do texto, sabemos que
+            %
+            \[
+            EX^k = \begin{cases}
+            \frac{k!\sigma^k}{(k/2)!2^{k/2}}, k \text{ par} \\
+            0, \text{c.c.}
+            \end{cases}.
+            \]
+            %
+            Portanto, $E(X^2) = \sigma^2$ e $\Var(X^2) = E(X^4) - E^2(X^2) = 2\sigma^4$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ v.a.’s com densidade conjunta
     \begin{align*}
         f_{X,Y}(x,y) = \frac{\sqrt{15}}{4\pi}\exp[ -\frac{x^2 - xy + 4y^2}{2} ], (x,y)\in\mathbb{R}^2.
     \end{align*}
     Determine o coeficiente de correlação entre $X$ e $Y$.
+    %
+    \begin{proof}[Solução]
+        Como $EX = 0 = EY$, temos que
+        %
+        \[
+        \rho(X,Y) = \frac{E(XY)}{8/15}.
+        \]
+        %
+        Como
+        %
+        \begin{align*}
+            E(XY) &= \iint_{\mathbb{R}^2} xyf_{X,Y}(x,y) \, dx \, dy \\
+                  &= \frac{\sqrt{15}}{4\pi}\frac{\sqrt{2\pi}}{2}
+                  \sqrt{2\pi}\sqrt{\frac{4}{15}}
+                  \int_{\mathbb{R}} \frac{1}{\sqrt{2\pi}}\cdot\frac{y^2}{\sqrt{4/15}}
+                  \exp(-15y^2/8) \, dy \\
+                  &= \frac{2}{15}.
+        \end{align*}
+        %
+        Portanto,
+        %
+        \[
+        \rho(X,Y) = \frac{1}{4}.
+        \]
+        %
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ v.a.’s independentes tais que $X\sim N(\mu, \sigma^2)$ e $Y\sim\Gamma(\alpha,\lambda)$. Obtenha a esperança e a variância de $Z = XY$.
+    %
+    \begin{proof}[Solução]
+        Como $X$ e $Y$ são independentes, temos $E(Z) = EXEY = \mu\alpha/\lambda$. Daí,
+        %
+        \[
+        \Var(Z) = (\sigma^2 + \mu^2)\frac{\alpha(\alpha+1)}{\lambda^2} 
+        - \frac{\mu^2\alpha^2}{\lambda^2} 
+                = \frac{\alpha}{\lambda}(\sigma^2\alpha + \sigma^2 + \mu^2).
+        \]
+        %
+    \end{proof}
+    %
     \item Sejam $X$ e $Y$ v.a.’s tais que $EX = EY = 0$, $\Var(X) = \Var(Y) = 1$ e $\rho(X, Y) = \rho$. Mostre que $X - \rho Y$ e $Y$ são não-correlacionadas, $E[X - \rho Y] = 0$ e $\Var(X - \rho Y) = 1 - \rho^2$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        \Cov(X-\rho Y, Y) = E[(X - \rho Y)Y] - E[X-\rho Y]E[Y] = E[XY] - \rho E[Y^2].
+        \]
+        %
+        Como $EY = 0$ e $\Var(Y) = 1$, temos $E[Y^2] = 1$. Ademais, como 
+        $\rho(X,Y) = \Cov(X,Y) = E[XY]$, temos $\Cov(X-\rho Y, Y) = \rho - \rho = 0$.
+        Por fim, $E[X - \rho Y] = EX - \rho EY = 0$ e $\Var(X-\rho Y) = E[X^2] - 2\rho E[XY] + \rho^2E[Y^2] = 1 - \rho^2$.
+    \end{proof}
+    %
     \item Seja $X\sim U(a,b)$. Obtenha $M_X(t)$, a função geradora de momentos de $X$.
+    %
+    \begin{proof}[Solução]
+        Temos
+        %
+        \[
+        M_X(t) = \int_{\mathbb{R}} e^{tx} f_X(x) \, dx 
+               = \int_a^b e^{tx}\frac{1}{b-a} \, dx.
+        \]
+        %
+        Se $t=0$, $M_X(0) = 1$. Se $t\neq 0$, então
+        %
+        \[
+        M_X(t) = \frac{e^{bt} - e^{at}}{(b-a)t}.
+        \]
+        %
+    \end{proof}
+    %
     \item Use a função geradora de momentos para obter a esperança e a variância de $X$, nos seguintes casos:
     \begin{enumerate}[a)]
     \item $X\sim B(n, p)$ 
     \item $X\sim\text{Poisson}(\lambda)$
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Feito no texto.
+            \item Para todo $t\in\mathbb{R}$, temos
+            %
+            \[
+            M_X(t) = \sum_{x=0}^{\infty} e^{tx}e^{-\lambda}\frac{\lambda^x}{x!}
+                   = e^{-\lambda} \sum_{x=0}^{\infty}\frac{(\lambda e^t)^x}{x!}
+                   = e^{-\lambda}e^{\lambda e^t}.
+            \]
+            %
+            Portanto,
+            %
+            \[
+            M_X'(t) = e^{-\lambda}e^{\lambda e^t}\lambda e^{t}
+            \implies M_X'(0) = EX = \lambda.
+            \]
+            %
+            Ademais,
+            %
+            \[
+            M_X''(t) = \lambda e^{-\lambda}(e^{\lambda e^t}\lambda e^{2t} 
+            + e^{\lambda e^t}e^t),
+            \]
+            %
+            donde segue que $M_X''(0) = \lambda^2 + \lambda = E[X^2]$. Portanto,
+            $\Var(X) = \lambda$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Use a função geradora de momentos para obter os momentos de todas as ordens de $X$, nos seguintes casos:
     \begin{enumerate}[a)]
     \item $X\sim N(0,\sigma^2)$ 
     \item $X$ tem densidade $f_X(x) = e^{-|x|}, x \in\mathbb{R}$.
     \end{enumerate}
+    %
+    \begin{proof}
+        \begin{enumerate}[a)]
+            \item Feito no texto.
+            \item Temos, para $t\in(-1,1)$,
+            %
+            \begin{align*}
+                M_X(t) &= \frac{1}{2}\left( \int_0^{\infty} e^{x(t-1)} \, dx
+                + \int_{-\infty}^0 e^{x(t+1)} \, dx \right) \\
+                &= -\frac{1}{2}\cdot\frac{1}{t-1} + \frac{1}{2}\cdot\frac{1}{t+1} \\
+                &= \frac{1}{1-t^2} \\
+                &= \sum_{k=0}^{\infty} t^{2k} \\
+                &= \sum_{k=0}^{\infty} (2k)!\frac{t^{2k}}{(2k)!}.
+            \end{align*}
+            %
+            Portanto,
+            %
+            \[
+            EX^m = \begin{cases}
+            0, m \text{ impar} \\
+            m!, m \text{ par}
+            \end{cases}.
+            \]
+            %
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam $X_1,X_2,\dots,X_n$ v.a.’s independentes. Use a função geradora de momentos para obter a distribuição de $S_n = X_1 + X_2 + \cdots + X_n$, nos seguintes casos:
     \begin{enumerate}[a)]
     \item $X_i\sim\Gamma(\alpha_i,\lambda)$
@@ -44,22 +331,84 @@
     \item $X_i\sim B(n_i , p)$
     \item $X_i\sim\text{Poisson}(\lambda_i)$, para $i = 1,\dots, n.$
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Temos
+            %
+            \begin{align*}
+                M_{S_n}(t) = \prod_{i=1}^n M_{X_i}(t)
+                           = \prod_{i=1}^n \left(
+                           \frac{\lambda}{\lambda - t}\right)^{\alpha_i}
+                           = \left(
+                           \frac{\lambda}{\lambda - t}\right)^{\sum_i \alpha_i}, \,
+                           t < \lambda.
+            \end{align*}
+            %
+            Portanto, $S_n\sim\Gamma\left(\sum_i \alpha_i, \lambda\right)$.
+            \item Temos
+            %
+            \begin{align*}
+                M_{S_n}(t) = \prod_{i=1}^n M_{X_i}(t)
+                           = \prod_{i=1}^n \frac{1}{1 - t/\lambda}
+                           =  \frac{1}{(1 - t/\lambda)^n}
+                           = \left(\frac{\lambda}{\lambda - t}\right)^n, \, t < \lambda.
+            \end{align*}
+            %
+            Portanto, $S_n\sim\Gamma(n, \lambda)$.
+            \item Temos
+            %
+            \begin{align*}
+                M_{S_n}(t) = \prod_{i=1}^n M_{X_i}(t)
+                           = \prod_{i=1}^n (pe^t + 1 - p)^{n_i}
+                           = (pe^t + 1 - p)^{\sum_i n_i}, \, \forall t\in\mathbb{R}.
+            \end{align*}
+            %
+            Portanto, $S_n\sim B\left( \sum_i n_i, p \right)$.
+            \item Temos
+            %
+            \begin{align*}
+                M_{S_n}(t) = \prod_{i=1}^n M_{X_i}(t)
+                           = \prod_{i=1}^n \exp(\lambda_i(e^t - 1))
+                           = \exp\left[ (e^t - 1)\sum_i \lambda_i \right], \, 
+                           \forall t\in\mathbb{R}.
+            \end{align*}
+            %
+            Portanto, $S_n\sim\text{Poisson}\left(\sum_i\lambda_i\right)$.
+        \end{enumerate}
+    \end{proof}
+    %
     \item Sejam $X_1, X_2,\dots, X_n$ v.a.'s i.i.d. tendo média $\mu$ e variância $\sigma^2$ e seja $\overline{X} = S_n/n$, onde $S_n = X_1 + \cdots + X_n$.
     \begin{enumerate}[a)]
-    \item Mostre que $EX = \mu$ e $\Var(\overline{X}) = \sigma^2/n$
+    \item Mostre que $EX = \mu$ e $\Var(\overline{X}) = \sigma^2/n$.
     \item Qual o tamanho da amostra que devemos considerar de tal forma que $P(|\overline{X} - \mu| \leq \sigma/10) \geq 0,95$?
     \end{enumerate}
-    \item Da experiência passado, um professor sabe que a pontuação de um estudante no seu exame final é uma v.a. com média 75.
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item Feito em exercícios anteriores.
+            \item 
+        \end{enumerate}
+    \end{proof}
+    %
+    \item Da experiência passada, um professor sabe que a pontuação de um estudante no seu exame final é uma v.a. com média 75.
     \begin{enumerate}[a)]
     \item Dê um limite superior para a probabilidade de que a pontuação do estudante excederá 85.
     \item Se, além disso, o professor também saiba que a variância da pontuação do estudante é 25, o que pode ser dito sobre a probabilidade de que o estudante terá uma pontuação entre 65 e 85?
     \end{enumerate}
+    %
+    \begin{proof}[Solução]
+        \begin{enumerate}[a)]
+            \item 
+        \end{enumerate}
+    \end{proof}
+    %
     \item Um corredor procura controlar seus passos em uma corrida de 100 metros. De sua experiência, ele sabe que o tamanho de seu passo na corrida é uma v.a. com média 0,97 metro e desvio-padrão 0,1 metro. Determine a probabilidade de que 100 passos difiram de 100 metros por não mais de 5 metros.
-    
-    
-    
-    
-    
+    %
+    \begin{proof}[Solução]
+        
+    \end{proof}
+    %
 \end{enumerate}
 
 \end{document}
